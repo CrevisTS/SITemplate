@@ -59,13 +59,11 @@
     <Compile Include="Events\MainWindowClosingEvent.cs" />
     <Compile Include="Events\ProgressMessageEventArgs.cs" />
     <Compile Include="Events\WindowThemeChangeEvent.cs" />
-    <Compile Include="InspectionRepoTest\Test2.cs" />
     <Compile Include="Interfaces\IAppBootstrapper.cs" />
     <Compile Include="Interfaces\IDisposeManager.cs" />
     <Compile Include="Interfaces\Inspections\IInspectionManager.cs" />
     <Compile Include="Interfaces\Inspections\IInspectionStarter.cs" />
     <Compile Include="Interfaces\Inspections\IInspectionStateProvider.cs" />
-    <Compile Include="Interfaces\Windows\IMainWindowManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,8 @@
 using CvsService.Log.Write.Services;
 using CvsService.Prism.Services;
 using Prism.Ioc;
+using SITemplate.Core.Interfaces;
+using SITemplate.Main.Services;
 using SITemplate.Main.Views;
 using System;
 using System.Reflection;
@@ -13,6 +15,9 @@ namespace SITemplate
     {
         protected override Window CreateShell()
         {
+            RunSplash();
+            // base.InitializeModules(); -> 만약 Splash, AppBootstrapper를 사용하지 않는다면 RunSplash()를 지우고 활성화.
+
             return new MainWindow();
         }
 
@@ -22,8 +27,8 @@ namespace SITemplate
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            CheckApplicationIsRunning(e, Assembly.GetExecutingAssembly().ManifestModule.Name);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            CheckApplicationIsRunning(e, Assembly.GetExecutingAssembly().ManifestModule.Name);
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

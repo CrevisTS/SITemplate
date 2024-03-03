@@ -14,7 +14,7 @@
     WindowStyle="None"
     AllowsTransparency="True"
     mc:Ignorable="d"
-    Theme="{Binding MainWindowManager.WindowTheme}"
+    Theme="{Binding WindowTheme}"
     Title="MainWindow" Height="1080" Width="1920">
     <!-- Theme를 None으로 설정하면 일반 Window로 적용됨 -->
     <b:Interaction.Triggers>

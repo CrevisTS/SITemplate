@@ -6,7 +6,7 @@ using Prism.Regions;
 using SITemplate.Core.Datas;
 using SITemplate.Core.Events;
 using SITemplate.Core.Interfaces;
-using SITemplate.Core.Interfaces.Windows;
+using SITemplate.Core.Interfaces.Inspections;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -17,34 +17,33 @@ namespace SITemplate.Main.ViewModels
     {
         #region Fields for property
         private EWindowTheme _windowTheme;
-        private IMainWindowManager _mainWindowManager;
         #endregion
 
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
         private readonly IDisposeManager _disposeManager;
 
-        public IMainWindowManager MainWindowManager => _mainWindowManager;
+        public EWindowTheme WindowTheme { get => _windowTheme; set => SetProperty(ref _windowTheme, value); }
 
         public ICommand LoadedCommand => new DelegateCommand(OnLoaded);
         public ICommand ClosingCommand => new DelegateCommand<CancelEventArgs>(OnClosing);
         public ICommand ClosedCommand => new DelegateCommand(OnClosed);
 
-        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IMainWindowManager mainWindowManager, IDisposeManager disposeManager)
+        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IDisposeManager disposeManager) // TODO : 0. 여기에서 싱글턴 받으면 에러발생함...  CvsService.Prism 이거 여기다가 옮기고 실행 순서 보면서 조율해볼것
         {
-            _mainWindowManager = mainWindowManager;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _disposeManager = disposeManager;
         }
         private void OnLoaded()
         {
+            SetWindowTheme(EWindowTheme.Dark);
             SetDefaultRegion();
             SubscribeEvent();
         }
         private void SetWindowTheme(EWindowTheme windowTheme)
         {
-            _mainWindowManager.WindowTheme = windowTheme;
+            WindowTheme = windowTheme;
         }
         private void SetDefaultRegion()
         {
@@ -53,6 +52,7 @@ namespace SITemplate.Main.ViewModels
         }
         private void SubscribeEvent()
         {
+            _eventAggregator.GetEvent<WindowThemeChangeEvent>().Subscribe(SetWindowTheme);
         }
 
         private void OnClosing(CancelEventArgs e)

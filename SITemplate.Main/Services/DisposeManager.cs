@@ -8,6 +8,10 @@ namespace SITemplate.Main.Services
     {
         private readonly List<IDisposable> _disposeValues = new List<IDisposable>();
 
+        public DisposeManager()
+        {
+
+        }
         public void AddIDisposable(IDisposable disposeable)
         {
             _disposeValues.Add(disposeable);

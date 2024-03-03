@@ -51,7 +51,8 @@
     <Reference Include="CvsService.Pattern">
       <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Pattern\bin\x64\Release\CvsService.Pattern.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Prism">
+    <Reference Include="CvsService.Prism, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Prism\bin\x64\Release\CvsService.Prism.dll</HintPath>
     </Reference>
     <Reference Include="CvsService.UI.Converters">
@@ -87,6 +88,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -102,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="PrismAppHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +151,10 @@
     <ProjectReference Include="..\SITemplate.Main\SITemplate.Main.csproj">
       <Project>{8FA48257-E29D-4BA9-91A9-C2A774DD15C9}</Project>
       <Name>SITemplate.Main</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SITemplate.Repository\SITemplate.Repository.csproj">
+      <Project>{8493a038-b421-40c8-9646-fc0cc6f04986}</Project>
+      <Name>SITemplate.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\SITemplate.Setting\SITemplate.Setting.csproj">
       <Project>{1D4FAED7-6FE7-4153-83D0-7A30C7BA4E0D}</Project>

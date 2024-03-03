@@ -1,14 +1,11 @@
 ﻿using CvsService.UI.Windows.Enums;
 using Prism.Mvvm;
-using SITemplate.Core.Interfaces.Windows;
 
-namespace SITemplate.Main.Services
+namespace SITemplate.Repository.Datas
 {
-    public class MainWindowManager : BindableBase, IMainWindowManager
+    public class WindowSetting : BindableBase
     {
         private EWindowTheme _windowTheme = EWindowTheme.Dark;
         public EWindowTheme WindowTheme { get => _windowTheme; set => SetProperty(ref _windowTheme, value); }
-        
-        // TODO : Language같은 내용들 필요하다면 이곳에 추가
     }
 }
