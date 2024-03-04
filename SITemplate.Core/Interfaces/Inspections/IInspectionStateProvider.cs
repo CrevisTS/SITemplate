@@ -1,7 +1,6 @@
 ﻿using SITemplate.Core.Enums;
 
-
-namespace SITemplate.Core.Interfaces.Inspections
+namespace SITemplate.Core.Interfaces
 {
     public interface IInspectionStateProvider
     {

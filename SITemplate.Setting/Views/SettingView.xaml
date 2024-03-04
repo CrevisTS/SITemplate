@@ -4,18 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:cvsWindow="clr-namespace:CvsService.UI.Windows.UI.Units;assembly=CvsService.UI.Windows"
-             xmlns:local="clr-namespace:SITemplate.Setting.Views"
+             xmlns:localConverter="clr-namespace:SITemplate.Setting.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="890" d:DesignWidth="1900">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <localConverter:WindowThemeValueConverter x:Key="WindowThemeValueConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <cvsWindow:Depth1Panel FontSize="20">
             <StackPanel>
                 <Label Content="Setting View"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Theme : "/>
-                    <!--<ComboBox Width="350" FontSize="15"
-                              ItemsSource="{Binding LanguageStrings, Source={StaticResource LanguageValueConverter}}"
-                              SelectedIndex="{Binding LanguageSet.Language, Converter={StaticResource LanguageValueConverter}}"/>-->
+                    <ComboBox 
+                        Width="200" 
+                        FontSize="15"
+                        VerticalContentAlignment="Center"
+                        ItemsSource="{Binding WindowThemeStrings, Source={StaticResource WindowThemeValueConverter}}"
+                        SelectedIndex="{Binding AppSetting.WindowSetting.WindowTheme , Converter={StaticResource WindowThemeValueConverter}}"/>
+
                 </StackPanel>
             </StackPanel>
         </cvsWindow:Depth1Panel>

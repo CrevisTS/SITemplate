@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 using SITemplate.Core.Enums;
-using SITemplate.Core.Interfaces.Inspections;
+using SITemplate.Core.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -1,9 +1,10 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
 using SITemplate.Core.Interfaces;
-using SITemplate.Core.Interfaces.Inspections;
+using SITemplate.Core.Interfaces.Settings;
 using SITemplate.Inspection.Services;
 using SITemplate.Main.Services;
+using SITemplate.Repository.Services;
 using SITemplate.Splash.Bootstrappers;
 
 namespace SITemplate.Settings
@@ -20,6 +21,7 @@ namespace SITemplate.Settings
             _ = containerRegistry.RegisterSingleton<IAppBootstrapper, AppBootstrapper>();
             _ = containerRegistry.RegisterSingleton<IInspectionManager, InspectionManager>();
             _ = containerRegistry.RegisterSingleton<IDisposeManager, DisposeManager>();
+            _ = containerRegistry.RegisterSingleton<ISettingRepository, SettingRepository>();
         }
     }
 }

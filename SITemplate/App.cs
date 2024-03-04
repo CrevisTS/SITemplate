@@ -2,8 +2,6 @@
 using CvsService.Log.Write.Services;
 using CvsService.Prism.Services;
 using Prism.Ioc;
-using SITemplate.Core.Interfaces;
-using SITemplate.Main.Services;
 using SITemplate.Main.Views;
 using System;
 using System.Reflection;

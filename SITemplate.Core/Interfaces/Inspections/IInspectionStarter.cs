@@ -1,4 +1,4 @@
-﻿namespace SITemplate.Core.Interfaces.Inspections
+﻿namespace SITemplate.Core.Interfaces
 {
     public interface IInspectionStarter
     {

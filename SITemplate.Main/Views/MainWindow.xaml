@@ -1,10 +1,11 @@
-﻿<cvsWindow:CustomWindow 
+﻿<cvsWindow:CustomWindow
     x:Class="SITemplate.Main.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cvsWindow="clr-namespace:CvsService.UI.Windows.UI.Units;assembly=CvsService.UI.Windows"
+    xmlns:cvsWindow2="clr-namespace:SITemplate.Main.Services"
     xmlns:cvsControl="clr-namespace:CvsService.UI.CustomControls.UI.Units;assembly=CvsService.UI.CustomControls"
     xmlns:coreData="clr-namespace:SITemplate.Core.Datas;assembly=SITemplate.Core"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
@@ -14,7 +15,7 @@
     WindowStyle="None"
     AllowsTransparency="True"
     mc:Ignorable="d"
-    Theme="{Binding WindowTheme}"
+    Theme="{Binding AppSetting.WindowSetting.WindowTheme}"
     Title="MainWindow" Height="1080" Width="1920">
     <!-- Theme를 None으로 설정하면 일반 Window로 적용됨 -->
     <b:Interaction.Triggers>

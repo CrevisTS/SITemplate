@@ -4,7 +4,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using SITemplate.Core.Datas;
 using SITemplate.Core.Enums;
-using SITemplate.Core.Interfaces.Inspections;
+using SITemplate.Core.Interfaces;
 using System;
 using System.Windows.Input;
 

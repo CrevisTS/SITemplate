@@ -7,6 +7,7 @@ using CvsService.Log.Write.Models;
 using CvsService.Log.Write.Services;
 using SITemplate.Core.Events;
 using SITemplate.Core.Interfaces;
+using SITemplate.Core.Interfaces.Settings;
 using SITemplate.Splash.Error;
 using System;
 using System.Threading;
@@ -19,16 +20,19 @@ namespace SITemplate.Splash.Bootstrappers
     {
         private ILogWriteManager _logWrite;
         private ILogDisplayManager _logDisplay;
+
         private readonly Lazy<IDisposeManager> _lazyDisposeManager;
+        private readonly Lazy<ISettingRepository> _lazySettingRepo;
 
         public bool IsFail { get; private set; } = false;
 
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;
         public event EventHandler WindowLoadedCompleted;
 
-        public AppBootstrapper(Lazy<IDisposeManager> disposeManager)
+        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo)
         {
-            _lazyDisposeManager = disposeManager;
+            _lazyDisposeManager = lazyDisposeManager;
+            _lazySettingRepo = lazySettingRepo;
         }
 
         public Task InitializeAsync()
@@ -38,17 +42,17 @@ namespace SITemplate.Splash.Bootstrappers
                 Thread.CurrentThread.Name = "LoadingThread";
 
                 // CvsService Log Initialize
-                LogInit(10);
-
+                LogInit(20);
                 // TODO : Prism Singleton 초기화 하는 부분.
+                _ = LazyInstanceInit(_lazySettingRepo, "Setting", 50);
 
-                // Dispose Mangaer Initialize (WindowClosedEvent 발생 시 알아서 Dispose해주는 Manager)
                 // AppBoot에서 초기화하는 클래스 중 Dispose()가 필요하면 여기에서 추가.
                 // 만약 다른곳에서 추가해야한다면 생성자에서 의존성 주입으로 IDisposeManager 받아서 추가하면 됨
-                IDisposeManager disposeManager = LazyInstanceInit(_lazyDisposeManager, "Dispose Manager", 95);
+                IDisposeManager disposeManager = LazyInstanceInit(_lazyDisposeManager, "Dispose Manager", 90);
+
                 // disposeManager.AddIDisposable(CameraManager);
                 // disposeManager.AddIDisposable(IOManager);
-                // ...
+                // ..
 
                 OnComplete();
             });

@@ -37,7 +37,7 @@
                     HorizontalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Horizontal">
                         <cvsCustomContorl:GeometryLabelButton
-                            Margin="10 0 5 0"
+                            Margin="10 3 5 0"
                             FontSize="12"
                             FontWeight="Bold"
                             Content="Home"
@@ -46,7 +46,7 @@
                             Command="{Binding MainRegionChangeClickCommand}"
                             CommandParameter="{x:Static coreEnum:EViewType.InspectionView}"/>
                         <cvsCustomContorl:GeometryLabelButton
-                            Margin="5 0"
+                            Margin="5 2 5 0"
                             FontSize="12"
                             FontWeight="Bold"
                             Content="Setting" 

@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Converters\ViewTypeOpacityConverter.cs" />
     <Compile Include="Datas\RegionNames.cs" />
+    <Compile Include="Datas\Settings\AppSetting.cs" />
+    <Compile Include="Datas\Settings\WindowSetting.cs" />
     <Compile Include="Datas\ViewNames.cs" />
     <Compile Include="Enums\EInspectionState.cs" />
     <Compile Include="Enums\ERegionType.cs" />
@@ -58,17 +60,16 @@
     <Compile Include="Events\MainWindowClosedEvent.cs" />
     <Compile Include="Events\MainWindowClosingEvent.cs" />
     <Compile Include="Events\ProgressMessageEventArgs.cs" />
-    <Compile Include="Events\WindowThemeChangeEvent.cs" />
-    <Compile Include="Interfaces\IAppBootstrapper.cs" />
-    <Compile Include="Interfaces\IDisposeManager.cs" />
+    <Compile Include="Interfaces\Bootstrappers\IAppBootstrapper.cs" />
+    <Compile Include="Interfaces\Disposes\IDisposeManager.cs" />
     <Compile Include="Interfaces\Inspections\IInspectionManager.cs" />
     <Compile Include="Interfaces\Inspections\IInspectionStarter.cs" />
     <Compile Include="Interfaces\Inspections\IInspectionStateProvider.cs" />
+    <Compile Include="Interfaces\Settings\ISettingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\XmlParser.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

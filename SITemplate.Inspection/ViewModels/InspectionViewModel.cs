@@ -1,5 +1,5 @@
 ﻿using Prism.Mvvm;
-using SITemplate.Core.Interfaces.Inspections;
+using SITemplate.Core.Interfaces;
 
 namespace SITemplate.Inspection.ViewModels
 {

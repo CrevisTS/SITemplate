@@ -2,8 +2,6 @@
 using SITemplate.Splash.ViewModels;
 using SITemplate.Splash.Views;
 using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace SITemplate
 {
