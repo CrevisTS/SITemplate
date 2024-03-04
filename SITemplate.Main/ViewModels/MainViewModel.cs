@@ -29,7 +29,7 @@ namespace SITemplate.Main.ViewModels
         public ICommand ClosingCommand => new DelegateCommand<CancelEventArgs>(OnClosing);
         public ICommand ClosedCommand => new DelegateCommand(OnClosed);
 
-        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IDisposeManager disposeManager) // TODO : 0. 여기에서 싱글턴 받으면 에러발생함...  CvsService.Prism 이거 여기다가 옮기고 실행 순서 보면서 조율해볼것
+        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IDisposeManager disposeManager)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
