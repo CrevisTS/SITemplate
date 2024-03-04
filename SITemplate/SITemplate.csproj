@@ -49,8 +49,8 @@
       <HintPath>..\CvsServiceDlls\CvsService.Log.Display.dll</HintPath>
     </Reference>
     <Reference Include="CvsService.Log.Write, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CvsServiceDlls\CvsService.Log.Write.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="CvsService.Pattern, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
