@@ -49,11 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\ViewTypeOpacityConverter.cs" />
+    <Compile Include="Converters\ToStringEqualCheckConverter.cs" />
     <Compile Include="Datas\RegionNames.cs" />
     <Compile Include="Datas\Settings\AppSetting.cs" />
     <Compile Include="Datas\Settings\WindowSetting.cs" />
     <Compile Include="Datas\ViewNames.cs" />
+    <Compile Include="Converters\ToStringEqualToOpacityConverter.cs" />
     <Compile Include="Enums\EInspectionState.cs" />
     <Compile Include="Enums\ERegionType.cs" />
     <Compile Include="Enums\EViewType.cs" />

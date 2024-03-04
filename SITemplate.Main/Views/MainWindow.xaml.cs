@@ -1,5 +1,4 @@
 ﻿using CvsService.UI.Windows.UI.Units;
-using SITemplate.Main.Services;
 
 namespace SITemplate.Main.Views
 {

@@ -5,6 +5,7 @@ using Prism.Regions;
 using SITemplate.Core.Datas;
 using SITemplate.Core.Enums;
 using SITemplate.Core.Interfaces;
+using SITemplate.Core.Interfaces.Settings;
 using System;
 using System.Windows.Input;
 
@@ -50,6 +51,8 @@ namespace SITemplate.ControlBar.ViewModels
         private void OnMainRegionChangeClick(object parameter)
         {
             EViewType newContent = (EViewType)Enum.Parse(typeof(EViewType), parameter.ToString());
+            if (MainRegionContent == newContent) return;
+
             MainRegionContent = newContent;
             _regionManager.RequestNavigate(RegionNames.MainViewRegion, newContent.ToString());
         }

@@ -7,14 +7,15 @@
     xmlns:cvsCustomContorl="clr-namespace:CvsService.UI.CustomControls.UI.Units;assembly=CvsService.UI.CustomControls"
     xmlns:cvsWindow="clr-namespace:CvsService.UI.Windows.UI.Units;assembly=CvsService.UI.Windows"
     xmlns:cvsIcon="clr-namespace:CvsService.UI.Icons;assembly=CvsService.UI.Icons"
-    xmlns:coreConverter="clr-namespace:SITemplate.Core.Converters;assembly=SITemplate.Core"
     xmlns:localConverter="clr-namespace:SITemplate.ControlBar.Converters"
     xmlns:coreEnum="clr-namespace:SITemplate.Core.Enums;assembly=SITemplate.Core"
+    xmlns:coreConverter="clr-namespace:SITemplate.Core.Converters;assembly=SITemplate.Core"
     mc:Ignorable="d" 
     d:DesignHeight="80" d:DesignWidth="1900">
     <UserControl.Resources>
         <ResourceDictionary>
-            <coreConverter:ViewTypeOpacityConverter x:Key="ViewTypeOpacityConverter"/>
+            <coreConverter:ToStringEqualCheckConverter x:Key="ToStringEqualCheckConverter"/>
+            <coreConverter:ToStringEqualToOpacityConverter x:Key="ToStringEqualToOpacityConverter"/>
             <localConverter:InspectionStatusToBtnBackgroundConverter x:Key="InspectionStatusToBtnBackgroundConverter"/>
             <localConverter:InspectionStatusToBtnTextConverter x:Key="InspectionStatusToBtnTextConverter"/>
         </ResourceDictionary>
@@ -42,7 +43,7 @@
                             FontWeight="Bold"
                             Content="Home"
                             GeometryIcon="{x:Static cvsIcon:GeometryIcons.HomeGeometry}"
-                            Opacity="{Binding MainRegionContent, Converter={StaticResource ViewTypeOpacityConverter}, ConverterParameter={x:Static coreEnum:EViewType.InspectionView}}"
+                            Opacity="{Binding MainRegionContent, Converter={StaticResource ToStringEqualToOpacityConverter}, ConverterParameter={x:Static coreEnum:EViewType.InspectionView}}"
                             Command="{Binding MainRegionChangeClickCommand}"
                             CommandParameter="{x:Static coreEnum:EViewType.InspectionView}"/>
                         <cvsCustomContorl:GeometryLabelButton
@@ -50,8 +51,9 @@
                             FontSize="12"
                             FontWeight="Bold"
                             Content="Setting" 
+                            IsEnabled="{Binding InsepctionStateProvider.InspectionState, Converter={StaticResource ToStringEqualCheckConverter}, ConverterParameter={x:Static coreEnum:EInspectionState.Stop}}"
                             GeometryIcon="{x:Static cvsIcon:GeometryIcons.SettingGeometry}"
-                            Opacity="{Binding MainRegionContent, Converter={StaticResource ViewTypeOpacityConverter}, ConverterParameter={x:Static coreEnum:EViewType.SettingView}}"
+                            Opacity="{Binding MainRegionContent, Converter={StaticResource ToStringEqualToOpacityConverter}, ConverterParameter={x:Static coreEnum:EViewType.SettingView}}"
                             Command="{Binding MainRegionChangeClickCommand}"
                             CommandParameter="{x:Static coreEnum:EViewType.SettingView}"/>
                     </StackPanel>
@@ -76,6 +78,7 @@
                 Margin="7"
                 Width="200"
                 VerticalContentAlignment="Center"
+                IsEnabled="{Binding MainRegionContent, Converter={StaticResource ToStringEqualCheckConverter}, ConverterParameter={x:Static coreEnum:EViewType.InspectionView}}"
                 Background="{Binding InsepctionStateProvider.InspectionState, Converter={StaticResource InspectionStatusToBtnBackgroundConverter}}"
                 FontSize="35"
                 Content="{Binding InsepctionStateProvider.InspectionState, Converter={StaticResource InspectionStatusToBtnTextConverter}}"

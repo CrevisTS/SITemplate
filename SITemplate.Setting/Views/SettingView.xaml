@@ -23,7 +23,7 @@
                         FontSize="15"
                         VerticalContentAlignment="Center"
                         ItemsSource="{Binding WindowThemeStrings, Source={StaticResource WindowThemeValueConverter}}"
-                        SelectedIndex="{Binding AppSetting.WindowSetting.WindowTheme , Converter={StaticResource WindowThemeValueConverter}}"/>
+                        SelectedIndex="{Binding AppSetting.WindowSetting.WindowTheme, Converter={StaticResource WindowThemeValueConverter}}"/>
 
                 </StackPanel>
             </StackPanel>

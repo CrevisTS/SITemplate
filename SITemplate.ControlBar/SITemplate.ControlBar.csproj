@@ -36,6 +36,9 @@
     <Reference Include="CvsService.Core">
       <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Core\bin\x64\Release\CvsService.Core.dll</HintPath>
     </Reference>
+    <Reference Include="CvsService.UI.Converters">
+      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Converters\bin\x64\Release\CvsService.UI.Converters.dll</HintPath>
+    </Reference>
     <Reference Include="CvsService.UI.CustomControls">
       <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.CustomControls\bin\x64\Release\CvsService.UI.CustomControls.dll</HintPath>
     </Reference>

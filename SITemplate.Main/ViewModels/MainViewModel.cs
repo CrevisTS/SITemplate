@@ -1,5 +1,4 @@
-﻿using CvsService.UI.Windows.Enums;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
