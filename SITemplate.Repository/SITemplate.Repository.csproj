@@ -32,8 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CvsService.UI.Windows">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Windows\bin\x64\Release\CvsService.UI.Windows.dll</HintPath>
+    <Reference Include="CvsService.UI.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Windows.dll</HintPath>
     </Reference>
     <Reference Include="Prism, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.8.1.97\lib\net47\Prism.dll</HintPath>

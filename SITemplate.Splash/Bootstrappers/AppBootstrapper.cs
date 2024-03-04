@@ -43,12 +43,16 @@ namespace SITemplate.Splash.Bootstrappers
 
                 // CvsService Log Initialize
                 LogInit(20);
+                Thread.Sleep(1000); // UI 보기위함
+
                 // TODO : Prism Singleton 초기화 하는 부분.
                 _ = LazyInstanceInit(_lazySettingRepo, "Setting", 50);
+                Thread.Sleep(1000); // UI 보기위함
 
                 // AppBoot에서 초기화하는 클래스 중 Dispose()가 필요하면 여기에서 추가.
                 // 만약 다른곳에서 추가해야한다면 생성자에서 의존성 주입으로 IDisposeManager 받아서 추가하면 됨
                 IDisposeManager disposeManager = LazyInstanceInit(_lazyDisposeManager, "Dispose Manager", 90);
+                Thread.Sleep(1000); // UI 보기위함
 
                 // disposeManager.AddIDisposable(CameraManager);
                 // disposeManager.AddIDisposable(IOManager);

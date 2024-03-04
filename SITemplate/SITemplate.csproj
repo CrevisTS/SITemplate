@@ -36,39 +36,49 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CvsService.Core">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Core\bin\x64\Release\CvsService.Core.dll</HintPath>
+    <Reference Include="CvsService.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Log.Core">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Log.Core\bin\x64\Release\CvsService.Log.Core.dll</HintPath>
+    <Reference Include="CvsService.Log.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Log.Display">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Log.Display\bin\x64\Release\CvsService.Log.Display.dll</HintPath>
+    <Reference Include="CvsService.Log.Display, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Display.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Log.Write">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Log.Write\bin\x64\Release\CvsService.Log.Write.dll</HintPath>
+    <Reference Include="CvsService.Log.Write, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Write.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Pattern">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Pattern\bin\x64\Release\CvsService.Pattern.dll</HintPath>
+    <Reference Include="CvsService.Pattern, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Pattern.dll</HintPath>
     </Reference>
     <Reference Include="CvsService.Prism, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Prism\bin\x64\Release\CvsService.Prism.dll</HintPath>
+      <HintPath>..\CvsServiceDlls\CvsService.Prism.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.Converters">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Converters\bin\x64\Release\CvsService.UI.Converters.dll</HintPath>
+    <Reference Include="CvsService.UI.Converters, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Converters.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.CustomControls">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.CustomControls\bin\x64\Release\CvsService.UI.CustomControls.dll</HintPath>
+    <Reference Include="CvsService.UI.CustomControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.CustomControls.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.Icons">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Icons\bin\x64\Release\CvsService.UI.Icons.dll</HintPath>
+    <Reference Include="CvsService.UI.Icons, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Icons.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.Styles">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Styles\bin\x64\Release\CvsService.UI.Styles.dll</HintPath>
+    <Reference Include="CvsService.UI.Styles, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Styles.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.Windows">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Windows\bin\x64\Release\CvsService.UI.Windows.dll</HintPath>
+    <Reference Include="CvsService.UI.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Windows.dll</HintPath>
     </Reference>
     <Reference Include="DryIoc, Version=4.7.7.0, Culture=neutral, PublicKeyToken=dfbf2bd50fcf7768, processorArchitecture=MSIL">
       <HintPath>..\packages\DryIoc.dll.4.7.7\lib\net45\DryIoc.dll</HintPath>
@@ -84,6 +94,15 @@
     </Reference>
     <Reference Include="Prism.Wpf, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.8.1.97\lib\net47\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.3.0.1\lib\net471\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Enrichers.Thread, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Enrichers.Thread.3.1.0\lib\net45\Serilog.Enrichers.Thread.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=5.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.5.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

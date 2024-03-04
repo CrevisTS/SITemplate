@@ -33,26 +33,33 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CvsService.Core">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Core\bin\x64\Release\CvsService.Core.dll</HintPath>
+    <Reference Include="CvsService.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Log.Core">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Log.Core\bin\x64\Release\CvsService.Log.Core.dll</HintPath>
+    <Reference Include="CvsService.Log.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Log.Display">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Log.Display\bin\x64\Release\CvsService.Log.Display.dll</HintPath>
+    <Reference Include="CvsService.Log.Display, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Display.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Log.Write">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Log.Write\bin\x64\Release\CvsService.Log.Write.dll</HintPath>
+    <Reference Include="CvsService.Log.Write, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Write.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Pattern">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Pattern\bin\x64\Release\CvsService.Pattern.dll</HintPath>
+    <Reference Include="CvsService.Pattern, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Pattern.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.Prism">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Prism\bin\x64\Release\CvsService.Prism.dll</HintPath>
+    <Reference Include="CvsService.Prism, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Prism.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.Styles">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Styles\bin\x64\Release\CvsService.UI.Styles.dll</HintPath>
+    <Reference Include="CvsService.UI.Styles, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Styles.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>

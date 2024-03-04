@@ -33,20 +33,25 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CvsService.Core">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.Core\bin\x64\Release\CvsService.Core.dll</HintPath>
+    <Reference Include="CvsService.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.Converters">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Converters\bin\x64\Release\CvsService.UI.Converters.dll</HintPath>
+    <Reference Include="CvsService.UI.Converters, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Converters.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.CustomControls">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.CustomControls\bin\x64\Release\CvsService.UI.CustomControls.dll</HintPath>
+    <Reference Include="CvsService.UI.CustomControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.CustomControls.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.Icons">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Icons\bin\x64\Release\CvsService.UI.Icons.dll</HintPath>
+    <Reference Include="CvsService.UI.Icons, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Icons.dll</HintPath>
     </Reference>
-    <Reference Include="CvsService.UI.Windows">
-      <HintPath>C:\Users\CREVIS_TS_KwonHG\source\repos\CvsService\CvsService.UI.Windows\bin\x64\Release\CvsService.UI.Windows.dll</HintPath>
+    <Reference Include="CvsService.UI.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Windows.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>

@@ -38,6 +38,6 @@
             Minimum="0"  
             Maximum="100"
             Style="{StaticResource Orange_ProgressBar}"
-            Value="50"/>
+            Value="{Binding ProgressValue}"/>
     </Grid>
 </Window>
