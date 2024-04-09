@@ -5,7 +5,6 @@ using Prism.Regions;
 using SITemplate.Core.Datas;
 using SITemplate.Core.Enums;
 using SITemplate.Core.Interfaces;
-using SITemplate.Core.Interfaces.Settings;
 using System;
 using System.Windows.Input;
 
