@@ -77,6 +77,7 @@
     <Compile Include="Enums\EViewType.cs" />
     <Compile Include="Events\MainWindowClosedEvent.cs" />
     <Compile Include="Events\MainWindowClosingEvent.cs" />
+    <Compile Include="Events\MouseMoveEvent.cs" />
     <Compile Include="Events\ProgressMessageEventArgs.cs" />
     <Compile Include="Interfaces\Bootstrappers\IAppBootstrapper.cs" />
     <Compile Include="Interfaces\Disposes\IDisposeManager.cs" />

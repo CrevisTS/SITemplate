@@ -1,5 +1,6 @@
 ﻿using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Login.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -16,8 +17,9 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 	public class LoginViewModel : BindableBase, IDialogAware
 	{
 		private readonly ISettingRepository _settingRepository;
-		private string _password;
 
+		private string _password;
+		private LoginService _loginService;
 		public string Title => "Login";
 		public string Password { get => _password; set => SetProperty(ref _password, value); }
 
@@ -25,16 +27,22 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 
 		public ICommand LoginBtnClickCommand => new DelegateCommand<string>(OnLoginBtnClick);
 
-		public LoginViewModel(ISettingRepository settingRepository)
+		public LoginViewModel(ISettingRepository settingRepository, LoginService loginService)
 		{
 			_settingRepository = settingRepository;
-
+			_loginService = loginService;
 		}
 
-		private void OnLoginBtnClick(string obj)
+		private void OnLoginBtnClick(string password)
 		{
-
-			
+			if (_loginService.Login(password))
+			{
+				RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+			}
+			else
+			{
+				MessageBox.Show("비밀번호가 다릅니다.");
+			}
 		}
 
 		#region DialogAware

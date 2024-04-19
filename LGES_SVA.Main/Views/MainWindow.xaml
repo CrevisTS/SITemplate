@@ -29,6 +29,9 @@
 		<b:EventTrigger EventName="Closed">
 			<b:InvokeCommandAction Command="{Binding ClosedCommand}"/>
 		</b:EventTrigger>
+		<b:EventTrigger EventName="MouseMove">
+			<b:InvokeCommandAction Command="{Binding MouseMoveCommand}"/>
+		</b:EventTrigger>
 	</b:Interaction.Triggers>
 	
 	<Grid>
@@ -192,7 +195,7 @@
 					</Border>
 
 					<Border Grid.Column="1">
-						<TextBlock Text="" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						<TextBlock Text="{Binding AppSetting.UserLevel}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 					</Border>
 				</Grid>
 			</Border>

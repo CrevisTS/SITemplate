@@ -194,6 +194,10 @@
       <Project>{8370B3F6-38ED-4124-A22C-D5A4E0488B55}</Project>
       <Name>LGES_SVA.Inspection</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Login\LGES_SVA.Login.csproj">
+      <Project>{8FCDBA57-5E0A-4062-B8CF-572155141C08}</Project>
+      <Name>LGES_SVA.Login</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Main\LGES_SVA.Main.csproj">
       <Project>{8FA48257-E29D-4BA9-91A9-C2A774DD15C9}</Project>
       <Name>LGES_SVA.Main</Name>

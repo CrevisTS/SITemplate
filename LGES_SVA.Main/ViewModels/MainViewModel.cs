@@ -14,6 +14,7 @@ using CvsService.Log.Write.Services;
 using CvsService.Log.Write.Interfaces;
 using CvsService.Log.Display.Interfaces;
 using CvsService.Log.Write.Models;
+using System;
 
 namespace LGES_SVA.Main.ViewModels
 {
@@ -34,6 +35,12 @@ namespace LGES_SVA.Main.ViewModels
         public ICommand LoadedCommand => new DelegateCommand(OnLoaded);
         public ICommand ClosingCommand => new DelegateCommand<CancelEventArgs>(OnClosing);
         public ICommand ClosedCommand => new DelegateCommand(OnClosed);
+        public ICommand MouseMoveCommand => new DelegateCommand(OnMouseMove);
+
+		private void OnMouseMove()
+		{
+            _eventAggregator.GetEvent<MouseMoveEvent>().Publish();
+        }
 
         public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, ISettingRepository settingRepository, IDisposeManager disposeManager)
         {

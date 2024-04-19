@@ -6,6 +6,7 @@ using LGES_SVA.Inspection.Services;
 using LGES_SVA.Main.Services;
 using LGES_SVA.Repository.Services;
 using LGES_SVA.Splash.Bootstrappers;
+using LGES_SVA.Login.Services;
 
 namespace LGES_SVA.Settings
 {
@@ -29,6 +30,8 @@ namespace LGES_SVA.Settings
             _ = containerRegistry.RegisterSingleton<IInspectionManager, InspectionManager>();
             _ = containerRegistry.RegisterSingleton<IDisposeManager, DisposeManager>();
             _ = containerRegistry.RegisterSingleton<ISettingRepository, SettingRepository>();
+
+            containerRegistry.RegisterSingleton<LoginService>();
 
         }
     }

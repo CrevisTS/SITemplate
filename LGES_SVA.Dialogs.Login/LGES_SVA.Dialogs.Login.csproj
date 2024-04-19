@@ -99,6 +99,10 @@
       <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
       <Name>LGES_SVA.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Login\LGES_SVA.Login.csproj">
+      <Project>{8FCDBA57-5E0A-4062-B8CF-572155141C08}</Project>
+      <Name>LGES_SVA.Login</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
