@@ -1,0 +1,202 @@
+﻿<cvsWindow:CustomWindow
+    x:Class="LGES_SVA.Main.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cvsWindow="clr-namespace:CvsService.UI.Windows.UI.Units;assembly=CvsService.UI.Windows"
+    xmlns:cvsWindow2="clr-namespace:LGES_SVA.Main.Services"
+    xmlns:cvsControl="clr-namespace:CvsService.UI.CustomControls.UI.Units;assembly=CvsService.UI.CustomControls"
+    xmlns:coreData="clr-namespace:LGES_SVA.Core.Datas;assembly=LGES_SVA.Core"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:prism="http://prismlibrary.com/"
+	xmlns:viewModel="clr-namespace:LGES_SVA.Main.ViewModels"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    WindowStyle="None"
+    mc:Ignorable="d"
+	d:DataContext="{d:DesignInstance Type=viewModel:MainViewModel, IsDesignTimeCreatable=False}"
+    Theme="LGES"
+    Title="MainWindow" Height="1080" Width="1920" Background="#292E42">
+	<!-- Theme를 None으로 설정하면 일반 Window로 적용됨 -->
+	<b:Interaction.Triggers>
+		<b:EventTrigger EventName="Loaded">
+			<b:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+		</b:EventTrigger>
+		<b:EventTrigger EventName="Closing">
+			<b:InvokeCommandAction Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
+		</b:EventTrigger>
+		<b:EventTrigger EventName="Closed">
+			<b:InvokeCommandAction Command="{Binding ClosedCommand}"/>
+		</b:EventTrigger>
+	</b:Interaction.Triggers>
+	
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1470"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		
+		<!-- Left -->
+		<Grid Grid.Column="0">
+			<Grid.RowDefinitions>
+				<!-- Title Bar -->
+				<RowDefinition Height="75"/>
+				<!-- Control Bar -->
+				<RowDefinition Height="100"/>
+				<!-- Main View -->
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="200"/>
+			</Grid.RowDefinitions>
+
+			<!-- Title Bar -->
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="435"/>
+					<ColumnDefinition Width="1035"/>
+				</Grid.ColumnDefinitions>
+				<!-- Logo -->
+				<Image Grid.Column="0" Source="pack://application:,,,/LGES_SVA;component/Resources/Images/LGES_logo.png" Margin="0" Panel.ZIndex="2" RenderOptions.BitmapScalingMode="HighQuality"/>
+
+				<cvsWindow:HeaderLabel 
+					Grid.Column="1"
+					FontSize="40"
+					Content="Smart Vision Align"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center" Margin="345,6,344,6"/>
+				<cvsControl:TitleBarArea Grid.ColumnSpan="2"/>
+			</Grid>
+
+
+			<!-- Control Bar -->
+			<ContentControl
+				Grid.Row="1"
+				prism:RegionManager.RegionName="{x:Static coreData:RegionNames.ControlRegion}"/>
+
+			<!-- Main View -->
+			<ContentControl
+				Grid.Row="2"
+				prism:RegionManager.RegionName="{x:Static coreData:RegionNames.MainViewRegion}"/>
+			
+			<!-- Tab View-->
+			<ContentControl
+				Grid.Row="3"
+				prism:RegionManager.RegionName="{x:Static coreData:RegionNames.TabViewRegion}"/>
+		</Grid>
+
+		<!-- Right -->
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<!-- Icon Bar -->
+				<RowDefinition Height="50"/>
+				<!-- Version -->
+				<RowDefinition Height="25"/>
+				<!-- Program Mode -->
+				<RowDefinition Height="25"/>
+				<!-- Program State -->
+				<RowDefinition Height="75"/>
+				<!-- Model ID, Recipe ID -->
+				<RowDefinition Height="50"/>
+				<!-- LOT ID -->
+				<RowDefinition Height="50"/>
+				<RowDefinition Height="25"/>
+				<RowDefinition Height="25"/>
+				<RowDefinition Height="50"/>
+				<RowDefinition Height="25"/>
+				<RowDefinition Height="50"/>
+			</Grid.RowDefinitions>
+
+			<!-- Icon Bar -->
+			<Grid Grid.Row="0">
+				<StackPanel
+                Panel.ZIndex="1"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+					<StackPanel Orientation="Horizontal">
+						<cvsControl:MinimizeButton Width="30" Height="30" Margin="10 9 5 10"/>
+						<cvsControl:RestoreMaximizeButton Width="30" Height="30" Margin="5 9 5 10"/>
+						<cvsControl:ExitButton Width="30" Height="30" Margin="5 10 10 10"/>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+
+			<!-- Version -->
+			<Grid Grid.Row="1">
+					
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+					<TextBlock Grid.Column="0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Version"/>
+				<TextBlock Grid.Column="1" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding AppSetting.ProgramVersion}"/>
+			</Grid>
+
+			<!-- Program Mode -->
+			<Border Grid.Row="2">
+				<Grid>
+					
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock FontSize="15" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="AUTO MODE"/>
+				<TextBlock FontSize="15" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="BY PASS MODE"/>
+				<TextBlock FontSize="15" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="MANUAL MODE"/>
+				</Grid>
+			</Border>
+
+			<!-- Program State -->
+			<Border Grid.Row="3">
+				<Label Background="Aquamarine" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize=" 40" Content="RUN"/>
+			</Border>
+
+			<!-- Model ID, Recipe ID -->
+			<Border Grid.Row="4">
+				<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="130"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="130"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+					<Border Grid.Column="0" >
+						<TextBlock FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Model ID(PLC)"/>
+					</Border>
+					<Border Grid.Column="1">
+						<TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text=""/>
+					</Border>
+					<Border Grid.Column="2">
+						<TextBlock  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Recipe ID(PC)"/>
+						
+					</Border>
+					<Border Grid.Column="3">
+						<TextBlock FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text=""/>
+					</Border>
+				</Grid>
+			</Border>
+			
+			<!-- LOT ID -->
+			<Border Grid.Row="5">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="130"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<Border Grid.Column="0">
+						<TextBlock Text="LOT ID" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					</Border>
+
+					<Border Grid.Column="1">
+						<TextBlock Text="" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+					</Border>
+				</Grid>
+			</Border>
+		</Grid>
+
+	</Grid>
+</cvsWindow:CustomWindow>

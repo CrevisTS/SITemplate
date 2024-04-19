@@ -1,0 +1,156 @@
+﻿<UserControl
+    x:Class="LGES_SVA.ControlBar.Views.ControlBarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:cvsCustomContorl="clr-namespace:CvsService.UI.CustomControls.UI.Units;assembly=CvsService.UI.CustomControls"
+    xmlns:cvsWindow="clr-namespace:CvsService.UI.Windows.UI.Units;assembly=CvsService.UI.Windows"
+    xmlns:cvsIcon="clr-namespace:CvsService.UI.Icons;assembly=CvsService.UI.Icons"
+    xmlns:localConverter="clr-namespace:LGES_SVA.ControlBar.Converters"
+    xmlns:coreEnum="clr-namespace:LGES_SVA.Core.Enums;assembly=LGES_SVA.Core"
+    xmlns:coreConverter="clr-namespace:LGES_SVA.Core.Converters;assembly=LGES_SVA.Core"
+	xmlns:viewModel="clr-namespace:LGES_SVA.ControlBar.ViewModels"
+	d:DataContext="{d:DesignInstance Type=viewModel:ControlBarViewModel, IsDesignTimeCreatable=False}"
+    mc:Ignorable="d" 
+    d:DesignHeight="100" d:DesignWidth="1900" Background="#292E42">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="C:\Users\TS_jiwon\source\repos\LGES_SmartVisionAlign\LGES_SVA.Styles\Regions\RegionStyle.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+			<coreConverter:ToStringEqualCheckConverter x:Key="ToStringEqualCheckConverter"/>
+			<coreConverter:ToStringEqualToOpacityConverter x:Key="ToStringEqualToOpacityConverter"/>
+			<localConverter:InspectionStatusToBtnBackgroundConverter x:Key="InspectionStatusToBtnBackgroundConverter"/>
+			<localConverter:InspectionStatusToBtnTextConverter x:Key="InspectionStatusToBtnTextConverter"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<cvsWindow:Depth1Panel>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<!-- Icons -->
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="80"/>
+					<ColumnDefinition Width="80"/>
+					<ColumnDefinition Width="80"/>
+					<ColumnDefinition Width="80"/>
+					<ColumnDefinition Width="80"/>
+					<ColumnDefinition Width="80"/>
+					<ColumnDefinition Width="80"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<!-- Menu Icons -->
+				<!-- Login -->
+				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="0" Background="Transparent" BorderThickness="0" Visibility="{Binding IsLoginMenuVisible}" Command="{Binding LoginBtnClickCommand}">
+					<Grid Height="80" Width="80">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="50"/>
+							<RowDefinition Height="15"/>
+						</Grid.RowDefinitions>
+						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/Login.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="LOGIN" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+					</Grid>
+				</Button>
+
+				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="1" Background="Transparent" BorderThickness="0" Visibility="{Binding IsLoginMenuVisible}" Command="{Binding LoginCommand}">
+					<Grid Height="80" Width="80">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="50"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/Simulation.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="SIMULATION" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+					</Grid>
+				</Button>
+
+				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="2" Background="Transparent" BorderThickness="0" Visibility="{Binding IsLoginMenuVisible}" Command="{Binding LoginCommand}">
+					<Grid Height="80" Width="80">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="50"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/logview.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="LOG" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+					</Grid>
+				</Button>
+
+				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="3" Background="Transparent" BorderThickness="0" Visibility="{Binding IsLoginMenuVisible}" Command="{Binding LoginCommand}">
+					<Grid Height="80" Width="80">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="50"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/RECIPE.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="RECIPE" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+					</Grid>
+				</Button>
+
+				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="4" Background="Transparent" BorderThickness="0" Visibility="{Binding IsLoginMenuVisible}" Command="{Binding LoginCommand}">
+					<Grid Height="80" Width="80">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="50"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/search.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="SEARCH" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+					</Grid>
+				</Button>
+
+				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="5" Background="Transparent" BorderThickness="0" Visibility="{Binding IsLoginMenuVisible}" Command="{Binding LoginCommand}">
+					<Grid Height="80" Width="80">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="50"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/live.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="LIVE" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+					</Grid>
+				</Button>
+
+				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="6" Background="Transparent" BorderThickness="0" Visibility="{Binding IsLoginMenuVisible}" Command="{Binding LoginCommand}">
+					<Grid Height="80" Width="80">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="5*"/>
+							<RowDefinition Height="3*"/>
+						</Grid.RowDefinitions>
+						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/settings.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="SETTING" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+					</Grid>
+				</Button>
+				<!-- Comunication Icons-->
+				<Grid
+                    Grid.Column="1"
+                    HorizontalAlignment="Right">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="60"/>
+						<ColumnDefinition Width="60"/>
+						<ColumnDefinition Width="60"/>
+						<ColumnDefinition Width="60"/>
+					</Grid.ColumnDefinitions>
+
+					<!-- PLC 
+                    <cvsCustomContorl:IsConnectedButton
+                        Grid.Column="0"
+                        ConnectionMonitor="{Binding PLCConnection}"/>
+					
+                    <cvsCustomContorl:IsConnectedButton
+                        Grid.Column="1"
+                        ConnectionMonitor="{Binding IOConnection}"/>
+
+					<cvsCustomContorl:IsConnectedButton
+                        Grid.Column="2"
+                        ConnectionMonitor="{Binding CameraConnection}"/>
+					-->
+
+				</Grid>
+			</Grid>
+
+		</Grid>
+	</cvsWindow:Depth1Panel>
+</UserControl>

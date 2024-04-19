@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="LGES_SVA.Dialogs.Login.Views.LoginDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Login.ViewModels"
+			 d:DataContext="{d:DesignInstance Type=viewModel:LoginViewModel, IsDesignTimeCreatable=False}"
+             xmlns:local="clr-namespace:LGES_SVA.Dialogs.Login.Views"
+             mc:Ignorable="d" 
+             Height="100" Width="400" Background="#292E42">
+	<Grid>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="80"/>
+		</Grid.ColumnDefinitions>
+
+		<Grid >
+			
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<Grid Grid.Column="0">
+					<RadioButton GroupName="UserLevel" Content="Operator" IsChecked="True"/>
+				</Grid>
+				<Grid Grid.Column="1">
+					<RadioButton GroupName="UserLevel" Content="Engineer"/>
+				</Grid>
+			</Grid>
+
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<Border Grid.Column="0">
+					<Label Content="PW"/>
+				</Border>
+				<Border Grid.Column="1">
+					<TextBox Text="{Binding Password}"/>
+				</Border>
+			</Grid>
+
+		</Grid>
+
+		<Grid Grid.Column="1">
+			<Button Command="{Binding LoginBtnClickCommand}" CommandParameter="{Binding Password}">
+				<Image/>
+			</Button>
+		</Grid>
+	</Grid>
+</UserControl>

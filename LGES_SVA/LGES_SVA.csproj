@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{684B92DA-5F63-4849-B198-94192D3FDE11}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LGES_SVA</RootNamespace>
+    <AssemblyName>LGES_SVA</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CvsService.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.Log.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.Log.Display, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Display.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.Log.Write, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\CvsServiceDlls\CvsService.Log.Write.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="CvsService.Pattern, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Pattern.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.Prism, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.UI.Converters, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Converters.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.UI.CustomControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.CustomControls.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.UI.Icons, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Icons.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.UI.Styles, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Styles.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.UI.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CvsServiceDlls\CvsService.UI.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="DryIoc, Version=4.7.7.0, Culture=neutral, PublicKeyToken=dfbf2bd50fcf7768, processorArchitecture=MSIL">
+      <HintPath>..\packages\DryIoc.dll.4.7.7\lib\net45\DryIoc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.8.1.97\lib\net47\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.DryIoc.Wpf, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.DryIoc.8.1.97\lib\net47\Prism.DryIoc.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.8.1.97\lib\net47\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.3.0.1\lib\net471\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Enrichers.Thread, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Enrichers.Thread.3.1.0\lib\net45\Serilog.Enrichers.Thread.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=5.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.5.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Settings\ViewModules.cs" />
+    <Compile Include="Settings\SingletonModules.cs" />
+    <Compile Include="Settings\WireDataContext.cs" />
+    <Compile Include="Starter.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LGES_SVA.ControlBar\LGES_SVA.ControlBar.csproj">
+      <Project>{D00A8075-5A35-450F-B809-8BC2F7B8F71A}</Project>
+      <Name>LGES_SVA.ControlBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Core\LGES_SVA.Core.csproj">
+      <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
+      <Name>LGES_SVA.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialogs.Live\LGES_SVA.Dialogs.Live.csproj">
+      <Project>{30C1AD99-ECCB-44A3-AE42-A6E4F86C9D83}</Project>
+      <Name>LGES_SVA.Dialogs.Live</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialogs.LogDialog\LGES_SVA.Dialogs.LogDialog.csproj">
+      <Project>{A6F4A12E-C6D8-4A80-92A4-C647C68E8FB6}</Project>
+      <Name>LGES_SVA.Dialogs.LogDialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialogs.Login\LGES_SVA.Dialogs.Login.csproj">
+      <Project>{EB0BF2F6-EDF8-45D5-BE89-CFF1F9063622}</Project>
+      <Name>LGES_SVA.Dialogs.Login</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialogs.Recipe\LGES_SVA.Dialogs.Recipe.csproj">
+      <Project>{EF80C25D-1FBF-4351-93FB-311986481D1F}</Project>
+      <Name>LGES_SVA.Dialogs.Recipe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialogs.Search\LGES_SVA.Dialogs.Search.csproj">
+      <Project>{196F5DA2-88FA-4377-BA22-84ADCE0A6E5D}</Project>
+      <Name>LGES_SVA.Dialogs.Search</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialogs.Setting\LGES_SVA.Dialogs.Setting.csproj">
+      <Project>{273E413C-504B-40E7-B028-1EA6C47E6207}</Project>
+      <Name>LGES_SVA.Dialogs.Setting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialogs.Simulation\LGES_SVA.Dialogs.Simulation.csproj">
+      <Project>{A52BCA4D-1709-4477-A36E-ED769C3FB7A8}</Project>
+      <Name>LGES_SVA.Dialogs.Simulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Inspection\LGES_SVA.Inspection.csproj">
+      <Project>{8370B3F6-38ED-4124-A22C-D5A4E0488B55}</Project>
+      <Name>LGES_SVA.Inspection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Main\LGES_SVA.Main.csproj">
+      <Project>{8FA48257-E29D-4BA9-91A9-C2A774DD15C9}</Project>
+      <Name>LGES_SVA.Main</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Regions.TabView\LGES_SVA.Regions.TabView.csproj">
+      <Project>{9A88DDF3-EF68-45F0-9786-1B6A4177FDD7}</Project>
+      <Name>LGES_SVA.Regions.TabView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Repository\LGES_SVA.Repository.csproj">
+      <Project>{8493a038-b421-40c8-9646-fc0cc6f04986}</Project>
+      <Name>LGES_SVA.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Setting\LGES_SVA.Setting.csproj">
+      <Project>{1D4FAED7-6FE7-4153-83D0-7A30C7BA4E0D}</Project>
+      <Name>LGES_SVA.Setting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Splash\LGES_SVA.Splash.csproj">
+      <Project>{B164694C-13F5-4D86-884C-EBF30A2AFD06}</Project>
+      <Name>LGES_SVA.Splash</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\LGES_logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
