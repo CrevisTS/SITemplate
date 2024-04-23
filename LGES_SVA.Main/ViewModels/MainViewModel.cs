@@ -22,16 +22,19 @@ namespace LGES_SVA.Main.ViewModels
     {
         #region Fields for property
         private AppSetting _appSetting;
-        #endregion
-
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
         private readonly IDisposeManager _disposeManager;
         private readonly ILogWriteManager _logWirteManager = LogWriteManager.Instance;
+        private ISettingRepository _settingRepo;
+        #endregion
+
+
         //private readonly ILogDisplayManager _logDisplayManager;
 
         public AppSetting AppSetting { get => _appSetting; set => SetProperty(ref _appSetting, value); }
 
+        public ISettingRepository SettingRepository { get => _settingRepo; set => SetProperty(ref _settingRepo, value); }
         public ICommand LoadedCommand => new DelegateCommand(OnLoaded);
         public ICommand ClosingCommand => new DelegateCommand<CancelEventArgs>(OnClosing);
         public ICommand ClosedCommand => new DelegateCommand(OnClosed);
@@ -47,6 +50,7 @@ namespace LGES_SVA.Main.ViewModels
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             AppSetting = settingRepository.AppSetting;
+            SettingRepository = settingRepository;
             _disposeManager = disposeManager;
 
             _logWirteManager.Info(new InfoLogData("프로그램 시작",$"{AppSetting.ProgramVersion}"));

@@ -3,12 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Setting.ViewModels"
+			 d:DataContext="{d:DesignInstance Type=viewModel:SettingViewModel, IsDesignTimeCreatable=False}"
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Setting.Views"
              mc:Ignorable="d" 
-             Height="450" Width="800" Background="#292E42">
-	<Grid>
-            <!-- 검사기 수동 판정 모드 -->
+             Height="450" Width="800" Background="#292E42" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">
+	<Grid >
+		<Grid.RowDefinitions>
+			<!-- Title -->
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<Label Content="Setting" />
+		</Grid>
 		
+		<!-- 검사기 이름-->
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid Grid.Column="0">
+				<Label Content="1. Inspection Name"/>
+			</Grid>
+			<Grid Grid.Column="1">
+				<TextBox Text="{Binding AppSettingClone.ProgramName}"/>
+			</Grid>
+		</Grid>
+		
+        <!-- 검사기 수동 판정 모드 -->
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid Grid.Column="0">
+				<Label Content="2. Inspection Mode"/>
+			</Grid>
+			<Grid Grid.Column="1">
+				<TextBox Text="{Binding AppSettingClone.ProgramName}"/>
+			</Grid>
+		</Grid>
 		    <!-- ROS 사용 여부 -->
 		
 		    <!-- ByPass 모드 -->

@@ -40,16 +40,17 @@ namespace LGES_SVA.ControlBar.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IInspectionManager _inspectionManager;
         private readonly IDialogService _dialogService;
-        private readonly ISettingRepository _settingRepository;
+        private ISettingRepository _settingRepository;
 
         public IInspectionStateProvider InsepctionStateProvider => _inspectionManager;
+        public ISettingRepository SettingRepository { get => _settingRepository; set => SetProperty(ref _settingRepository, value); }
         public IConnectionMonitor CameraConnection { get => _cameraConnection; set => SetProperty(ref _cameraConnection, value); }
         public IConnectionMonitor IOConnection { get => _ioConnection; set => SetProperty(ref _ioConnection, value); }
         public IConnectionMonitor PLCConnection { get => _PLCConnection; set => SetProperty(ref _PLCConnection, value); }
         public EViewType MainRegionContent { get => _mainRegionContent; set => SetProperty(ref _mainRegionContent, value); }
 
         // MainMenu 
-        public ICommand LoginBtnClickCommand => new DelegateCommand(LoginClick);
+        public ICommand LoginBtnClickCommand => new DelegateCommand(LoginToggleClick);
         public ICommand SimulationBtnClickCommand => new DelegateCommand(SimulationClick);
         public ICommand LogBtnClickCommand => new DelegateCommand(LogClick);
         public ICommand RecipeBtnClickCommand => new DelegateCommand(RecipeClick);
@@ -69,11 +70,23 @@ namespace LGES_SVA.ControlBar.ViewModels
             CameraConnection = new FakeConncetion() { Name = "Cam", IsConnected = true };
             IOConnection = new FakeConncetion() { Name = "IO", IsConnected = false };
             PLCConnection = new FakeConncetion() { Name = "PLC", IsConnected = true };
+
         }
         
-        private void LoginClick()
+        private void LoginToggleClick()
         {
-            _dialogService.ShowDialog(DialogNames.LoginDialog);
+            // 로그아웃 상태 -> 로그인 창 띄움
+            if(_settingRepository.AppSetting.NowUserLevel == EUserLevelType.None)
+			{
+                _dialogService.ShowDialog(DialogNames.LoginDialog);
+			}
+			// 로그인 상태 -> 로그아웃 시킴
+            else
+			{
+                // TODO : 로그아웃이 여기 있는게 맞는지;;
+                _settingRepository.AppSetting.NowUserLevel = EUserLevelType.None;
+            }
+
         }
 
         private void SimulationClick()

@@ -81,6 +81,8 @@
   <ItemGroup>
     <Compile Include="Converters\InspectionStatusToBtnTextConverter.cs" />
     <Compile Include="Converters\InspectionStatutsToBtnBackgroundConverter.cs" />
+    <Compile Include="Converters\LoginIconConverter.cs" />
+    <Compile Include="Converters\MenuIconConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -2,13 +2,7 @@
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces.Settings;
 using Prism.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
-using System.Windows.Input;
 
 namespace LGES_SVA.Login.Services
 {
@@ -23,6 +17,7 @@ namespace LGES_SVA.Login.Services
 			_settingRepository = settingRepository;
 			_eventAggregator = eventAggregator;
 
+			// Mouse Move Event 구독
 			_eventAggregator.GetEvent<MouseMoveEvent>().Subscribe(() => MouseMove());
 		}
 
@@ -31,7 +26,7 @@ namespace LGES_SVA.Login.Services
 			// 지금 선택된 User와 PW 확인
 			if (_settingRepository.AppSetting.User[EUserLevelType.Operator] == obj)
 			{
-				_settingRepository.AppSetting.UserLevel = EUserLevelType.Operator;
+				_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Operator;
 				AutoLogoutStart();
 				return true;
 			}
@@ -42,7 +37,7 @@ namespace LGES_SVA.Login.Services
 
 			if (_settingRepository.AppSetting.User[EUserLevelType.Engineer] == obj)
 			{
-				_settingRepository.AppSetting.UserLevel = EUserLevelType.Engineer;
+				_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Engineer;
 				AutoLogoutStart();
 				return true;
 			}
@@ -50,6 +45,11 @@ namespace LGES_SVA.Login.Services
 			{
 				return false;
 			}
+		}
+
+		public void Logout()
+		{
+			_settingRepository.AppSetting.NowUserLevel = EUserLevelType.None;
 		}
 
 		/// <summary>
@@ -60,22 +60,32 @@ namespace LGES_SVA.Login.Services
 			_autoLogoutTimer = new Timer();
 			_autoLogoutTimer.AutoReset = false;
 			_autoLogoutTimer.Elapsed += _autoLogoutTimer_Elapsed;
-			_autoLogoutTimer.Interval = 100000;
+			_autoLogoutTimer.Interval = 300000;
 			_autoLogoutTimer.Start();
 		}
 
+		/// <summary>
+		/// Timer Callback
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void _autoLogoutTimer_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			_autoLogoutTimer.Stop();
 			_autoLogoutTimer.Dispose();
 
-			_settingRepository.AppSetting.UserLevel = EUserLevelType.None;
+			Logout();
 		}
 
-
+		/// <summary>
+		/// MouseMove 이벤트 Callback
+		/// </summary>
 		private void MouseMove()
 		{
-			_autoLogoutTimer.Interval = 5000;
+			if(_autoLogoutTimer != null)
+			{
+				_autoLogoutTimer.Interval = 300000;
+			}
 		}
 	}
 }

@@ -64,7 +64,7 @@
 				<cvsWindow:HeaderLabel 
 					Grid.Column="1"
 					FontSize="40"
-					Content="Smart Vision Align"
+					Content="{Binding SettingRepository.AppSetting.ProgramName}"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center" Margin="345,6,344,6"/>
 				<cvsControl:TitleBarArea Grid.ColumnSpan="2"/>

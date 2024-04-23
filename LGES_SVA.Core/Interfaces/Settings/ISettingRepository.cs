@@ -4,8 +4,9 @@ namespace LGES_SVA.Core.Interfaces.Settings
 {
     public interface ISettingRepository
     {
-        AppSetting AppSetting { get; }
+        AppSetting AppSetting { get; set; }
         void LoadSetting();
         void SaveSetting();
+
     }
 }
