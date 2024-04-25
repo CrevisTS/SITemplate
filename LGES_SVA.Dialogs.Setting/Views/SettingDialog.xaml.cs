@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CvsService.UI.Windows.UI.Units;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace LGES_SVA.Dialogs.Setting.Views
 		public SettingDialog()
 		{
 			InitializeComponent();
+			CustomWindow.MergeThemeToUserControl(this, CvsService.UI.Windows.Enums.EWindowTheme.LGES);
+
 		}
 	}
 }

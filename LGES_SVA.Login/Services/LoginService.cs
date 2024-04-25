@@ -30,12 +30,7 @@ namespace LGES_SVA.Login.Services
 				AutoLogoutStart();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-
-			if (_settingRepository.AppSetting.User[EUserLevelType.Engineer] == obj)
+			else if (_settingRepository.AppSetting.User[EUserLevelType.Engineer] == obj)
 			{
 				_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Engineer;
 				AutoLogoutStart();

@@ -56,7 +56,7 @@
 
 				<!-- Menu Icons -->
 				<!-- Login -->
-				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="0" Background="Transparent" BorderThickness="0" Visibility="{Binding IsLoginMenuVisible}" Command="{Binding LoginBtnClickCommand}">
+				<Button Style="{DynamicResource MainMenuButton}" Grid.Column="0" Background="Transparent" BorderThickness="0" Command="{Binding LoginBtnClickCommand}">
 					<Grid Height="80" Width="80">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="50"/>

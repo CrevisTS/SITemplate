@@ -25,7 +25,10 @@ namespace LGES_SVA.Dialogs.Login.Views
 		{
 			InitializeComponent();
 			// 테마 Merge
-			//CustomWindow.MergeThemeToUserControl(this, CvsService.UI.Windows.Enums.EWindowTheme.LGES);
+			CustomWindow.MergeThemeToUserControl(this, CvsService.UI.Windows.Enums.EWindowTheme.LGES);
+
+			Password_textBox.Focus();
 		}
+
 	}
 }

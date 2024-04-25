@@ -210,10 +210,6 @@
       <Project>{8493a038-b421-40c8-9646-fc0cc6f04986}</Project>
       <Name>LGES_SVA.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LGES_SVA.Setting\LGES_SVA.Setting.csproj">
-      <Project>{1D4FAED7-6FE7-4153-83D0-7A30C7BA4E0D}</Project>
-      <Name>LGES_SVA.Setting</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Splash\LGES_SVA.Splash.csproj">
       <Project>{B164694C-13F5-4D86-884C-EBF30A2AFD06}</Project>
       <Name>LGES_SVA.Splash</Name>

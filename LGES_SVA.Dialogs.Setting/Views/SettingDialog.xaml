@@ -7,24 +7,25 @@
 			 d:DataContext="{d:DesignInstance Type=viewModel:SettingViewModel, IsDesignTimeCreatable=False}"
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Setting.Views"
              mc:Ignorable="d" 
-             Height="450" Width="800" Background="#292E42" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White">
+             Height="650" Width="800" Background="#292E42" >
 	<Grid >
 		<Grid.RowDefinitions>
 			<!-- Title -->
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
-			<RowDefinition/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="100"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
-			<Label Content="Setting" />
+			<Label Content="Setting" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" />
 		</Grid>
 		
 		<!-- 검사기 이름-->
@@ -34,12 +35,12 @@
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
-			<Grid Grid.Column="0">
-				<Label Content="1. Inspection Name"/>
-			</Grid>
-			<Grid Grid.Column="1">
+			<Border Grid.Column="0">
+				<Label Content="1. Inspection Name" VerticalAlignment="Center"/>
+			</Border>
+			<Border Grid.Column="1">
 				<TextBox Text="{Binding AppSettingClone.ProgramName}"/>
-			</Grid>
+			</Border>
 		</Grid>
 		
         <!-- 검사기 수동 판정 모드 -->
@@ -49,26 +50,211 @@
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
-			<Grid Grid.Column="0">
-				<Label Content="2. Inspection Mode"/>
-			</Grid>
-			<Grid Grid.Column="1">
-				<TextBox Text="{Binding AppSettingClone.ProgramName}"/>
-			</Grid>
+			<Border Grid.Column="0">
+				<Label Content="2. Inspection Mode" VerticalAlignment="Center"/>
+			</Border>
+			<Border Grid.Column="1">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<RadioButton Content="Auto" IsChecked="True" GroupName="InspectionMode" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="Manual" GroupName="InspectionMode" Foreground="White" Margin="10 0 0 0"/>
+				</StackPanel>
+			</Border>
 		</Grid>
 		    <!-- ROS 사용 여부 -->
-		
-		    <!-- ByPass 모드 -->
-		
-		    <!-- 데이터 저장 확장자 및 압축률 -->
-		
-			<!-- 데이터 자동 삭제 기간 설정 -->
-		
-			<!-- 검사기 알람 기능 설정 조건 -->
-		
-			<!-- 집계 데이터 리셋 시간 조건 설정 -->
-		
-			<!-- 검사기 검증 모드 -->
+		<Grid Grid.Row="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
 
-    </Grid>
+			<Border Grid.Column="0">
+				<Label Content="3. ROS Mode" VerticalAlignment="Center"/>
+			</Border>
+			<Border Grid.Column="1">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<RadioButton Content="Non" IsChecked="True" GroupName="ROSMode" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="NG 코드 별 Check Box" GroupName="ROSMode" Foreground="White" Margin="10 0 0 0"/>
+				</StackPanel>
+			</Border>
+		</Grid>
+		    <!-- ByPass 모드 -->
+		<Grid Grid.Row="4">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Column="0">
+				<Label Content="4. By-Pass Mode" VerticalAlignment="Center"/>
+			</Border>
+			<Border Grid.Column="1" >
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<RadioButton Content="Non" IsChecked="True" GroupName="ByPassMode" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="NG 코드 별 Check Box" GroupName="ByPassMode" Foreground="White" Margin="10 0 0 0"/>
+				</StackPanel>
+			</Border>
+		</Grid>
+		    <!-- 데이터 저장 확장자 및 압축률 -->
+		<Grid Grid.Row="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Column="0">
+				<Label Content="5. Image Save" VerticalAlignment="Center"/>
+			</Border>
+
+			<Grid Grid.Column="1">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+
+				<Border Grid.Row="0">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Label Content="Original Image" VerticalAlignment="Center"/>
+						<Label Content="Save Type" VerticalAlignment="Center"/>
+						<ComboBox ItemsSource="{Binding AppSetting.ImageTypeList}"/>
+
+						<Label Content="Rate" VerticalAlignment="Center"/>
+						<ComboBox ToolTip="100%에 가까울 수록 압축률이 높음">
+							<ComboBoxItem>10%</ComboBoxItem>
+							<ComboBoxItem>20%</ComboBoxItem>
+							<ComboBoxItem>30%</ComboBoxItem>
+							<ComboBoxItem>40%</ComboBoxItem>
+							<ComboBoxItem>50%</ComboBoxItem>
+							<ComboBoxItem>60%</ComboBoxItem>
+							<ComboBoxItem>70%</ComboBoxItem>
+							<ComboBoxItem>80%</ComboBoxItem>
+							<ComboBoxItem>90%</ComboBoxItem>
+							<ComboBoxItem>100%</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Row="1">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Label Content="Overlay Image" VerticalAlignment="Center"/>
+						<Label Content="Save Type" VerticalAlignment="Center"/>
+						<ComboBox ItemsSource="{Binding AppSetting.ImageTypeList}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Type}"/>
+
+
+						<Label Content="Rate" VerticalAlignment="Center"/>
+						<ComboBox>
+							<ComboBoxItem>10%</ComboBoxItem>
+							<ComboBoxItem>20%</ComboBoxItem>
+							<ComboBoxItem>30%</ComboBoxItem>
+							<ComboBoxItem>40%</ComboBoxItem>
+							<ComboBoxItem>50%</ComboBoxItem>
+							<ComboBoxItem>60%</ComboBoxItem>
+							<ComboBoxItem>70%</ComboBoxItem>
+							<ComboBoxItem>80%</ComboBoxItem>
+							<ComboBoxItem>90%</ComboBoxItem>
+							<ComboBoxItem>100%</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+				</Border>
+			</Grid>
+			
+		</Grid>
+			<!-- 데이터 자동 삭제 기간 설정 -->
+		<Grid Grid.Row="6">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Column="0">
+				<Label Content="6. Auto Delete Image" VerticalAlignment="Center"/>
+			</Border>
+
+			<Grid Grid.Column="1">
+				<Border>
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Label Content="Image Delete" VerticalAlignment="Center"/>
+						<ComboBox>
+							<ComboBoxItem>BMP</ComboBoxItem>
+							<ComboBoxItem>PNG</ComboBoxItem>
+							<ComboBoxItem>JPG</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+				</Border>
+			</Grid>
+		</Grid>
+		<!-- 검사기 알람 기능 설정 조건 -->
+		<Grid Grid.Row="7">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Column="0">
+				<Label Content="7. Alarm Configuration" VerticalAlignment="Center"/>
+			</Border>
+
+			<Grid Grid.Column="1">
+				<Border>
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Label Content="Continues NG Count" VerticalAlignment="Center"/>
+						<ComboBox>
+							<ComboBoxItem>5</ComboBoxItem>
+							<ComboBoxItem>6</ComboBoxItem>
+							<ComboBoxItem>7</ComboBoxItem>
+							<ComboBoxItem>8</ComboBoxItem>
+							<ComboBoxItem>9</ComboBoxItem>
+							<ComboBoxItem>10</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+				</Border>
+			</Grid>
+		</Grid>
+			<!-- 집계 데이터 리셋 시간 조건 설정 -->
+		<Grid Grid.Row="8">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Column="0">
+				<Label Content="8. Daily Count Reset Time" VerticalAlignment="Center"/>
+			</Border>
+
+			<Grid Grid.Column="1">
+				<Border>
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<ComboBox Width="100">
+							<ComboBoxItem>07:00</ComboBoxItem>
+							<ComboBoxItem>07:30</ComboBoxItem>
+							<ComboBoxItem>08:00</ComboBoxItem>
+							<ComboBoxItem>08:30</ComboBoxItem>
+							<ComboBoxItem>09:00</ComboBoxItem>
+							<ComboBoxItem>09:30</ComboBoxItem>
+							<ComboBoxItem>10:00</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+				</Border>
+			</Grid>
+		</Grid>
+
+		<!-- 검사기 검증 모드 -->
+		<Grid Grid.Row="9">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Column="0">
+				<Label Content="9. Master Sample Mode" VerticalAlignment="Center"/>
+			</Border>
+
+			<Border Grid.Column="1" >
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<RadioButton Content="ON" IsChecked="True" GroupName="MasterSampleMode" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="OFF" GroupName="MasterSampleMode" Foreground="White" Margin="10 0 0 0"/>
+				</StackPanel>
+			</Border>
+		</Grid>
+
+	</Grid>
 </UserControl>

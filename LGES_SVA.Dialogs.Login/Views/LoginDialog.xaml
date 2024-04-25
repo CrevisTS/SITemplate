@@ -6,17 +6,21 @@
 			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Login.ViewModels"
 			 d:DataContext="{d:DesignInstance Type=viewModel:LoginViewModel, IsDesignTimeCreatable=False}"
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Login.Views"
+			 xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              Height="100" Width="400" Background="#292E42">
+	<b:Interaction.Triggers>
+		<b:KeyTrigger Key="Return" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="EnterDown"/>
+		</b:KeyTrigger>
+	</b:Interaction.Triggers>
 	<Grid>
-
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="80"/>
 		</Grid.ColumnDefinitions>
 
 		<Grid >
-			
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 				<RowDefinition/>
@@ -29,10 +33,10 @@
 				</Grid.ColumnDefinitions>
 
 				<Grid Grid.Column="0">
-					<RadioButton GroupName="UserLevel" Content="Operator" IsChecked="True"/>
+					<RadioButton GroupName="UserLevel" Content="Operator" IsChecked="True" VerticalContentAlignment="Center"/>
 				</Grid>
 				<Grid Grid.Column="1">
-					<RadioButton GroupName="UserLevel" Content="Engineer"/>
+					<RadioButton GroupName="UserLevel" Content="Engineer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"/>
 				</Grid>
 			</Grid>
 
@@ -43,10 +47,10 @@
 				</Grid.ColumnDefinitions>
 
 				<Border Grid.Column="0">
-					<Label Content="PW"/>
+					<Label Content="PW" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				</Border>
 				<Border Grid.Column="1">
-					<TextBox Text="{Binding Password}"/>
+					<TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Name="Password_textBox"/>
 				</Border>
 			</Grid>
 
