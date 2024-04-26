@@ -3,7 +3,10 @@ using LGES_SVA.Core.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Prism.Mvvm;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LGES_SVA.Core.Datas.Settings
 {
@@ -17,16 +20,26 @@ namespace LGES_SVA.Core.Datas.Settings
         private Dictionary<EUserLevelType, string> _user;
 
         // AppSetting 관련
-        private string _programName = "ProgramName";
+        private string _inspectionName = "Inspection Name";
         private int _NGCount;
         private string _deleteCycle;
+        private EInspectionMode _inspectionMode;
+        private EROSMode _ROSMode;
+        private EByPassMode _ByPassMode;
+        private ImageSaveData _originalImageSave;
+        private ImageSaveData _overlayImageSave;
+
+        private EMasterSampleMode _masterSampleMode;
 
         // TODO : 프로그램 버전
         public string ProgramVersion { get => _programVersion; set => SetProperty(ref _programVersion, value); }
-        
-        public string ProgramName { get => _programName; set => SetProperty(ref _programName, value); }
-
         public WindowSetting WindowSetting { get => _windowSetting; set => SetProperty(ref _windowSetting, value); }
+        
+        /// <summary>
+        /// 1. 검사기 이름
+        /// </summary>
+        public string InspectionName { get => _inspectionName; set => SetProperty(ref _inspectionName, value); }
+
 
         /// <summary>
         /// 사용자 레벨(권한) -> Json으로 저장하지 않음
@@ -39,24 +52,37 @@ namespace LGES_SVA.Core.Datas.Settings
         /// </summary>
         public Dictionary<EUserLevelType, string> User { get => _user; set => SetProperty(ref _user, value); }
 
-		
-        public EInspectionMode InspectionMode { get; set; }
-        public EROSMode ROSMode;
+        /// <summary>
+        /// 2. 검사 모드
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EInspectionMode InspectionMode { get => _inspectionMode; set => SetProperty(ref _inspectionMode, value); }
+        
+        /// <summary>
+        /// 3. ROS 모드
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EROSMode ROSMode { get => _ROSMode; set => SetProperty(ref _ROSMode, value); }
 
-        public EByPassMode ByPassMode;
-
-		private ImageSaveData _originalImageSave;
-		private ImageSaveData _overlayImageSave;
+        /// <summary>
+        /// 4. ByPass 모드
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EByPassMode ByPassMode { get => _ByPassMode; set => SetProperty(ref _ByPassMode, value); }
 
 		public ImageSaveData OriginalImageSave { get => _originalImageSave; set => SetProperty(ref _originalImageSave, value); }
         public ImageSaveData OverlayImageSave { get => _overlayImageSave; set => SetProperty(ref _overlayImageSave, value); }
 		
-
 		public string DeleteCycle { get => _deleteCycle; set => SetProperty(ref _deleteCycle, value); }
         public int NGCount { get => _NGCount; set => SetProperty(ref _NGCount, value); }
 
-        [JsonIgnore]
-        public List<EImageType> ImageTypeList { get; set; } = new List<EImageType>();
+        /// <summary>
+        /// 9. Master Sample Mode
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EMasterSampleMode MasterSampleMode { get => _masterSampleMode; set => SetProperty(ref _masterSampleMode, value); }
+
+      
 
         public AppSetting()
         {

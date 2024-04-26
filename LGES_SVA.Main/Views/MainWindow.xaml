@@ -64,9 +64,9 @@
 				<cvsWindow:HeaderLabel 
 					Grid.Column="1"
 					FontSize="40"
-					Content="{Binding SettingRepository.AppSetting.ProgramName}"
+					Content="{Binding SettingRepository.AppSetting.InspectionName}"
 					HorizontalAlignment="Center"
-					VerticalAlignment="Center" Margin="345,6,344,6"/>
+					VerticalAlignment="Center"/>
 				<cvsControl:TitleBarArea Grid.ColumnSpan="2"/>
 			</Grid>
 

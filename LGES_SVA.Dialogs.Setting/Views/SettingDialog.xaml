@@ -6,8 +6,18 @@
 			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Setting.ViewModels"
 			 d:DataContext="{d:DesignInstance Type=viewModel:SettingViewModel, IsDesignTimeCreatable=False}"
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Setting.Views"
+			 xmlns:settingDatas="clr-namespace:LGES_SVA.Core.Datas.Settings.Enums;assembly=LGES_SVA.Core"
+
+			 xmlns:localConveter="clr-namespace:LGES_SVA.Dialogs.Setting.Converter"
              mc:Ignorable="d" 
              Height="650" Width="800" Background="#292E42" >
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<localConveter:EnumToRadio_Converter x:Key="RadioEnum_Converter"/>
+			<localConveter:EnumValue_Converter x:Key="EnumValue_Converter"/>
+			<localConveter:ValueToDisable_Converter x:Key="ValueToDisable_Converter"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<Grid >
 		<Grid.RowDefinitions>
 			<!-- Title -->
@@ -39,7 +49,7 @@
 				<Label Content="1. Inspection Name" VerticalAlignment="Center"/>
 			</Border>
 			<Border Grid.Column="1">
-				<TextBox Text="{Binding AppSettingClone.ProgramName}"/>
+				<TextBox Text="{Binding AppSettingClone.InspectionName}"/>
 			</Border>
 		</Grid>
 		
@@ -55,8 +65,8 @@
 			</Border>
 			<Border Grid.Column="1">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<RadioButton Content="Auto" IsChecked="True" GroupName="InspectionMode" Foreground="White" Margin="10 0 0 0"/>
-					<RadioButton Content="Manual" GroupName="InspectionMode" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="Auto" GroupName="InspectionMode" IsChecked="{Binding AppSettingClone.InspectionMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EInspectionMode.Auto}}"   Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="Manual" GroupName="InspectionMode" IsChecked="{Binding AppSettingClone.InspectionMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EInspectionMode.Manual}}" Foreground="White" Margin="10 0 0 0"/>
 				</StackPanel>
 			</Border>
 		</Grid>
@@ -72,8 +82,8 @@
 			</Border>
 			<Border Grid.Column="1">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<RadioButton Content="Non" IsChecked="True" GroupName="ROSMode" Foreground="White" Margin="10 0 0 0"/>
-					<RadioButton Content="NG 코드 별 Check Box" GroupName="ROSMode" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="Non" GroupName="ROSMode" IsChecked="{Binding AppSettingClone.ROSMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EROSMode.Non}}" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="NG 코드 별 Check Box" GroupName="ROSMode" IsChecked="{Binding AppSettingClone.ROSMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EROSMode.Check}}" Foreground="White" Margin="10 0 0 0"/>
 				</StackPanel>
 			</Border>
 		</Grid>
@@ -89,8 +99,8 @@
 			</Border>
 			<Border Grid.Column="1" >
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<RadioButton Content="Non" IsChecked="True" GroupName="ByPassMode" Foreground="White" Margin="10 0 0 0"/>
-					<RadioButton Content="NG 코드 별 Check Box" GroupName="ByPassMode" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="Non" GroupName="ByPassMode" IsChecked="{Binding AppSettingClone.ByPassMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EByPassMode.Non}}" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="NG 코드 별 Check Box" GroupName="ByPassMode" IsChecked="{Binding AppSettingClone.ByPassMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EByPassMode.Check}}"  Foreground="White" Margin="10 0 0 0"/>
 				</StackPanel>
 			</Border>
 		</Grid>
@@ -115,21 +125,11 @@
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Label Content="Original Image" VerticalAlignment="Center"/>
 						<Label Content="Save Type" VerticalAlignment="Center"/>
-						<ComboBox ItemsSource="{Binding AppSetting.ImageTypeList}"/>
+						<ComboBox ItemsSource="{Binding AppSettingClone.OriginalImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Type}"/>
 
 						<Label Content="Rate" VerticalAlignment="Center"/>
-						<ComboBox ToolTip="100%에 가까울 수록 압축률이 높음">
-							<ComboBoxItem>10%</ComboBoxItem>
-							<ComboBoxItem>20%</ComboBoxItem>
-							<ComboBoxItem>30%</ComboBoxItem>
-							<ComboBoxItem>40%</ComboBoxItem>
-							<ComboBoxItem>50%</ComboBoxItem>
-							<ComboBoxItem>60%</ComboBoxItem>
-							<ComboBoxItem>70%</ComboBoxItem>
-							<ComboBoxItem>80%</ComboBoxItem>
-							<ComboBoxItem>90%</ComboBoxItem>
-							<ComboBoxItem>100%</ComboBoxItem>
-						</ComboBox>
+						<ComboBox ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OriginalImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OriginalImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>
+						<Label Content="%" VerticalAlignment="Center"/>
 					</StackPanel>
 				</Border>
 
@@ -137,8 +137,7 @@
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Label Content="Overlay Image" VerticalAlignment="Center"/>
 						<Label Content="Save Type" VerticalAlignment="Center"/>
-						<ComboBox ItemsSource="{Binding AppSetting.ImageTypeList}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Type}"/>
-
+						<ComboBox ItemsSource="{Binding AppSettingClone.OverlayImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Type}" />
 
 						<Label Content="Rate" VerticalAlignment="Center"/>
 						<ComboBox>
@@ -250,8 +249,8 @@
 
 			<Border Grid.Column="1" >
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<RadioButton Content="ON" IsChecked="True" GroupName="MasterSampleMode" Foreground="White" Margin="10 0 0 0"/>
-					<RadioButton Content="OFF" GroupName="MasterSampleMode" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="ON" GroupName="MasterSampleMode"  IsChecked="{Binding AppSettingClone.MasterSampleMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EMasterSampleMode.ON}}" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="OFF" GroupName="MasterSampleMode" IsChecked="{Binding AppSettingClone.MasterSampleMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EMasterSampleMode.OFF}}" Foreground="White" Margin="10 0 0 0"/>
 				</StackPanel>
 			</Border>
 		</Grid>

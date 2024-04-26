@@ -69,6 +69,7 @@
     <Compile Include="Datas\Settings\AlarmConfigurationData.cs" />
     <Compile Include="Datas\Settings\AppSetting.cs" />
     <Compile Include="Datas\Settings\AutoDeleteImageData.cs" />
+    <Compile Include="Datas\Settings\Enums\EMasterSampleMode.cs" />
     <Compile Include="Datas\Settings\ImageSaveData.cs" />
     <Compile Include="Datas\Settings\Enums\EByPassMode.cs" />
     <Compile Include="Datas\Settings\Enums\EImageType.cs" />

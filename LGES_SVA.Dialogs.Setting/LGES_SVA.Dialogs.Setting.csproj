@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CvsService.Core">
+      <HintPath>..\CvsServiceDlls\CvsService.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CvsService.UI.Windows, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CvsServiceDlls\CvsService.UI.Windows.dll</HintPath>
@@ -62,6 +65,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\EnumToRadio_Converter.cs" />
+    <Compile Include="Converter\EnumValue_Converter.cs" />
+    <Compile Include="Converter\ValueToDisable_Converter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
