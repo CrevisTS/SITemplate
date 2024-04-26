@@ -73,10 +73,10 @@ namespace LGES_SVA.ControlBar.ViewModels
 
         }
         
-        private void LoginToggleClick()
+        public void LoginToggleClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
-            if(_settingRepository.AppSetting.NowUserLevel == EUserLevelType.None)
+            if(!LoginCheck())
 			{
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
 			}
@@ -86,35 +86,97 @@ namespace LGES_SVA.ControlBar.ViewModels
                 // TODO : 로그아웃이 여기 있는게 맞는지;;
                 _settingRepository.AppSetting.NowUserLevel = EUserLevelType.None;
             }
-
         }
 
-        private void SimulationClick()
-        {
-            _dialogService.ShowDialog(DialogNames.SimulationDialog);
+        /// <summary>
+        /// 로그인 상태인지 확인
+        /// </summary>
+        /// <returns>true : Login / false : Not Login</returns>
+        private bool LoginCheck()
+		{
+            if (_settingRepository.AppSetting.NowUserLevel == EUserLevelType.None)
+            {
+                return false;
+            }
+			else
+			{
+                return true;
+			}
         }
 
-        private void LogClick()
+        public void SimulationClick()
         {
-            _dialogService.ShowDialog(DialogNames.LogDialog);
+            // 로그아웃 상태 -> 로그인 창 띄움
+            if (!LoginCheck())
+            {
+                _dialogService.ShowDialog(DialogNames.LoginDialog);
+            }
+            else
+            {
+                _dialogService.ShowDialog(DialogNames.SimulationDialog);
+            }
         }
 
-        private void RecipeClick()
+        public void LogClick()
         {
-            _dialogService.ShowDialog(DialogNames.RecipeDialog);
+            // 로그아웃 상태 -> 로그인 창 띄움
+            if (!LoginCheck())
+            {
+                _dialogService.ShowDialog(DialogNames.LoginDialog);
+            }
+            else
+            {
+                _dialogService.ShowDialog(DialogNames.LogDialog);
+            }
         }
 
-        private void SearchClick()
+        public void RecipeClick()
         {
-            _dialogService.ShowDialog(DialogNames.SearchDialog);
+            // 로그아웃 상태 -> 로그인 창 띄움
+            if (!LoginCheck())
+            {
+                _dialogService.ShowDialog(DialogNames.LoginDialog);
+            }
+            else
+            {
+                _dialogService.ShowDialog(DialogNames.RecipeDialog);
+            }
         }
-        private void LiveClick()
+
+        public void SearchClick()
         {
-            _dialogService.ShowDialog(DialogNames.LiveDialog);
+            // 로그아웃 상태 -> 로그인 창 띄움
+            if (!LoginCheck())
+            {
+                _dialogService.ShowDialog(DialogNames.LoginDialog);
+            }
+            else
+            {
+                _dialogService.ShowDialog(DialogNames.SearchDialog);
+            }
         }
-        private void SettingClick()
+        public void LiveClick()
+        {// 로그아웃 상태 -> 로그인 창 띄움
+            if (!LoginCheck())
+            {
+                _dialogService.ShowDialog(DialogNames.LoginDialog);
+            }
+            else
+            {
+                _dialogService.ShowDialog(DialogNames.LiveDialog);
+            }
+        }
+        public void SettingClick()
         {
-            _dialogService.ShowDialog(DialogNames.SettingDialog);
+            // 로그아웃 상태 -> 로그인 창 띄움
+            if (!LoginCheck())
+            {
+                _dialogService.ShowDialog(DialogNames.LoginDialog);
+            }
+            else
+            {
+                _dialogService.ShowDialog(DialogNames.SettingDialog);
+            }
         }
         private void OnMainRegionChangeClick(object parameter)
         {

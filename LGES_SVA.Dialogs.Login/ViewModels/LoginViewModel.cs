@@ -57,6 +57,7 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 
 		public void OnDialogClosed()
 		{
+			RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
 		}
 
 		public void OnDialogOpened(IDialogParameters parameters)

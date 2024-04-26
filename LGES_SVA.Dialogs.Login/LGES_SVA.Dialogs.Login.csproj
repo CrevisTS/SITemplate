@@ -104,5 +104,10 @@
       <Name>LGES_SVA.Login</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Enter1.png" />
+    <Resource Include="Resources\Icons\Enter2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

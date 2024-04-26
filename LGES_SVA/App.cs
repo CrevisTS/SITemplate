@@ -1,17 +1,15 @@
 ﻿using CvsService.Log.Write.Models;
 using CvsService.Log.Write.Services;
 using CvsService.Prism.Services;
-using Prism.Ioc;
 using LGES_SVA.Main.Views;
+using Prism.Ioc;
 using System;
 using System.Reflection;
 using System.Windows;
-using LGES_SVA.Dialogs.Login.Views;
-using LGES_SVA.Dialogs.Login.ViewModels;
 
 namespace LGES_SVA
 {
-    public class App : PrismApplicationHelper
+	public class App : PrismApplicationHelper
     {
         protected override Window CreateShell()
         {

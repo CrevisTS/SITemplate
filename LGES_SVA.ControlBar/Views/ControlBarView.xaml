@@ -11,6 +11,7 @@
     xmlns:coreEnum="clr-namespace:LGES_SVA.Core.Enums;assembly=LGES_SVA.Core"
     xmlns:coreConverter="clr-namespace:LGES_SVA.Core.Converters;assembly=LGES_SVA.Core"
 	xmlns:viewModel="clr-namespace:LGES_SVA.ControlBar.ViewModels"
+	xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
 	d:DataContext="{d:DesignInstance Type=viewModel:ControlBarViewModel, IsDesignTimeCreatable=False}"
     mc:Ignorable="d" 
     d:DesignHeight="100" d:DesignWidth="1900" Background="#292E42">
@@ -34,6 +35,31 @@
 			
 		</ResourceDictionary>
 	</UserControl.Resources>
+
+	<b:Interaction.Triggers>
+		<b:KeyTrigger Key="F1" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="LoginToggleClick"/>
+		</b:KeyTrigger>
+		<b:KeyTrigger Key="F2" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="SimulationClick"/>
+		</b:KeyTrigger>
+		<b:KeyTrigger Key="F3" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="LogClick"/>
+		</b:KeyTrigger>
+		<b:KeyTrigger Key="F4" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="RecipeClick"/>
+		</b:KeyTrigger>
+		<b:KeyTrigger Key="F5" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="SearchClick"/>
+		</b:KeyTrigger>
+		<b:KeyTrigger Key="F6" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="LiveClick"/>
+		</b:KeyTrigger>
+		<b:KeyTrigger Key="F7" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="SettingClick"/>
+		</b:KeyTrigger>
+	</b:Interaction.Triggers>
+	
 	<cvsWindow:Depth1Panel>
 		<Grid>
 			<Grid.ColumnDefinitions>

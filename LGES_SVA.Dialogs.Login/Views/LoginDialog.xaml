@@ -7,11 +7,27 @@
 			 d:DataContext="{d:DesignInstance Type=viewModel:LoginViewModel, IsDesignTimeCreatable=False}"
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Login.Views"
 			 xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
              Height="100" Width="400" Background="#292E42">
+
+	<prism:Dialog.WindowStyle>
+		<Style TargetType="Window">
+			<Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+			<Setter Property="ResizeMode" Value="NoResize"/>
+			<Setter Property="ShowInTaskbar" Value="False"/>
+			<Setter Property="SizeToContent" Value="WidthAndHeight"/>
+			<Setter Property="WindowStyle" Value="ToolWindow"/>
+		</Style>
+	</prism:Dialog.WindowStyle>
+
+	
 	<b:Interaction.Triggers>
 		<b:KeyTrigger Key="Return" FiredOn="KeyDown">
 			<b:CallMethodAction TargetObject="{Binding}" MethodName="EnterDown"/>
+		</b:KeyTrigger>
+		<b:KeyTrigger Key="Esc" FiredOn="KeyDown">
+			<b:CallMethodAction TargetObject="{Binding}" MethodName="OnDialogClosed" />
 		</b:KeyTrigger>
 	</b:Interaction.Triggers>
 	<Grid>
@@ -57,8 +73,10 @@
 		</Grid>
 
 		<Grid Grid.Column="1">
-			<Button Command="{Binding LoginBtnClickCommand}" CommandParameter="{Binding Password}">
-				<Image/>
+			<Button Command="{Binding LoginBtnClickCommand}" CommandParameter="{Binding Password}" Background="White">
+				<Button.Content>
+					<Image Grid.Column="0" Source="pack://application:,,,/LGES_SVA.Dialogs.Login;component/Resources/Icons/Enter1.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+				</Button.Content>
 			</Button>
 		</Grid>
 	</Grid>

@@ -22,7 +22,7 @@ namespace LGES_SVA.Core.Datas.Settings
         // AppSetting 관련
         private string _inspectionName = "Inspection Name";
         private int _NGCount;
-        private string _deleteCycle;
+        private int _imageDeletePeriod;
         private EInspectionMode _inspectionMode;
         private EROSMode _ROSMode;
         private EByPassMode _ByPassMode;
@@ -30,9 +30,10 @@ namespace LGES_SVA.Core.Datas.Settings
         private ImageSaveData _overlayImageSave;
 
         private EMasterSampleMode _masterSampleMode;
+		private string _resetTime;
 
-        // TODO : 프로그램 버전
-        public string ProgramVersion { get => _programVersion; set => SetProperty(ref _programVersion, value); }
+		// TODO : 프로그램 버전
+		public string ProgramVersion { get => _programVersion; set => SetProperty(ref _programVersion, value); }
         public WindowSetting WindowSetting { get => _windowSetting; set => SetProperty(ref _windowSetting, value); }
         
         /// <summary>
@@ -72,9 +73,18 @@ namespace LGES_SVA.Core.Datas.Settings
 
 		public ImageSaveData OriginalImageSave { get => _originalImageSave; set => SetProperty(ref _originalImageSave, value); }
         public ImageSaveData OverlayImageSave { get => _overlayImageSave; set => SetProperty(ref _overlayImageSave, value); }
-		
-		public string DeleteCycle { get => _deleteCycle; set => SetProperty(ref _deleteCycle, value); }
+		/// <summary>
+        /// 이미지 삭제 주기(개월)
+        /// </summary>
+		public int ImageDeletePeriod { get => _imageDeletePeriod; set => SetProperty(ref _imageDeletePeriod, value); }
+        /// <summary>
+        /// 몇 회 이상 NG시 알람 울림 - 알람카운터
+        /// </summary>
         public int NGCount { get => _NGCount; set => SetProperty(ref _NGCount, value); }
+        /// <summary>
+        /// 결과 리셋 시간(매일 한번씩 발생)
+        /// </summary>
+        public string ResetTime { get => _resetTime; set => SetProperty(ref _resetTime, value); }
 
         /// <summary>
         /// 9. Master Sample Mode
@@ -82,13 +92,23 @@ namespace LGES_SVA.Core.Datas.Settings
         [JsonConverter(typeof(StringEnumConverter))]
         public EMasterSampleMode MasterSampleMode { get => _masterSampleMode; set => SetProperty(ref _masterSampleMode, value); }
 
-      
+
+        [JsonIgnore]
+        public int[] ImageDeletePeriodArray { get; } = new int[] { 6, 7, 8, 9, 10, 11, 12 };
+        [JsonIgnore]
+        public int[] NGCountArray { get; } = new int[] { 5, 6, 7, 8, 9, 10 };
+        [JsonIgnore]
+        public string[] ResetTimeArray { get; } = new string[] { "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00" };
 
         public AppSetting()
         {
             User = new Dictionary<EUserLevelType, string> { { EUserLevelType.Operator, "1234" }, { EUserLevelType.Engineer, "1234" } };
             OriginalImageSave = new ImageSaveData();
             OverlayImageSave = new ImageSaveData();
+
+            ImageDeletePeriod = 6;
+            NGCount = 5;
+            ResetTime = "07:00";
         }
 
         public object Clone()

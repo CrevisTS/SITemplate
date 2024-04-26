@@ -10,6 +10,7 @@ using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Splash.Error;
 using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,6 +19,8 @@ namespace LGES_SVA.Splash.Bootstrappers
 {
     public class AppBootstrapper : IAppBootstrapper
     {
+        //private readonly string LOG_PATH = Path.Combine($@"D:\DAT\LOG\", "{Date:yyyy}", "{Date:MM}", "{Date:yyyy_mm_dd}.log");
+
         private ILogWriteManager _logWrite;
         private ILogDisplayManager _logDisplay;
 
