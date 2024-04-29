@@ -2,16 +2,20 @@
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces.Settings;
 using Prism.Events;
+using Prism.Mvvm;
 using System.Timers;
 
 namespace LGES_SVA.Login.Services
 {
-	public class LoginService
+	public class LoginService : BindableBase
 	{
 		private readonly ISettingRepository _settingRepository;
 		private readonly IEventAggregator _eventAggregator;
 
 		private Timer _autoLogoutTimer;
+
+		private EUserLevelType _selectedUserLevel;
+		public EUserLevelType SelectedUserLevel { get => _selectedUserLevel; set => SetProperty(ref _selectedUserLevel, value); }
 		public LoginService(ISettingRepository settingRepository, IEventAggregator eventAggregator)
 		{
 			_settingRepository = settingRepository;
@@ -23,23 +27,33 @@ namespace LGES_SVA.Login.Services
 
 		public bool Login(string obj)
 		{
-			// 지금 선택된 User와 PW 확인
-			if (_settingRepository.AppSetting.User[EUserLevelType.Operator] == obj)
+			switch(SelectedUserLevel)
 			{
-				_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Operator;
-				AutoLogoutStart();
-				return true;
+				case EUserLevelType.Operator:
+
+					if (_settingRepository.AppSetting.User[EUserLevelType.Operator] == obj)
+					{
+						_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Operator;
+						AutoLogoutStart();
+						return true;
+					}
+					break;
+
+				case EUserLevelType.Engineer:
+					if (_settingRepository.AppSetting.User[EUserLevelType.Engineer] == obj)
+					{
+						_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Engineer;
+						AutoLogoutStart();
+						return true;
+					}
+					break;
+				case EUserLevelType.None:
+				default:
+					break;
 			}
-			else if (_settingRepository.AppSetting.User[EUserLevelType.Engineer] == obj)
-			{
-				_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Engineer;
-				AutoLogoutStart();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			
+			return false;
+			
 		}
 
 		public void Logout()

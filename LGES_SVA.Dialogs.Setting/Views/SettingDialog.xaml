@@ -9,8 +9,7 @@
 			 xmlns:localConveter="clr-namespace:LGES_SVA.Dialogs.Setting.Converter"
 			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
-             Height="650" Width="800" Background="#292E42" >
-
+             Height="550" Width="800" Background="#292E42" >
 	<prism:Dialog.WindowStyle>
 		<Style TargetType="Window">
 			<Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
@@ -20,7 +19,6 @@
 			<Setter Property="WindowStyle" Value="ToolWindow"/>
 		</Style>
 	</prism:Dialog.WindowStyle>
-
 	
 	<UserControl.Resources>
 		<ResourceDictionary>
@@ -38,7 +36,6 @@
 			<RowDefinition Height="50"/>
 			<RowDefinition Height="50"/>
 			<RowDefinition Height="100"/>
-			<RowDefinition Height="50"/>
 			<RowDefinition Height="50"/>
 			<RowDefinition Height="50"/>
 			<RowDefinition Height="50"/>
@@ -132,11 +129,12 @@
 					<RowDefinition/>
 				</Grid.RowDefinitions>
 
+				<!-- Original -->
 				<Border Grid.Row="0">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
 						<Label Content="Original Image" VerticalAlignment="Center"/>
 						<Label Content="Save Type : " VerticalAlignment="Center"/>
-						<ComboBox Width="50" ItemsSource="{Binding AppSettingClone.OriginalImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Type}"/>
+						<ComboBox Width="60" ItemsSource="{Binding AppSettingClone.OriginalImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Type}"/>
 
 						<Label Content="Rate : " VerticalAlignment="Center"/>
 						<ComboBox Width="50" ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OriginalImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OriginalImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>
@@ -144,11 +142,12 @@
 					</StackPanel>
 				</Border>
 
+				<!-- Overlay -->
 				<Border Grid.Row="1">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
 						<Label Content="Overlay Image" VerticalAlignment="Center"/>
 						<Label Content="Save Type : " VerticalAlignment="Center"/>
-						<ComboBox Width="50" ItemsSource="{Binding AppSettingClone.OverlayImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Type}" />
+						<ComboBox Width="60" ItemsSource="{Binding AppSettingClone.OverlayImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Type}" />
 
 						<Label Content="Rate : " VerticalAlignment="Center"/>
 						<ComboBox Width="50" ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OverlayImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OverlayImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>

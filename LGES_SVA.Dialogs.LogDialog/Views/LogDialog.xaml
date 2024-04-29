@@ -4,9 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.LogDialog.Views"
+			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.LogDialog.ViewModels"
+			 d:DataContext="{d:DesignInstance Type=viewModel:LogViewModel, IsDesignTimeCreatable=False}"
+			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
-             Height="450" Width="800" Background="#292E42">
-    <Grid>
-            
-    </Grid>
+             Height="100" Width="200" Background="#292E42">
+
+	<prism:Dialog.WindowStyle>
+		<Style TargetType="Window">
+			<Setter Property="prism:Dialog.WindowStartupLocation" Value="Manual" />
+			<Setter Property="ResizeMode" Value="NoResize"/>
+			<Setter Property="ShowInTaskbar" Value="False"/>
+			<Setter Property="SizeToContent" Value="WidthAndHeight"/>
+			<Setter Property="WindowStyle" Value="ToolWindow"/>
+		</Style>
+	</prism:Dialog.WindowStyle>
+
+	
+	<Grid>
+		<Button Content="System Log" Command="{Binding SystemLogCommand}"/>
+	</Grid>
 </UserControl>

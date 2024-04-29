@@ -17,6 +17,7 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 		private LoginService _loginService;
 		public string Title => "Login";
 		public string Password { get => _password; set => SetProperty(ref _password, value); }
+		public LoginService LoginService { get => _loginService; set => SetProperty(ref _loginService, value); }
 
 		public event Action<IDialogResult> RequestClose;
 

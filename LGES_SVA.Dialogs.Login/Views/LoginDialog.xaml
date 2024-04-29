@@ -7,6 +7,9 @@
 			 d:DataContext="{d:DesignInstance Type=viewModel:LoginViewModel, IsDesignTimeCreatable=False}"
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Login.Views"
 			 xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+			 xmlns:localConverter="clr-namespace:LGES_SVA.Dialogs.Login.Converter"
+			 xmlns:userLevels="clr-namespace:LGES_SVA.Core.Enums;assembly=LGES_SVA.Core"
+
 			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
              Height="100" Width="400" Background="#292E42">
@@ -30,6 +33,13 @@
 			<b:CallMethodAction TargetObject="{Binding}" MethodName="OnDialogClosed" />
 		</b:KeyTrigger>
 	</b:Interaction.Triggers>
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<localConverter:EnumToRadio_Converter x:Key="RadioEnum_Converter"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
@@ -49,10 +59,10 @@
 				</Grid.ColumnDefinitions>
 
 				<Grid Grid.Column="0">
-					<RadioButton GroupName="UserLevel" Content="Operator" IsChecked="True" VerticalContentAlignment="Center"/>
+					<RadioButton GroupName="UserLevel" Content="Operator" IsChecked="{Binding LoginService.SelectedUserLevel, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static userLevels:EUserLevelType.Operator}}" VerticalContentAlignment="Center"/>
 				</Grid>
 				<Grid Grid.Column="1">
-					<RadioButton GroupName="UserLevel" Content="Engineer" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"/>
+					<RadioButton GroupName="UserLevel" Content="Engineer" IsChecked="{Binding LoginService.SelectedUserLevel, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static userLevels:EUserLevelType.Engineer}}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"/>
 				</Grid>
 			</Grid>
 
