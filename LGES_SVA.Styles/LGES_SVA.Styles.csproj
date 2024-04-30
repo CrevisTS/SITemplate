@@ -71,6 +71,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dialogs\DialogStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Regions\RegionStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

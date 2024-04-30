@@ -214,6 +214,10 @@
       <Project>{B164694C-13F5-4D86-884C-EBF30A2AFD06}</Project>
       <Name>LGES_SVA.Splash</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Styles\LGES_SVA.Styles.csproj">
+      <Project>{99f0c2ae-6bd7-417a-b6b1-dabc5f5413b9}</Project>
+      <Name>LGES_SVA.Styles</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Icons\" />

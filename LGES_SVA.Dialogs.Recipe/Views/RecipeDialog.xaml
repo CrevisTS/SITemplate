@@ -4,9 +4,73 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Recipe.Views"
+			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
              Height="450" Width="800" Background="#292E42">
+
+	<prism:Dialog.WindowStyle>
+		<Style TargetType="Window">
+			<Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+			<Setter Property="ResizeMode" Value="NoResize"/>
+			<Setter Property="ShowInTaskbar" Value="False"/>
+			<Setter Property="SizeToContent" Value="WidthAndHeight"/>
+			<Setter Property="WindowStyle" Value="ToolWindow"/>
+		</Style>
+	</prism:Dialog.WindowStyle>
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Dialogs/DialogStyle.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	
 	<Grid>
-            
-    </Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0">
+			<Label Content="Recipe" Style="{StaticResource Title_Label}"/>
+		</Border>
+		
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+
+			<!-- 레시피 선택 -->
+			<Border Grid.Column="0">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition Height="50"/>
+					</Grid.RowDefinitions>
+
+					<Border Grid.Row="1">
+						<Button Content="레시피 추가"/>
+					</Border>
+				</Grid>
+			</Border>
+			
+			<!-- 레시피 수정 -->
+			<Border Grid.Column="1">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="150"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<Border Grid.Row="0">
+						<GroupBox Header="Tool 경로" Margin="10">
+							<TextBox/>
+						</GroupBox>
+					</Border>
+				</Grid>
+			</Border>
+		</Grid>
+	</Grid>
 </UserControl>

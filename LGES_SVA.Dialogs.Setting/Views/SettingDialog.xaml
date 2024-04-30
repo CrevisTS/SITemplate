@@ -9,7 +9,7 @@
 			 xmlns:localConveter="clr-namespace:LGES_SVA.Dialogs.Setting.Converter"
 			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
-             Height="550" Width="800" Background="#292E42" >
+             Height="500" Width="800" Background="#292E42" >
 	<prism:Dialog.WindowStyle>
 		<Style TargetType="Window">
 			<Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
@@ -25,12 +25,14 @@
 			<localConveter:EnumToRadio_Converter x:Key="RadioEnum_Converter"/>
 			<localConveter:EnumValue_Converter x:Key="EnumValue_Converter"/>
 			<localConveter:ValueToDisable_Converter x:Key="ValueToDisable_Converter"/>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Dialogs/DialogStyle.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<Grid >
 		<Grid.RowDefinitions>
 			<!-- Title -->
-			<RowDefinition Height="50"/>
 			<RowDefinition Height="50"/>
 			<RowDefinition Height="50"/>
 			<RowDefinition Height="50"/>
@@ -43,7 +45,7 @@
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
-			<Label Content="Setting" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" />
+			<Label Style="{StaticResource Title_Label}" Content="Setting" />
 		</Grid>
 		
 		<!-- 검사기 이름-->
@@ -54,10 +56,10 @@
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Column="0">
-				<Label Content="1. Inspection Name" VerticalAlignment="Center"/>
+				<Label Content="1. Inspection Name" Style="{StaticResource Menu_Label}"/>
 			</Border>
 			<Border Grid.Column="1">
-				<TextBox Text="{Binding AppSettingClone.InspectionName}"/>
+				<TextBox Text="{Binding AppSettingClone.InspectionName}" Style="{StaticResource Content_TextBox}"/>
 			</Border>
 		</Grid>
 		
@@ -69,7 +71,7 @@
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Column="0">
-				<Label Content="2. Inspection Mode" VerticalAlignment="Center"/>
+				<Label Content="2. Inspection Mode" Style="{StaticResource Menu_Label}"/>
 			</Border>
 			<Border Grid.Column="1">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -78,7 +80,8 @@
 				</StackPanel>
 			</Border>
 		</Grid>
-		    <!-- ROS 사용 여부 -->
+		
+		<!-- ROS 사용 여부 
 		<Grid Grid.Row="3">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="200"/>
@@ -86,7 +89,7 @@
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Column="0">
-				<Label Content="3. ROS Mode" VerticalAlignment="Center"/>
+				<Label Content="3. ROS Mode" Style="{StaticResource Menu_Label}"/>
 			</Border>
 			<Border Grid.Column="1">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -95,15 +98,17 @@
 				</StackPanel>
 			</Border>
 		</Grid>
-		    <!-- ByPass 모드 -->
-		<Grid Grid.Row="4">
+		-->
+		
+		<!-- ByPass 모드 -->
+		<Grid Grid.Row="3">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="200"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Column="0">
-				<Label Content="4. By-Pass Mode" VerticalAlignment="Center"/>
+				<Label Content="3. By-Pass Mode" Style="{StaticResource Menu_Label}"/>
 			</Border>
 			<Border Grid.Column="1" >
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -113,14 +118,14 @@
 			</Border>
 		</Grid>
 		    <!-- 데이터 저장 확장자 및 압축률 -->
-		<Grid Grid.Row="5">
+		<Grid Grid.Row="4">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="200"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Column="0">
-				<Label Content="5. Image Save" VerticalAlignment="Center"/>
+				<Label Content="4. Image Save" Style="{StaticResource Menu_Label}"/>
 			</Border>
 
 			<Grid Grid.Column="1">
@@ -132,26 +137,26 @@
 				<!-- Original -->
 				<Border Grid.Row="0">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<Label Content="Original Image" VerticalAlignment="Center"/>
-						<Label Content="Save Type : " VerticalAlignment="Center"/>
+						<TextBlock Text="Original Image / " Style="{StaticResource Content_TextBlock}"/>
+						<TextBlock Text="Save Type : " Style="{StaticResource Content_TextBlock}"/>
 						<ComboBox Width="60" ItemsSource="{Binding AppSettingClone.OriginalImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Type}"/>
 
-						<Label Content="Rate : " VerticalAlignment="Center"/>
+						<TextBlock Text=" Rate : " Style="{StaticResource Content_TextBlock}"/>
 						<ComboBox Width="50" ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OriginalImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OriginalImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>
-						<Label Content="%" VerticalAlignment="Center"/>
+						<TextBlock Text=" %" Style="{StaticResource Content_TextBlock}"/>
 					</StackPanel>
 				</Border>
 
 				<!-- Overlay -->
 				<Border Grid.Row="1">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<Label Content="Overlay Image" VerticalAlignment="Center"/>
-						<Label Content="Save Type : " VerticalAlignment="Center"/>
+						<TextBlock Text="Overlay Image / " Style="{StaticResource Content_TextBlock}"/>
+						<TextBlock Text="Save Type : " Style="{StaticResource Content_TextBlock}"/>
 						<ComboBox Width="60" ItemsSource="{Binding AppSettingClone.OverlayImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Type}" />
 
-						<Label Content="Rate : " VerticalAlignment="Center"/>
+						<TextBlock Text=" Rate : " Style="{StaticResource Content_TextBlock}"/>
 						<ComboBox Width="50" ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OverlayImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OverlayImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>
-						<Label Content="%" VerticalAlignment="Center"/>
+						<TextBlock Text=" %" Style="{StaticResource Content_TextBlock}"/>
 
 					</StackPanel>
 				</Border>
@@ -159,6 +164,27 @@
 			
 		</Grid>
 		<!-- 데이터 보관 기간 설정 -->
+		<Grid Grid.Row="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Border Grid.Column="0">
+				<Label Content="5. Auto Delete Image" Style="{StaticResource Menu_Label}" ToolTip="데이터 보관 기간을 설정합니다."/>
+			</Border>
+
+			<Grid Grid.Column="1">
+				<Border>
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
+						<TextBlock Text="Image Delete Preiod : " Style="{StaticResource Content_TextBlock}"/>
+						<ComboBox Width="50" ItemsSource="{Binding AppSettingClone.ImageDeletePeriodArray}" SelectedItem="{Binding AppSettingClone.ImageDeletePeriod}" />
+						<TextBlock Text=" Month" Style="{StaticResource Content_TextBlock}"/>
+					</StackPanel>
+				</Border>
+			</Grid>
+		</Grid>
+		<!-- 검사기 알람 기능 설정 조건 -->
 		<Grid Grid.Row="6">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="200"/>
@@ -166,21 +192,19 @@
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Column="0">
-				<Label Content="6. Auto Delete Image" VerticalAlignment="Center" ToolTip="데이터 보관 기간을 설정합니다."/>
+				<Label Content="6. Alarm Configuration" Style="{StaticResource Menu_Label}"/>
 			</Border>
 
 			<Grid Grid.Column="1">
 				<Border>
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<Label Content="Image Delete Preiod : " VerticalAlignment="Center"/>
-						<ComboBox Width="50" ItemsSource="{Binding AppSettingClone.ImageDeletePeriodArray}" SelectedItem="{Binding AppSettingClone.ImageDeletePeriod}" />
-						<Label Content="Month" VerticalAlignment="Center"/>
-
+						<TextBlock Text="Continues NG Count : " Style="{StaticResource Content_TextBlock}"/>
+						<ComboBox Width="50" ItemsSource="{Binding AppSettingClone.NGCountArray}" SelectedItem="{Binding AppSettingClone.NGCount}" />
 					</StackPanel>
 				</Border>
 			</Grid>
 		</Grid>
-		<!-- 검사기 알람 기능 설정 조건 -->
+			<!-- 집계 데이터 리셋 시간 조건 설정 -->
 		<Grid Grid.Row="7">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="200"/>
@@ -188,27 +212,7 @@
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Column="0">
-				<Label Content="7. Alarm Configuration" VerticalAlignment="Center"/>
-			</Border>
-
-			<Grid Grid.Column="1">
-				<Border>
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<Label Content="Continues NG Count : " VerticalAlignment="Center"/>
-						<ComboBox Width="50" ItemsSource="{Binding AppSettingClone.NGCountArray}" SelectedItem="{Binding AppSettingClone.NGCount}" />
-					</StackPanel>
-				</Border>
-			</Grid>
-		</Grid>
-			<!-- 집계 데이터 리셋 시간 조건 설정 -->
-		<Grid Grid.Row="8">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-
-			<Border Grid.Column="0">
-				<Label Content="8. Daily Count Reset Time" VerticalAlignment="Center"/>
+				<Label Content="7. Daily Count Reset Time" Style="{StaticResource Menu_Label}"/>
 			</Border>
 
 			<Grid Grid.Column="1">
@@ -221,14 +225,14 @@
 		</Grid>
 
 		<!-- 검사기 검증 모드 -->
-		<Grid Grid.Row="9">
+		<Grid Grid.Row="8">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="200"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
 			<Border Grid.Column="0">
-				<Label Content="9. Master Sample Mode" VerticalAlignment="Center"/>
+				<Label Content="8. Master Sample Mode" Style="{StaticResource Menu_Label}"/>
 			</Border>
 
 			<Border Grid.Column="1" >
