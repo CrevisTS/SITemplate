@@ -1,24 +1,22 @@
-﻿using Prism.Commands;
-using Prism.Events;
-using Prism.Mvvm;
-using Prism.Regions;
+﻿using CvsService.Log.Write.Interfaces;
+using CvsService.Log.Write.Models;
+using CvsService.Log.Write.Services;
 using LGES_SVA.Core.Datas;
 using LGES_SVA.Core.Datas.Settings;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
-using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Repository.Services.Interface;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Mvvm;
+using Prism.Regions;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using CvsService.Log.Write.Services;
-using CvsService.Log.Write.Interfaces;
-using CvsService.Log.Display.Interfaces;
-using CvsService.Log.Write.Models;
-using System;
 
 namespace LGES_SVA.Main.ViewModels
 {
-    public class MainViewModel : BindableBase
+	public class MainViewModel : BindableBase
     {
         #region Fields for property
         private AppSetting _appSetting;

@@ -104,6 +104,10 @@
       <Project>{8FCDBA57-5E0A-4062-B8CF-572155141C08}</Project>
       <Name>LGES_SVA.Login</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Repository\LGES_SVA.Repository.csproj">
+      <Project>{8493A038-B421-40C8-9646-FC0CC6F04986}</Project>
+      <Name>LGES_SVA.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

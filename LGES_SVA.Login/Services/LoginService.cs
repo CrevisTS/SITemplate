@@ -1,6 +1,6 @@
 ﻿using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Events;
-using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Repository.Services.Interface;
 using Prism.Events;
 using Prism.Mvvm;
 using System.Timers;
@@ -11,6 +11,8 @@ namespace LGES_SVA.Login.Services
 	{
 		private readonly ISettingRepository _settingRepository;
 		private readonly IEventAggregator _eventAggregator;
+		// 300000 = 5분
+		private const int MINUTE5 = 300000;
 
 		private Timer _autoLogoutTimer;
 
@@ -20,6 +22,9 @@ namespace LGES_SVA.Login.Services
 		{
 			_settingRepository = settingRepository;
 			_eventAggregator = eventAggregator;
+
+			// 초기 선택을 Operator로 변경
+			SelectedUserLevel = EUserLevelType.Operator;
 
 			// Mouse Move Event 구독
 			_eventAggregator.GetEvent<MouseMoveEvent>().Subscribe(() => MouseMove());
@@ -69,7 +74,7 @@ namespace LGES_SVA.Login.Services
 			_autoLogoutTimer = new Timer();
 			_autoLogoutTimer.AutoReset = false;
 			_autoLogoutTimer.Elapsed += _autoLogoutTimer_Elapsed;
-			_autoLogoutTimer.Interval = 300000;
+			_autoLogoutTimer.Interval = MINUTE5;
 			_autoLogoutTimer.Start();
 		}
 
@@ -93,7 +98,7 @@ namespace LGES_SVA.Login.Services
 		{
 			if(_autoLogoutTimer != null)
 			{
-				_autoLogoutTimer.Interval = 300000;
+				_autoLogoutTimer.Interval = MINUTE5;
 			}
 		}
 	}

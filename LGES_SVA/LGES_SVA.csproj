@@ -36,6 +36,16 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cognex.Vision.Core.Net">
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\bin\Cognex.Vision.Core.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Comm, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Comm.Controls, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.Core, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.CorePlus, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.ToolGroup, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="Cognex.VisionPro.ToolGroup.Controls, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="CvsService.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CvsServiceDlls\CvsService.Core.dll</HintPath>
@@ -201,6 +211,10 @@
     <ProjectReference Include="..\LGES_SVA.Main\LGES_SVA.Main.csproj">
       <Project>{8FA48257-E29D-4BA9-91A9-C2A774DD15C9}</Project>
       <Name>LGES_SVA.Main</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Recipe\LGES_SVA.Recipe.csproj">
+      <Project>{E545F16D-1125-46C5-9951-8E4B81B75866}</Project>
+      <Name>LGES_SVA.Recipe</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Regions.TabView\LGES_SVA.Regions.TabView.csproj">
       <Project>{9A88DDF3-EF68-45F0-9786-1B6A4177FDD7}</Project>

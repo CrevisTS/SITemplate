@@ -123,6 +123,14 @@
       <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
       <Name>LGES_SVA.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Recipe\LGES_SVA.Recipe.csproj">
+      <Project>{E545F16D-1125-46C5-9951-8E4B81B75866}</Project>
+      <Name>LGES_SVA.Recipe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Repository\LGES_SVA.Repository.csproj">
+      <Project>{8493A038-B421-40C8-9646-FC0CC6F04986}</Project>
+      <Name>LGES_SVA.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\checkbox_logo_Org.png" />

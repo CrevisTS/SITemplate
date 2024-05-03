@@ -107,6 +107,10 @@
       <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
       <Name>LGES_SVA.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Repository\LGES_SVA.Repository.csproj">
+      <Project>{8493A038-B421-40C8-9646-FC0CC6F04986}</Project>
+      <Name>LGES_SVA.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Styles\LGES_SVA.Styles.csproj">
       <Project>{99f0c2ae-6bd7-417a-b6b1-dabc5f5413b9}</Project>
       <Name>LGES_SVA.Styles</Name>

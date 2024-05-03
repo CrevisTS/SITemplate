@@ -3,10 +3,7 @@ using LGES_SVA.Core.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Prism.Mvvm;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace LGES_SVA.Core.Datas.Settings
 {

@@ -7,17 +7,17 @@ using CvsService.Log.Write.Models;
 using CvsService.Log.Write.Services;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
-using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Recipe.Services;
+using LGES_SVA.Repository.Services.Interface;
 using LGES_SVA.Splash.Error;
 using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace LGES_SVA.Splash.Bootstrappers
 {
-    public class AppBootstrapper : IAppBootstrapper
+	public class AppBootstrapper : IAppBootstrapper
     {
         //private readonly string LOG_PATH = Path.Combine($@"D:\DAT\LOG\", "{Date:yyyy}", "{Date:MM}", "{Date:yyyy_mm_dd}.log");
 
@@ -26,16 +26,19 @@ namespace LGES_SVA.Splash.Bootstrappers
 
         private readonly Lazy<IDisposeManager> _lazyDisposeManager;
         private readonly Lazy<ISettingRepository> _lazySettingRepo;
+        private readonly Lazy<RecipeService> _recipeService;
+
 
         public bool IsFail { get; private set; } = false;
 
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;
         public event EventHandler WindowLoadedCompleted;
 
-        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo)
+        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<RecipeService> recipeService)
         {
             _lazyDisposeManager = lazyDisposeManager;
             _lazySettingRepo = lazySettingRepo;
+            _recipeService = recipeService;
         }
 
         public Task InitializeAsync()
@@ -51,6 +54,10 @@ namespace LGES_SVA.Splash.Bootstrappers
                 // TODO : Prism Singleton 초기화 하는 부분.
                 _ = LazyInstanceInit(_lazySettingRepo, "Setting", 50);
                 //Thread.Sleep(1000); // UI 보기위함
+
+                // VisionPro
+                _ = LazyInstanceInit(_recipeService, "VisionPro", 80);
+
 
                 // AppBoot에서 초기화하는 클래스 중 Dispose()가 필요하면 여기에서 추가.
                 // 만약 다른곳에서 추가해야한다면 생성자에서 의존성 주입으로 IDisposeManager 받아서 추가하면 됨

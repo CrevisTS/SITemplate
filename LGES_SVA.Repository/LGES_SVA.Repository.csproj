@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datas\VisionProSetting.cs" />
+    <Compile Include="Interface\ISettingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingRepository.cs" />
   </ItemGroup>
@@ -62,6 +64,10 @@
     <ProjectReference Include="..\LGES_SVA.Core\LGES_SVA.Core.csproj">
       <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
       <Name>LGES_SVA.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Recipe\LGES_SVA.Recipe.csproj">
+      <Project>{E545F16D-1125-46C5-9951-8E4B81B75866}</Project>
+      <Name>LGES_SVA.Recipe</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

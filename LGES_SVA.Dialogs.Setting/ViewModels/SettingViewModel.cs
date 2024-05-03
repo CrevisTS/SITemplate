@@ -1,12 +1,8 @@
 ﻿using LGES_SVA.Core.Datas.Settings;
-using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Repository.Services.Interface;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace LGES_SVA.Dialogs.Setting.ViewModels

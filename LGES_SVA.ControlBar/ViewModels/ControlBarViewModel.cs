@@ -1,24 +1,20 @@
 ﻿using CvsService.Core.Interfaces;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
 using LGES_SVA.Core.Datas;
 using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Interfaces;
-using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Repository.Services.Interface;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Regions;
+using Prism.Services.Dialogs;
 using System;
 using System.Windows.Input;
-using Prism.Modularity;
-using Prism.Ioc;
-using LGES_SVA.Dialogs.Login.Views;
-using LGES_SVA.Dialogs.Login.ViewModels;
-using Prism.Services.Dialogs;
 
 namespace LGES_SVA.ControlBar.ViewModels
 {
-    /////////////////////////////////////////////////////////
-    // TODO : 연결 상태 표시 UI 예시용. 삭제 필요. 
-    public sealed class FakeConncetion : BindableBase, IConnectionMonitor
+	/////////////////////////////////////////////////////////
+	// TODO : 연결 상태 표시 UI 예시용. 삭제 필요. 
+	public sealed class FakeConncetion : BindableBase, IConnectionMonitor
     {
         private string _name;
         private bool _isConnected;
