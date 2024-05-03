@@ -5,7 +5,7 @@ using LGES_SVA.Core.Datas;
 using LGES_SVA.Core.Datas.Settings;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
-using LGES_SVA.Repository.Services.Interface;
+using LGES_SVA.Core.Interfaces.Settings;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;

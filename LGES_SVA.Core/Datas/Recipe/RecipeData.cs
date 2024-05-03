@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LGES_SVA.Recipe.Datas
+namespace LGES_SVA.Core.Datas.Recipe
 {
 	public class RecipeData : BindableBase
 	{

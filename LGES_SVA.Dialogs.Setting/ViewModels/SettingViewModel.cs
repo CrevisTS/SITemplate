@@ -1,5 +1,5 @@
 ﻿using LGES_SVA.Core.Datas.Settings;
-using LGES_SVA.Repository.Services.Interface;
+using LGES_SVA.Core.Interfaces.Settings;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;

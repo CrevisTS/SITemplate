@@ -1,8 +1,7 @@
 ﻿using Cognex.VisionPro.ToolBlock;
 using CvsService.Core.Interfaces;
-using LGES_SVA.Recipe.Datas;
+using LGES_SVA.Core.Datas.Recipe;
 using Prism.Mvvm;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace LGES_SVA.Recipe.Services

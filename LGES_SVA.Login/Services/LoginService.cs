@@ -1,6 +1,6 @@
 ﻿using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Events;
-using LGES_SVA.Repository.Services.Interface;
+using LGES_SVA.Core.Interfaces.Settings;
 using Prism.Events;
 using Prism.Mvvm;
 using System.Timers;

@@ -1,17 +1,17 @@
-﻿using Prism.Ioc;
-using Prism.Modularity;
-using LGES_SVA.Core.Interfaces;
+﻿using LGES_SVA.Core.Interfaces;
+using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Inspection.Services;
+using LGES_SVA.Login.Services;
 using LGES_SVA.Main.Services;
+using LGES_SVA.Recipe.Services;
 using LGES_SVA.Repository.Services;
 using LGES_SVA.Splash.Bootstrappers;
-using LGES_SVA.Login.Services;
-using LGES_SVA.Recipe.Services;
-using LGES_SVA.Repository.Services.Interface;
+using Prism.Ioc;
+using Prism.Modularity;
 
 namespace LGES_SVA.Settings
 {
-    public sealed class SingletonModules : IModule
+	public sealed class SingletonModules : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {

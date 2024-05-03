@@ -1,7 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.ToolBlock;
+using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Recipe.Services;
-using LGES_SVA.Repository.Services.Interface;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -60,8 +60,8 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		public void OnDialogClosed()
 		{
 			CogSerializer.SaveObjectToFile(ToolBlockWindow.Subject, $@"D:\DAT\test.vpp");
-			_settingRepository.VisionProSetting.NowRecipe = RecipeService.NowRecipe;
-			_settingRepository.SaveSetting();
+			//_settingRepository.VisionProSetting.NowRecipe = RecipeService.NowRecipe;
+			//_settingRepository.SaveSetting();
 		}
 
 		public void OnDialogOpened(IDialogParameters parameters)

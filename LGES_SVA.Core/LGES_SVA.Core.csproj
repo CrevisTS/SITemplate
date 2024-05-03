@@ -75,6 +75,8 @@
     <Compile Include="Datas\Settings\Enums\EImageType.cs" />
     <Compile Include="Datas\Settings\Enums\EInspectionMode.cs" />
     <Compile Include="Datas\Settings\Enums\EROSMode.cs" />
+    <Compile Include="Datas\Recipe\RecipeData.cs" />
+    <Compile Include="Datas\Settings\VisionPro\VisionProSetting.cs" />
     <Compile Include="Datas\Settings\WindowSetting.cs" />
     <Compile Include="Datas\ViewNames.cs" />
     <Compile Include="Converters\ToStringEqualToOpacityConverter.cs" />
