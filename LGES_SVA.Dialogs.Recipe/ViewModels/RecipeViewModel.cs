@@ -6,6 +6,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LGES_SVA.Dialogs.Recipe.ViewModels
@@ -77,6 +78,8 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		public void OnDialogClosed()
 		{
+			
+
 			try
 			{
 				if(ToolBlockWindow.Subject != null)
@@ -89,6 +92,11 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 				throw;
 			}
+
+			Application.Current.Dispatcher.Invoke(() =>
+			{
+				RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
+			});
 			//_settingRepository.VisionProSetting.NowRecipe = RecipeService.NowRecipe;
 			//_settingRepository.SaveSetting();
 		}

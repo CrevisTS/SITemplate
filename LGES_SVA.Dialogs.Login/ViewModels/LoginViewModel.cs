@@ -17,7 +17,6 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 		public string Password { get => _password; set => SetProperty(ref _password, value); }
 		public LoginService LoginService { get => _loginService; set => SetProperty(ref _loginService, value); }
 
-
 		public ICommand LoginBtnClickCommand => new DelegateCommand<string>(OnLoginBtnClick);
 
 		/// <summary>
@@ -57,7 +56,7 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 
 		public void OnDialogClosed()
 		{
-			RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
+			//RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
 		}
 
 		public void OnDialogOpened(IDialogParameters parameters)

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LGES_SVA.Dialogs.Live.ViewModels
 {
@@ -23,7 +24,10 @@ namespace LGES_SVA.Dialogs.Live.ViewModels
 
 		public void OnDialogClosed()
 		{
-			RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+			Application.Current.Dispatcher.Invoke(() =>
+			{
+				RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
+			});
 		}
 
 		public void OnDialogOpened(IDialogParameters parameters)

@@ -78,7 +78,7 @@ namespace LGES_SVA.ControlBar.ViewModels
             if(!_loginService.IsLogin)
 			{
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
-			}
+            }
 			// 로그인 상태 -> 로그아웃 시킴
             else
 			{
