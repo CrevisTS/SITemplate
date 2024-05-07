@@ -175,11 +175,11 @@ namespace LGES_SVA.ControlBar.Converters
 			switch (userLevel)
 			{
 				case EUserLevelType.None:
+				case EUserLevelType.Operator:
 					enable = "false";
 
 					break;
 
-				case EUserLevelType.Operator:
 				case EUserLevelType.Engineer:
 					enable = "true";
 

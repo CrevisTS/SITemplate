@@ -38,14 +38,29 @@ namespace LGES_SVA.Repository.Services
 
         public void LoadSetting()
         {
-            AppSetting = JsonParser.Load<AppSetting>(_settingFullPath);
-            VisionProSetting = JsonParser.Load<VisionProSetting>(_visionProFullPath);
+			try
+			{
+                AppSetting = JsonParser.Load<AppSetting>(_settingFullPath);
+                VisionProSetting = JsonParser.Load<VisionProSetting>(_visionProFullPath);
+            }
+			catch (Exception)
+			{
+				throw;
+			}
+           
         }
 
         public void SaveSetting()
         {
-            JsonParser.Save(AppSetting, _settingFolderPath, _settingFullPath);
-            JsonParser.Save(VisionProSetting, _settingFolderPath, _visionProFullPath);
+			try
+			{
+                JsonParser.Save(AppSetting, _settingFolderPath, _settingFullPath);
+                JsonParser.Save(VisionProSetting, _settingFolderPath, _visionProFullPath);
+            }
+			catch (Exception)
+			{
+				throw;
+			}
         }
 
 		public void Initialize()

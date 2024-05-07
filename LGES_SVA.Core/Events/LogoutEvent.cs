@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Prism.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LGES_SVA.Core.Enums
+namespace LGES_SVA.Core.Events
 {
-	public enum EUserLevelType
+	public class LogoutEvent : PubSubEvent
 	{
-		None,
-		Operator,
-		Engineer,
-		God
 	}
 }

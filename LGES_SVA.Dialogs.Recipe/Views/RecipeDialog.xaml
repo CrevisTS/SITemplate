@@ -32,6 +32,7 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 
@@ -40,7 +41,13 @@
 			<Label Content="Recipe" Style="{StaticResource Title_Label}"/>
 		</Border>
 		
+		<!-- 현재 레시피 -->
 		<Grid Grid.Row="1">
+			<Label Content="현재 레시피 : " Style="{StaticResource Menu_Label}"/>
+		</Grid>
+		
+		<!-- 레시피 조작 -->
+		<Grid Grid.Row="2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="200"/>
 				<ColumnDefinition/>
@@ -50,14 +57,17 @@
 			<Border Grid.Column="0">
 				<Grid>
 					<Grid.RowDefinitions>
-						<RowDefinition Height="50"/>
 						<RowDefinition/>
 						<RowDefinition Height="50"/>
 					</Grid.RowDefinitions>
 
-					<Label Grid.Row="0" Content="현재 레시피 : "/>
-					<Grid Grid.Row="1">
-						<ListView ItemsSource="{Binding RecipeService.Recipes}" SelectedItem="{Binding RecipeService.NowRecipe}">
+					<Grid Grid.Row="0">
+						<ListView ItemsSource="{Binding RecipeService.Recipes}" SelectedItem="{Binding RecipeService.NowRecipe}" >
+							<b:Interaction.Triggers>
+								<b:EventTrigger EventName="SelectionChanged">
+									<b:InvokeCommandAction Command="{Binding SelectedCommand}"/>
+								</b:EventTrigger>
+							</b:Interaction.Triggers>
 							<ListView.View>
 								<GridView>
 									<GridViewColumn Header="레시피 명" DisplayMemberBinding="{Binding Name}" Width="150" />
@@ -80,8 +90,8 @@
 					</Grid.RowDefinitions>
 
 					<Border Grid.Row="0">
-						<GroupBox Header="Tool 경로" Margin="10">
-							<TextBox Text="{Binding RecipeService.NowRecipe.Path}"/>
+						<GroupBox Header="모델 명" Margin="10" Foreground="White">
+							<TextBox Text="{Binding RecipeService.NowRecipe.Model, UpdateSourceTrigger=PropertyChanged}"/>
 						</GroupBox>
 					</Border>
 

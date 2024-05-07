@@ -4,8 +4,8 @@ namespace LGES_SVA.Core.Datas.Settings.VisionPro
 {
 	public class VisionProSetting
 	{
-		private RecipeData _nowRecipe;
+		private RecipeData _inspectionRecipe;
 
-		public RecipeData NowRecipe { get; set; }
+		public RecipeData InspectionRecipe { get; set; }
 	}
 }

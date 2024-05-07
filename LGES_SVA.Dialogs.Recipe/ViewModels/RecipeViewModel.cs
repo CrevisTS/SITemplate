@@ -16,41 +16,59 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		private ISettingRepository _settingRepository;
 
 		public RecipeService RecipeService { get => _recipeService; set => SetProperty(ref _recipeService, value); }
-		public string Title => "Recipe";
-
-		public event Action<IDialogResult> RequestClose;
-
 		public CogToolBlockEditV2 ToolBlockWindow { get; set; } = new CogToolBlockEditV2();
 
 		public ICommand AddRecipeCommand => new DelegateCommand(OnAddRecipe);
-
-		private void OnAddRecipe()
-		{
-			RecipeService.AddRecipe("abc");
-		}
-
-		public void OnSelected()
-		{
-			if (RecipeService.NowRecipe.Path == "")
-			{
-				ToolBlockWindow.Subject = new CogToolBlock();
-			}
-			else
-			{
-				//ToolBlockWindow.Subject = new CogToolBlock();
-			}
-		}
-
+		public ICommand SelectedCommand => new DelegateCommand(OnSelected);
 		public RecipeViewModel(RecipeService recipeService, ISettingRepository settingRepository)
 		{
 			_recipeService = recipeService;
 			_settingRepository = settingRepository;
 
-			// 여기다가 툴블럭을 new해서 넣어!!
-			var Toolblock = CogSerializer.LoadObjectFromFile($@"D:\DAT\test.vpp");
-			ToolBlockWindow.Subject = Toolblock as CogToolBlock;
-
+			ToolBlockInit();
 		}
+
+		public void ToolBlockInit()
+		{
+			var toolBlockPath = _settingRepository.VisionProSetting.InspectionRecipe;
+
+			// 선택된 레시피가 없다면
+			if (toolBlockPath == null)
+			{
+				return;
+			}
+			// 선택된 레시피가 있다면
+			else
+			{
+				var Toolblock = CogSerializer.LoadObjectFromFile(_settingRepository.VisionProSetting.InspectionRecipe.Path);
+				ToolBlockWindow.Subject = Toolblock as CogToolBlock;
+			}
+		}
+
+		public void OnSelected()
+		{
+			var nowRecipe = RecipeService.NowRecipe;
+			if (nowRecipe == null)
+			{
+				return;
+			}
+			// 선택된 레시피가 있다면
+			else
+			{
+				// 다른 레시피 선택 시 현재 레시피의 툴 경로를 변경
+				RecipeService.NowRecipe.Path = ToolBlockWindow.Filename;
+			}
+			
+		}
+		private void OnAddRecipe()
+		{
+			_recipeService.AddRecipe("abc");
+		}
+
+		#region DialogAware
+		public string Title => "Recipe";
+
+		public event Action<IDialogResult> RequestClose;
 
 		public bool CanCloseDialog()
 		{
@@ -59,7 +77,18 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		public void OnDialogClosed()
 		{
-			CogSerializer.SaveObjectToFile(ToolBlockWindow.Subject, $@"D:\DAT\test.vpp");
+			try
+			{
+				if(ToolBlockWindow.Subject != null)
+				{
+					CogSerializer.SaveObjectToFile(ToolBlockWindow.Subject, $@"D:\DAT\test.vpp");
+				}
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
 			//_settingRepository.VisionProSetting.NowRecipe = RecipeService.NowRecipe;
 			//_settingRepository.SaveSetting();
 		}
@@ -67,5 +96,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		public void OnDialogOpened(IDialogParameters parameters)
 		{
 		}
+
+		#endregion
 	}
 }

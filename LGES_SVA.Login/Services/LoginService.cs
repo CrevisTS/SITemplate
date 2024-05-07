@@ -12,12 +12,18 @@ namespace LGES_SVA.Login.Services
 		private readonly ISettingRepository _settingRepository;
 		private readonly IEventAggregator _eventAggregator;
 		// 300000 = 5분
-		private const int MINUTE5 = 300000;
+		private const int MINUTE5 = 5000;
 
 		private Timer _autoLogoutTimer;
 
 		private EUserLevelType _selectedUserLevel;
 		public EUserLevelType SelectedUserLevel { get => _selectedUserLevel; set => SetProperty(ref _selectedUserLevel, value); }
+
+		/// <summary>
+		/// Login 상태 확이
+		/// </summary>
+		public bool IsLogin { get; set; } = false;
+
 		public LoginService(ISettingRepository settingRepository, IEventAggregator eventAggregator)
 		{
 			_settingRepository = settingRepository;
@@ -39,6 +45,7 @@ namespace LGES_SVA.Login.Services
 					if (_settingRepository.AppSetting.User[EUserLevelType.Operator] == obj)
 					{
 						_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Operator;
+						IsLogin = true;
 						AutoLogoutStart();
 						return true;
 					}
@@ -48,6 +55,7 @@ namespace LGES_SVA.Login.Services
 					if (_settingRepository.AppSetting.User[EUserLevelType.Engineer] == obj)
 					{
 						_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Engineer;
+						IsLogin = true;
 						AutoLogoutStart();
 						return true;
 					}
@@ -56,14 +64,16 @@ namespace LGES_SVA.Login.Services
 				default:
 					break;
 			}
-			
 			return false;
-			
 		}
 
 		public void Logout()
 		{
 			_settingRepository.AppSetting.NowUserLevel = EUserLevelType.None;
+			IsLogin = false;
+
+			_eventAggregator.GetEvent<LogoutEvent>().Publish();
+
 		}
 
 		/// <summary>

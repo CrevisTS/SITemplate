@@ -3,6 +3,7 @@ using LGES_SVA.Core.Datas;
 using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Login.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -37,6 +38,7 @@ namespace LGES_SVA.ControlBar.ViewModels
         private readonly IInspectionManager _inspectionManager;
         private readonly IDialogService _dialogService;
         private ISettingRepository _settingRepository;
+        private LoginService _loginService;
 
         public IInspectionStateProvider InsepctionStateProvider => _inspectionManager;
         public ISettingRepository SettingRepository { get => _settingRepository; set => SetProperty(ref _settingRepository, value); }
@@ -56,12 +58,13 @@ namespace LGES_SVA.ControlBar.ViewModels
 		public ICommand MainRegionChangeClickCommand => new DelegateCommand<object>(OnMainRegionChangeClick);
         public ICommand BtnStartStopClickCommand => new DelegateCommand(OnBtnStartStopClick);
 
-        public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository)
+        public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService)
         {
             _regionManager = regionManager;
             _inspectionManager = inspectionManager;
             _dialogService = dialogService;
             _settingRepository = settingRepository;
+            _loginService = loginService;
 
             CameraConnection = new FakeConncetion() { Name = "Cam", IsConnected = true };
             IOConnection = new FakeConncetion() { Name = "IO", IsConnected = false };
@@ -72,38 +75,21 @@ namespace LGES_SVA.ControlBar.ViewModels
         public void LoginToggleClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
-            if(!LoginCheck())
+            if(!_loginService.IsLogin)
 			{
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
 			}
 			// 로그인 상태 -> 로그아웃 시킴
             else
 			{
-                // TODO : 로그아웃이 여기 있는게 맞는지;;
-                _settingRepository.AppSetting.NowUserLevel = EUserLevelType.None;
+                _loginService.Logout();
             }
-        }
-
-        /// <summary>
-        /// 로그인 상태인지 확인
-        /// </summary>
-        /// <returns>true : Login / false : Not Login</returns>
-        private bool LoginCheck()
-		{
-            if (_settingRepository.AppSetting.NowUserLevel == EUserLevelType.None)
-            {
-                return false;
-            }
-			else
-			{
-                return true;
-			}
         }
 
         public void SimulationClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
-            if (!LoginCheck())
+            if (!_loginService.IsLogin)
             {
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
             }
@@ -116,7 +102,7 @@ namespace LGES_SVA.ControlBar.ViewModels
         public void LogClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
-            if (!LoginCheck())
+            if (!_loginService.IsLogin)
             {
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
             }
@@ -129,7 +115,7 @@ namespace LGES_SVA.ControlBar.ViewModels
         public void RecipeClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
-            if (!LoginCheck())
+            if (!_loginService.IsLogin)
             {
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
             }
@@ -142,7 +128,7 @@ namespace LGES_SVA.ControlBar.ViewModels
         public void SearchClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
-            if (!LoginCheck())
+            if (!_loginService.IsLogin)
             {
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
             }
@@ -152,8 +138,9 @@ namespace LGES_SVA.ControlBar.ViewModels
             }
         }
         public void LiveClick()
-        {// 로그아웃 상태 -> 로그인 창 띄움
-            if (!LoginCheck())
+        {
+            // 로그아웃 상태 -> 로그인 창 띄움
+            if (!_loginService.IsLogin)
             {
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
             }
@@ -165,7 +152,7 @@ namespace LGES_SVA.ControlBar.ViewModels
         public void SettingClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
-            if (!LoginCheck())
+            if (!_loginService.IsLogin)
             {
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
             }

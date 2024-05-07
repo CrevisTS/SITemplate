@@ -11,15 +11,12 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 {
 	public class LoginViewModel : BindableBase, IDialogAware
 	{
-		private readonly ISettingRepository _settingRepository;
-
 		private string _password;
 		private LoginService _loginService;
-		public string Title => "Login";
+
 		public string Password { get => _password; set => SetProperty(ref _password, value); }
 		public LoginService LoginService { get => _loginService; set => SetProperty(ref _loginService, value); }
 
-		public event Action<IDialogResult> RequestClose;
 
 		public ICommand LoginBtnClickCommand => new DelegateCommand<string>(OnLoginBtnClick);
 
@@ -31,9 +28,8 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 			OnLoginBtnClick(Password);
 		}
 
-		public LoginViewModel(ISettingRepository settingRepository, LoginService loginService)
+		public LoginViewModel(LoginService loginService)
 		{
-			_settingRepository = settingRepository;
 			_loginService = loginService;
 		}
 
@@ -50,6 +46,9 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 		}
 
 		#region DialogAware
+		public string Title => "Login";
+
+		public event Action<IDialogResult> RequestClose;
 
 		public bool CanCloseDialog()
 		{

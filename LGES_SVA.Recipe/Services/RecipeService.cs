@@ -17,17 +17,6 @@ namespace LGES_SVA.Recipe.Services
 		// 현재 선택된 레시피
 		public RecipeData NowRecipe { get => _nowRecipe; set => SetProperty(ref _nowRecipe, value); }
 
-		/// <summary>
-		/// Cam1, Cam2 Cailbration
-		/// </summary>
-		public CogToolBlock CailbrationTool1 { get; set; }
-		/// <summary>
-		/// Cam3, Cam4 Cailbration
-		/// </summary>
-		public CogToolBlock CailbrationTool2 { get; set; }
-
-		public bool IsInit => true;
-
 		public RecipeService()
 		{
 			Recipes = new ObservableCollection<RecipeData>();
@@ -38,9 +27,12 @@ namespace LGES_SVA.Recipe.Services
 			Recipes.Add(new RecipeData(name: name));
 		}
 
+		#region Init
+		public bool IsInit => true;
 		public void Initialize()
 		{
 			_ = new CogToolBlock();
 		}
+		#endregion
 	}
 }

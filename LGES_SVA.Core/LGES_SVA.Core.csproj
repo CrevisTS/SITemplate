@@ -85,6 +85,7 @@
     <Compile Include="Enums\ELevelType.cs" />
     <Compile Include="Enums\ERegionType.cs" />
     <Compile Include="Enums\EViewType.cs" />
+    <Compile Include="Events\LogoutEvent.cs" />
     <Compile Include="Events\MainWindowClosedEvent.cs" />
     <Compile Include="Events\MainWindowClosingEvent.cs" />
     <Compile Include="Events\MouseMoveEvent.cs" />
