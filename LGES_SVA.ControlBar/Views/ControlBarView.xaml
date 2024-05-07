@@ -18,7 +18,7 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="C:\Users\TS_jiwon\source\repos\LGES_SmartVisionAlign\LGES_SVA.Styles\Regions\RegionStyle.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Regions/RegionStyle.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			<coreConverter:ToStringEqualCheckConverter x:Key="ToStringEqualCheckConverter"/>
 			<coreConverter:ToStringEqualToOpacityConverter x:Key="ToStringEqualToOpacityConverter"/>
