@@ -1,5 +1,6 @@
 ﻿using LGES_SVA.Core.Datas.Login;
 using LGES_SVA.Core.Enums;
+using LGES_SVA.Core.Enums.Login;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Core.Utils;
@@ -59,8 +60,10 @@ namespace LGES_SVA.Login.Services
 
 		public void Logout()
 		{
-			//_settingRepository.AppSetting.NowUserLevel = EUserLevelType.None;
+			_settingRepository.NowUser = new User(ELevel.None);
 			IsLogin = false;
+
+			AutoLogoutStop();
 
 			_eventAggregator.GetEvent<LogoutEvent>().Publish();
 
@@ -78,6 +81,12 @@ namespace LGES_SVA.Login.Services
 			_autoLogoutTimer.Start();
 		}
 
+		private void AutoLogoutStop()
+		{
+			_autoLogoutTimer.Stop();
+			_autoLogoutTimer.Dispose();
+		}
+
 		/// <summary>
 		/// Timer Callback
 		/// </summary>
@@ -85,8 +94,7 @@ namespace LGES_SVA.Login.Services
 		/// <param name="e"></param>
 		private void _autoLogoutTimer_Elapsed(object sender, ElapsedEventArgs e)
 		{
-			_autoLogoutTimer.Stop();
-			_autoLogoutTimer.Dispose();
+			AutoLogoutStop();
 
 			Logout();
 		}

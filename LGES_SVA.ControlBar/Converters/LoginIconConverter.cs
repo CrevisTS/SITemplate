@@ -21,6 +21,7 @@ namespace LGES_SVA.ControlBar.Converters
 
 				case ELevel.Operator:
 				case ELevel.Engineer:
+				case ELevel.God:
 					source = $@"pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/Login.png";
 
 					break;
@@ -52,6 +53,7 @@ namespace LGES_SVA.ControlBar.Converters
 
 				case ELevel.Operator:
 				case ELevel.Engineer:
+				case ELevel.God:
 					text = "Logout";
 
 					break;

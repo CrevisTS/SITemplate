@@ -27,6 +27,7 @@ namespace LGES_SVA.Dialogs.Login.Views
 			// 테마 Merge
 			CustomWindow.MergeThemeToUserControl(this, CvsService.UI.Windows.Enums.EWindowTheme.LGES);
 
+			ID_TextBox.Focus();
 		}
 
 	}
