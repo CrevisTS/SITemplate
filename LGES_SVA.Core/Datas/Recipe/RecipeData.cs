@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LGES_SVA.Core.Datas.Recipe
 {
-	public class RecipeData : BindableBase
+	public class RecipeData : BindableBase, ICloneable
 	{
 		private string _name;
 		private string _path;
@@ -27,9 +27,18 @@ namespace LGES_SVA.Core.Datas.Recipe
 		/// </summary>
 		public string Model { get => _model; set => SetProperty(ref _model, value); }
 
+		public double AlignResultY_ { get; set; }
+		public double PouchAngle_Correction { get; set; }
+		
+
 		public RecipeData(string name)
 		{
 			_name = name;
+		}
+
+		public object Clone()
+		{
+			return MemberwiseClone();
 		}
 	}
 }

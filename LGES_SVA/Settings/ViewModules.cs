@@ -14,6 +14,7 @@ using LGES_SVA.Dialogs.Setting.ViewModels;
 using LGES_SVA.Dialogs.Setting.Views;
 using LGES_SVA.Dialogs.Simulation.ViewModels;
 using LGES_SVA.Dialogs.Simulation.Views;
+using LGES_SVA.Dialog;
 using LGES_SVA.Inspection.Views;
 using LGES_SVA.Regions.TabView.Views;
 using Prism.Ioc;
@@ -34,8 +35,10 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterForNavigation<InspectionView>(ViewNames.InspectionView);
             containerRegistry.RegisterForNavigation<TabView>(ViewNames.TabView);
 
-            // TODO : Dialog 선언하는 부분
-            containerRegistry.RegisterDialog<LoginDialog, LoginViewModel>();
+			containerRegistry.RegisterDialogWindow<DialogWindow>();
+
+			// TODO : Dialog 선언하는 부분
+			containerRegistry.RegisterDialog<LoginDialog, LoginViewModel>();
             containerRegistry.RegisterDialog<SimulationDialog, SimulationViewModel>();
             containerRegistry.RegisterDialog<LogDialog, LogViewModel>();
             containerRegistry.RegisterDialog<RecipeDialog, RecipeViewModel>();

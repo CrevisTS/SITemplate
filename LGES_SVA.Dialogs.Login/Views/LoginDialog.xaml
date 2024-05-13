@@ -5,14 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Login.ViewModels"
 			 d:DataContext="{d:DesignInstance Type=viewModel:LoginViewModel, IsDesignTimeCreatable=False}"
-             xmlns:local="clr-namespace:LGES_SVA.Dialogs.Login.Views"
+             xmlns:local="clr-namespace:LGES_SVA.Dialogs.Login.ViewModels"
 			 xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-			 xmlns:localConverter="clr-namespace:LGES_SVA.Dialogs.Login.Converter"
-			 xmlns:userLevels="clr-namespace:LGES_SVA.Core.Enums;assembly=LGES_SVA.Core"
-
 			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
-             Height="100" Width="400" Background="#292E42">
+             Height="324" Width="420" Background="#292E42">
 
 	<prism:Dialog.WindowStyle>
 		<Style TargetType="Window">
@@ -20,11 +17,10 @@
 			<Setter Property="ResizeMode" Value="NoResize"/>
 			<Setter Property="ShowInTaskbar" Value="False"/>
 			<Setter Property="SizeToContent" Value="WidthAndHeight"/>
-			<Setter Property="WindowStyle" Value="ToolWindow"/>
+			<Setter Property="WindowStyle" Value="None"/>
 		</Style>
 	</prism:Dialog.WindowStyle>
 
-	
 	<b:Interaction.Triggers>
 		<b:KeyTrigger Key="Return" FiredOn="KeyDown">
 			<b:CallMethodAction TargetObject="{Binding}" MethodName="EnterDown"/>
@@ -34,60 +30,27 @@
 		</b:KeyTrigger>
 	</b:Interaction.Triggers>
 
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<localConverter:EnumToRadio_Converter x:Key="RadioEnum_Converter"/>
-		</ResourceDictionary>
-	</UserControl.Resources>
-	
 	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="80"/>
-		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="200"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
 
-		<Grid >
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-
-			<Grid Grid.Row="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-
-				<Grid Grid.Column="0">
-					<RadioButton GroupName="UserLevel" Content="Operator" IsChecked="{Binding LoginService.SelectedUserLevel, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static userLevels:EUserLevelType.Operator}}" VerticalContentAlignment="Center"/>
-				</Grid>
-				<Grid Grid.Column="1">
-					<RadioButton GroupName="UserLevel" Content="Engineer" IsChecked="{Binding LoginService.SelectedUserLevel, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static userLevels:EUserLevelType.Engineer}}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"/>
-				</Grid>
-			</Grid>
-
-			<Grid Grid.Row="1">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-
-				<Border Grid.Column="0">
-					<Label Content="PW" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-				</Border>
-				<Border Grid.Column="1">
-					<TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Name="Password_textBox"/>
-				</Border>
-			</Grid>
-
+		<Grid Grid.Row="0">
+			<TextBlock Text="ID" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,58,0,0" FontSize="24"/>
+			<TextBlock Text="PW" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,117,0,0" FontSize="24"/>
+			<TextBox Name="ID_TextBox" Margin="98,54,50,0" VerticalAlignment="Top" Height="39" FontSize="30" Text="{Binding ID}"/>
+			<PasswordBox Name="Password_PasswordBox" Margin="98,113,50,0" VerticalAlignment="Top" Height="39" FontSize="30" >
+				<b:Interaction.Behaviors>
+					<local:PasswordBoxBehavior Password="{Binding Password, Mode=TwoWay}"/>
+				</b:Interaction.Behaviors>
+			</PasswordBox>
 		</Grid>
 
-		<Grid Grid.Column="1">
-			<Button Command="{Binding LoginBtnClickCommand}" CommandParameter="{Binding Password}" Background="White">
-				<Button.Content>
-					<Image Grid.Column="0" Source="pack://application:,,,/LGES_SVA.Dialogs.Login;component/Resources/Icons/Enter1.png" RenderOptions.BitmapScalingMode="HighQuality"/>
-				</Button.Content>
-			</Button>
+		<Grid Grid.Row="1">
+			<Button Name="Login_Button" Content="LOGIN" HorizontalAlignment="Left" Command="{Binding LoginBtnClickCommand}" Margin="50,0,0,0" VerticalAlignment="Top" Height="66" Width="130" Background="#FF47527F" BorderBrush="#FF47527F"/>
+			<Button Name="Cancel_Button" Content="CANCEL" HorizontalAlignment="Left" Margin="220,0,0,0" VerticalAlignment="Top" Background="#FF47527F" Height="66" Width="130" BorderBrush="#FF47527F"/>
 		</Grid>
+
 	</Grid>
 </UserControl>

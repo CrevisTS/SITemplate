@@ -1,4 +1,4 @@
-﻿using LGES_SVA.Core.Enums;
+﻿using LGES_SVA.Core.Enums.Login;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -9,18 +9,18 @@ namespace LGES_SVA.ControlBar.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			EUserLevelType userLevel = (EUserLevelType)value;
+			ELevel userLevel = (ELevel)value;
 
 			string source = "";
 			switch (userLevel)
 			{
-				case EUserLevelType.None:
+				case ELevel.None:
 					source = $@"pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/Login.png";
 
 					break;
 
-				case EUserLevelType.Operator:
-				case EUserLevelType.Engineer:
+				case ELevel.Operator:
+				case ELevel.Engineer:
 					source = $@"pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/Login.png";
 
 					break;
@@ -40,18 +40,18 @@ namespace LGES_SVA.ControlBar.Converters
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 
-			EUserLevelType userLevel = (EUserLevelType)value;
+			ELevel userLevel = (ELevel)value;
 			string text = "";
 
 			switch (userLevel)
 			{
-				case EUserLevelType.None:
+				case ELevel.None:
 					text = "Login";
 
 					break;
 
-				case EUserLevelType.Operator:
-				case EUserLevelType.Engineer:
+				case ELevel.Operator:
+				case ELevel.Engineer:
 					text = "Logout";
 
 					break;

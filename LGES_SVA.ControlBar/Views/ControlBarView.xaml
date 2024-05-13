@@ -88,13 +88,13 @@
 							<RowDefinition Height="50"/>
 							<RowDefinition Height="15"/>
 						</Grid.RowDefinitions>
-						<Image Grid.Row="0" Height="40" Width="40" Source="{Binding SettingRepository.AppSetting.NowUserLevel, Converter={StaticResource LoginIconConverter}, Mode=OneWay}" RenderOptions.BitmapScalingMode="HighQuality"/>
-						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="{Binding SettingRepository.AppSetting.NowUserLevel, Converter={StaticResource LoginDescriptionConverter}, Mode=OneWay}" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+						<Image Grid.Row="0" Height="40" Width="40" Source="{Binding SettingRepository.NowUser.Level, Converter={StaticResource LoginIconConverter}, Mode=OneWay}" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="{Binding SettingRepository.NowUser.Level, Converter={StaticResource LoginDescriptionConverter}, Mode=OneWay}" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
 					</Grid>
 				</Button>
 
 				<!-- Simulation -->
-				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.AppSetting.NowUserLevel, Converter={StaticResource SimulationIconConverter}, Mode=OneWay}" Grid.Column="1" Background="Transparent" BorderThickness="0" Command="{Binding SimulationBtnClickCommand}">
+				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource SimulationIconConverter}, Mode=OneWay}" Grid.Column="1" Background="Transparent" BorderThickness="0" Command="{Binding SimulationBtnClickCommand}">
 					<Grid Height="80" Width="80">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="50"/>
@@ -105,7 +105,7 @@
 					</Grid>
 				</Button>
 
-				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.AppSetting.NowUserLevel, Converter={StaticResource LogIconConverter}, Mode=OneWay}" Grid.Column="2" Background="Transparent" BorderThickness="0" Command="{Binding LogBtnClickCommand}">
+				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource LogIconConverter}, Mode=OneWay}" Grid.Column="2" Background="Transparent" BorderThickness="0" Command="{Binding LogBtnClickCommand}">
 					<Grid Height="80" Width="80">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="50"/>
@@ -116,7 +116,7 @@
 					</Grid>
 				</Button>
 
-				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.AppSetting.NowUserLevel, Converter={StaticResource RecipeIconConverter}, Mode=OneWay}" Grid.Column="3" Background="Transparent" BorderThickness="0" Command="{Binding RecipeBtnClickCommand}">
+				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource RecipeIconConverter}, Mode=OneWay}" Grid.Column="3" Background="Transparent" BorderThickness="0" Command="{Binding RecipeBtnClickCommand}">
 					<Grid Height="80" Width="80">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="50"/>
@@ -127,7 +127,7 @@
 					</Grid>
 				</Button>
 
-				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.AppSetting.NowUserLevel, Converter={StaticResource SearchIconConverter}, Mode=OneWay}" Grid.Column="4" Background="Transparent" BorderThickness="0" Command="{Binding SearchBtnClickCommand}">
+				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource SearchIconConverter}, Mode=OneWay}" Grid.Column="4" Background="Transparent" BorderThickness="0" Command="{Binding SearchBtnClickCommand}">
 					<Grid Height="80" Width="80">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="50"/>
@@ -138,7 +138,7 @@
 					</Grid>
 				</Button>
 
-				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.AppSetting.NowUserLevel, Converter={StaticResource LiveIconConverter}, Mode=OneWay}" Grid.Column="5" Background="Transparent" BorderThickness="0" Command="{Binding LiveBtnClickCommand}">
+				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource LiveIconConverter}, Mode=OneWay}" Grid.Column="5" Background="Transparent" BorderThickness="0" Command="{Binding LiveBtnClickCommand}">
 					<Grid Height="80" Width="80">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="50"/>
@@ -149,7 +149,7 @@
 					</Grid>
 				</Button>
 
-				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.AppSetting.NowUserLevel, Converter={StaticResource SettingIconConverter}, Mode=OneWay}" Grid.Column="6" Background="Transparent" BorderThickness="0" Command="{Binding SettingBtnClickCommand}">
+				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource SettingIconConverter}, Mode=OneWay}" Grid.Column="6" Background="Transparent" BorderThickness="0" Command="{Binding SettingBtnClickCommand}">
 					<Grid Height="80" Width="80">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="5*"/>

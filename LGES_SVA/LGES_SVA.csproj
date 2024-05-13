@@ -200,6 +200,10 @@
       <Project>{A52BCA4D-1709-4477-A36E-ED769C3FB7A8}</Project>
       <Name>LGES_SVA.Dialogs.Simulation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialog\LGES_SVA.Dialog.csproj">
+      <Project>{C1330C30-1F16-4E02-9F8C-5DC4E02CAD0C}</Project>
+      <Name>LGES_SVA.Dialog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Inspection\LGES_SVA.Inspection.csproj">
       <Project>{8370B3F6-38ED-4124-A22C-D5A4E0488B55}</Project>
       <Name>LGES_SVA.Inspection</Name>
@@ -231,6 +235,10 @@
     <ProjectReference Include="..\LGES_SVA.Styles\LGES_SVA.Styles.csproj">
       <Project>{99f0c2ae-6bd7-417a-b6b1-dabc5f5413b9}</Project>
       <Name>LGES_SVA.Styles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.VisionPro\LGES_SVA.VisionPro.csproj">
+      <Project>{221013A5-C63A-4FF5-8432-C1BD73D60F6D}</Project>
+      <Name>LGES_SVA.VisionPro</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

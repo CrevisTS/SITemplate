@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LGES_SVA.Core.Enums
+namespace LGES_SVA.Core.Enums.Login
 {
-	public enum EUserLevelType
+	public enum ELevel
 	{
 		None,
 		Operator,

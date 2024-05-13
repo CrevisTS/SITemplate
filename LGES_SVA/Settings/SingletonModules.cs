@@ -1,4 +1,5 @@
 ﻿using LGES_SVA.Core.Interfaces;
+using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Inspection.Services;
 using LGES_SVA.Login.Services;
@@ -6,6 +7,7 @@ using LGES_SVA.Main.Services;
 using LGES_SVA.Recipe.Services;
 using LGES_SVA.Repository.Services;
 using LGES_SVA.Splash.Bootstrappers;
+using LGES_SVA.VisionPro.Services;
 using Prism.Ioc;
 using Prism.Modularity;
 
@@ -31,6 +33,8 @@ namespace LGES_SVA.Settings
             _ = containerRegistry.RegisterSingleton<IInspectionManager, InspectionManager>();
             _ = containerRegistry.RegisterSingleton<IDisposeManager, DisposeManager>();
             _ = containerRegistry.RegisterSingleton<ISettingRepository, SettingRepository>();
+
+            containerRegistry.RegisterSingleton<IVisionProService, VisionProService>();
 
             containerRegistry.RegisterSingleton<LoginService>();
             containerRegistry.RegisterSingleton<RecipeService>();

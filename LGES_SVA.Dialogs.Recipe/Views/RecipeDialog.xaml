@@ -28,7 +28,11 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</UserControl.Resources>
-	
+
+	<UserControl.InputBindings>
+		<KeyBinding Modifiers="Alt" Key="F3" Command="{Binding ClosingCommand}"/>
+	</UserControl.InputBindings>
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50"/>
@@ -38,12 +42,18 @@
 
 		<!-- Title -->
 		<Border Grid.Row="0">
-			<Label Content="Recipe" Style="{StaticResource Title_Label}"/>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1200"/>
+				</Grid.ColumnDefinitions>
+				<Label Grid.Column="0" Content="Recipe" Style="{StaticResource Title_Label}"/>
+			</Grid>
+				
 		</Border>
 		
 		<!-- 현재 레시피 -->
 		<Grid Grid.Row="1">
-			<Label Content="현재 레시피 : " Style="{StaticResource Menu_Label}"/>
+			<TextBlock Text="{Binding RecipeService.NowRecipe.Name, StringFormat={}현재 레시피 : {0}}" Style="{StaticResource Content_TextBlock}"/>
 		</Grid>
 		
 		<!-- 레시피 조작 -->
@@ -62,15 +72,22 @@
 					</Grid.RowDefinitions>
 
 					<Grid Grid.Row="0">
-						<ListView ItemsSource="{Binding RecipeService.Recipes}" SelectedItem="{Binding RecipeService.NowRecipe}" >
+						<ListView Name="RecipeList" ItemsSource="{Binding RecipeService.Recipes}">
 							<b:Interaction.Triggers>
 								<b:EventTrigger EventName="SelectionChanged">
-									<b:InvokeCommandAction Command="{Binding SelectedCommand}"/>
+									<b:InvokeCommandAction Command="{Binding SelectedCommand}" CommandParameter="{Binding ElementName=RecipeList, Path=SelectedItem}"/>
 								</b:EventTrigger>
 							</b:Interaction.Triggers>
 							<ListView.View>
 								<GridView>
-									<GridViewColumn Header="레시피 명" DisplayMemberBinding="{Binding Name}" Width="150" />
+									<GridViewColumn Header="Recipe Name" DisplayMemberBinding="{Binding Name}" Width="130" />
+									<GridViewColumn Header="Delete" Width="50">
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<Button Content="Delete" Command="{Binding DataContext.RemoveRecipeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"/>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+									</GridViewColumn>
 								</GridView>
 							</ListView.View>
 						</ListView>
@@ -84,26 +101,56 @@
 			<!-- 레시피 수정 -->
 			<Border Grid.Column="1">
 				<Grid>
+
 					<Grid.RowDefinitions>
-						<RowDefinition Height="150"/>
-						<RowDefinition/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="50"/>
 					</Grid.RowDefinitions>
 
-					<Border Grid.Row="0">
-						<GroupBox Header="모델 명" Margin="10" Foreground="White">
-							<TextBox Text="{Binding RecipeService.NowRecipe.Model, UpdateSourceTrigger=PropertyChanged}"/>
-						</GroupBox>
-					</Border>
+					<Grid Grid.Row="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="200"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
 
-					<Border Grid.Row="1">
-						<WindowsFormsHost x:Name="ToolWindow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Background="DimGray">
-							<b:Interaction.Behaviors>
-								<local:WindowsFormsHostBehavior Child="{Binding ToolBlockWindow}"/>
-							</b:Interaction.Behaviors>
-						</WindowsFormsHost>
-					</Border>
+						<Border Grid.Column="0">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition/>
+									<RowDefinition/>
+								</Grid.RowDefinitions>
+								<GroupBox Grid.Row="0" Header="모델 명" Margin="10" Foreground="White">
+									<StackPanel>
+										<TextBox Text="{Binding RecipeService.NowRecipe.Name, UpdateSourceTrigger=PropertyChanged}"/>
+										<Button Content="Add Left Image" Command="{Binding AddLeftImageCommand}"/>
+										<Button Content="Add Right Image" Command="{Binding AddRightImageCommand}"/>
+									</StackPanel>
+								</GroupBox>
+
+								<GroupBox Grid.Row="1" Header="검사 사양" Margin="10" Foreground="White">
+									<!-- Align Result Y -->
+									<!-- Pouch Angle -->
+									<!-- Align Result -->
+								</GroupBox>
+							</Grid>
+
+						</Border>
+
+						<Border Grid.Column="1">
+							<WindowsFormsHost x:Name="ToolWindow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Background="DimGray">
+								<b:Interaction.Behaviors>
+									<local:WindowsFormsHostBehavior Child="{Binding ToolBlockWindow}"/>
+								</b:Interaction.Behaviors>
+							</WindowsFormsHost>
+						</Border>
+					</Grid>
+
+					<Grid Grid.Row="1">
+						<Button Content="Save" Command="{Binding SaveRecipeCommand}"/>
+					</Grid>
 				</Grid>
 			</Border>
 		</Grid>
 	</Grid>
+
 </UserControl>

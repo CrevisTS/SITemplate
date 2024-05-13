@@ -1,11 +1,13 @@
 ﻿using LGES_SVA.Core.Datas.Settings;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces.Settings;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
 using System.Windows;
+using System.Windows.Input;
 
 namespace LGES_SVA.Dialogs.Setting.ViewModels
 {
@@ -19,6 +21,30 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 		public AppSetting AppSetting { get => _settingRepository.AppSetting; }
 		public AppSetting AppSettingClone { get => _appSettingClone; set => SetProperty(ref _appSettingClone, value); }
 
+		public ICommand CancelCommand => new DelegateCommand(OnCanceled);
+
+		private void OnCanceled()
+		{
+			Application.Current.Dispatcher.Invoke(() =>
+			{
+				RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
+			});
+		}
+
+		public ICommand SaveCommand => new DelegateCommand(OnSaved);
+
+		private void OnSaved()
+		{
+			// 저장하시겠습니까?
+			var result = MessageBox.Show("현재 설정을 저장하시겠습니까?", "Save", MessageBoxButton.YesNo);
+			if (result == MessageBoxResult.Yes)
+			{
+				_settingRepository.AppSetting = AppSettingClone;
+				_settingRepository.SaveSetting();
+
+				RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+			}
+		}
 
 		public SettingViewModel(ISettingRepository settingRepository, IEventAggregator eventAggregator)
 		{
@@ -34,10 +60,7 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 
 		public event Action<IDialogResult> RequestClose;
 
-		public bool CanCloseDialog()
-		{
-			return true;
-		}
+		public bool CanCloseDialog() => true;
 
 		private void LogoutDialogClosed()
 		{
@@ -49,17 +72,7 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 
 		public void OnDialogClosed()
 		{
-			// 저장하시겠습니까?
-			var result = MessageBox.Show("현재 설정을 저장하시겠습니까?","Save",MessageBoxButton.YesNo);
-			if(result == MessageBoxResult.Yes)
-			{
-				_settingRepository.AppSetting = AppSettingClone;
-				_settingRepository.SaveSetting();
-			}
-			else
-			{
-				//_settingRepository.LoadSetting();
-			}
+			
 		}
 
 		public void OnDialogOpened(IDialogParameters parameters)

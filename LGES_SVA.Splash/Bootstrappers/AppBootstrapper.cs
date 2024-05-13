@@ -7,6 +7,7 @@ using CvsService.Log.Write.Models;
 using CvsService.Log.Write.Services;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
+using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Recipe.Services;
 using LGES_SVA.Splash.Error;
@@ -26,7 +27,7 @@ namespace LGES_SVA.Splash.Bootstrappers
 
         private readonly Lazy<IDisposeManager> _lazyDisposeManager;
         private readonly Lazy<ISettingRepository> _lazySettingRepo;
-        private readonly Lazy<RecipeService> _recipeService;
+        private readonly Lazy<IVisionProService> _visionProService;
 
 
         public bool IsFail { get; private set; } = false;
@@ -34,11 +35,11 @@ namespace LGES_SVA.Splash.Bootstrappers
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;
         public event EventHandler WindowLoadedCompleted;
 
-        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<RecipeService> recipeService)
+        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<IVisionProService> visionProService)
         {
             _lazyDisposeManager = lazyDisposeManager;
             _lazySettingRepo = lazySettingRepo;
-            _recipeService = recipeService;
+            _visionProService = visionProService;
         }
 
         public Task InitializeAsync()
@@ -56,7 +57,7 @@ namespace LGES_SVA.Splash.Bootstrappers
                 //Thread.Sleep(1000); // UI 보기위함
 
                 // VisionPro
-                _ = LazyInstanceInit(_recipeService, "VisionPro", 80);
+                _ = LazyInstanceInit(_visionProService, "VisionPro", 80);
 
 
                 // AppBoot에서 초기화하는 클래스 중 Dispose()가 필요하면 여기에서 추가.

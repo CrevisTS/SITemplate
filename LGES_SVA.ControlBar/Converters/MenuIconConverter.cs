@@ -1,10 +1,6 @@
-﻿using LGES_SVA.Core.Enums;
+﻿using LGES_SVA.Core.Enums.Login;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace LGES_SVA.ControlBar.Converters
@@ -13,19 +9,19 @@ namespace LGES_SVA.ControlBar.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			EUserLevelType userLevel = (EUserLevelType)value;
+			ELevel userLevel = (ELevel)value;
 
 			string enable = "";
 
 			switch (userLevel)
 			{
-				case EUserLevelType.None:
+				case ELevel.None:
 					enable = "false";
 
 					break;
 
-				case EUserLevelType.Operator:
-				case EUserLevelType.Engineer:
+				case ELevel.Operator:
+				case ELevel.Engineer:
 					enable = "true";
 
 					break;
@@ -44,19 +40,19 @@ namespace LGES_SVA.ControlBar.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			EUserLevelType userLevel = (EUserLevelType)value;
+			ELevel userLevel = (ELevel)value;
 
 			string enable = "";
 
 			switch (userLevel)
 			{
-				case EUserLevelType.None:
+				case ELevel.None:
 					enable = "false";
 
 					break;
 
-				case EUserLevelType.Operator:
-				case EUserLevelType.Engineer:
+				case ELevel.Operator:
+				case ELevel.Engineer:
 					enable = "true";
 
 					break;
@@ -75,19 +71,19 @@ namespace LGES_SVA.ControlBar.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			EUserLevelType userLevel = (EUserLevelType)value;
+			ELevel userLevel = (ELevel)value;
 
 			string enable = "";
 
 			switch (userLevel)
 			{
-				case EUserLevelType.None:
+				case ELevel.None:
 					enable = "false";
 
 					break;
 
-				case EUserLevelType.Operator:
-				case EUserLevelType.Engineer:
+				case ELevel.Operator:
+				case ELevel.Engineer:
 					enable = "true";
 
 					break;
@@ -106,19 +102,19 @@ namespace LGES_SVA.ControlBar.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			EUserLevelType userLevel = (EUserLevelType)value;
+			ELevel userLevel = (ELevel)value;
 
 			string enable = "";
 
 			switch (userLevel)
 			{
-				case EUserLevelType.None:
+				case ELevel.None:
 					enable = "false";
 
 					break;
 
-				case EUserLevelType.Operator:
-				case EUserLevelType.Engineer:
+				case ELevel.Operator:
+				case ELevel.Engineer:
 					enable = "true";
 
 					break;
@@ -137,19 +133,19 @@ namespace LGES_SVA.ControlBar.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			EUserLevelType userLevel = (EUserLevelType)value;
+			ELevel userLevel = (ELevel)value;
 
 			string enable = "";
 
 			switch (userLevel)
 			{
-				case EUserLevelType.None:
+				case ELevel.None:
 					enable = "false";
 
 					break;
 
-				case EUserLevelType.Operator:
-				case EUserLevelType.Engineer:
+				case ELevel.Operator:
+				case ELevel.Engineer:
 					enable = "true";
 
 					break;
@@ -168,19 +164,19 @@ namespace LGES_SVA.ControlBar.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			EUserLevelType userLevel = (EUserLevelType)value;
+			ELevel userLevel = (ELevel)value;
 
 			string enable = "";
 
 			switch (userLevel)
 			{
-				case EUserLevelType.None:
-				case EUserLevelType.Operator:
+				case ELevel.None:
+				case ELevel.Operator:
 					enable = "false";
 
 					break;
 
-				case EUserLevelType.Engineer:
+				case ELevel.Engineer:
 					enable = "true";
 
 					break;

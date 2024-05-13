@@ -4,6 +4,7 @@ using Prism.Events;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -15,26 +16,6 @@ namespace LGES_SVA.Dialogs.LogDialog.ViewModels
 {
 	public class LogViewModel : IDialogAware
 	{
-		private IEventAggregator _eventAggregator;
-
-	
-		public ICommand SystemLogCommand => new DelegateCommand(ShowSystemLog);
-
-		private void ShowSystemLog()
-		{
-			string folderPath = @"D:\DAT";
-
-			// 폴더 열기
-			Process.Start(folderPath);
-		}
-
-		public LogViewModel(IEventAggregator eventAggregator)
-		{
-			_eventAggregator = eventAggregator;
-			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => OnDialogClosed());
-
-		}
-
 		#region DialogAware
 		public string Title => "Log";
 
@@ -57,5 +38,31 @@ namespace LGES_SVA.Dialogs.LogDialog.ViewModels
 		{
 		}
 		#endregion
+
+		private IEventAggregator _eventAggregator;
+
+		public ICommand SystemLogCommand => new DelegateCommand(ShowSystemLog);
+
+		private void ShowSystemLog()
+		{
+			string folderPath = @"D:\DAT";
+
+			// 폴더 열기
+			Process.Start(folderPath);
+		}
+
+		public LogViewModel(IEventAggregator eventAggregator)
+		{
+			_eventAggregator = eventAggregator;
+			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => OnDialogClosed());
+			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("LogDialog"));
+
+
+		}
+
+
+		private void OnDialogClosing((string, CancelEventArgs) obj)
+		{
+		}
 	}
 }

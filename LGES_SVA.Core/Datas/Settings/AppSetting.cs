@@ -1,5 +1,6 @@
 ﻿using LGES_SVA.Core.Datas.Settings.Enums;
 using LGES_SVA.Core.Enums;
+using LGES_SVA.Core.Enums.Login;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Prism.Mvvm;
@@ -13,8 +14,8 @@ namespace LGES_SVA.Core.Datas.Settings
         private WindowSetting _windowSetting = new WindowSetting();
 
         // Login 관련
-        private EUserLevelType _userLevel = EUserLevelType.None;
-        private Dictionary<EUserLevelType, string> _user;
+        private ELevel _userLevel = ELevel.None;
+        private Dictionary<ELevel, string> _user;
 
         // AppSetting 관련
         private string _inspectionName = "Inspection Name";
@@ -38,17 +39,6 @@ namespace LGES_SVA.Core.Datas.Settings
         /// </summary>
         public string InspectionName { get => _inspectionName; set => SetProperty(ref _inspectionName, value); }
 
-
-        /// <summary>
-        /// 사용자 레벨(권한) -> Json으로 저장하지 않음
-        /// </summary>
-        [JsonIgnore]
-        public EUserLevelType NowUserLevel { get => _userLevel; set => SetProperty(ref _userLevel, value); }
-
-        /// <summary>
-        /// User DB
-        /// </summary>
-        public Dictionary<EUserLevelType, string> User { get => _user; set => SetProperty(ref _user, value); }
 
         /// <summary>
         /// 2. 검사 모드
@@ -99,7 +89,6 @@ namespace LGES_SVA.Core.Datas.Settings
 
         public AppSetting()
         {
-            User = new Dictionary<EUserLevelType, string> { { EUserLevelType.Operator, "1234" }, { EUserLevelType.Engineer, "1234" } };
             OriginalImageSave = new ImageSaveData();
             OverlayImageSave = new ImageSaveData();
 

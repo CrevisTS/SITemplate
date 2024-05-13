@@ -3,6 +3,7 @@ using Prism.Events;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,10 @@ namespace LGES_SVA.Dialogs.Live.ViewModels
 
 		public event Action<IDialogResult> RequestClose;
 
-		public bool CanCloseDialog()
+		public bool CanCloseDialog() => true;
+
+		private void OnDialogClosing((string, CancelEventArgs) obj)
 		{
-			return true;
 		}
 
 		public void OnDialogClosed()
@@ -33,16 +35,25 @@ namespace LGES_SVA.Dialogs.Live.ViewModels
 		public void OnDialogOpened(IDialogParameters parameters)
 		{
 		}
-		#endregion
 
+		
+		#endregion
 		private IEventAggregator _eventAggregator;
 
 		public LiveViewModel(IEventAggregator eventAggregator)
 		{
-			_eventAggregator = eventAggregator;
-			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => OnDialogClosed());
-
+			try
+			{
+				_eventAggregator = eventAggregator;
+				_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => OnDialogClosed());
+				_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("LiveDialog"));
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
+		
 	}
 }

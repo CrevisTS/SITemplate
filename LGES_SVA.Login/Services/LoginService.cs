@@ -1,8 +1,11 @@
-﻿using LGES_SVA.Core.Enums;
+﻿using LGES_SVA.Core.Datas.Login;
+using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Core.Utils;
 using Prism.Events;
 using Prism.Mvvm;
+using System.Collections.Generic;
 using System.Timers;
 
 namespace LGES_SVA.Login.Services
@@ -11,65 +14,52 @@ namespace LGES_SVA.Login.Services
 	{
 		private readonly ISettingRepository _settingRepository;
 		private readonly IEventAggregator _eventAggregator;
+		private readonly CSVParser _csvParser;
+		private readonly string USER_PATH = $@"D:\DAT\User.csv";
+
 		// 300000 = 5분
-		private const int MINUTE5 = 5000;
+		private const int MINUTE5 = 300000;
 
 		private Timer _autoLogoutTimer;
 
-		private EUserLevelType _selectedUserLevel;
-		public EUserLevelType SelectedUserLevel { get => _selectedUserLevel; set => SetProperty(ref _selectedUserLevel, value); }
+		private List<User> _users;
 
 		/// <summary>
-		/// Login 상태 확이
+		/// 현재 로그인 중인지 확인한다. True = 로그인 / False = 로그아웃
 		/// </summary>
 		public bool IsLogin { get; set; } = false;
 
-		public LoginService(ISettingRepository settingRepository, IEventAggregator eventAggregator)
+		public LoginService(ISettingRepository settingRepository, IEventAggregator eventAggregator, CSVParser csvParser)
 		{
 			_settingRepository = settingRepository;
 			_eventAggregator = eventAggregator;
 
-			// 초기 선택을 Operator로 변경
-			SelectedUserLevel = EUserLevelType.Operator;
+			_csvParser = csvParser;
+			_users = _csvParser.ReadCSV<User>(USER_PATH);
 
 			// Mouse Move Event 구독
 			_eventAggregator.GetEvent<MouseMoveEvent>().Subscribe(() => MouseMove());
 		}
 
-		public bool Login(string obj)
+		public bool Login(string id, string pw)
 		{
-			switch(SelectedUserLevel)
+			for(int i = 0; i < _users.Count; i++)
 			{
-				case EUserLevelType.Operator:
+				if(_users[i].ID.Equals(id) && _users[i].Password.Equals(pw))
+				{
+					_settingRepository.NowUser = _users[i];
+					IsLogin = true;
+					AutoLogoutStart();
 
-					if (_settingRepository.AppSetting.User[EUserLevelType.Operator] == obj)
-					{
-						_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Operator;
-						IsLogin = true;
-						AutoLogoutStart();
-						return true;
-					}
-					break;
-
-				case EUserLevelType.Engineer:
-					if (_settingRepository.AppSetting.User[EUserLevelType.Engineer] == obj)
-					{
-						_settingRepository.AppSetting.NowUserLevel = EUserLevelType.Engineer;
-						IsLogin = true;
-						AutoLogoutStart();
-						return true;
-					}
-					break;
-				case EUserLevelType.None:
-				default:
-					break;
+					return true;
+				}
 			}
 			return false;
 		}
 
 		public void Logout()
 		{
-			_settingRepository.AppSetting.NowUserLevel = EUserLevelType.None;
+			//_settingRepository.AppSetting.NowUserLevel = EUserLevelType.None;
 			IsLogin = false;
 
 			_eventAggregator.GetEvent<LogoutEvent>().Publish();

@@ -1,6 +1,8 @@
 ﻿using CvsService.Core.Interfaces;
+using LGES_SVA.Core.Datas.Login;
 using LGES_SVA.Core.Datas.Settings;
 using LGES_SVA.Core.Datas.Settings.VisionPro;
+using LGES_SVA.Core.Enums.Login;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Core.Utils;
 using Prism.Mvvm;
@@ -19,10 +21,13 @@ namespace LGES_SVA.Repository.Services
 
         private AppSetting _appSetting;
         private VisionProSetting _visionProSetting;
+        private User _nowUser;
+
 
         public AppSetting AppSetting { get => _appSetting; set => SetProperty(ref _appSetting, value); }
 
         public VisionProSetting VisionProSetting { get => _visionProSetting; set => SetProperty(ref _visionProSetting, value); }
+        public User NowUser { get => _nowUser; set => SetProperty(ref _nowUser, value); }
         public bool IsInit => true;
 
 		public SettingRepository()
@@ -33,6 +38,7 @@ namespace LGES_SVA.Repository.Services
 
             AppSetting = new AppSetting();
             VisionProSetting = new VisionProSetting();
+            NowUser = new User(ELevel.None);
 
         }
 
