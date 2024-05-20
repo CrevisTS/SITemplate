@@ -7,6 +7,7 @@ using CvsService.Log.Write.Models;
 using CvsService.Log.Write.Services;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
+using LGES_SVA.Core.Interfaces.Communicate;
 using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Recipe.Services;
@@ -27,6 +28,7 @@ namespace LGES_SVA.Splash.Bootstrappers
 
         private readonly Lazy<IDisposeManager> _lazyDisposeManager;
         private readonly Lazy<ISettingRepository> _lazySettingRepo;
+        private readonly Lazy<ICommunicateRepository> _lazyCommunicateRepo;
         private readonly Lazy<IVisionProService> _visionProService;
 
 
@@ -35,11 +37,12 @@ namespace LGES_SVA.Splash.Bootstrappers
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;
         public event EventHandler WindowLoadedCompleted;
 
-        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<IVisionProService> visionProService)
+        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<IVisionProService> visionProService, Lazy<ICommunicateRepository> lazyCommunicateRepo)
         {
             _lazyDisposeManager = lazyDisposeManager;
             _lazySettingRepo = lazySettingRepo;
             _visionProService = visionProService;
+            _lazyCommunicateRepo = lazyCommunicateRepo;
         }
 
         public Task InitializeAsync()
@@ -54,6 +57,8 @@ namespace LGES_SVA.Splash.Bootstrappers
 
                 // TODO : Prism Singleton 초기화 하는 부분.
                 _ = LazyInstanceInit(_lazySettingRepo, "Setting", 50);
+
+                _ = LazyInstanceInit(_lazyCommunicateRepo, "Comunicate", 70);
                 //Thread.Sleep(1000); // UI 보기위함
 
                 // VisionPro

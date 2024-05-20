@@ -1,4 +1,5 @@
 ﻿using LGES_SVA.Core.Interfaces;
+using LGES_SVA.Core.Interfaces.Communicate;
 using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Inspection.Services;
@@ -29,10 +30,11 @@ namespace LGES_SVA.Settings
             */
 
             // TODO : Prism Singleton 선언 하는 부분
-            _ = containerRegistry.RegisterSingleton<IAppBootstrapper, AppBootstrapper>();
-            _ = containerRegistry.RegisterSingleton<IInspectionManager, InspectionManager>();
-            _ = containerRegistry.RegisterSingleton<IDisposeManager, DisposeManager>();
-            _ = containerRegistry.RegisterSingleton<ISettingRepository, SettingRepository>();
+            containerRegistry.RegisterSingleton<IAppBootstrapper, AppBootstrapper>();
+            containerRegistry.RegisterSingleton<IInspectionManager, InspectionManager>();
+            containerRegistry.RegisterSingleton<IDisposeManager, DisposeManager>();
+            containerRegistry.RegisterSingleton<ISettingRepository, SettingRepository>();
+            containerRegistry.RegisterSingleton<ICommunicateRepository, CommunicateRepository>();
 
             containerRegistry.RegisterSingleton<IVisionProService, VisionProService>();
 

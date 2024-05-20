@@ -36,11 +36,6 @@ namespace LGES_SVA.VisionPro.Services
 			_settingRepository = settingRepository;
 		}
 
-		public void Init()
-		{
-			
-		}
-
 		public CogToolBlock Load(string path)
 		{
 			try

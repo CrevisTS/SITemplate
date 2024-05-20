@@ -9,6 +9,7 @@ namespace LGES_SVA.Core.Interfaces.Settings
         AppSetting AppSetting { get; set; }
         VisionProSetting VisionProSetting { get; set; }
         User NowUser { get; set; }
+
         void LoadSetting();
         void SaveSetting();
 

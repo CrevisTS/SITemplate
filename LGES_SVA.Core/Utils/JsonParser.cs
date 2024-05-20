@@ -40,5 +40,11 @@ namespace LGES_SVA.Core.Utils
 				return new T();
 			}
 		}
+
+		public static T DeepCopy<T>(object json)
+		{
+			string serial = JsonConvert.SerializeObject(json);
+			return JsonConvert.DeserializeObject<T>(serial);
+		}
 	}
 }

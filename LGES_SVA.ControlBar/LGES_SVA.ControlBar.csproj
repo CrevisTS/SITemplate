@@ -79,6 +79,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BoolToColorFillConverter.cs" />
     <Compile Include="Converters\InspectionStatusToBtnTextConverter.cs" />
     <Compile Include="Converters\InspectionStatutsToBtnBackgroundConverter.cs" />
     <Compile Include="Converters\LoginIconConverter.cs" />

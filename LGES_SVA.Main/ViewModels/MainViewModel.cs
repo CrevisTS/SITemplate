@@ -72,6 +72,7 @@ namespace LGES_SVA.Main.ViewModels
                 e.Cancel = true;
                 return;
             }
+
             _eventAggregator.GetEvent<MainWindowClosingEvent>().Publish();
         }
         private void OnClosed()

@@ -9,7 +9,7 @@
 			 xmlns:localConveter="clr-namespace:LGES_SVA.Dialogs.Setting.Converter"
 			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
-             Height="550" Width="800" Background="#292E42" >
+             Height="570" Width="820" Background="#292E42" >
 	<prism:Dialog.WindowStyle>
 		<Style TargetType="Window">
 			<Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
@@ -28,6 +28,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Dialogs/DialogStyle.xaml"/>
 				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/ComboBoxTemplate.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/CloseButtonTemplate.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -48,12 +49,18 @@
 
 		<Grid Grid.Row="0">
 			<Label Style="{StaticResource Title_Label}" Content="Setting" />
+			<Button x:Name="Close_Button" Width="30" Height="30" Template="{StaticResource ResourceKey=CloseButtonTemplate}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}" HorizontalAlignment="Right">
+				<Canvas>
+					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="0" X2="18" Y2="18" Canvas.Left="-9" Canvas.Top="-9"/>
+					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="18" X2="18" Y2="0" Canvas.Left="-9" Canvas.Top="-9"/>
+				</Canvas>
+			</Button>
 		</Grid>
 		
 		<!-- 검사기 이름-->
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -68,7 +75,7 @@
         <!-- 검사기 수동 판정 모드 -->
 		<Grid Grid.Row="2">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -77,35 +84,16 @@
 			</Border>
 			<Border Grid.Column="1" Margin="-1 -1 0 0">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<RadioButton Content="Auto" GroupName="InspectionMode" IsChecked="{Binding AppSettingClone.InspectionMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EInspectionMode.Auto}}"   Foreground="White" Margin="10 0 0 0"/>
-					<RadioButton Content="Manual" GroupName="InspectionMode" IsChecked="{Binding AppSettingClone.InspectionMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EInspectionMode.Manual}}" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="Auto" GroupName="InspectionMode" IsChecked="{Binding AppSettingClone.InspectionMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EInspectionMode.Auto}}"/>
+					<RadioButton Content="Manual" GroupName="InspectionMode" IsChecked="{Binding AppSettingClone.InspectionMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EInspectionMode.Manual}}"/>
 				</StackPanel>
 			</Border>
 		</Grid>
-		
-		<!-- ROS 사용 여부 
-		<Grid Grid.Row="3">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-
-			<Border Grid.Column="0">
-				<Label Content="3. ROS Mode" Style="{StaticResource Menu_Label}"/>
-			</Border>
-			<Border Grid.Column="1">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<RadioButton Content="Non" GroupName="ROSMode" IsChecked="{Binding AppSettingClone.ROSMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EROSMode.Non}}" Foreground="White" Margin="10 0 0 0"/>
-					<RadioButton Content="NG 코드 별 Check Box" GroupName="ROSMode" IsChecked="{Binding AppSettingClone.ROSMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EROSMode.Check}}" Foreground="White" Margin="10 0 0 0"/>
-				</StackPanel>
-			</Border>
-		</Grid>
-		-->
 		
 		<!-- ByPass 모드 -->
 		<Grid Grid.Row="3">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -114,15 +102,15 @@
 			</Border>
 			<Border Grid.Column="1" Margin="-1 -1 0 0">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<RadioButton Content="Non" GroupName="ByPassMode" IsChecked="{Binding AppSettingClone.ByPassMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EByPassMode.Non}}" Foreground="White" Margin="10 0 0 0"/>
-					<RadioButton Content="NG 코드 별 Check Box" GroupName="ByPassMode" IsChecked="{Binding AppSettingClone.ByPassMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EByPassMode.Check}}"  Foreground="White" Margin="10 0 0 0"/>
+					<CheckBox Content="Pouch Angle" IsChecked="{Binding AppSettingClone.ByPassMode.IsByPass_PouchAngle}" Foreground="White" Margin="10 0 0 0"/>
+					<CheckBox Content="Align Result" IsChecked="{Binding AppSettingClone.ByPassMode.IsByPass_AlignResult}" Foreground="White" Margin="10 0 0 0"/>
 				</StackPanel>
 			</Border>
 		</Grid>
 		    <!-- 데이터 저장 확장자 및 압축률 -->
 		<Grid Grid.Row="4">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -139,26 +127,26 @@
 				<!-- Original -->
 				<Border Grid.Row="0" Margin="-1 -1 0 0">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<TextBlock Text="Original Image / " Style="{StaticResource Content_TextBlock}"/>
-						<TextBlock Text="Save Type : " Style="{StaticResource Content_TextBlock}"/>
+						<TextBlock Text="Original Image / "/>
+						<TextBlock Text="Save Type : "/>
 						<ComboBox Width="60" Style="{StaticResource LGES_ComboBoxStyle}" ItemsSource="{Binding AppSettingClone.OriginalImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Type}"/>
 
-						<TextBlock Text=" Rate : " Style="{StaticResource Content_TextBlock}"/>
-						<ComboBox Width="50" ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OriginalImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OriginalImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>
-						<TextBlock Text=" %" Style="{StaticResource Content_TextBlock}"/>
+						<TextBlock Text=" Rate : "/>
+						<ComboBox Width="50" Style="{StaticResource LGES_ComboBoxStyle}"  ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OriginalImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OriginalImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OriginalImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>
+						<TextBlock Text=" %"/>
 					</StackPanel>
 				</Border>
 
 				<!-- Overlay -->
 				<Border Grid.Row="1" Margin="-1 -1 0 0">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<TextBlock Text="Overlay Image / " Style="{StaticResource Content_TextBlock}"/>
-						<TextBlock Text="Save Type : " Style="{StaticResource Content_TextBlock}"/>
-						<ComboBox Width="60" ItemsSource="{Binding AppSettingClone.OverlayImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Type}" />
+						<TextBlock Text="Overlay Image / "/>
+						<TextBlock Text="Save Type : "/>
+						<ComboBox Width="60" Style="{StaticResource LGES_ComboBoxStyle}" ItemsSource="{Binding AppSettingClone.OverlayImageSave.TypeArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Type}" />
 
-						<TextBlock Text=" Rate : " Style="{StaticResource Content_TextBlock}"/>
-						<ComboBox Width="50" ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OverlayImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OverlayImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>
-						<TextBlock Text=" %" Style="{StaticResource Content_TextBlock}"/>
+						<TextBlock Text=" Rate : "/>
+						<ComboBox Width="50" Style="{StaticResource LGES_ComboBoxStyle}" ToolTip="100%에 가까울 수록 압축률이 높음" ItemsSource="{Binding AppSettingClone.OverlayImageSave.RateArray}" SelectedItem="{Binding AppSettingClone.OverlayImageSave.Rate}" IsEnabled="{Binding AppSettingClone.OverlayImageSave.Type, Converter={StaticResource ValueToDisable_Converter}}"/>
+						<TextBlock Text=" %" />
 
 					</StackPanel>
 				</Border>
@@ -168,7 +156,7 @@
 		<!-- 데이터 보관 기간 설정 -->
 		<Grid Grid.Row="5">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -179,9 +167,9 @@
 			<Grid Grid.Column="1">
 				<Border Margin="-1 -1 0 0">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<TextBlock Text="Image Delete Period : " Style="{StaticResource Content_TextBlock}"/>
-						<ComboBox Width="50" ItemsSource="{Binding AppSettingClone.ImageDeletePeriodArray}" SelectedItem="{Binding AppSettingClone.ImageDeletePeriod}" />
-						<TextBlock Text=" Month" Style="{StaticResource Content_TextBlock}"/>
+						<TextBlock Text="Image Delete Period : "/>
+						<ComboBox Width="50" Style="{StaticResource LGES_ComboBoxStyle}" ItemsSource="{Binding AppSettingClone.ImageDeletePeriodArray}" SelectedItem="{Binding AppSettingClone.ImageDeletePeriod}" />
+						<TextBlock Text=" Months"/>
 					</StackPanel>
 				</Border>
 			</Grid>
@@ -189,7 +177,7 @@
 		<!-- 검사기 알람 기능 설정 조건 -->
 		<Grid Grid.Row="6">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -200,8 +188,8 @@
 			<Grid Grid.Column="1">
 				<Border Margin="-1 -1 0 0">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<TextBlock Text="Continues NG Count : " Style="{StaticResource Content_TextBlock}"/>
-						<ComboBox Width="50" ItemsSource="{Binding AppSettingClone.NGCountArray}" SelectedItem="{Binding AppSettingClone.NGCount}" />
+						<TextBlock Text="Continues NG Count : "/>
+						<ComboBox Width="50" Style="{StaticResource LGES_ComboBoxStyle}" ItemsSource="{Binding AppSettingClone.NGCountArray}" SelectedItem="{Binding AppSettingClone.NGCount}" />
 					</StackPanel>
 				</Border>
 			</Grid>
@@ -209,7 +197,7 @@
 			<!-- 집계 데이터 리셋 시간 조건 설정 -->
 		<Grid Grid.Row="7">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -220,7 +208,8 @@
 			<Grid Grid.Column="1" Margin="-1 -1 0 0">
 				<Border>
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-						<ComboBox Width="100" ItemsSource="{Binding AppSettingClone.ResetTimeArray}" SelectedItem="{Binding AppSettingClone.ResetTime}" />
+						<ComboBox Width="100" Style="{StaticResource LGES_ComboBoxStyle}" ItemsSource="{Binding AppSettingClone.ResetTimeArray}" SelectedItem="{Binding AppSettingClone.ResetTime}" />
+						<TextBlock Text=" O'Clock"/>
 					</StackPanel>
 				</Border>
 			</Grid>
@@ -229,7 +218,7 @@
 		<!-- 검사기 검증 모드 -->
 		<Grid Grid.Row="8">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -239,8 +228,8 @@
 
 			<Border Grid.Column="1" Margin="-1 -1 0 0">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0 0 0">
-					<RadioButton Content="ON" GroupName="MasterSampleMode"  IsChecked="{Binding AppSettingClone.MasterSampleMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EMasterSampleMode.ON}}" Foreground="White" Margin="10 0 0 0"/>
-					<RadioButton Content="OFF" GroupName="MasterSampleMode" IsChecked="{Binding AppSettingClone.MasterSampleMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EMasterSampleMode.OFF}}" Foreground="White" Margin="10 0 0 0"/>
+					<RadioButton Content="ON" GroupName="MasterSampleMode"  IsChecked="{Binding AppSettingClone.MasterSampleMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EMasterSampleMode.ON}}"/>
+					<RadioButton Content="OFF" GroupName="MasterSampleMode" IsChecked="{Binding AppSettingClone.MasterSampleMode, Converter={StaticResource RadioEnum_Converter}, ConverterParameter={x:Static settingDatas:EMasterSampleMode.OFF}}"/>
 				</StackPanel>
 			</Border>
 		</Grid>
@@ -254,8 +243,7 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 
-			<Button Grid.Column="2" Margin="5" Content="Save" Command="{Binding SaveCommand}"/>
-			<Button Grid.Column="3" Margin="5" Content="Cancel" Command="{Binding CancelCommand}"/>
+			<Button Grid.Column="3" Margin="5" Content="Save" Command="{Binding SaveCommand}"/>
 		</Grid>
 	</Grid>
 </UserControl>

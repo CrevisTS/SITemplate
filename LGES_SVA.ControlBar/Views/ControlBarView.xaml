@@ -19,6 +19,8 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Regions/RegionStyle.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Regions/ComunicateStyle.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/MinimizeButtonTemplate.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			<coreConverter:ToStringEqualCheckConverter x:Key="ToStringEqualCheckConverter"/>
 			<coreConverter:ToStringEqualToOpacityConverter x:Key="ToStringEqualToOpacityConverter"/>
@@ -32,6 +34,7 @@
 			<localConverter:SearchIconConverter x:Key="SearchIconConverter"/>
 			<localConverter:LiveIconConverter x:Key="LiveIconConverter"/>
 			<localConverter:SettingIconConverter x:Key="SettingIconConverter"/>
+			<localConverter:BoolToColorFillConverter x:Key="BoolToColorFillConverter"/>
 			
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -161,29 +164,41 @@
 				</Button>
 				<!-- Comunication Icons-->
 				<Grid
-                    Grid.Column="1"
+                    Grid.Column="7"
                     HorizontalAlignment="Right">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="60"/>
-						<ColumnDefinition Width="60"/>
-						<ColumnDefinition Width="60"/>
-						<ColumnDefinition Width="60"/>
-					</Grid.ColumnDefinitions>
 
-					<!-- PLC 
-                    <cvsCustomContorl:IsConnectedButton
-                        Grid.Column="0"
-                        ConnectionMonitor="{Binding PLCConnection}"/>
-					
-                    <cvsCustomContorl:IsConnectedButton
-                        Grid.Column="1"
-                        ConnectionMonitor="{Binding IOConnection}"/>
-
-					<cvsCustomContorl:IsConnectedButton
-                        Grid.Column="2"
-                        ConnectionMonitor="{Binding CameraConnection}"/>
-					-->
-
+					<StackPanel Orientation="Horizontal">
+						<Button x:Name="PLC_Button" Padding="-1" Template="{StaticResource MinimizeButton}" Style="{StaticResource NaviBarButton}" Width="70">
+							<StackPanel Style="{StaticResource LightIndicator}">
+								<TextBlock Text="PLC" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>
+								<Ellipse Width="30" Height="30" Fill="{Binding ComunicateRepository.PLC.IsConnected, Converter={StaticResource BoolToColorFillConverter}}"/>
+							</StackPanel>
+						</Button>
+						<Button x:Name="IO_Button"  Padding="-1" Template="{StaticResource MinimizeButton}" Style="{StaticResource NaviBarButton}" Width="70">
+							<StackPanel Style="{StaticResource LightIndicator}">
+								<TextBlock Text="IO" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>
+								<Ellipse Width="30" Height="30" Fill="{Binding }"/>
+							</StackPanel>
+						</Button>
+						<Button x:Name="DB_Button"  Padding="-1" Template="{StaticResource MinimizeButton}" Style="{StaticResource NaviBarButton}" Width="70">
+							<StackPanel Style="{StaticResource LightIndicator}">
+								<TextBlock Text="DB" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>
+								<Ellipse Width="30" Height="30" Fill="{Binding}"/>
+							</StackPanel>
+						</Button>
+						<Button x:Name="Light_Button"  Padding="-1" Template="{StaticResource MinimizeButton}" Style="{StaticResource NaviBarButton}" Width="70">
+							<StackPanel Style="{StaticResource LightIndicator}">
+								<TextBlock Text="LIGHT" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>
+								<Ellipse Width="30" Height="30" Fill="{Binding}"/>
+							</StackPanel>
+						</Button>
+						<Button x:Name="Cam_Button"  Padding="-1" Template="{StaticResource MinimizeButton}" Style="{StaticResource NaviBarButton}" Width="70">
+							<StackPanel Style="{StaticResource LightIndicator}">
+								<TextBlock Text="CAM" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>
+								<Ellipse Width="30" Height="30" Fill="{Binding}"/>
+							</StackPanel>
+						</Button>
+					</StackPanel>
 				</Grid>
 			</Grid>
 

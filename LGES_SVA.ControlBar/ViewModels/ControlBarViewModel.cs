@@ -3,6 +3,7 @@ using LGES_SVA.Core.Datas;
 using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Core.Interfaces.Communicate;
 using LGES_SVA.Login.Services;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -13,24 +14,9 @@ using System.Windows.Input;
 
 namespace LGES_SVA.ControlBar.ViewModels
 {
-	/////////////////////////////////////////////////////////
-	// TODO : 연결 상태 표시 UI 예시용. 삭제 필요. 
-	public sealed class FakeConncetion : BindableBase, IConnectionMonitor
-    {
-        private string _name;
-        private bool _isConnected;
-        public string Name { get => _name; set => SetProperty(ref _name, value); }
-        public bool IsConnected { get => _isConnected; set => SetProperty(ref _isConnected, value); }
-	}
-    //////////////////////////////////////////////////////////
-
     public class ControlBarViewModel : BindableBase
     {
         #region Fields for property
-        private IConnectionMonitor _cameraConnection;
-        private IConnectionMonitor _ioConnection;
-        private IConnectionMonitor _PLCConnection;
-
         private EViewType _mainRegionContent = EViewType.InspectionView;
         #endregion
 
@@ -38,13 +24,13 @@ namespace LGES_SVA.ControlBar.ViewModels
         private readonly IInspectionManager _inspectionManager;
         private readonly IDialogService _dialogService;
         private ISettingRepository _settingRepository;
+        private ICommunicateRepository _communicateRepository;
+
         private LoginService _loginService;
 
         public IInspectionStateProvider InsepctionStateProvider => _inspectionManager;
         public ISettingRepository SettingRepository { get => _settingRepository; set => SetProperty(ref _settingRepository, value); }
-        public IConnectionMonitor CameraConnection { get => _cameraConnection; set => SetProperty(ref _cameraConnection, value); }
-        public IConnectionMonitor IOConnection { get => _ioConnection; set => SetProperty(ref _ioConnection, value); }
-        public IConnectionMonitor PLCConnection { get => _PLCConnection; set => SetProperty(ref _PLCConnection, value); }
+        public ICommunicateRepository ComunicateRepository { get => _communicateRepository; set => SetProperty(ref _communicateRepository, value); }
         public EViewType MainRegionContent { get => _mainRegionContent; set => SetProperty(ref _mainRegionContent, value); }
 
         // MainMenu 
@@ -58,18 +44,14 @@ namespace LGES_SVA.ControlBar.ViewModels
 		public ICommand MainRegionChangeClickCommand => new DelegateCommand<object>(OnMainRegionChangeClick);
         public ICommand BtnStartStopClickCommand => new DelegateCommand(OnBtnStartStopClick);
 
-        public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService)
+        public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService, ICommunicateRepository communicateRepository)
         {
             _regionManager = regionManager;
             _inspectionManager = inspectionManager;
             _dialogService = dialogService;
             _settingRepository = settingRepository;
             _loginService = loginService;
-
-            CameraConnection = new FakeConncetion() { Name = "Cam", IsConnected = true };
-            IOConnection = new FakeConncetion() { Name = "IO", IsConnected = false };
-            PLCConnection = new FakeConncetion() { Name = "PLC", IsConnected = true };
-
+            _communicateRepository = communicateRepository;
         }
         
         public void LoginToggleClick()

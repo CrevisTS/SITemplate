@@ -1,5 +1,5 @@
 ﻿using CvsService.UI.Windows.UI.Units;
-
+using System.Windows;
 namespace LGES_SVA.Main.Views
 {
     /// <summary>
@@ -10,6 +10,17 @@ namespace LGES_SVA.Main.Views
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+		private void Minimize_Button_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+            WindowState = WindowState.Minimized;
+		}
+
+		private void Maximize_Button_Click(object sender, RoutedEventArgs e)
+		{
+            WindowState = WindowState.Maximized;
+
         }
     }
 }

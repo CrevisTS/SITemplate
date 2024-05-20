@@ -1,9 +1,11 @@
 ﻿using LGES_SVA.Core.Datas.Settings.Enums;
 using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Enums.Login;
+using LGES_SVA.Core.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 
 namespace LGES_SVA.Core.Datas.Settings
@@ -13,17 +15,12 @@ namespace LGES_SVA.Core.Datas.Settings
         private string _programVersion = "v1.0.0";
         private WindowSetting _windowSetting = new WindowSetting();
 
-        // Login 관련
-        private ELevel _userLevel = ELevel.None;
-        private Dictionary<ELevel, string> _user;
-
         // AppSetting 관련
         private string _inspectionName = "Inspection Name";
         private int _NGCount;
         private int _imageDeletePeriod;
         private EInspectionMode _inspectionMode;
-        private EROSMode _ROSMode;
-        private EByPassMode _ByPassMode;
+        private ByPassMode _ByPassMode;
         private ImageSaveData _originalImageSave;
         private ImageSaveData _overlayImageSave;
 
@@ -47,16 +44,9 @@ namespace LGES_SVA.Core.Datas.Settings
         public EInspectionMode InspectionMode { get => _inspectionMode; set => SetProperty(ref _inspectionMode, value); }
         
         /// <summary>
-        /// 3. ROS 모드
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public EROSMode ROSMode { get => _ROSMode; set => SetProperty(ref _ROSMode, value); }
-
-        /// <summary>
         /// 4. ByPass 모드
         /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public EByPassMode ByPassMode { get => _ByPassMode; set => SetProperty(ref _ByPassMode, value); }
+        public ByPassMode ByPassMode { get => _ByPassMode; set => SetProperty(ref _ByPassMode, value); }
 
 		public ImageSaveData OriginalImageSave { get => _originalImageSave; set => SetProperty(ref _originalImageSave, value); }
         public ImageSaveData OverlayImageSave { get => _overlayImageSave; set => SetProperty(ref _overlayImageSave, value); }
@@ -91,15 +81,16 @@ namespace LGES_SVA.Core.Datas.Settings
         {
             OriginalImageSave = new ImageSaveData();
             OverlayImageSave = new ImageSaveData();
+            ByPassMode = new ByPassMode();
 
             ImageDeletePeriod = 6;
             NGCount = 5;
             ResetTime = "07:00";
         }
 
-        public object Clone()
+        public AppSetting Clone()
 		{
-            return MemberwiseClone();
+            return JsonParser.DeepCopy<AppSetting>(this);
 		}
     }
 

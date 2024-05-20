@@ -49,7 +49,7 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 		public SettingViewModel(ISettingRepository settingRepository, IEventAggregator eventAggregator)
 		{
 			_settingRepository = settingRepository;
-			AppSettingClone = _settingRepository.AppSetting.Clone() as AppSetting;
+			AppSettingClone = _settingRepository.AppSetting.Clone();
 
 			_eventAggregator = eventAggregator;
 			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());

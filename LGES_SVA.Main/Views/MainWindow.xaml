@@ -11,6 +11,7 @@
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:prism="http://prismlibrary.com/"
 	xmlns:viewModel="clr-namespace:LGES_SVA.Main.ViewModels"
+	xmlns:coreConverter="clr-namespace:LGES_SVA.Core.Converters;assembly=LGES_SVA.Core"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     WindowStyle="None"
@@ -18,6 +19,17 @@
 	d:DataContext="{d:DesignInstance Type=viewModel:MainViewModel, IsDesignTimeCreatable=False}"
     Theme="LGES"
     Title="MainWindow" Height="1080" Width="1920" Background="#292E42">
+
+	<Window.Resources>
+		<ResourceDictionary>
+			<coreConverter:BoolToVisibility_Converter x:Key="BoolToVisibility_Converter"/>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/CloseButtonTemplate.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/MaximizeButtonTemplate.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/MinimizeButtonTemplate.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
 	<!-- Theme를 None으로 설정하면 일반 Window로 적용됨 -->
 	<b:Interaction.Triggers>
 		<b:EventTrigger EventName="Loaded">
@@ -116,9 +128,28 @@
                 Orientation="Horizontal"
                 HorizontalAlignment="Right">
 					<StackPanel Orientation="Horizontal">
-						<cvsControl:MinimizeButton Width="30" Height="30" Margin="10 9 5 10"/>
-						<cvsControl:RestoreMaximizeButton Width="30" Height="30" Margin="5 9 5 10"/>
-						<cvsControl:ExitButton Width="30" Height="30" Margin="5 10 10 10"/>
+						<Button x:Name="Minimize_Button" Width="50" Height="50" Template="{StaticResource ResourceKey=MinimizeButton}" Style="{StaticResource CloseButton}" Click="Minimize_Button_Click">
+							<Canvas>
+								<Line X1="-18" Y1="0" X2="18" Y2="0" Stroke="White" StrokeThickness="5"/>
+							</Canvas>
+						</Button>
+						<Button x:Name="Maximize_Button" Width="50" Height="50" Template="{StaticResource ResourceKey=MaximizeButton}" Style="{StaticResource CloseButton}" Click="Maximize_Button_Click">
+							<Canvas>
+								<Rectangle Stroke="White" StrokeThickness="3" Width="34" Height="30" Canvas.Left="-17" Canvas.Top="-14"/>
+								<Line Stroke="White" StrokeThickness="8" X1="0" Y1="0" X2="34" Y2="0" Canvas.Left="-17" Canvas.Top="-11"/>
+							</Canvas>
+						</Button>
+						<Button x:Name="Close_Button" Width="50" Height="50" Template="{StaticResource ResourceKey=CloseButtonTemplate}" Style="{StaticResource CloseButton}" Margin="0,-2,0,3">
+							<b:Interaction.Triggers>
+								<b:EventTrigger EventName="Click">
+									<b:CallMethodAction MethodName="Close" TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+								</b:EventTrigger>
+							</b:Interaction.Triggers>
+							<Canvas>
+								<Line Stroke="White" StrokeThickness="4" X1="0" Y1="0" X2="26" Y2="26" Canvas.Left="-13" Canvas.Top="-13"/>
+								<Line Stroke="White" StrokeThickness="4" X1="0" Y1="26" X2="26" Y2="0" Canvas.Left="-13" Canvas.Top="-13"/>
+							</Canvas>
+						</Button>
 					</StackPanel>
 				</StackPanel>
 			</Grid>
@@ -153,7 +184,18 @@
 
 			<!-- Program State -->
 			<Border Grid.Row="3">
-				<Label Background="Aquamarine" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize=" 40" Content="RUN"/>
+				<Grid>
+					<Label Background="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize=" 40" Content="STOPPED"/>
+
+					<Grid Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="AlignResult" Foreground="White" Visibility="{Binding SettingRepository.AppSetting.ByPassMode.IsByPass_AlignResult, Converter={StaticResource BoolToVisibility_Converter}}"/>
+							<TextBlock Text=" " Foreground="White" Visibility="Visible"/>
+							<TextBlock Text="PouchAngle" Foreground="White" Visibility="{Binding SettingRepository.AppSetting.ByPassMode.IsByPass_PouchAngle, Converter={StaticResource BoolToVisibility_Converter}}"/>
+						</StackPanel>
+					</Grid>
+					
+				</Grid>
 			</Border>
 
 			<!-- Model ID, Recipe ID -->

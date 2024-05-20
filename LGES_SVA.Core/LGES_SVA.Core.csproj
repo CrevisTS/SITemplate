@@ -64,16 +64,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BoolToVisibility_Converter.cs" />
     <Compile Include="Converters\ToStringEqualCheckConverter.cs" />
+    <Compile Include="Datas\Comunicate\PLC\PLC.cs" />
     <Compile Include="Datas\DialogNames.cs" />
     <Compile Include="Datas\Login\User.cs" />
     <Compile Include="Datas\RegionNames.cs" />
     <Compile Include="Datas\Settings\AlarmConfigurationData.cs" />
     <Compile Include="Datas\Settings\AppSetting.cs" />
+    <Compile Include="Datas\Settings\ByPassMode.cs" />
     <Compile Include="Datas\Settings\Enums\AutoDeleteImageData.cs" />
     <Compile Include="Datas\Settings\Enums\EMasterSampleMode.cs" />
     <Compile Include="Datas\Settings\ImageSaveData.cs" />
-    <Compile Include="Datas\Settings\Enums\EByPassMode.cs" />
     <Compile Include="Datas\Settings\Enums\EImageType.cs" />
     <Compile Include="Datas\Settings\Enums\EInspectionMode.cs" />
     <Compile Include="Datas\Settings\Enums\EROSMode.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Events\MouseMoveEvent.cs" />
     <Compile Include="Events\ProgressMessageEventArgs.cs" />
     <Compile Include="Interfaces\Bootstrappers\IAppBootstrapper.cs" />
+    <Compile Include="Interfaces\Communicate\ICommunicateRepository.cs" />
     <Compile Include="Interfaces\Disposes\IDisposeManager.cs" />
     <Compile Include="Interfaces\Inspections\IInspectionManager.cs" />
     <Compile Include="Interfaces\Inspections\IInspectionStarter.cs" />

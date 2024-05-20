@@ -24,8 +24,6 @@ namespace LGES_SVA.Dialogs.Setting.Views
 		public SettingDialog()
 		{
 			InitializeComponent();
-			//CustomWindow.MergeThemeToUserControl(this, CvsService.UI.Windows.Enums.EWindowTheme.LGES);
-
 		}
 	}
 }
