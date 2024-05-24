@@ -25,9 +25,6 @@
 		<b:KeyTrigger Key="Return" FiredOn="KeyDown">
 			<b:CallMethodAction TargetObject="{Binding}" MethodName="EnterDown"/>
 		</b:KeyTrigger>
-		<b:KeyTrigger Key="Esc" FiredOn="KeyDown">
-			<b:CallMethodAction TargetObject="{Binding}" MethodName="OnDialogClosed" />
-		</b:KeyTrigger>
 	</b:Interaction.Triggers>
 
 	<Grid>
@@ -49,7 +46,7 @@
 
 		<Grid Grid.Row="1">
 			<Button Content="LOGIN" HorizontalAlignment="Left" Command="{Binding LoginBtnClickCommand}" Margin="50,0,0,0" VerticalAlignment="Top" Height="66" Width="130" Background="#FF47527F" BorderBrush="#FF47527F"/>
-			<Button Content="CANCEL" HorizontalAlignment="Left" Margin="220,0,0,0" VerticalAlignment="Top" Background="#FF47527F" Height="66" Width="130" BorderBrush="#FF47527F"/>
+			<Button Content="CANCEL" HorizontalAlignment="Left" Command="{Binding CancelBtnClickCommand}" Margin="220,0,0,0" VerticalAlignment="Top" Background="#FF47527F" Height="66" Width="130" BorderBrush="#FF47527F"/>
 		</Grid>
 
 	</Grid>

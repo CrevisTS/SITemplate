@@ -172,6 +172,10 @@
       <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
       <Name>LGES_SVA.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Dialogs.IO\LGES_SVA.Dialogs.IO.csproj">
+      <Project>{7DD70C7D-1252-4F16-A917-A8EBC7571E46}</Project>
+      <Name>LGES_SVA.Dialogs.IO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Dialogs.Live\LGES_SVA.Dialogs.Live.csproj">
       <Project>{30C1AD99-ECCB-44A3-AE42-A6E4F86C9D83}</Project>
       <Name>LGES_SVA.Dialogs.Live</Name>

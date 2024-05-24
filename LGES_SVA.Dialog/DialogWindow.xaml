@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LGES_SVA.Dialog"
         mc:Ignorable="d"
-        Title="DialogWindow" WindowStyle="None" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="DialogWindow" WindowStyle="None" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Background="#292E42">
     <Grid>
         
     </Grid>

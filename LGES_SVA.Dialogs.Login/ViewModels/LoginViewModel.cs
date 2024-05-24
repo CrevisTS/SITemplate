@@ -26,6 +26,9 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 
 		public LoginService LoginService { get => _loginService; set => SetProperty(ref _loginService, value); }
 		public ICommand LoginBtnClickCommand => new DelegateCommand(OnLoginBtnClick);
+		public ICommand CancelBtnClickCommand => new DelegateCommand(OnCancel);
+
+		
 
 		/// <summary>
 		/// View에서 Enter KeyDown
@@ -53,6 +56,11 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 				MessageBox.Show("비밀번호가 다릅니다.");
 				Password = "";
 			}
+		}
+
+		private void OnCancel()
+		{
+			RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
 		}
 
 		#region DialogAware

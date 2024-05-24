@@ -41,10 +41,11 @@ namespace LGES_SVA.ControlBar.ViewModels
         public ICommand SearchBtnClickCommand => new DelegateCommand(SearchClick);
         public ICommand LiveBtnClickCommand => new DelegateCommand(LiveClick);
         public ICommand SettingBtnClickCommand => new DelegateCommand(SettingClick);
-		public ICommand MainRegionChangeClickCommand => new DelegateCommand<object>(OnMainRegionChangeClick);
-        public ICommand BtnStartStopClickCommand => new DelegateCommand(OnBtnStartStopClick);
 
-        public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService, ICommunicateRepository communicateRepository)
+        public ICommand IOBtnClickCommand => new DelegateCommand(IOClick);
+
+		
+		public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService, ICommunicateRepository communicateRepository)
         {
             _regionManager = regionManager;
             _inspectionManager = inspectionManager;
@@ -142,6 +143,12 @@ namespace LGES_SVA.ControlBar.ViewModels
             {
                 _dialogService.ShowDialog(DialogNames.SettingDialog);
             }
+        }
+
+        private void IOClick()
+        {
+            _dialogService.ShowDialog(DialogNames.IODialog);
+
         }
         private void OnMainRegionChangeClick(object parameter)
         {

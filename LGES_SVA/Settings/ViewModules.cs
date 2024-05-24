@@ -19,6 +19,8 @@ using LGES_SVA.Inspection.Views;
 using LGES_SVA.Regions.TabView.Views;
 using Prism.Ioc;
 using Prism.Modularity;
+using LGES_SVA.Dialogs.IO.Views;
+using LGES_SVA.Dialogs.IO.ViewModels;
 
 namespace LGES_SVA.Settings
 {
@@ -45,6 +47,8 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterDialog<SearchDialog, SearchViewModel>();
             containerRegistry.RegisterDialog<LiveDialog, LiveViewModel>();
             containerRegistry.RegisterDialog<SettingDialog, SettingViewModel>();
+            
+            containerRegistry.RegisterDialog<IODialog, IODialogViewModel>();
 
 
         }
