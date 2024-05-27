@@ -9,7 +9,7 @@ namespace LGES_SVA.Core.Interfaces.Modules.VisionPro
 {
 	public interface IVisionProService
 	{
-		CogToolBlock Load(string path);
+		object Load(string path);
 		void Save(object toolBlock, string path);
 	}
 }

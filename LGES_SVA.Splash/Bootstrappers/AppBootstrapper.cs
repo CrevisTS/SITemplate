@@ -31,7 +31,6 @@ namespace LGES_SVA.Splash.Bootstrappers
         private readonly Lazy<ICommunicateRepository> _lazyCommunicateRepo;
         private readonly Lazy<IVisionProService> _visionProService;
 
-
         public bool IsFail { get; private set; } = false;
 
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;

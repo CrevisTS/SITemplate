@@ -1,12 +1,10 @@
 ﻿using Cognex.VisionPro;
+using Cognex.VisionPro.CalibFix;
 using Cognex.VisionPro.ToolBlock;
 using CvsService.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LGES_SVA.VisionPro.Services
 {
@@ -15,13 +13,22 @@ namespace LGES_SVA.VisionPro.Services
 		private ISettingRepository _settingRepository;
 
 		/// <summary>
-		/// Cam1, Cam2 Cailbration
+		/// Cam1
 		/// </summary>
-		public CogToolBlock CailbrationTool1 { get; set; }
+		public CogCalibNPointToNPointTool CalibrationTool1 { get; set; }
 		/// <summary>
-		/// Cam3, Cam4 Cailbration
+		/// Cam2
 		/// </summary>
-		public CogToolBlock CailbrationTool2 { get; set; }
+		public CogCalibNPointToNPointTool CalibrationTool2 { get; set; }
+		/// <summary>
+		/// Cam3
+		/// </summary>
+		public CogCalibNPointToNPointTool CalibrationTool3 { get; set; }
+		/// <summary>
+		/// Cam4
+		/// </summary>
+		public CogCalibNPointToNPointTool CalibrationTool4 { get; set; }
+
 
 		/// <summary>
 		/// 검사를 위한 툴
@@ -36,11 +43,11 @@ namespace LGES_SVA.VisionPro.Services
 			_settingRepository = settingRepository;
 		}
 
-		public CogToolBlock Load(string path)
+		public object Load(string path)
 		{
 			try
 			{
-				return CogSerializer.LoadObjectFromFile(path) as CogToolBlock;
+				return CogSerializer.LoadObjectFromFile(path);
 			}
 			catch (Exception)
 			{
@@ -63,11 +70,8 @@ namespace LGES_SVA.VisionPro.Services
 
 		public void Initialize()
 		{
-			//if(_settingRepository.VisionProSetting.InspectionRecipe.Path != null)
-			//{
-			//	InspectTool1 = Load(_settingRepository.VisionProSetting.InspectionRecipe.Path);
-			//	InspectTool2 = Load(_settingRepository.VisionProSetting.InspectionRecipe.Path);
-			//}
+			CalibrationTool1 = Load(_settingRepository.VisionProSetting.Calibration1Path) as CogCalibNPointToNPointTool;
+			//InspectTool2 = Load(_settingRepository.VisionProSetting.InspectionRecipe.Path);
 		}
 	}
 }

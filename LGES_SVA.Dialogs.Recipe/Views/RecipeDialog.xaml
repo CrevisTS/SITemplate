@@ -25,6 +25,8 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Dialogs/DialogStyle.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/ComboBoxTemplate.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/CloseButtonTemplate.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -37,19 +39,19 @@
 		</Grid.RowDefinitions>
 
 		<!-- Title -->
-		<Border Grid.Row="0">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="1200"/>
-				</Grid.ColumnDefinitions>
-				<Label Grid.Column="0" Content="Recipe" Style="{StaticResource Title_Label}"/>
-			</Grid>
-				
-		</Border>
+		<Grid Grid.Row="0">
+			<Label Style="{StaticResource Title_Label}" Content="Recipe" />
+			<Button x:Name="Close_Button" Width="30" Height="30" Template="{StaticResource ResourceKey=CloseButtonTemplate}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}" HorizontalAlignment="Right">
+				<Canvas>
+					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="0" X2="18" Y2="18" Canvas.Left="-9" Canvas.Top="-9"/>
+					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="18" X2="18" Y2="0" Canvas.Left="-9" Canvas.Top="-9"/>
+				</Canvas>
+			</Button>
+		</Grid>
 		
 		<!-- 현재 레시피 -->
 		<Grid Grid.Row="1">
-			<TextBlock Text="{Binding RecipeService.NowRecipe.Name, StringFormat={}현재 레시피 : {0}}" Style="{StaticResource Content_TextBlock}"/>
+			<TextBlock Text="{Binding RecipeService.NowRecipe.Name, StringFormat={}현재 레시피 : {0}}"/>
 		</Grid>
 		
 		<!-- 레시피 조작 -->

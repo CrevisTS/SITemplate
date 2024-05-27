@@ -44,6 +44,13 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		{
 		}
 
+		private void OnCanceled()
+		{
+			Application.Current.Dispatcher.Invoke(() =>
+			{
+				RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
+			});
+		}
 		#endregion
 
 		private RecipeService _recipeService;
@@ -62,8 +69,8 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		public ICommand AddLeftImageCommand => new DelegateCommand(OnAddLeftImage);
 		public ICommand AddRightImageCommand => new DelegateCommand(OnAddRightImage);
 
+		public ICommand CancelCommand => new DelegateCommand(OnCanceled);
 
-		
 		public RecipeViewModel(RecipeService recipeService, ISettingRepository settingRepository, IVisionProService visionProService, IEventAggregator eventAggregator)
 		{
 			_recipeService = recipeService;
@@ -84,6 +91,8 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		private void OnDialogClosing((string, CancelEventArgs) obj)
 		{
 			// 현재 레시피가 있는지 확인
+			// TODO : -> 현재 레시피 확인 하지 않고, 검사 시작 때 확인하는게 좋아 보임
+			/*
 			if (_recipeService.NowRecipe == null)
 			{
 				MessageBox.Show("No recipe selected.");
@@ -92,6 +101,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 				return;
 			}
 
+			*/
 			var result = MessageBox.Show("저장하시겠습니까?", "Save", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
 			switch (result)
@@ -125,7 +135,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		public void ToolBlockWindowInit()
 		{
-			var toolBlockPath = _settingRepository.VisionProSetting.InspectionRecipe;
+			var toolBlockPath = _settingRepository.VisionProSetting.InspectionRecipe.Path;
 
 			// 현재 레시피가 없다면
 			if (toolBlockPath == null)
@@ -135,7 +145,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			// 현재 레시피가 있다면
 			else
 			{
-				var Toolblock = _visionProService.Load(_settingRepository.VisionProSetting.InspectionRecipe.Path);
+				var Toolblock = _visionProService.Load(_settingRepository.VisionProSetting.InspectionRecipe.Path) as CogToolBlock;
 				ToolBlockWindow.Subject = Toolblock;
 			}
 		}
