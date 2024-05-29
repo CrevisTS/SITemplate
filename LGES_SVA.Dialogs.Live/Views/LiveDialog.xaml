@@ -3,10 +3,49 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:prism="http://prismlibrary.com/"
+		xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Live.ViewModels"
         xmlns:local="clr-namespace:LGES_SVA.Dialogs.Live.Views"
+		d:DataContext="{d:DesignInstance Type=viewModel:LiveViewModel, IsDesignTimeCreatable=False}"
         mc:Ignorable="d"
-        Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Height="800" Width="1200" Background="#292E42" >
+	
+	
+	<prism:Dialog.WindowStyle>
+		<Style TargetType="Window">
+			<Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+			<Setter Property="ResizeMode" Value="NoResize"/>
+			<Setter Property="ShowInTaskbar" Value="False"/>
+			<Setter Property="SizeToContent" Value="WidthAndHeight"/>
+			<Setter Property="WindowStyle" Value="ToolWindow"/>
+		</Style>
+	</prism:Dialog.WindowStyle>
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Dialogs/DialogStyle.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/CloseButtonTemplate.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="50"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+
+		<!-- Title -->
+		<Grid Grid.Row="0">
+			<Label Style="{StaticResource Title_Label}" Content="Live" />
+			<Button x:Name="Close_Button" Width="30" Height="30" Template="{StaticResource ResourceKey=CloseButtonTemplate}" Style="{StaticResource CloseButton}" Command="{Binding CloseCommand}" HorizontalAlignment="Right" Margin="10">
+				<Canvas>
+					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="0" X2="18" Y2="18" Canvas.Left="-9" Canvas.Top="-9"/>
+					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="18" X2="18" Y2="0" Canvas.Left="-9" Canvas.Top="-9"/>
+				</Canvas>
+			</Button>
+		</Grid>
+	</Grid>
 </UserControl>

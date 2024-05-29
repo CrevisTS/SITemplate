@@ -30,19 +30,12 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 
 		
 
-		/// <summary>
-		/// View에서 Enter KeyDown
-		/// </summary>
-		public void EnterDown()
-		{
-			OnLoginBtnClick();
-		}
-
+	
 		public LoginViewModel(LoginService loginService, IEventAggregator ea)
 		{
 			_loginService = loginService;
 			_eventAggregator = ea;
-			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("LoginDialog"));
+			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing);
 		}
 
 		private void OnLoginBtnClick()
@@ -58,6 +51,11 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// View에서 Enter KeyDown
+		/// </summary>
+		public void EnterDown() => OnLoginBtnClick();
+
 		private void OnCancel()
 		{
 			RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
@@ -68,23 +66,10 @@ namespace LGES_SVA.Dialogs.Login.ViewModels
 
 		public event Action<IDialogResult> RequestClose;
 
-		public bool CanCloseDialog()
-		{
-			return true;
-		}
-		private void OnDialogClosing((string, CancelEventArgs) obj)
-		{
-		}
-
-		public void OnDialogClosed()
-		{
-		}
-
-		public void OnDialogOpened(IDialogParameters parameters)
-		{
-	
-		}
-
+		public bool CanCloseDialog() => true;
+		private void OnDialogClosing(CancelEventArgs e) { }
+		public void OnDialogClosed() { }
+		public void OnDialogOpened(IDialogParameters parameters) { }
 		#endregion
 
 	}

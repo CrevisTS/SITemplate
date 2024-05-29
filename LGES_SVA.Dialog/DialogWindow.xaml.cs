@@ -37,11 +37,7 @@ namespace LGES_SVA.Dialog
 
 		private void DialogWindow_Closing(object sender, CancelEventArgs e)
 		{
-			Item.Item1 = Content.GetType().Name;
-			Item.Item2 = e;
-
-			// Event Aggregator 구현?
-			_eventAggregator.GetEvent<DialogClosingEvent>().Publish(Item);
+			_eventAggregator.GetEvent<DialogClosingEvent>().Publish(e);
 		}
 
 		public IDialogResult Result { get; set; }

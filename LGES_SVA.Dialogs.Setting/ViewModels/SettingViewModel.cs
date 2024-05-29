@@ -6,12 +6,13 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
 namespace LGES_SVA.Dialogs.Setting.ViewModels
 {
-	public class SettingViewModel : BindableBase, IDialogAware
+	public class SettingViewModel : BindableBase, IDialogAware, IDisposable
 	{
 		private ISettingRepository _settingRepository;
 		private IEventAggregator _eventAggregator;
@@ -20,17 +21,7 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 
 		public AppSetting AppSetting { get => _settingRepository.AppSetting; }
 		public AppSetting AppSettingClone { get => _appSettingClone; set => SetProperty(ref _appSettingClone, value); }
-
-		public ICommand CancelCommand => new DelegateCommand(OnCanceled);
-
-		private void OnCanceled()
-		{
-			Application.Current.Dispatcher.Invoke(() =>
-			{
-				RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
-			});
-		}
-
+		public ICommand CancelCommand => new DelegateCommand(OnDialogClose);
 		public ICommand SaveCommand => new DelegateCommand(OnSaved);
 
 		private void OnSaved()
@@ -46,13 +37,24 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 			}
 		}
 
-		public SettingViewModel(ISettingRepository settingRepository, IEventAggregator eventAggregator)
+		public SettingViewModel(ISettingRepository sr, IEventAggregator ea)
 		{
-			_settingRepository = settingRepository;
+			_settingRepository = sr;
+			_eventAggregator = ea;
+
 			AppSettingClone = _settingRepository.AppSetting.Clone();
 
-			_eventAggregator = eventAggregator;
 			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());
+			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false);
+
+		}
+
+		private void OnDialogClose()
+		{
+			Application.Current.Dispatcher.Invoke(() =>
+			{
+				RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
+			});
 		}
 
 		#region DialogAware
@@ -61,6 +63,7 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 		public event Action<IDialogResult> RequestClose;
 
 		public bool CanCloseDialog() => true;
+		private void OnDialogClosing(CancelEventArgs e) { }
 
 		private void LogoutDialogClosed()
 		{
@@ -70,13 +73,19 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 			});
 		}
 
-		public void OnDialogClosed()
+		public void OnDialogClosed() 
 		{
-			
+			Dispose();
 		}
 
 		public void OnDialogOpened(IDialogParameters parameters)
 		{
+		}
+
+		public void Dispose()
+		{
+			_eventAggregator.GetEvent<DialogClosingEvent>().Unsubscribe(OnDialogClosing);
+			_eventAggregator.GetEvent<LogoutEvent>().Unsubscribe(LogoutDialogClosed);
 		}
 
 		#endregion

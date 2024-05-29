@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace LGES_SVA.Dialogs.LogDialog.ViewModels
 {
-	public class LogViewModel : IDialogAware
+	public class LogViewModel : IDialogAware, IDisposable
 	{
 		#region DialogAware
 		public string Title => "Log";
@@ -54,15 +54,21 @@ namespace LGES_SVA.Dialogs.LogDialog.ViewModels
 		public LogViewModel(IEventAggregator eventAggregator)
 		{
 			_eventAggregator = eventAggregator;
-			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => OnDialogClosed());
-			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("LogDialog"));
+			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(OnDialogClosed);
+			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing);
 
 
 		}
 
 
-		private void OnDialogClosing((string, CancelEventArgs) obj)
+		private void OnDialogClosing(CancelEventArgs e) { }
+
+		public void Dispose()
 		{
+			_eventAggregator.GetEvent<DialogClosingEvent>().Unsubscribe(OnDialogClosing);
+			_eventAggregator.GetEvent<LogoutEvent>().Unsubscribe(LogoutDialogClosed);
 		}
+
+		private void LogoutDialogClosed() { }
 	}
 }
