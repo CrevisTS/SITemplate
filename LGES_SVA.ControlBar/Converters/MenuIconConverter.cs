@@ -22,6 +22,7 @@ namespace LGES_SVA.ControlBar.Converters
 
 				case ELevel.Operator:
 				case ELevel.Engineer:
+				case ELevel.God:
 					enable = "true";
 
 					break;
@@ -53,6 +54,8 @@ namespace LGES_SVA.ControlBar.Converters
 
 				case ELevel.Operator:
 				case ELevel.Engineer:
+				case ELevel.God:
+
 					enable = "true";
 
 					break;
@@ -84,6 +87,8 @@ namespace LGES_SVA.ControlBar.Converters
 
 				case ELevel.Operator:
 				case ELevel.Engineer:
+				case ELevel.God:
+
 					enable = "true";
 
 					break;
@@ -115,6 +120,8 @@ namespace LGES_SVA.ControlBar.Converters
 
 				case ELevel.Operator:
 				case ELevel.Engineer:
+				case ELevel.God:
+
 					enable = "true";
 
 					break;
@@ -146,6 +153,8 @@ namespace LGES_SVA.ControlBar.Converters
 
 				case ELevel.Operator:
 				case ELevel.Engineer:
+				case ELevel.God:
+
 					enable = "true";
 
 					break;
@@ -177,6 +186,8 @@ namespace LGES_SVA.ControlBar.Converters
 					break;
 
 				case ELevel.Engineer:
+				case ELevel.God:
+
 					enable = "true";
 
 					break;

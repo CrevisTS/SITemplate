@@ -4,6 +4,7 @@
     {
         ControlRegion,
         MainViewRegion,
-        TabViewRegion
+        TabViewRegion,
+        RecipeRegion
     }
 }

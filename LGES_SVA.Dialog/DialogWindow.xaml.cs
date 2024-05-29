@@ -33,7 +33,6 @@ namespace LGES_SVA.Dialog
 
 			_eventAggregator = eventAggregator;
 
-			Closing += DialogWindow_Closing;
 		}
 
 		private void DialogWindow_Closing(object sender, CancelEventArgs e)

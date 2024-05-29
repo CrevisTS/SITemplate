@@ -6,6 +6,7 @@ using LGES_SVA.Core.Datas.Settings;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Recipe.Services;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -25,13 +26,14 @@ namespace LGES_SVA.Main.ViewModels
         private readonly IDisposeManager _disposeManager;
         private readonly ILogWriteManager _logWirteManager = LogWriteManager.Instance;
         private ISettingRepository _settingRepo;
-        #endregion
+		private RecipeService _recipeService;
+		#endregion
 
 
-        //private readonly ILogDisplayManager _logDisplayManager;
+		//private readonly ILogDisplayManager _logDisplayManager;
 
-        public AppSetting AppSetting { get => _appSetting; set => SetProperty(ref _appSetting, value); }
-
+		public AppSetting AppSetting { get => _appSetting; set => SetProperty(ref _appSetting, value); }
+        public RecipeService RecipeService { get => _recipeService; }
         public ISettingRepository SettingRepository { get => _settingRepo; set => SetProperty(ref _settingRepo, value); }
         public ICommand LoadedCommand => new DelegateCommand(OnLoaded);
         public ICommand ClosingCommand => new DelegateCommand<CancelEventArgs>(OnClosing);
@@ -43,13 +45,14 @@ namespace LGES_SVA.Main.ViewModels
             _eventAggregator.GetEvent<MouseMoveEvent>().Publish();
         }
 
-        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, ISettingRepository settingRepository, IDisposeManager disposeManager)
+        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, ISettingRepository settingRepository, IDisposeManager disposeManager, RecipeService rs)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             AppSetting = settingRepository.AppSetting;
             SettingRepository = settingRepository;
             _disposeManager = disposeManager;
+            _recipeService = rs;
 
             _logWirteManager.Info(new InfoLogData("프로그램 시작",$"{AppSetting.ProgramVersion}"));
         }

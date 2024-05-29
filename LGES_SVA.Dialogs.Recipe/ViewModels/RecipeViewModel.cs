@@ -16,49 +16,35 @@ using System.Windows.Input;
 
 namespace LGES_SVA.Dialogs.Recipe.ViewModels
 {
-	public class RecipeViewModel : BindableBase, IDialogAware
+	public class RecipeViewModel : BindableBase, IDialogAware, IDisposable
 	{
 		#region DialogAware
-		private bool _canClose = true;
 		public string Title => "Recipe";
-
-
 		public event Action<IDialogResult> RequestClose;
-
-		public bool CanCloseDialog() => _canClose;
-
+		public bool CanCloseDialog() => true;
 		public void OnDialogClosed()
 		{
 			try
 			{
-				ToolBlockWindow.FilenameChanged -= ToolBlockWindow_FilenameChanged;
+				Dispose();
 			}
 			catch (Exception)
 			{
-
 				throw;
 			}
 		}
-
-		public void OnDialogOpened(IDialogParameters parameters)
-		{
-		}
-
-		private void OnCanceled()
-		{
-			Application.Current.Dispatcher.Invoke(() =>
-			{
-				RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
-			});
-		}
+		public void OnDialogOpened(IDialogParameters parameters) { }
 		#endregion
 
-		private RecipeService _recipeService;
 		private ISettingRepository _settingRepository;
 		private IVisionProService _visionProService;
 		private IEventAggregator _eventAggregator;
+		private RecipeService _recipeService;
+		private RecipeData _selectedRecipe;
+
 
 		public RecipeService RecipeService { get => _recipeService; set => SetProperty(ref _recipeService, value); }
+		public RecipeData SelectedRecipe { get => _selectedRecipe; set => SetProperty(ref _selectedRecipe, value); }
 		public CogToolBlockEditV2 ToolBlockWindow { get; set; } = new CogToolBlockEditV2();
 
 		public ICommand AddRecipeCommand => new DelegateCommand(OnAddRecipe);
@@ -71,7 +57,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		public ICommand CancelCommand => new DelegateCommand(OnCanceled);
 
-		public RecipeViewModel(RecipeService recipeService, ISettingRepository settingRepository, IVisionProService visionProService, IEventAggregator eventAggregator)
+		public RecipeViewModel(RecipeService recipeService, ISettingRepository settingRepository, IVisionProService visionProService, IEventAggregator ea)
 		{
 			_recipeService = recipeService;
 			_settingRepository = settingRepository;
@@ -79,9 +65,10 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 			ToolBlockWindowInit();
 			
+			// 툴블럭 파일명 변경 시 새로 Load하기 위해
 			ToolBlockWindow.FilenameChanged += ToolBlockWindow_FilenameChanged;
 
-			_eventAggregator = eventAggregator;
+			_eventAggregator = ea;
 			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());
 			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("RecipeDialog"));
 
@@ -90,33 +77,30 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		private void OnDialogClosing((string, CancelEventArgs) obj)
 		{
-			// 현재 레시피가 있는지 확인
-			// TODO : -> 현재 레시피 확인 하지 않고, 검사 시작 때 확인하는게 좋아 보임
-			/*
-			if (_recipeService.NowRecipe == null)
+			foreach(var recipe in RecipeService.Recipes)
 			{
-				MessageBox.Show("No recipe selected.");
-				obj.Item2.Cancel = true;
+				if (recipe.IsChanged)
+				{
+					var result = MessageBox.Show("저장하시겠습니까?", "Save", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
-				return;
-			}
+					switch (result)
+					{
+						case MessageBoxResult.Yes:
+							// TODO : 저장 로직
+							_recipeService.SaveRecipe();
 
-			*/
-			var result = MessageBox.Show("저장하시겠습니까?", "Save", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+							break;
 
-			switch (result)
-			{
-				case MessageBoxResult.Yes:
-					// TODO : 저장 로직
-					break;
+						case MessageBoxResult.No:
+							_recipeService.LoadRecipe();
+							break;
 
-				case MessageBoxResult.No:
-					break;
+						case MessageBoxResult.Cancel:
+							obj.Item2.Cancel = true;
+							break;
+					}
 
-				case MessageBoxResult.Cancel:
-					obj.Item2.Cancel = true;
-					break;
-
+				}
 			}
 		}
 
@@ -127,9 +111,19 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		private void DialogClose()
 		{
+			// TODO : 저장하지 않고 Close 해야함
+
 			Application.Current.Dispatcher.Invoke(() =>
 			{
 				RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
+			});
+		}
+
+		private void OnCanceled()
+		{
+			Application.Current.Dispatcher.Invoke(() =>
+			{
+				RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
 			});
 		}
 
@@ -195,8 +189,21 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		private void OnSelected(RecipeData recipeData)
 		{
-			_recipeService.NowRecipe = recipeData;
+			if(recipeData == null)
+			{
+				return;
+			}
+			else
+			{
+				SelectedRecipe = recipeData;
+			}
 
+			foreach(var recipe in _recipeService.Recipes)
+			{
+				recipe.IsNowRecipe = false;
+			}
+
+			recipeData.IsNowRecipe = true;
 			// Window에 다른 Toolblock이 있다면 Dispose
 			if (ToolBlockWindow.Subject != null)
 			{
@@ -216,6 +223,15 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			}
 
 			_visionProService.Load(_recipeService.NowRecipe.Path);
+		}
+
+		public void Dispose()
+		{
+			ToolBlockWindow.FilenameChanged -= ToolBlockWindow_FilenameChanged;
+
+			_eventAggregator.GetEvent<DialogClosingEvent>().Unsubscribe(OnDialogClosing);
+			_eventAggregator.GetEvent<LogoutEvent>().Unsubscribe(LogoutDialogClosed);
+
 		}
 	}
 }

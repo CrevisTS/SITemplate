@@ -219,7 +219,7 @@
 						
 					</Border>
 					<Border Grid.Column="3">
-						<TextBlock FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text=""/>
+						<TextBlock FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding RecipeService.NowRecipe.Name}"/>
 					</Border>
 				</Grid>
 			</Border>

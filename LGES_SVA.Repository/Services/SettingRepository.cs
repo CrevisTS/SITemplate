@@ -27,6 +27,7 @@ namespace LGES_SVA.Repository.Services
         public AppSetting AppSetting { get => _appSetting; set => SetProperty(ref _appSetting, value); }
 
         public VisionProSetting VisionProSetting { get => _visionProSetting; set => SetProperty(ref _visionProSetting, value); }
+
         public User NowUser { get => _nowUser; set => SetProperty(ref _nowUser, value); }
         public bool IsInit => true;
 
