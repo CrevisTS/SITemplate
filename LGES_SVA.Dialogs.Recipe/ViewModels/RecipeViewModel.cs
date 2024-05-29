@@ -24,6 +24,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		private RecipeService _recipeService;
 		private RecipeData _selectedRecipe;
 
+		private int _count;
 
 		public RecipeService RecipeService { get => _recipeService; set => SetProperty(ref _recipeService, value); }
 		public RecipeData SelectedRecipe { get => _selectedRecipe; set => SetProperty(ref _selectedRecipe, value); }
@@ -57,29 +58,23 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		private void OnDialogClosing(CancelEventArgs e)
 		{
-			foreach(var recipe in RecipeService.Recipes)
+			var result = MessageBox.Show("저장하시겠습니까?", "Save", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+			switch (result)
 			{
-				if (recipe.IsChanged)
-				{
-					var result = MessageBox.Show("저장하시겠습니까?", "Save", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+				case MessageBoxResult.Yes:
+					// TODO : 저장 로직
+					_recipeService.SaveRecipe();
 
-					switch (result)
-					{
-						case MessageBoxResult.Yes:
-							// TODO : 저장 로직
-							_recipeService.SaveRecipe();
+					break;
 
-							break;
+				case MessageBoxResult.No:
+					_recipeService.LoadRecipe();
+					break;
 
-						case MessageBoxResult.No:
-							_recipeService.LoadRecipe();
-							break;
-
-						case MessageBoxResult.Cancel:
-							e.Cancel = true;
-							break;
-					}
-				}
+				case MessageBoxResult.Cancel:
+					e.Cancel = true;
+					break;
 			}
 		}
 

@@ -31,7 +31,7 @@ namespace LGES_SVA.Dialogs.Simulation.ViewModels
 		{
 			_eventAggregator = eventAggregator;
 			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => OnDialogClosed());
-			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread);
+			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing);
 
 		}
 
