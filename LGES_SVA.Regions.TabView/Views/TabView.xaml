@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LGES_SVA.Regions.TabView.Views"
+			 xmlns:prism="http://prismlibrary.com/"
+			 xmlns:viewModel="clr-namespace:LGES_SVA.Regions.TabView.ViewModels"
+			 xmlns:coreData="clr-namespace:LGES_SVA.Core.Datas;assembly=LGES_SVA.Core"
+			 d:DataContext="{d:DesignInstance Type=viewModel:TabViewModel, IsDesignTimeCreatable=False}"
              mc:Ignorable="d" 
              Height="200" Width="1470" Background="#292E42">
 
@@ -22,14 +25,14 @@
 						<ColumnDefinition Width="*"/>
 					</Grid.ColumnDefinitions>
 
-					<TextBlock Grid.Column="0" FontSize="15" Text="Image" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-				<TextBlock Grid.Column="1" FontSize="15" Text="Result" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-				<TextBlock Grid.Column="2" FontSize="15" Text="Graph" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<Button Grid.Column="0" FontSize="15" Content="Image" Foreground="White" Width="Auto" Height="Auto" Background="Transparent" Command="{Binding ImageCommand}"/>
+					<Button Grid.Column="1" FontSize="15" Content="Result" Foreground="White" Width="Auto" Height="Auto" Background="Transparent" Command="{Binding ResultCommand}"/>
+					<TextBlock Grid.Column="2" FontSize="15" Text="Graph" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Grid>
 			</Border>
 
 			<Border Grid.Row="1" BorderBrush="DimGray" BorderThickness="1">
-
+				<ContentControl prism:RegionManager.RegionName="{x:Static coreData:RegionNames.TabInnerRegion}"/>
 			</Border>
 	</Grid>
 </UserControl>

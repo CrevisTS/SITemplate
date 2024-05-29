@@ -5,6 +5,8 @@ using LGES_SVA.Inspection.ViewModels;
 using LGES_SVA.Inspection.Views;
 using LGES_SVA.Main.ViewModels;
 using LGES_SVA.Main.Views;
+using LGES_SVA.Regions.TabView.ViewModels;
+using LGES_SVA.Regions.TabView.Views;
 using LGES_SVA.Splash.ViewModels;
 using LGES_SVA.Splash.Views;
 using Prism.Mvvm;
@@ -20,6 +22,7 @@ namespace LGES_SVA.Settings
             ViewModelLocationProvider.Register<SplashWindow, SplashViewModel>();
             ViewModelLocationProvider.Register<InspectionView, InspectionViewModel>();
             ViewModelLocationProvider.Register<ControlBarView, ControlBarViewModel>();
+            ViewModelLocationProvider.Register<TabImageView, TabImageViewModel>();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace LGES_SVA.ControlBar.ViewModels
         public ICommunicateRepository ComunicateRepository { get => _communicateRepository; set => SetProperty(ref _communicateRepository, value); }
         public EViewType MainRegionContent { get => _mainRegionContent; set => SetProperty(ref _mainRegionContent, value); }
 
-        // MainMenu 
+        // Main Menu 
         public ICommand LoginBtnClickCommand => new DelegateCommand(LoginToggleClick);
         public ICommand SimulationBtnClickCommand => new DelegateCommand(SimulationClick);
         public ICommand LogBtnClickCommand => new DelegateCommand(LogClick);
@@ -42,9 +42,15 @@ namespace LGES_SVA.ControlBar.ViewModels
         public ICommand LiveBtnClickCommand => new DelegateCommand(LiveClick);
         public ICommand SettingBtnClickCommand => new DelegateCommand(SettingClick);
 
+        // Communicate Menu
         public ICommand IOBtnClickCommand => new DelegateCommand(IOClick);
+        public ICommand PLCBtnClickCommand => new DelegateCommand(OnPLCDialogShow);
+        public ICommand DBBtnClickCommand => new DelegateCommand(OnDBDialogShow);
+        public ICommand LightBtnClickCommand => new DelegateCommand(OnLightDialogShow);
+        public ICommand CamBtnClickCommand => new DelegateCommand(OnCamDialogShow);
 
 		
+
 		public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService, ICommunicateRepository communicateRepository)
         {
             _regionManager = regionManager;
@@ -54,8 +60,9 @@ namespace LGES_SVA.ControlBar.ViewModels
             _loginService = loginService;
             _communicateRepository = communicateRepository;
         }
-        
-        public void LoginToggleClick()
+
+		#region Main Menu 
+		public void LoginToggleClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
             if(!_loginService.IsLogin)
@@ -144,12 +151,47 @@ namespace LGES_SVA.ControlBar.ViewModels
                 _dialogService.ShowDialog(DialogNames.SettingDialog);
             }
         }
+		#endregion
 
-        private void IOClick()
+		#region Communicate Menu
+		private void IOClick()
         {
             _dialogService.ShowDialog(DialogNames.IODialog);
-
         }
+
+        private void OnPLCDialogShow()
+        {
+            _dialogService.ShowDialog(DialogNames.PLCDialog);
+        }
+        private void OnCamDialogShow()
+        {
+            _dialogService.ShowDialog(DialogNames.CamDialog);
+        }
+
+        private void OnLightDialogShow()
+        {
+            _dialogService.ShowDialog(DialogNames.LightDialog);
+        }
+
+        private void OnDBDialogShow()
+        {
+            _dialogService.ShowDialog(DialogNames.DBDialog);
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void OnMainRegionChangeClick(object parameter)
         {
             EViewType newContent = (EViewType)Enum.Parse(typeof(EViewType), parameter.ToString());

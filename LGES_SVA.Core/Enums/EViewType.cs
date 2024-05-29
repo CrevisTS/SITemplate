@@ -5,6 +5,8 @@
         ControlBarView,
         InspectionView,
         SettingView,
-        TabView
+        TabView,
+        TabImageView,
+        TabResultView
     }
 }

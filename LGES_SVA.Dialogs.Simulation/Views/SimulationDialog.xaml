@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Simulation.Views"
 			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Simulation.ViewModels"
-
 			 xmlns:prism="http://prismlibrary.com/"
 			 d:DataContext="{d:DesignInstance Type=viewModel:SimulationViewModel,IsDesignTimeCreatable=False}"
              mc:Ignorable="d" 
@@ -38,7 +37,7 @@
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
-			<Label Style="{StaticResource Title_Label}" Content="Simulation" />
+			<Label Style="{StaticResource Title_Label}" Content="{Binding Title}" />
 			<Button x:Name="Close_Button" Width="30" Height="30" Template="{StaticResource ResourceKey=CloseButtonTemplate}" Style="{StaticResource CloseButton}" Command="{Binding CloseCommand}" HorizontalAlignment="Right" Margin="10">
 				<Canvas>
 					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="0" X2="18" Y2="18" Canvas.Left="-9" Canvas.Top="-9"/>

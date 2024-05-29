@@ -17,6 +17,8 @@ namespace LGES_SVA.Core.Enums
 		SettingDialog,
 		PLCDialog,
 		IODialog,
+		DBDialog,
+		LightDialog,
 		CamDialog,
 	}
 

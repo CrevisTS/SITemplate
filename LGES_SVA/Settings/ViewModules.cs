@@ -21,6 +21,14 @@ using Prism.Ioc;
 using Prism.Modularity;
 using LGES_SVA.Dialogs.IO.Views;
 using LGES_SVA.Dialogs.IO.ViewModels;
+using LGES_SVA.Dialogs.PLC.Views;
+using LGES_SVA.Dialogs.PLC.ViewModels;
+using LGES_SVA.Dialogs.DB.Views;
+using LGES_SVA.Dialogs.DB.ViewModels;
+using LGES_SVA.Dialogs.Cam.Views;
+using LGES_SVA.Dialogs.Light.Views;
+using LGES_SVA.Dialogs.Light.ViewModels;
+using LGES_SVA.Dialogs.Cam.ViewModels;
 
 namespace LGES_SVA.Settings
 {
@@ -36,6 +44,8 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterForNavigation<ControlBarView>(ViewNames.ControlBarView);
             containerRegistry.RegisterForNavigation<InspectionView>(ViewNames.InspectionView);
             containerRegistry.RegisterForNavigation<TabView>(ViewNames.TabView);
+            containerRegistry.RegisterForNavigation<TabImageView>(ViewNames.TabImageView);
+            containerRegistry.RegisterForNavigation<TabResultView>(ViewNames.TabResultView);
 
 			containerRegistry.RegisterDialogWindow<DialogWindow>();
 
@@ -48,7 +58,11 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterDialog<LiveDialog, LiveViewModel>();
             containerRegistry.RegisterDialog<SettingDialog, SettingViewModel>();
             
-            containerRegistry.RegisterDialog<IODialog, IODialogViewModel>();
+            containerRegistry.RegisterDialog<PLCDialog, PLCViewModel>();
+            containerRegistry.RegisterDialog<IODialog, IOViewModel>();
+            containerRegistry.RegisterDialog<DBDialog, DBViewModel>();
+            containerRegistry.RegisterDialog<LightDialog, LightViewModel>();
+            containerRegistry.RegisterDialog<CamDialog, CamViewModel>();
 
 
         }

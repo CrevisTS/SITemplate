@@ -6,8 +6,7 @@
 			 xmlns:prism="http://prismlibrary.com/"
 			 xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
 			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.IO.ViewModels"
-			 d:DataContext="{d:DesignInstance Type=viewModel:IODialogViewModel, IsDesignTimeCreatable=False}"
-             xmlns:local="clr-namespace:LGES_SVA.Dialogs.IO.Views"
+			 d:DataContext="{d:DesignInstance Type=viewModel:IOViewModel, IsDesignTimeCreatable=False}"
              mc:Ignorable="d" 
              Height="759" Width="800" Background="#292E42">
 
@@ -41,8 +40,8 @@
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
-			<Label Style="{StaticResource Title_Label}" Content="IO" />
-			<Button x:Name="Close_Button" Width="30" Height="30" Template="{StaticResource ResourceKey=CloseButtonTemplate}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}" HorizontalAlignment="Right">
+			<Label Style="{StaticResource Title_Label}" Content="{Binding Title}" />
+			<Button x:Name="Close_Button" Width="30" Height="30" Template="{StaticResource ResourceKey=CloseButtonTemplate}" Style="{StaticResource CloseButton}" Command="{Binding CloseCommand}" HorizontalAlignment="Right">
 				<Canvas>
 					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="0" X2="18" Y2="18" Canvas.Left="-9" Canvas.Top="-9"/>
 					<Line Stroke="White" StrokeThickness="2" X1="0" Y1="18" X2="18" Y2="0" Canvas.Left="-9" Canvas.Top="-9"/>
