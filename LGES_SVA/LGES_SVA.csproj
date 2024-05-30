@@ -241,7 +241,7 @@
       <Name>LGES_SVA.Recipe</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Regions.TabView\LGES_SVA.Regions.TabView.csproj">
-      <Project>{9A88DDF3-EF68-45F0-9786-1B6A4177FDD7}</Project>
+      <Project>{9a88ddf3-ef68-45f0-9786-1b6a4177fdd7}</Project>
       <Name>LGES_SVA.Regions.TabView</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Repository\LGES_SVA.Repository.csproj">

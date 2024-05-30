@@ -46,6 +46,7 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterForNavigation<TabView>(ViewNames.TabView);
             containerRegistry.RegisterForNavigation<TabImageView>(ViewNames.TabImageView);
             containerRegistry.RegisterForNavigation<TabResultView>(ViewNames.TabResultView);
+            containerRegistry.RegisterForNavigation<TabGraphView>(ViewNames.TabGraphView);
 
 			containerRegistry.RegisterDialogWindow<DialogWindow>();
 

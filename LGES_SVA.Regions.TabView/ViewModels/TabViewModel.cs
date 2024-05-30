@@ -16,17 +16,23 @@ namespace LGES_SVA.Regions.TabView.ViewModels
 		private IRegionManager _regionManager;
 
 		public ICommand ImageCommand => new DelegateCommand(OnImageViewShow);
+		public ICommand ResultCommand => new DelegateCommand(OnResultViewShow);
+		public ICommand GraphCommand => new DelegateCommand(OnGrahpViewShow);
+
+		private void OnGrahpViewShow()
+		{
+			_regionManager.RequestNavigate(RegionNames.TabInnerRegion, ViewNames.TabGraphView);
+		}
 
 		private void OnImageViewShow()
 		{
-			_regionManager.RequestNavigate(RegionNames.TabInnerRegion, nameof(TabImageView));
+			_regionManager.RequestNavigate(RegionNames.TabInnerRegion, ViewNames.TabImageView);
 		}
 
-		public ICommand ResultCommand => new DelegateCommand(OnResultViewShow);
 
 		private void OnResultViewShow()
 		{
-			_regionManager.RequestNavigate(RegionNames.TabInnerRegion, nameof(TabResultView));
+			_regionManager.RequestNavigate(RegionNames.TabInnerRegion, ViewNames.TabResultView);
 		}
 
 		public TabViewModel(IRegionManager rm)

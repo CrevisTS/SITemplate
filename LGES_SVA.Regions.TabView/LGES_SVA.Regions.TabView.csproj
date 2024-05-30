@@ -92,6 +92,9 @@
     </Compile>
     <Compile Include="ViewModels\TabImageViewModel.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
+    <Compile Include="Views\TabGraphView.xaml.cs">
+      <DependentUpon>TabGraphView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TabImageView.xaml.cs">
       <DependentUpon>TabImageView.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\TabGraphView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TabImageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

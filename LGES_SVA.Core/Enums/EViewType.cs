@@ -7,6 +7,7 @@
         SettingView,
         TabView,
         TabImageView,
-        TabResultView
+        TabResultView,
+        TabGraphView
     }
 }
