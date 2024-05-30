@@ -21,9 +21,21 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 
 		public AppSetting AppSetting { get => _settingRepository.AppSetting; }
 		public AppSetting AppSettingClone { get => _appSettingClone; set => SetProperty(ref _appSettingClone, value); }
-		public ICommand CancelCommand => new DelegateCommand(OnDialogClose);
+		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
 		public ICommand SaveCommand => new DelegateCommand(OnSaved);
 
+	
+		public SettingViewModel(ISettingRepository sr, IEventAggregator ea)
+		{
+			_settingRepository = sr;
+			_eventAggregator = ea;
+
+			AppSettingClone = _settingRepository.AppSetting.Clone();
+
+			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());
+			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false);
+
+		}
 		private void OnSaved()
 		{
 			// 저장하시겠습니까?
@@ -35,18 +47,6 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 
 				RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
 			}
-		}
-
-		public SettingViewModel(ISettingRepository sr, IEventAggregator ea)
-		{
-			_settingRepository = sr;
-			_eventAggregator = ea;
-
-			AppSettingClone = _settingRepository.AppSetting.Clone();
-
-			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());
-			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false);
-
 		}
 
 		private void OnDialogClose()
