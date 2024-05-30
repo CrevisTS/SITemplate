@@ -81,8 +81,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\NewRecipeDialogViewModel.cs" />
     <Compile Include="ViewModels\RecipeViewModel.cs" />
     <Compile Include="ViewModels\WindowsFormsHostBehavior.cs" />
+    <Compile Include="Views\NewRecipeDialog.xaml.cs">
+      <DependentUpon>NewRecipeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RecipeDialog.xaml.cs">
       <DependentUpon>RecipeDialog.xaml</DependentUpon>
     </Compile>
@@ -100,6 +104,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\NewRecipeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RecipeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

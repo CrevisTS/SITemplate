@@ -20,6 +20,7 @@ namespace LGES_SVA.Core.Enums
 		DBDialog,
 		LightDialog,
 		CamDialog,
+		NewRecipeDialog
 	}
 
 }

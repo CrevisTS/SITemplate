@@ -25,5 +25,8 @@ namespace LGES_SVA.Core.Datas
 		public static string LightDialog => nameof(EDialogType.LightDialog);
 		public static string CamDialog => nameof(EDialogType.CamDialog);
 
+		// 레시피 설정
+		public static string NewRecipeDialog = nameof(EDialogType.NewRecipeDialog);
+
 	}
 }

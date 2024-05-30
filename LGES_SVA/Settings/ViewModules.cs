@@ -65,6 +65,8 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterDialog<LightDialog, LightViewModel>();
             containerRegistry.RegisterDialog<CamDialog, CamViewModel>();
 
+            containerRegistry.RegisterDialog<NewRecipeDialog, NewRecipeDialogViewModel>();
+
 
         }
 

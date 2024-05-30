@@ -1,5 +1,6 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.ToolBlock;
+using LGES_SVA.Core.Datas;
 using LGES_SVA.Core.Datas.Recipe;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces.Modules.VisionPro;
@@ -21,10 +22,10 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		private ISettingRepository _settingRepository;
 		private IVisionProService _visionProService;
 		private IEventAggregator _eventAggregator;
+		private IDialogService _dialogService;
+
 		private RecipeService _recipeService;
 		private RecipeData _selectedRecipe;
-
-		private int _count;
 
 		public RecipeService RecipeService { get => _recipeService; set => SetProperty(ref _recipeService, value); }
 		public RecipeData SelectedRecipe { get => _selectedRecipe; set => SetProperty(ref _selectedRecipe, value); }
@@ -38,12 +39,13 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		public ICommand AddRightImageCommand => new DelegateCommand(OnAddRightImage);
 		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
 
-		public RecipeViewModel(RecipeService rs, ISettingRepository sr, IVisionProService vp, IEventAggregator ea)
+		public RecipeViewModel(RecipeService rs, ISettingRepository sr, IVisionProService vp, IEventAggregator ea, IDialogService ds)
 		{
 			_recipeService = rs;
 			_settingRepository = sr;
 			_visionProService = vp;
 			_eventAggregator = ea;
+			_dialogService = ds;
 
 			ToolBlockWindowInit();
 			
@@ -51,13 +53,15 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			ToolBlockWindow.FilenameChanged += ToolBlockWindow_FilenameChanged;
 
 			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());
-			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread);
+			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("RecipeDialog"));
+		} 
 
-		}
 
-
-		private void OnDialogClosing(CancelEventArgs e)
+		private void OnDialogClosing((string, CancelEventArgs) obj)
 		{
+			string title = obj.Item1;
+			CancelEventArgs e = obj.Item2;
+
 			var result = MessageBox.Show("저장하시겠습니까?", "Save", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
 			switch (result)
@@ -65,7 +69,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 				case MessageBoxResult.Yes:
 					// TODO : 저장 로직
 					_recipeService.SaveRecipe();
-
 					break;
 
 				case MessageBoxResult.No:
@@ -130,9 +133,19 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		private void OnAddRecipe()
 		{
-			_recipeService.AddRecipe("abc");
+			DialogParameters parameter = new DialogParameters();
+			_dialogService.ShowDialog(DialogNames.NewRecipeDialog, parameter, AddRecipeCallback);
 		}
 
+		private void AddRecipeCallback(IDialogResult dialogResult)
+		{
+			string name = dialogResult.Parameters.GetValue<string>("Name");
+			string dateTime = $"{DateTime.Now:MMddHHmm}";
+			DateTime.Now.ToString();
+			_recipeService.AddRecipe($"{name}_{dateTime}");
+
+
+		}
 		private void OnRemoveRecipe(RecipeData recipeData)
 		{
 			MessageBoxResult result = MessageBox.Show("Are you sure you want to delete?", "Delete", MessageBoxButton.OKCancel, MessageBoxImage.Question);

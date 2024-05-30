@@ -40,7 +40,23 @@ namespace LGES_SVA.Recipe.Services
 
 		public void AddRecipe(string name)
 		{
-			Recipes.Add(new RecipeData(name: name));
+			try
+			{
+				foreach (var recipe in Recipes)
+				{
+					if (recipe.Name == name)
+					{
+						Recipes.Remove(recipe);
+						break;
+					}
+				}
+				Recipes.Add(new RecipeData(name: name));
+			}
+			catch (Exception e)
+			{
+				throw;
+			}
+			
 		}
 
 		public void RemoveRecipe(RecipeData recipeData)

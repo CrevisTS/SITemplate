@@ -45,7 +45,7 @@ namespace LGES_SVA.Dialogs.Search.ViewModels
 		public string Title => "Search";
 		public event Action<IDialogResult> RequestClose;
 		public bool CanCloseDialog() => true;
-		private void OnDialogClosing(CancelEventArgs e) {  }
+		private void OnDialogClosing((string, CancelEventArgs) obj) {  }
 
 		public void OnDialogClosed()
 		{

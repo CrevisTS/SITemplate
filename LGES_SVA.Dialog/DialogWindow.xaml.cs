@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -33,11 +34,31 @@ namespace LGES_SVA.Dialog
 
 			_eventAggregator = eventAggregator;
 
+			DropShadowEffect shadowEffect = new DropShadowEffect
+			{
+				Color = Colors.Black,
+				BlurRadius = 20,
+				ShadowDepth = 5,
+				Opacity = 0.5
+			};
+
+			// 예제용으로 Border를 추가
+			Border border = new Border
+			{
+				Background = Brushes.White,
+				CornerRadius = new CornerRadius(10),
+				Padding = new Thickness(20),
+				Effect = shadowEffect
+			};
+
 		}
 
 		private void DialogWindow_Closing(object sender, CancelEventArgs e)
 		{
-			_eventAggregator.GetEvent<DialogClosingEvent>().Publish(e);
+			Item.Item1 = Content.GetType().Name;
+			Item.Item2 = e;
+
+			_eventAggregator.GetEvent<DialogClosingEvent>().Publish(Item);
 		}
 
 		public IDialogResult Result { get; set; }

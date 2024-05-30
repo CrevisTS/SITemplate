@@ -61,7 +61,7 @@ namespace LGES_SVA.Dialogs.LogDialog.ViewModels
 		}
 
 
-		private void OnDialogClosing(CancelEventArgs e) { }
+		private void OnDialogClosing((string, CancelEventArgs) obj) { }
 
 		public void Dispose()
 		{

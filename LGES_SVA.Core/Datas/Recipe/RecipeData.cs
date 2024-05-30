@@ -15,7 +15,7 @@ namespace LGES_SVA.Core.Datas.Recipe
 		private bool _isNowRecipe;
 
 		/// <summary>
-		/// 레시피 명 : 모델명_MMDDHHmm
+		/// 레시피 명 : 모델명_MMddHHmm
 		/// </summary>
 		public string Name 
 		{ 

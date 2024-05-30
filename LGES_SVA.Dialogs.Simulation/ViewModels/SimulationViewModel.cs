@@ -48,7 +48,7 @@ namespace LGES_SVA.Dialogs.Simulation.ViewModels
 		{
 		}
 
-		private void OnDialogClosing(CancelEventArgs e)
+		private void OnDialogClosing((string,CancelEventArgs) obj)
 		{
 		}
 

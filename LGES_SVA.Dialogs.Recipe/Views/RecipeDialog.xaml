@@ -89,7 +89,7 @@
 						</ListView>
 					</Grid>
 					<Border Grid.Row="2">
-						<Button Content="레시피 추가" Command="{Binding AddRecipeCommand}"/>
+						<Button Content="Add Recipe" Command="{Binding AddRecipeCommand}"/>
 					</Border>
 				</Grid>
 			</Border>

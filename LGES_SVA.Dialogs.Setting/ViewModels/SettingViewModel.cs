@@ -63,7 +63,7 @@ namespace LGES_SVA.Dialogs.Setting.ViewModels
 		public event Action<IDialogResult> RequestClose;
 
 		public bool CanCloseDialog() => true;
-		private void OnDialogClosing(CancelEventArgs e) { }
+		private void OnDialogClosing((string, CancelEventArgs) obj) { }
 
 		private void LogoutDialogClosed()
 		{
