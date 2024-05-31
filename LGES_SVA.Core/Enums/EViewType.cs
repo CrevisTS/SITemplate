@@ -8,6 +8,9 @@
         TabView,
         TabImageView,
         TabResultView,
-        TabGraphView
+        TabGraphView,
+        RecipeSettingView,
+        RecipeBasicSettingView,
+        RecipeLeftSettingView
     }
 }

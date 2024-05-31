@@ -19,12 +19,15 @@ namespace LGES_SVA.Recipe.Services
 
 		private ObservableCollection<RecipeData> _recipes;
 		private RecipeData _nowRecipe;
+		private RecipeData _selectedRecipe;
 
 		// 저장된 레시피
 		public ObservableCollection<RecipeData> Recipes { get => _recipes; set => SetProperty(ref _recipes, value); }
 
 		// 현재 선택된 레시피
 		public RecipeData NowRecipe { get => _nowRecipe; set => SetProperty(ref _nowRecipe, value); }
+
+		public RecipeData SelectedRecipe { get => _selectedRecipe; set => SetProperty(ref _selectedRecipe, value); }
 
 		public RecipeService() { }
 		public RecipeService(IVisionProService visionProService)

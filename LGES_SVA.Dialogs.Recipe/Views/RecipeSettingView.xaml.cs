@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LGES_SVA.Core.Datas;
+using Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,20 @@ namespace LGES_SVA.Dialogs.Recipe.Views
 	/// <summary>
 	/// RecipeRegion.xaml에 대한 상호 작용 논리
 	/// </summary>
-	public partial class RecipeRegion : UserControl
+	public partial class RecipeSettingView : UserControl
 	{
-		public RecipeRegion()
+		public RecipeSettingView(IRegionManager rm)
 		{
 			InitializeComponent();
+
+			if (rm.Regions.ContainsRegionWithName(RegionNames.RecipeSettingInnerRegion))
+			{
+				rm.Regions.Remove(RegionNames.RecipeSettingInnerRegion);
+			}
+			RegionManager.SetRegionName(content, RegionNames.RecipeSettingInnerRegion);
+			RegionManager.SetRegionManager(content, rm);
+			RegionManager.UpdateRegions();
+			
 		}
 	}
 }

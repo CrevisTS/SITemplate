@@ -1,4 +1,6 @@
 ﻿using Cognex.VisionPro.ToolBlock;
+using LGES_SVA.Core.Datas;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -23,9 +25,20 @@ namespace LGES_SVA.Dialogs.Recipe.Views
 	/// </summary>
 	public partial class RecipeDialog : UserControl
 	{
-		public RecipeDialog()
+
+		public RecipeDialog(IRegionManager rm)
 		{
 			InitializeComponent();
+
+			if (rm.Regions.ContainsRegionWithName(RegionNames.RecipeSettingRegion))
+			{
+				rm.Regions.Remove(RegionNames.RecipeSettingRegion);
+			}
+
+			RegionManager.SetRegionName(content, RegionNames.RecipeSettingRegion);
+			RegionManager.SetRegionManager(content, rm);
+			RegionManager.UpdateRegions();
 		}
+
 	}
 }

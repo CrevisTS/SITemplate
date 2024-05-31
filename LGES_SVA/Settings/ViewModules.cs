@@ -47,14 +47,18 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterForNavigation<TabImageView>(ViewNames.TabImageView);
             containerRegistry.RegisterForNavigation<TabResultView>(ViewNames.TabResultView);
             containerRegistry.RegisterForNavigation<TabGraphView>(ViewNames.TabGraphView);
+            containerRegistry.RegisterForNavigation<RecipeSettingView>(ViewNames.RecipeSettingView);
+            containerRegistry.RegisterForNavigation<RecipeBasicSettingView>(ViewNames.RecipeBasicSettingView);
+            containerRegistry.RegisterForNavigation<RecipeLeftSettingView>(ViewNames.RecipeLeftSettingView);
 
-			containerRegistry.RegisterDialogWindow<DialogWindow>();
+            containerRegistry.RegisterDialogWindow<DialogWindow>();
 
 			// TODO : Dialog 선언하는 부분
 			containerRegistry.RegisterDialog<LoginDialog, LoginViewModel>();
             containerRegistry.RegisterDialog<SimulationDialog, SimulationViewModel>();
             containerRegistry.RegisterDialog<LogDialog, LogViewModel>();
-            containerRegistry.RegisterDialog<RecipeDialog, RecipeViewModel>();
+            containerRegistry.RegisterDialog<RecipeDialog, RecipeDialogViewModel>();
+
             containerRegistry.RegisterDialog<SearchDialog, SearchViewModel>();
             containerRegistry.RegisterDialog<LiveDialog, LiveViewModel>();
             containerRegistry.RegisterDialog<SettingDialog, SettingViewModel>();

@@ -9,6 +9,7 @@ using LGES_SVA.Recipe.Services;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
 using System.ComponentModel;
@@ -17,12 +18,13 @@ using System.Windows.Input;
 
 namespace LGES_SVA.Dialogs.Recipe.ViewModels
 {
-	public class RecipeViewModel : BindableBase, IDialogAware, IDisposable
+	public class RecipeDialogViewModel : BindableBase, IDialogAware, IDisposable
 	{
 		private ISettingRepository _settingRepository;
 		private IVisionProService _visionProService;
 		private IEventAggregator _eventAggregator;
 		private IDialogService _dialogService;
+		private IRegionManager _regionManager;
 
 		private RecipeService _recipeService;
 		private RecipeData _selectedRecipe;
@@ -33,19 +35,24 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		public ICommand AddRecipeCommand => new DelegateCommand(OnAddRecipe);
 		public ICommand RemoveRecipeCommand => new DelegateCommand<RecipeData>(OnRemoveRecipe);
+		public ICommand SelectRecipeCommand => new DelegateCommand<RecipeData>(OnSelecteNowRecipe);
+
+		
+
 		public ICommand SaveRecipeCommand => new DelegateCommand(OnSaveRecipe);
 		public ICommand SelectedCommand => new DelegateCommand<RecipeData>(OnSelected);
 		public ICommand AddLeftImageCommand => new DelegateCommand(OnAddLeftImage);
 		public ICommand AddRightImageCommand => new DelegateCommand(OnAddRightImage);
 		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
 
-		public RecipeViewModel(RecipeService rs, ISettingRepository sr, IVisionProService vp, IEventAggregator ea, IDialogService ds)
+		public RecipeDialogViewModel(RecipeService rs, ISettingRepository sr, IVisionProService vp, IEventAggregator ea, IDialogService ds, IRegionManager rm )
 		{
 			_recipeService = rs;
 			_settingRepository = sr;
 			_visionProService = vp;
 			_eventAggregator = ea;
 			_dialogService = ds;
+			_regionManager = rm;
 
 			ToolBlockWindowInit();
 			
@@ -54,7 +61,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());
 			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("RecipeDialog"));
-		} 
+		}
 
 
 		private void OnDialogClosing((string, CancelEventArgs) obj)
@@ -146,6 +153,12 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 
 		}
+
+		private void OnSelecteNowRecipe(RecipeData recipeData)
+		{
+			_recipeService.NowRecipe = recipeData;
+		}
+
 		private void OnRemoveRecipe(RecipeData recipeData)
 		{
 			MessageBoxResult result = MessageBox.Show("Are you sure you want to delete?", "Delete", MessageBoxButton.OKCancel, MessageBoxImage.Question);
@@ -173,10 +186,19 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			}
 			else
 			{
-				SelectedRecipe = recipeData;
+				RecipeService.SelectedRecipe = recipeData;
 			}
 
-			foreach(var recipe in _recipeService.Recipes)
+			//if (_regionManager.Regions.ContainsRegionWithName(RegionNames.RecipeSettingRegion))
+			//{
+			//	_regionManager.Regions[RegionNames.RecipeSettingRegion].RemoveAll();
+			//}
+
+			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeSettingView);
+
+			/*
+
+			foreach (var recipe in _recipeService.Recipes)
 			{
 				recipe.IsNowRecipe = false;
 			}
@@ -201,6 +223,8 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			}
 
 			_visionProService.Load(_recipeService.NowRecipe.Path);
+
+			*/
 		}
 
 		#region DialogAware

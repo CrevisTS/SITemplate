@@ -1,6 +1,8 @@
 ﻿using CvsService.Prism.Interfaces;
 using LGES_SVA.ControlBar.ViewModels;
 using LGES_SVA.ControlBar.Views;
+using LGES_SVA.Dialogs.Recipe.ViewModels;
+using LGES_SVA.Dialogs.Recipe.Views;
 using LGES_SVA.Inspection.ViewModels;
 using LGES_SVA.Inspection.Views;
 using LGES_SVA.Main.ViewModels;
@@ -23,6 +25,10 @@ namespace LGES_SVA.Settings
             ViewModelLocationProvider.Register<InspectionView, InspectionViewModel>();
             ViewModelLocationProvider.Register<ControlBarView, ControlBarViewModel>();
             ViewModelLocationProvider.Register<TabImageView, TabImageViewModel>();
+            ViewModelLocationProvider.Register<RecipeDialog, RecipeDialogViewModel>();
+            ViewModelLocationProvider.Register<RecipeSettingView, RecipeSettingViewModel>();
+            ViewModelLocationProvider.Register<RecipeBasicSettingView, RecipeBasicSettingViewModel>();
+            ViewModelLocationProvider.Register<RecipeLeftSettingView, RecipeLeftSettingViewModel>();
         }
     }
 }

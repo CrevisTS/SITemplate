@@ -5,7 +5,8 @@
         ControlRegion,
         MainViewRegion,
         TabViewRegion,
-        RecipeRegion,
-        TabInnerRegion
+        RecipeSettingRegion,
+        TabInnerRegion,
+        RecipeSettingInnerRegion
     }
 }

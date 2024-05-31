@@ -12,6 +12,7 @@ namespace LGES_SVA.Core.Datas
         // Tab View
         public static string TabInnerRegion => nameof(ERegionType.TabInnerRegion);
 
-        public static string RecipeRegion => nameof(ERegionType.RecipeRegion);
+        public static string RecipeSettingRegion => nameof(ERegionType.RecipeSettingRegion);
+        public static string RecipeSettingInnerRegion => nameof(ERegionType.RecipeSettingInnerRegion);
     }
 }

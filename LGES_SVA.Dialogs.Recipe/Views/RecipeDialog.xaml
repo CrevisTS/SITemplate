@@ -6,7 +6,9 @@
 			 xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
 			 xmlns:prism="http://prismlibrary.com/"
 			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Recipe.ViewModels"
-			 d:DataContext="{d:DesignInstance Type=viewModel:RecipeViewModel, IsDesignTimeCreatable=False}"
+			 xmlns:coreData="clr-namespace:LGES_SVA.Core.Datas;assembly=LGES_SVA.Core"
+
+			 d:DataContext="{d:DesignInstance Type=viewModel:RecipeDialogViewModel, IsDesignTimeCreatable=False}"
              mc:Ignorable="d" 
              Height="800" Width="1200" Background="#292E42">
 
@@ -46,21 +48,21 @@
 				</Canvas>
 			</Button>
 		</Grid>
-		
+
 		<!-- 현재 레시피 -->
 		<Grid Grid.Row="1">
 			<TextBlock Text="{Binding RecipeService.NowRecipe.Name, StringFormat={}현재 레시피 : {0}}" Style="{DynamicResource Contents}"/>
 		</Grid>
-		
+
 		<!-- 레시피 조작 -->
 		<Grid Grid.Row="2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="200"/>
-				<ColumnDefinition/>
+				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
 			<!-- 레시피 선택 -->
-			<Border Grid.Column="0">
+			<Border Grid.Column="0" Grid.RowSpan="2">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition/>
@@ -77,6 +79,13 @@
 							<ListView.View>
 								<GridView >
 									<GridViewColumn Header="Recipe Name" DisplayMemberBinding="{Binding Name}" Width="130"/>
+									<GridViewColumn Header="Select" Width="50">
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<Button Content="Select" Command="{Binding DataContext.SelectRecipeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"/>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+									</GridViewColumn>
 									<GridViewColumn Header="Delete" Width="50">
 										<GridViewColumn.CellTemplate>
 											<DataTemplate>
@@ -93,10 +102,10 @@
 					</Border>
 				</Grid>
 			</Border>
-			
+
 			<!-- 레시피 수정 -->
-			<Border Grid.Column="1">
-				<ContentControl prism:RegionManager.RegionName="RecipeRegion"/>
+			<Border Grid.Column="1" Grid.RowSpan="2">
+				<ContentControl prism:RegionManager.RegionName="{x:Static coreData:RegionNames.RecipeSettingRegion}" x:Name="content"/>
 			</Border>
 		</Grid>
 	</Grid>

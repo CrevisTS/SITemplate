@@ -62,14 +62,20 @@ namespace LGES_SVA.Main.ViewModels
             SetDefaultRegion();
         }
 
+        /// <summary>
+        /// 초기 Region은 여기 등록해야됨
+        /// </summary>
         private void SetDefaultRegion()
         {
+            // TODO : 초기 Region은 여기 등록해야함
+
             _regionManager.RequestNavigate(RegionNames.MainViewRegion, ViewNames.InspectionView);
             _regionManager.RequestNavigate(RegionNames.ControlRegion, ViewNames.ControlBarView);
             _regionManager.RequestNavigate(RegionNames.TabViewRegion, ViewNames.TabView);
 
             //
             _regionManager.RequestNavigate(RegionNames.TabInnerRegion, ViewNames.TabImageView);
+            _regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeSettingView);
 
         }
         private void OnClosing(CancelEventArgs e)
