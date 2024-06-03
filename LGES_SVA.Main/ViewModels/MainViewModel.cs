@@ -75,7 +75,7 @@ namespace LGES_SVA.Main.ViewModels
 
             //
             _regionManager.RequestNavigate(RegionNames.TabInnerRegion, ViewNames.TabImageView);
-            _regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeSettingView);
+            _regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeBasicSettingView);
 
         }
         private void OnClosing(CancelEventArgs e)

@@ -104,15 +104,24 @@ namespace LGES_SVA.ControlBar.ViewModels
 
         public void RecipeClick()
         {
-            // 로그아웃 상태 -> 로그인 창 띄움
-            if (!_loginService.IsLogin)
-            {
-                _dialogService.ShowDialog(DialogNames.LoginDialog);
+			try
+			{
+                // 로그아웃 상태 -> 로그인 창 띄움
+                if (!_loginService.IsLogin)
+                {
+                    _dialogService.ShowDialog(DialogNames.LoginDialog);
+                }
+                else
+                {
+                    _dialogService.ShowDialog(DialogNames.RecipeDialog);
+                }
             }
-            else
-            {
-                _dialogService.ShowDialog(DialogNames.RecipeDialog);
-            }
+			catch (Exception)
+			{
+
+				throw;
+			}
+            
         }
 
         public void SearchClick()

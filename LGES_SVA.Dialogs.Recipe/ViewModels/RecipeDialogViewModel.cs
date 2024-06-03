@@ -35,15 +35,20 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		public ICommand AddRecipeCommand => new DelegateCommand(OnAddRecipe);
 		public ICommand RemoveRecipeCommand => new DelegateCommand<RecipeData>(OnRemoveRecipe);
-		public ICommand SelectRecipeCommand => new DelegateCommand<RecipeData>(OnSelecteNowRecipe);
-
-		
-
-		public ICommand SaveRecipeCommand => new DelegateCommand(OnSaveRecipe);
+		/// <summary>
+		/// 현재 레시피로 선택 할 때
+		/// </summary>
+		public ICommand NowRecipeCommand => new DelegateCommand<RecipeData>(OnSelectNowRecipe);
+		/// <summary>
+		/// 설정을 위해 단순 레시피 선택 할 때
+		/// </summary>
 		public ICommand SelectedCommand => new DelegateCommand<RecipeData>(OnSelected);
-		public ICommand AddLeftImageCommand => new DelegateCommand(OnAddLeftImage);
-		public ICommand AddRightImageCommand => new DelegateCommand(OnAddRightImage);
 		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
+
+		public ICommand BasicSettingCommand => new DelegateCommand(OnBasicSettingCommand);
+		public ICommand LeftSettingCommand => new DelegateCommand(OnLeftSettingCommand);
+		public ICommand RightSettingCommand => new DelegateCommand(OnRightSettingCommand);
+
 
 		public RecipeDialogViewModel(RecipeService rs, ISettingRepository sr, IVisionProService vp, IEventAggregator ea, IDialogService ds, IRegionManager rm )
 		{
@@ -61,8 +66,26 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());
 			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("RecipeDialog"));
+
+			// Recipe 설정 초기값
+			_recipeService.SelectedRecipe = _recipeService.NowRecipe;
+			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeBasicSettingView);
+
 		}
 
+		private void OnBasicSettingCommand()
+		{
+			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeBasicSettingView);
+		}
+
+		private void OnLeftSettingCommand()
+		{
+			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeLeftSettingView);
+		}
+		private void OnRightSettingCommand()
+		{
+			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeRightSettingView);
+		}
 
 		private void OnDialogClosing((string, CancelEventArgs) obj)
 		{
@@ -88,6 +111,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			}
 		}
 
+
 		private void LogoutDialogClosed()
 		{
 			OnDialogClose();
@@ -95,7 +119,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		private void OnDialogClose()
 		{
-			// TODO : 저장하지 않고 Close 해야함
 			Application.Current.Dispatcher.Invoke(() =>
 			{
 				RequestClose?.Invoke(new DialogResult(ButtonResult.OK));
@@ -114,8 +137,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			// 현재 레시피가 있다면
 			else
 			{
-				var Toolblock = _visionProService.Load(_settingRepository.VisionProSetting.InspectionRecipe.Path) as CogToolBlock;
-				ToolBlockWindow.Subject = Toolblock;
+				CogToolBlock Toolblock = _visionProService.Load(_settingRepository.VisionProSetting.InspectionRecipe.Path) as CogToolBlock;
 			}
 		}
 
@@ -154,9 +176,10 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		}
 
-		private void OnSelecteNowRecipe(RecipeData recipeData)
+		private void OnSelectNowRecipe(RecipeData recipeData)
 		{
-			_recipeService.NowRecipe = recipeData;
+			_recipeService.SelectNowRecipe(recipeData);
+			_recipeService.FindNowRecipe();
 		}
 
 		private void OnRemoveRecipe(RecipeData recipeData)
@@ -186,28 +209,8 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			}
 			else
 			{
-				RecipeService.SelectedRecipe = recipeData;
-			}
-
-			//if (_regionManager.Regions.ContainsRegionWithName(RegionNames.RecipeSettingRegion))
-			//{
-			//	_regionManager.Regions[RegionNames.RecipeSettingRegion].RemoveAll();
-			//}
-
-			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeSettingView);
-
-			/*
-
-			foreach (var recipe in _recipeService.Recipes)
-			{
-				recipe.IsNowRecipe = false;
-			}
-
-			recipeData.IsNowRecipe = true;
-			// Window에 다른 Toolblock이 있다면 Dispose
-			if (ToolBlockWindow.Subject != null)
-			{
-				ToolBlockWindow.Subject.Dispose();
+				_recipeService.SelectedRecipe = recipeData;
+				_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeBasicSettingView);
 			}
 
 			// 현재 선택한 레시피를 삭제하면 return
@@ -215,20 +218,11 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			{
 				return;
 			}
-
-			// 현재 레시피에 Toolblock 경로가 없다면 Load하지 않음
-			if (_recipeService.NowRecipe.Path == null)
-			{
-				return;
-			}
-
-			_visionProService.Load(_recipeService.NowRecipe.Path);
-
-			*/
 		}
 
 		#region DialogAware
 		public string Title => "Recipe";
+
 		public event Action<IDialogResult> RequestClose;
 		public bool CanCloseDialog() => true;
 		public void OnDialogClosed()
@@ -243,7 +237,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 			_eventAggregator.GetEvent<DialogClosingEvent>().Unsubscribe(OnDialogClosing);
 			_eventAggregator.GetEvent<LogoutEvent>().Unsubscribe(LogoutDialogClosed);
-
 		}
 	}
 }

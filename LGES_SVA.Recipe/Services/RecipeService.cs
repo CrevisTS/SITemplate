@@ -77,7 +77,18 @@ namespace LGES_SVA.Recipe.Services
 			FindNowRecipe();
 		}
 
-		private void FindNowRecipe()
+		public void SelectNowRecipe(RecipeData selectRecipe)
+		{
+			foreach(var recipe in Recipes)
+			{
+				recipe.IsNowRecipe = false;
+			}
+
+			selectRecipe.IsNowRecipe = true;
+
+		}
+
+		public void FindNowRecipe()
 		{
 			foreach(var recipe in Recipes)
 			{

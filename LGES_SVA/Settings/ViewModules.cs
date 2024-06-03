@@ -47,7 +47,6 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterForNavigation<TabImageView>(ViewNames.TabImageView);
             containerRegistry.RegisterForNavigation<TabResultView>(ViewNames.TabResultView);
             containerRegistry.RegisterForNavigation<TabGraphView>(ViewNames.TabGraphView);
-            containerRegistry.RegisterForNavigation<RecipeSettingView>(ViewNames.RecipeSettingView);
             containerRegistry.RegisterForNavigation<RecipeBasicSettingView>(ViewNames.RecipeBasicSettingView);
             containerRegistry.RegisterForNavigation<RecipeLeftSettingView>(ViewNames.RecipeLeftSettingView);
 

@@ -73,6 +73,7 @@
     <Compile Include="Datas\Communicate\PLC\PLC.cs" />
     <Compile Include="Datas\DialogNames.cs" />
     <Compile Include="Datas\Login\User.cs" />
+    <Compile Include="Datas\Recipe\Box.cs" />
     <Compile Include="Datas\RegionNames.cs" />
     <Compile Include="Datas\Settings\AlarmConfigurationData.cs" />
     <Compile Include="Datas\Settings\AppSetting.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Events\MainWindowClosingEvent.cs" />
     <Compile Include="Events\MouseMoveEvent.cs" />
     <Compile Include="Events\ProgressMessageEventArgs.cs" />
+    <Compile Include="Events\RecipeSelectedEvent.cs" />
     <Compile Include="Interfaces\Bootstrappers\IAppBootstrapper.cs" />
     <Compile Include="Interfaces\Communicate\ICommunicateRepository.cs" />
     <Compile Include="Interfaces\Disposes\IDisposeManager.cs" />

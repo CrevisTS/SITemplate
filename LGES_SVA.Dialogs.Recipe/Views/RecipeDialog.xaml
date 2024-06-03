@@ -7,7 +7,7 @@
 			 xmlns:prism="http://prismlibrary.com/"
 			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Recipe.ViewModels"
 			 xmlns:coreData="clr-namespace:LGES_SVA.Core.Datas;assembly=LGES_SVA.Core"
-
+			 xmlns:views="clr-namespace:LGES_SVA.Dialogs.Recipe.Views"
 			 d:DataContext="{d:DesignInstance Type=viewModel:RecipeDialogViewModel, IsDesignTimeCreatable=False}"
              mc:Ignorable="d" 
              Height="800" Width="1200" Background="#292E42">
@@ -57,7 +57,7 @@
 		<!-- 레시피 조작 -->
 		<Grid Grid.Row="2">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="250"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 
@@ -82,7 +82,7 @@
 									<GridViewColumn Header="Select" Width="50">
 										<GridViewColumn.CellTemplate>
 											<DataTemplate>
-												<Button Content="Select" Command="{Binding DataContext.SelectRecipeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"/>
+												<Button Content="Select" Command="{Binding DataContext.NowRecipeCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding}"/>
 											</DataTemplate>
 										</GridViewColumn.CellTemplate>
 									</GridViewColumn>
@@ -105,7 +105,32 @@
 
 			<!-- 레시피 수정 -->
 			<Border Grid.Column="1" Grid.RowSpan="2">
-				<ContentControl prism:RegionManager.RegionName="{x:Static coreData:RegionNames.RecipeSettingRegion}" x:Name="content"/>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="50"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<Border Grid.Row="0">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100"/>
+								<ColumnDefinition Width="100"/>
+								<ColumnDefinition Width="100"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							
+							<Button Grid.Column="0" Content="Basic" Command="{Binding BasicSettingCommand}"/>
+							<Button Grid.Column="1" Content="Left" Command="{Binding LeftSettingCommand}"/>
+							<Button Grid.Column="2" Content="Right" Command="{Binding RightSettingCommand}"/>
+						<Grid/>
+					</Grid> 
+					</Border>
+
+					<Border Grid.Row="1">
+						<ContentControl x:Name="content"/>
+					</Border>
+				</Grid>
 			</Border>
 		</Grid>
 	</Grid>

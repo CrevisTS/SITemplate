@@ -17,59 +17,56 @@ namespace LGES_SVA.Core.Datas.Recipe
 		/// <summary>
 		/// 레시피 명 : 모델명_MMddHHmm
 		/// </summary>
-		public string Name 
-		{ 
+		public string Name
+		{
 			get => _name;
 			set
 			{
 				SetProperty(ref _name, value);
-				IsChanged = true;
 			}
 		}
 
 		/// <summary>
 		/// TooBlock 파일 경로
 		/// </summary>
-		public string Path 
-		{ 
+		public string Path
+		{
 			get => _path;
 			set
 			{
 				SetProperty(ref _path, value);
-				IsChanged = true;
 			}
 		}
 
 		/// <summary>
 		/// 제품 모델명
 		/// </summary>
-		public string Model 
-		{ 
+		public string Model
+		{
 			get => _model;
 			set
 			{
 				SetProperty(ref _model, value);
-				IsChanged = true;
 			}
 		}
 
 		public bool IsNowRecipe { get => _isNowRecipe; set => SetProperty(ref _isNowRecipe, value); }
 
-		[JsonIgnore]
-		public bool IsChanged { get; private set; }
-
 		public double AlignResultY_ { get; set; }
 		public double PouchAngle_Correction { get; set; }
-		
+
 
 		public RecipeData(string name)
 		{
 			_name = name;
 		}
+	}
 
-		public void RecipeSaved()
-		{
-			IsChanged = false;
-		}
+	public class RecipeLeftData
+	{
+		private string _imagePath;
+		private Box ROI1 { get; set; }
+		private Box ROI2 { get; set; }
+		private Box ROI3 { get; set; }
 	}
 }

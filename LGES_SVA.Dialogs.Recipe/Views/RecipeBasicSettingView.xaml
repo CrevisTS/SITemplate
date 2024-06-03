@@ -15,15 +15,21 @@
 			<RowDefinition/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
-		<GroupBox Grid.Row="0" Header="모델 명" Margin="10" Foreground="White">
-			<StackPanel>
-				<TextBox Text="{Binding  Recipe.Name, UpdateSourceTrigger=PropertyChanged}"/>
-				<Button Content="Add Left Image" Command="{Binding AddLeftImageCommand}"/>
-				<Button Content="Add Right Image" Command="{Binding AddRightImageCommand}"/>
-			</StackPanel>
+		<GroupBox Grid.Row="0" Header="Basic" Margin="10" Foreground="White">
+			<Grid Margin="10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="20"/>
+					<RowDefinition Height="20"/>
+				</Grid.RowDefinitions>
+				<TextBlock Grid.Row="0" Text="Model Name"/>
+				<TextBox Grid.Row="1" Text="{Binding  Recipe.Name, UpdateSourceTrigger=PropertyChanged}"/>
+			</Grid>
 		</GroupBox>
 
-		<GroupBox Grid.Row="1" Header="검사 사양" Margin="10" Foreground="White">
+		<GroupBox Grid.Row="1" Header="Inspection Spec" Margin="10" Foreground="White">
+			<Grid Margin="10">
+				
+			</Grid>
 			<!-- Align Result Y -->
 			<!-- Pouch Angle -->
 			<!-- Align Result -->

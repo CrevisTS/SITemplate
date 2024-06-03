@@ -15,8 +15,8 @@ namespace LGES_SVA.Core.Datas
         public static string TabResultView => nameof(EViewType.TabResultView);
         public static string TabGraphView => nameof(EViewType.TabGraphView);
 
-        public static string RecipeSettingView => nameof(EViewType.RecipeSettingView);
         public static string RecipeBasicSettingView => nameof(EViewType.RecipeBasicSettingView);
         public static string RecipeLeftSettingView => nameof(EViewType.RecipeLeftSettingView);
+        public static string RecipeRightSettingView => nameof(EViewType.RecipeRightSettingView);
     }
 }

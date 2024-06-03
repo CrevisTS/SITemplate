@@ -12,7 +12,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 {
 	public class RecipeBasicSettingViewModel : BindableBase, INavigationAware
 	{
-		RecipeService _recipeService;
+		private RecipeService _recipeService;
 		private RecipeData _recipe;
 
 		public RecipeData Recipe { get => _recipe; set => SetProperty(ref _recipe, value); }
