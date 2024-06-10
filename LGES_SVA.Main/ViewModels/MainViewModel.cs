@@ -85,13 +85,13 @@ namespace LGES_SVA.Main.ViewModels
                 e.Cancel = true;
                 return;
             }
-
             _eventAggregator.GetEvent<MainWindowClosingEvent>().Publish();
+
+            _disposeManager.DisposeResources();
+            _eventAggregator.GetEvent<MainWindowClosedEvent>().Publish();
         }
         private void OnClosed()
         {
-            _disposeManager.DisposeResources();
-            _eventAggregator.GetEvent<MainWindowClosedEvent>().Publish();
         }
     }
 }

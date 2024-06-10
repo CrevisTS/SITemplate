@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using CvsService.Camera.CvsGigE.Services;
+using Prism.Commands;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,12 @@ namespace LGES_SVA.Dialogs.Cam.ViewModels
 {
 	public class CamViewModel : IDialogAware
 	{
+		private CvsGigEManager _cvsGigEManager;
+		public CvsGigEManager CVSGigEManager { get; set; }
 		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
-
-		public CamViewModel()
+		public CamViewModel(CvsGigEManager cvsGigEManager)
 		{
-
-
+			_cvsGigEManager = cvsGigEManager;
 		}
 
 		private void OnDialogClose()

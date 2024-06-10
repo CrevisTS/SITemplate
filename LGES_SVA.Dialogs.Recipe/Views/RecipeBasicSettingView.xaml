@@ -22,7 +22,7 @@
 					<RowDefinition Height="20"/>
 				</Grid.RowDefinitions>
 				<TextBlock Grid.Row="0" Text="Model Name"/>
-				<TextBox Grid.Row="1" Text="{Binding  Recipe.Name, UpdateSourceTrigger=PropertyChanged}"/>
+				<TextBox Grid.Row="1" Text="{Binding  Recipe.Model, UpdateSourceTrigger=PropertyChanged}"/>
 			</Grid>
 		</GroupBox>
 

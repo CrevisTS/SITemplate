@@ -10,7 +10,7 @@
 			 xmlns:views="clr-namespace:LGES_SVA.Dialogs.Recipe.Views"
 			 d:DataContext="{d:DesignInstance Type=viewModel:RecipeDialogViewModel, IsDesignTimeCreatable=False}"
              mc:Ignorable="d" 
-             Height="800" Width="1200" Background="#292E42">
+             Height="900" Width="1400" Background="#292E42">
 
 	<prism:Dialog.WindowStyle>
 		<Style TargetType="Window">
@@ -121,8 +121,7 @@
 							</Grid.ColumnDefinitions>
 							
 							<Button Grid.Column="0" Content="Basic" Command="{Binding BasicSettingCommand}"/>
-							<Button Grid.Column="1" Content="Left" Command="{Binding LeftSettingCommand}"/>
-							<Button Grid.Column="2" Content="Right" Command="{Binding RightSettingCommand}"/>
+							<Button Grid.Column="1" Content="Tool" Command="{Binding ToolSettingCommand}"/>
 						<Grid/>
 					</Grid> 
 					</Border>

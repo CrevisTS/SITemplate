@@ -13,7 +13,7 @@ namespace LGES_SVA.Core.Datas.Settings.VisionPro
 
 		public string Calibration1Path { get; set; }
 		public string Calibration2Path { get; set; }
-		public string Calibration3Path { get; set; } 
+		public string DummyPath { get; set; } 
 		public string Calibration4Path { get; set; }
 
 
@@ -25,6 +25,7 @@ namespace LGES_SVA.Core.Datas.Settings.VisionPro
 			
 			Calibration1Path = $@"{_path}\LeftCalibration.vpp";
 			Calibration2Path = $@"{_path}\RightCalibration.vpp";
+			DummyPath = $@"{_path}\Dummy.vpp";
 
 			InspectionRecipe = new RecipeData("DefaultRecipe");
 

@@ -1,11 +1,10 @@
-﻿using Cognex.VisionPro;
-using Cognex.VisionPro.ToolBlock;
+﻿using Cognex.VisionPro.ToolBlock;
 using LGES_SVA.Core.Datas;
 using LGES_SVA.Core.Datas.Recipe;
 using LGES_SVA.Core.Events;
-using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Recipe.Services;
+using LGES_SVA.VisionPro.Services;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -21,13 +20,19 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 	public class RecipeDialogViewModel : BindableBase, IDialogAware, IDisposable
 	{
 		private ISettingRepository _settingRepository;
-		private IVisionProService _visionProService;
+		private VisionProService _visionProService;
 		private IEventAggregator _eventAggregator;
 		private IDialogService _dialogService;
 		private IRegionManager _regionManager;
 
 		private RecipeService _recipeService;
 		private RecipeData _selectedRecipe;
+
+		private bool _isToolSettingEnabled;
+		private bool _isBasicSettingEnabled;
+
+		public bool IsToolSettingEnabled { get => _isToolSettingEnabled; set => SetProperty(ref _isToolSettingEnabled, value); } 
+		public bool IsBasicSettingEnabled { get => _isBasicSettingEnabled; set => SetProperty(ref _isBasicSettingEnabled, value); } 
 
 		public RecipeService RecipeService { get => _recipeService; set => SetProperty(ref _recipeService, value); }
 		public RecipeData SelectedRecipe { get => _selectedRecipe; set => SetProperty(ref _selectedRecipe, value); }
@@ -45,12 +50,11 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		public ICommand SelectedCommand => new DelegateCommand<RecipeData>(OnSelected);
 		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
 
-		public ICommand BasicSettingCommand => new DelegateCommand(OnBasicSettingCommand);
-		public ICommand LeftSettingCommand => new DelegateCommand(OnLeftSettingCommand);
-		public ICommand RightSettingCommand => new DelegateCommand(OnRightSettingCommand);
+		public ICommand BasicSettingCommand => new DelegateCommand(OnBasicSettingCommand).ObservesCanExecute(() => IsBasicSettingEnabled);
+		public DelegateCommand ToolSettingCommand => new DelegateCommand(OnToolSettingCommand).ObservesCanExecute(() => IsToolSettingEnabled);
 
 
-		public RecipeDialogViewModel(RecipeService rs, ISettingRepository sr, IVisionProService vp, IEventAggregator ea, IDialogService ds, IRegionManager rm )
+		public RecipeDialogViewModel(RecipeService rs, ISettingRepository sr, VisionProService vp, IEventAggregator ea, IDialogService ds, IRegionManager rm )
 		{
 			_recipeService = rs;
 			_settingRepository = sr;
@@ -71,20 +75,24 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			_recipeService.SelectedRecipe = _recipeService.NowRecipe;
 			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeBasicSettingView);
 
+			IsBasicSettingEnabled = false;
+			IsToolSettingEnabled = true;
 		}
 
 		private void OnBasicSettingCommand()
 		{
 			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeBasicSettingView);
+			
+			IsBasicSettingEnabled = false;
+			IsToolSettingEnabled = true;
 		}
 
-		private void OnLeftSettingCommand()
+		private void OnToolSettingCommand()
 		{
 			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeLeftSettingView);
-		}
-		private void OnRightSettingCommand()
-		{
-			_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeRightSettingView);
+
+			IsBasicSettingEnabled = true;
+			IsToolSettingEnabled = false;
 		}
 
 		private void OnDialogClosing((string, CancelEventArgs) obj)
@@ -111,7 +119,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			}
 		}
 
-
 		private void LogoutDialogClosed()
 		{
 			OnDialogClose();
@@ -127,7 +134,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		public void ToolBlockWindowInit()
 		{
-			var toolBlockPath = _settingRepository.VisionProSetting.InspectionRecipe.Path;
+			var toolBlockPath = _settingRepository.VisionProSetting.InspectionRecipe.ToolPath;
 
 			// 현재 레시피가 없다면
 			if (toolBlockPath == null)
@@ -137,13 +144,13 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			// 현재 레시피가 있다면
 			else
 			{
-				CogToolBlock Toolblock = _visionProService.Load(_settingRepository.VisionProSetting.InspectionRecipe.Path) as CogToolBlock;
+				CogToolBlock Toolblock = _visionProService.Load(_settingRepository.VisionProSetting.InspectionRecipe.ToolPath) as CogToolBlock;
 			}
 		}
 
 		private void ToolBlockWindow_FilenameChanged(object sender, EventArgs e)
 		{
-			_recipeService.NowRecipe.Path = ToolBlockWindow.Filename;
+			_recipeService.NowRecipe.ToolPath = ToolBlockWindow.Filename;
 		}
 
 		private void OnAddRightImage()
@@ -172,8 +179,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			string dateTime = $"{DateTime.Now:MMddHHmm}";
 			DateTime.Now.ToString();
 			_recipeService.AddRecipe($"{name}_{dateTime}");
-
-
 		}
 
 		private void OnSelectNowRecipe(RecipeData recipeData)

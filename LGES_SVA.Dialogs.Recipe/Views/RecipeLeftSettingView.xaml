@@ -9,35 +9,70 @@
 			 d:DataContext="{d:DesignInstance Type=viewModel:RecipeLeftSettingViewModel, IsDesignTimeCreatable=False}"
              mc:Ignorable="d" 
               d:DesignHeight="450" d:DesignWidth="800" Background="#292E42">
-    <Grid>
-			<Grid Margin="10">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="20"/>
-					<RowDefinition Height="20"/>
-					<RowDefinition Height="20"/>
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Dialogs/DialogStyle.xaml"/>
+				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/CloseButtonTemplate.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	
+	<Grid>
+		<Grid Margin="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30"/>
+				<RowDefinition Height="30"/>
+				<RowDefinition Height="30"/>
+				<RowDefinition Height="30"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<TextBlock Grid.Row="0" Text="Tool Setting" Style="{StaticResource Contents}"/>
+			
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="200"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="200"/>
+				</Grid.ColumnDefinitions>
 				
-				<TextBlock Grid.Row="0" Text="Left Setting"/>
-				<TextBlock Grid.Row="1" Text="Image Path"/>
+				<TextBlock Grid.Row="0" Text="Tool Path"  Style="{StaticResource Contents}"/>
+				<TextBox Grid.Column="1" Text="{Binding  Recipe.ToolPath, UpdateSourceTrigger=PropertyChanged}"/>
+				<Button Grid.Column="2" Content="Path" Margin="10 0 0 0" Command="{Binding SelectToolPathCommand}"/>
+			</Grid>
+			<Grid Grid.Row="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="200"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="200"/>
+				</Grid.ColumnDefinitions>
 
-				<Grid Grid.Row="2">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="200"/>
-					</Grid.ColumnDefinitions>
-					
-					<TextBox Grid.Column="0" Text="{Binding  Recipe.Name, UpdateSourceTrigger=PropertyChanged}"/>
-					<Button Grid.Column="1" Content="Path" Margin="10 0 0 0"/>
-				</Grid>
+				<TextBlock Grid.Row="0" Text="Left Image Path"  Style="{StaticResource Contents}"/>
+				<TextBox Grid.Column="1" Text="{Binding  Recipe.LeftImagePath, UpdateSourceTrigger=PropertyChanged}"/>
+				<Button Grid.Column="2" Content="Path" Margin="10 0 0 0" Command="{Binding SelectImagePathCommand}" CommandParameter="left"/>
+			</Grid>
 
-				<Grid Grid.Row="3">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="200"/>
-					</Grid.ColumnDefinitions>
+			<Grid Grid.Row="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="200"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="200"/>
+				</Grid.ColumnDefinitions>
 
-					<Border Background="LightSlateGray" Grid.Column="0" Margin="0 10">
+				<TextBlock Grid.Row="0" Text="Right Image Path"  Style="{StaticResource Contents}"/>
+				<TextBox Grid.Column="1" Text="{Binding  Recipe.RightImagePath, UpdateSourceTrigger=PropertyChanged}"/>
+				<Button Grid.Column="2" Content="Path" Margin="10 0 0 0" Command="{Binding SelectImagePathCommand}" CommandParameter="right"/>
+			</Grid>
+
+			<Grid Grid.Row="4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="0"/>
+				</Grid.ColumnDefinitions>
+
+				<Border Background="LightSlateGray" Grid.Column="0" Margin="0 10">
 					<WindowsFormsHost x:Name="ToolWindow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Background="DimGray">
 						<b:Interaction.Behaviors>
 							<viewModel:WindowsFormsHostBehavior Child="{Binding ToolBlockWindow}"/>
@@ -45,9 +80,9 @@
 					</WindowsFormsHost>
 				</Border>
 
-					<Grid Grid.Column="1" Margin="10 0 0 0">
-					</Grid>
+				<Grid Grid.Column="1" Margin="10 0 0 0">
 				</Grid>
 			</Grid>
+		</Grid>
 	</Grid>
 </UserControl>

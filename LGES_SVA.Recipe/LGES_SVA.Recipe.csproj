@@ -68,6 +68,10 @@
       <Project>{61ba9ec6-77d6-47fb-abbb-6e91d96267f4}</Project>
       <Name>LGES_SVA.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.VisionPro\LGES_SVA.VisionPro.csproj">
+      <Project>{221013A5-C63A-4FF5-8432-C1BD73D60F6D}</Project>
+      <Name>LGES_SVA.VisionPro</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

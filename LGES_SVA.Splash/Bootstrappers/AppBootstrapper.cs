@@ -1,4 +1,5 @@
-﻿using CvsService.Core.Interfaces;
+﻿using CvsService.Camera.CvsGigE.Services;
+using CvsService.Core.Interfaces;
 using CvsService.Log.Core.Interfaces;
 using CvsService.Log.Display.Interfaces;
 using CvsService.Log.Display.Services;
@@ -8,10 +9,9 @@ using CvsService.Log.Write.Services;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Communicate;
-using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
-using LGES_SVA.Recipe.Services;
 using LGES_SVA.Splash.Error;
+using LGES_SVA.VisionPro.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,19 +29,21 @@ namespace LGES_SVA.Splash.Bootstrappers
         private readonly Lazy<IDisposeManager> _lazyDisposeManager;
         private readonly Lazy<ISettingRepository> _lazySettingRepo;
         private readonly Lazy<ICommunicateRepository> _lazyCommunicateRepo;
-        private readonly Lazy<IVisionProService> _visionProService;
+        private readonly Lazy<VisionProService> _visionProService;
+        private readonly Lazy<CvsGigEManager> _cvsGigEManager;
 
         public bool IsFail { get; private set; } = false;
 
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;
         public event EventHandler WindowLoadedCompleted;
 
-        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<IVisionProService> visionProService, Lazy<ICommunicateRepository> lazyCommunicateRepo)
+        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<VisionProService> visionProService, Lazy<ICommunicateRepository> lazyCommunicateRepo, Lazy<CvsGigEManager> cvsGigEManager)
         {
             _lazyDisposeManager = lazyDisposeManager;
             _lazySettingRepo = lazySettingRepo;
             _visionProService = visionProService;
             _lazyCommunicateRepo = lazyCommunicateRepo;
+            _cvsGigEManager = cvsGigEManager;
         }
 
         public Task InitializeAsync()
@@ -55,21 +57,24 @@ namespace LGES_SVA.Splash.Bootstrappers
                 //Thread.Sleep(1000); // UI 보기위함
 
                 // TODO : Prism Singleton 초기화 하는 부분.
-                _ = LazyInstanceInit(_lazySettingRepo, "Setting", 50);
+                _ = LazyInstanceInit(_lazySettingRepo, "Setting", 20);
 
-                _ = LazyInstanceInit(_lazyCommunicateRepo, "Comunicate", 70);
+                _ = LazyInstanceInit(_lazyCommunicateRepo, "Comunicate", 40);
                 //Thread.Sleep(1000); // UI 보기위함
 
                 // VisionPro
-                _ = LazyInstanceInit(_visionProService, "VisionPro", 80);
+                _ = LazyInstanceInit(_visionProService, "VisionPro", 60);
 
+				// Camera
+				CvsGigEManager camManager = LazyInstanceInit(_cvsGigEManager, "Camera", 90);
+                camManager.OpenCameras();
 
                 // AppBoot에서 초기화하는 클래스 중 Dispose()가 필요하면 여기에서 추가.
                 // 만약 다른곳에서 추가해야한다면 생성자에서 의존성 주입으로 IDisposeManager 받아서 추가하면 됨
                 IDisposeManager disposeManager = LazyInstanceInit(_lazyDisposeManager, "Dispose Manager", 90);
                 //Thread.Sleep(1000); // UI 보기위함
 
-                // disposeManager.AddIDisposable(CameraManager);
+                disposeManager.AddIDisposable(camManager);
                 // disposeManager.AddIDisposable(IOManager);
                 // ..
 

@@ -57,6 +57,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -147,6 +148,10 @@
     <ProjectReference Include="..\LGES_SVA.Styles\LGES_SVA.Styles.csproj">
       <Project>{99f0c2ae-6bd7-417a-b6b1-dabc5f5413b9}</Project>
       <Name>LGES_SVA.Styles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.VisionPro\LGES_SVA.VisionPro.csproj">
+      <Project>{221013A5-C63A-4FF5-8432-C1BD73D60F6D}</Project>
+      <Name>LGES_SVA.VisionPro</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

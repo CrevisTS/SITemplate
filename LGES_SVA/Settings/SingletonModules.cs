@@ -1,6 +1,5 @@
 ﻿using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Communicate;
-using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Inspection.Services;
 using LGES_SVA.Login.Services;
@@ -36,8 +35,7 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterSingleton<ISettingRepository, SettingRepository>();
             containerRegistry.RegisterSingleton<ICommunicateRepository, CommunicateRepository>();
 
-            containerRegistry.RegisterSingleton<IVisionProService, VisionProService>();
-
+            containerRegistry.RegisterSingleton<VisionProService>();
             containerRegistry.RegisterSingleton<LoginService>();
             containerRegistry.RegisterSingleton<RecipeService>();
 

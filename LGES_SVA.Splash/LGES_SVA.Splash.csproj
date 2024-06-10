@@ -33,6 +33,12 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CvsService.Camera.Core">
+      <HintPath>..\..\CvsService\CvsService.Camera.CvsGigE\bin\x64\Release\CvsService.Camera.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.Camera.CvsGigE">
+      <HintPath>..\..\CvsService\CvsService.Camera.CvsGigE\bin\x64\Release\CvsService.Camera.CvsGigE.dll</HintPath>
+    </Reference>
     <Reference Include="CvsService.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CvsServiceDlls\CvsService.Core.dll</HintPath>
@@ -130,6 +136,10 @@
     <ProjectReference Include="..\LGES_SVA.Repository\LGES_SVA.Repository.csproj">
       <Project>{8493A038-B421-40C8-9646-FC0CC6F04986}</Project>
       <Name>LGES_SVA.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.VisionPro\LGES_SVA.VisionPro.csproj">
+      <Project>{221013A5-C63A-4FF5-8432-C1BD73D60F6D}</Project>
+      <Name>LGES_SVA.VisionPro</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

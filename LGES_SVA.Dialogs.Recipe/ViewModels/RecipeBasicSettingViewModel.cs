@@ -33,6 +33,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 		public void OnNavigatedFrom(NavigationContext navigationContext)
 		{
+			// 저장 여부 확인
 		}
 	}
 }

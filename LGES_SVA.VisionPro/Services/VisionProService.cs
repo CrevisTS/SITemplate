@@ -2,18 +2,15 @@
 using Cognex.VisionPro.CalibFix;
 using Cognex.VisionPro.ToolBlock;
 using CvsService.Core.Interfaces;
-using LGES_SVA.Core.Interfaces.Modules.VisionPro;
 using LGES_SVA.Core.Interfaces.Settings;
-using LGES_SVA.VisionPro.Datas;
 using System;
 using System.Drawing;
 
 namespace LGES_SVA.VisionPro.Services
 {
-	public class VisionProService : IVisionProService, IInitializable
+	public class VisionProService : IInitializable
 	{
 		private ISettingRepository _settingRepository;
-
 		/// <summary>
 		/// Cam1
 		/// </summary>
@@ -37,6 +34,7 @@ namespace LGES_SVA.VisionPro.Services
 		/// </summary>
 		public CogToolBlock InspectTool1 { get; set; }
 		public CogToolBlock InspectTool2 { get; set; }
+		public CogToolBlock DummyTool { get; set; }
 
 		public bool IsInit => true;
 
@@ -73,6 +71,11 @@ namespace LGES_SVA.VisionPro.Services
 		{
 			CalibrationTool1 = Load(_settingRepository.VisionProSetting.Calibration1Path) as CogCalibNPointToNPointTool;
 			CalibrationTool2 = Load(_settingRepository.VisionProSetting.Calibration2Path) as CogCalibNPointToNPointTool;
+		}
+
+		public CogImage8Grey ConvertImage(Bitmap image)
+		{
+			return new CogImage8Grey(image);
 		}
 
 		public CogImage8Grey Run(CogCalibNPointToNPointTool tool, Bitmap bmp)
