@@ -10,6 +10,7 @@ using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Communicate;
 using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Recipe.Services;
 using LGES_SVA.Splash.Error;
 using LGES_SVA.VisionPro.Services;
 using System;
@@ -31,19 +32,21 @@ namespace LGES_SVA.Splash.Bootstrappers
         private readonly Lazy<ICommunicateRepository> _lazyCommunicateRepo;
         private readonly Lazy<VisionProService> _visionProService;
         private readonly Lazy<CvsGigEManager> _cvsGigEManager;
+        private readonly Lazy<RecipeService> _recipeService;
 
         public bool IsFail { get; private set; } = false;
 
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;
         public event EventHandler WindowLoadedCompleted;
 
-        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<VisionProService> visionProService, Lazy<ICommunicateRepository> lazyCommunicateRepo, Lazy<CvsGigEManager> cvsGigEManager)
+        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<VisionProService> visionProService, Lazy<ICommunicateRepository> lazyCommunicateRepo, Lazy<CvsGigEManager> cvsGigEManager, Lazy<RecipeService> recipeService)
         {
             _lazyDisposeManager = lazyDisposeManager;
             _lazySettingRepo = lazySettingRepo;
             _visionProService = visionProService;
             _lazyCommunicateRepo = lazyCommunicateRepo;
             _cvsGigEManager = cvsGigEManager;
+            _recipeService = recipeService;
         }
 
         public Task InitializeAsync()
@@ -65,8 +68,11 @@ namespace LGES_SVA.Splash.Bootstrappers
                 // VisionPro
                 _ = LazyInstanceInit(_visionProService, "VisionPro", 60);
 
-				// Camera
-				CvsGigEManager camManager = LazyInstanceInit(_cvsGigEManager, "Camera", 90);
+                // Recipe
+                _ = LazyInstanceInit(_recipeService, "Recipe", 70);
+
+                // Camera
+                CvsGigEManager camManager = LazyInstanceInit(_cvsGigEManager, "Camera", 90);
                 camManager.OpenCameras();
 
                 // AppBoot에서 초기화하는 클래스 중 Dispose()가 필요하면 여기에서 추가.
