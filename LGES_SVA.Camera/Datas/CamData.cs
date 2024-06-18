@@ -4,6 +4,7 @@ using CvsService.Camera.CvsGigE.Models;
 using LGES_SVA.Core.Utils;
 using Prism.Mvvm;
 using System;
+using System.Collections.Concurrent;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Media;
@@ -18,10 +19,11 @@ namespace LGES_SVA.Camera.Datas
 	{
 		private double _exposureTime;
 		private double _gainAbs;
+		private ConcurrentQueue<Bitmap> _bitmaps;
 
 		public CvsGigECamera Cam { get; set; }
 		public WriteableBitmapWrapper WBitmap { get; set; }
-		public Bitmap Bitmap { get; set; }
+		public ConcurrentQueue<Bitmap> Bitmaps { get => _bitmaps; set => SetProperty(ref _bitmaps, value); }
 		public BitmapSource CrossLineOverlay { get; set; }
 
 		public string Name { get; private set; }
@@ -71,6 +73,8 @@ namespace LGES_SVA.Camera.Datas
 			WBitmap = new WriteableBitmapWrapper(Width, Height, PixelFormats.Indexed8, BitmapPalettes.Gray256);
 
 			DrawCrossLineOverlay();
+
+			Bitmaps = new ConcurrentQueue<Bitmap>();
 		}
 
 		private void DrawCrossLineOverlay()
@@ -105,7 +109,7 @@ namespace LGES_SVA.Camera.Datas
 				WBitmap.UpdateWBmp(e.RawData);
 			}));
 
-			Bitmap = ImageHelper.ByteToBitmap(e.RawData, Width, Height);
+			Bitmaps.Enqueue(ImageHelper.ByteToBitmap(e.RawData, Width, Height));
 		}
 
 		public void AcqStart()
