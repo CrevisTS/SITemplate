@@ -14,6 +14,7 @@
 		Background="#292E42" 
 		Closing="DialogWindow_Closing" 
 		BorderBrush="DimGray" 
+		FontFamily="LG Smart_H2.0"
 		BorderThickness="2">
 		<Grid>
 	    </Grid>

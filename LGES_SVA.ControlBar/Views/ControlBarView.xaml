@@ -93,7 +93,7 @@
 							<RowDefinition Height="15"/>
 						</Grid.RowDefinitions>
 						<Image Grid.Row="0" Height="40" Width="40" Source="{Binding SettingRepository.NowUser.Level, Converter={StaticResource LoginIconConverter}, Mode=OneWay}" RenderOptions.BitmapScalingMode="HighQuality"/>
-						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="{Binding SettingRepository.NowUser.Level, Converter={StaticResource LoginDescriptionConverter}, Mode=OneWay}" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+						<TextBlock Grid.Row="1" Text="{Binding SettingRepository.NowUser.Level, Converter={StaticResource LoginDescriptionConverter}, Mode=OneWay}"/>
 					</Grid>
 				</Button>
 
@@ -105,7 +105,7 @@
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/Simulation.png" RenderOptions.BitmapScalingMode="HighQuality"/>
-						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="SIMULATION" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+						<TextBlock Grid.Row="1" Text="SIMULATION"/>
 					</Grid>
 				</Button>
 
@@ -116,7 +116,7 @@
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/logview.png" RenderOptions.BitmapScalingMode="HighQuality"/>
-						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="LOG" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+						<TextBlock Grid.Row="1" Text="LOG" />
 					</Grid>
 				</Button>
 
@@ -127,7 +127,7 @@
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/RECIPE.png" RenderOptions.BitmapScalingMode="HighQuality"/>
-						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="RECIPE" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+						<TextBlock Grid.Row="1" Text="RECIPE" />
 					</Grid>
 				</Button>
 
@@ -138,7 +138,7 @@
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/search.png" RenderOptions.BitmapScalingMode="HighQuality"/>
-						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="SEARCH" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+						<TextBlock Grid.Row="1" Text="SEARCH"/>
 					</Grid>
 				</Button>
 
@@ -149,7 +149,7 @@
 							<RowDefinition Height="3*"/>
 						</Grid.RowDefinitions>
 						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/settings.png" RenderOptions.BitmapScalingMode="HighQuality"/>
-						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="SETTING" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
+						<TextBlock Grid.Row="1" Text="SETTING"/>
 					</Grid>
 				</Button>
 				<!-- Comunication Icons-->

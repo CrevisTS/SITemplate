@@ -270,6 +270,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\Fonts\" />
     <Folder Include="Resources\Icons\" />
   </ItemGroup>
   <ItemGroup>
