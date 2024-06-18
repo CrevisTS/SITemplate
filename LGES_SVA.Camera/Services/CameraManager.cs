@@ -17,6 +17,7 @@ namespace LGES_SVA.Camera.Services
 			Cameras = new Dictionary<string, CamData>();
 
 			InitCam();
+
 		}
 
 		private void InitCam()

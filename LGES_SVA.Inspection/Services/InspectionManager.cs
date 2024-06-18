@@ -39,8 +39,8 @@ namespace LGES_SVA.Inspection.Services
                 {
                     Application.Current.Dispatcher.Invoke(() => 
                     { 
-                        _recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(ImageHelper.BitmapFromWriteableBitmap(_cameraManager.Cameras["Cam1"].Bitmap.WBitmap));
-                        _recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(ImageHelper.BitmapFromWriteableBitmap(_cameraManager.Cameras["Cam2"].Bitmap.WBitmap));
+                        _recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(ImageHelper.BitmapFromWriteableBitmap(_cameraManager.Cameras["Cam1"].WBitmap.WBitmap));
+                        _recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(ImageHelper.BitmapFromWriteableBitmap(_cameraManager.Cameras["Cam2"].WBitmap.WBitmap));
                     });
                     
                     _recipeService.NowRecipe.ToolBlock.Run();

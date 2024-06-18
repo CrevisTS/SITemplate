@@ -44,6 +44,7 @@
 			<RowDefinition Height="130"/>
 		</Grid.RowDefinitions>
 
+		<!-- Title -->
 		<Grid Grid.Row="0">
 			<Label Style="{StaticResource Title_Label}" Content="{Binding Title}" />
 			<Button x:Name="Close_Button" Width="30" Height="30" Template="{StaticResource ResourceKey=CloseButtonTemplate}" Style="{StaticResource CloseButton}" Command="{Binding CloseCommand}" HorizontalAlignment="Right" Margin="10">
@@ -54,12 +55,12 @@
 			</Button>
 		</Grid>
 
-		<Grid Grid.Row="1">
+		<!-- Menu -->
+		<Grid Grid.Row="1" Margin="0 5 0 5">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition Width="100"/>
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="0" Content="Calibration" Command="{Binding CalibrationCommand}"/>
@@ -69,14 +70,14 @@
 		</Grid>
 		
 		<!-- Cam1 -->
-		<Grid Grid.Row="2">
+		<Grid Grid.Row="2" Margin="0 5 0 5">
 			<GroupBox Header="Cam1" Foreground="White">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="100"/>
-						<ColumnDefinition Width="100"/>
-						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="200"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
 					</Grid.ColumnDefinitions>
 
 					<!-- Label -->
@@ -136,7 +137,7 @@
 		</Grid>
 		
 		<!-- Cam2 -->
-		<Grid Grid.Row="3">
+		<Grid Grid.Row="3" Margin="0 5 0 5">
 			<GroupBox Header="Cam2" Foreground="White">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -203,7 +204,7 @@
 		</Grid>
 		
 		<!-- Cam3 -->
-		<Grid Grid.Row="4">
+		<Grid Grid.Row="4" Margin="0 5 0 5">
 			<GroupBox Header="Cam3" Foreground="White">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -270,7 +271,7 @@
 		</Grid>
 		
 		<!-- Cam4 -->
-		<Grid Grid.Row="5">
+		<Grid Grid.Row="5" Margin="0 5 0 5">
 			<GroupBox Header="Cam4" Foreground="White">
 				<Grid>
 					<Grid.ColumnDefinitions>

@@ -110,8 +110,8 @@
 
 				<utils:ZoomPanBorder Grid.Column="0" Style="{StaticResource LiveBorder}">
 					<Grid>
-						<Image Source="{Binding CrossLineOverlay}" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-						<Image Source="{Binding CameraManager.Cameras[Cam1].Bitmap.WBitmap}" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<Image Source="{Binding CameraManager.Cameras[Cam1].CrossLineOverlay}" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="1"/>
+						<Image Source="{Binding CameraManager.Cameras[Cam1].WBitmap.WBitmap}" RenderOptions.BitmapScalingMode="HighQuality"/>
 					</Grid>
 				</utils:ZoomPanBorder>
 
@@ -157,8 +157,8 @@
 
 				<utils:ZoomPanBorder Style="{StaticResource LiveBorder}">
 					<Grid>
-						<Image RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-						<Image Source="{Binding CameraManager.Cameras[Cam2].Bitmap.WBitmap}" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<Image Source="{Binding CameraManager.Cameras[Cam2].CrossLineOverlay}" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="1"/>
+						<Image Source="{Binding CameraManager.Cameras[Cam2].WBitmap.WBitmap}" RenderOptions.BitmapScalingMode="HighQuality"/>
 					</Grid>
 				</utils:ZoomPanBorder>
 
@@ -204,8 +204,8 @@
 
 				<utils:ZoomPanBorder Style="{StaticResource LiveBorder}">
 					<Grid>
-						<Image RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-						<Image Source="{Binding CameraManager.Cameras[Cam3].Bitmap.WBitmap}" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<Image Source="{Binding CameraManager.Cameras[Cam3].CrossLineOverlay}" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="1"/>
+						<Image Source="{Binding CameraManager.Cameras[Cam3].WBitmap.WBitmap}" RenderOptions.BitmapScalingMode="HighQuality"/>
 					</Grid>
 				</utils:ZoomPanBorder>
 
@@ -251,8 +251,8 @@
 
 				<utils:ZoomPanBorder Style="{StaticResource LiveBorder}">
 					<Grid>
-						<Image RenderOptions.BitmapScalingMode="NearestNeighbor"/>
-						<Image Source="{Binding CameraManager.Cameras[Cam4].Bitmap.WBitmap}" RenderOptions.BitmapScalingMode="HighQuality"/>
+						<Image Source="{Binding CameraManager.Cameras[Cam4].CrossLineOverlay}" RenderOptions.BitmapScalingMode="NearestNeighbor" Panel.ZIndex="1"/>
+						<Image Source="{Binding CameraManager.Cameras[Cam4].WBitmap.WBitmap}" RenderOptions.BitmapScalingMode="HighQuality"/>
 					</Grid>
 				</utils:ZoomPanBorder>
 

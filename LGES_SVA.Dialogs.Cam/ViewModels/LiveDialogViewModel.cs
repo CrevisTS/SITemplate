@@ -6,12 +6,14 @@ using Prism.Services.Dialogs;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace LGES_SVA.Dialogs.Cam.ViewModels
 {
 	public class LiveDialogViewModel : BindableBase,IDialogAware,IDisposable
 	{
 		private CameraManager _cameraManager;
+
 		public CameraManager CameraManager { get => _cameraManager; set => SetProperty(ref _cameraManager, value); }
 		
 		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
