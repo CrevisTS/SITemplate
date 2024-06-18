@@ -24,6 +24,12 @@
 		<Setter Property="BorderThickness" Value="1"/>
 		<Setter Property="BorderBrush" Value="DimGray"/>
 	</Style>
+	
+	<Style TargetType="Border" x:Key="LiveBorder">
+		<Setter Property="BorderBrush" Value="#FF444444"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Background" Value="#FF0A0A64"/>
+	</Style>
 
 	<Style TargetType="RadioButton">
 		<Setter Property="Foreground" Value="White"/>

@@ -5,7 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LGES_SVA.Dialog"
         mc:Ignorable="d"
-        Title="DialogWindow" WindowStyle="None" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Background="#292E42" Closing="DialogWindow_Closing" BorderBrush="DimGray" BorderThickness="2">
+        Title="DialogWindow" 
+		WindowStyle="None" 
+		SizeToContent="WidthAndHeight" 
+		ShowInTaskbar="False"
+		WindowStartupLocation="CenterOwner"
+		ResizeMode="NoResize" 
+		Background="#292E42" 
+		Closing="DialogWindow_Closing" 
+		BorderBrush="DimGray" 
+		BorderThickness="2">
 		<Grid>
 	    </Grid>
 </Window>

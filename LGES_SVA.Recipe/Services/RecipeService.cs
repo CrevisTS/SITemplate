@@ -15,11 +15,12 @@ namespace LGES_SVA.Recipe.Services
 	{
 		private readonly string _path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Assembly.GetEntryAssembly().GetName().Name, "SettingFile");
 		private readonly string _filePath;
-		private VisionProService _visionProService;
 
 		private ObservableCollection<RecipeData> _recipes;
 		private RecipeData _nowRecipe;
 		private RecipeData _selectedRecipe;
+		private VisionProService _visionProService;
+
 
 		// 저장된 레시피
 		public ObservableCollection<RecipeData> Recipes { get => _recipes; set => SetProperty(ref _recipes, value); }
@@ -30,16 +31,14 @@ namespace LGES_SVA.Recipe.Services
 		// 레시피 세팅에서 선택된 레시피
 		public RecipeData SelectedRecipe { get => _selectedRecipe; set => SetProperty(ref _selectedRecipe, value); }
 
-		public RecipeService() { }
-		public RecipeService(VisionProService visionProService)
+		public RecipeService(VisionProService vps)
 		{
-			_visionProService = visionProService;
+			_visionProService = vps;
+
 			_filePath = Path.Combine(_path, "Recipe.json");
 			Recipes = new ObservableCollection<RecipeData>();
 
 			LoadRecipe();
-
-
 		}
 
 		public void AddRecipe(string name)
@@ -57,7 +56,7 @@ namespace LGES_SVA.Recipe.Services
 				}
 				Recipes.Add(new RecipeData(name: name));
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				throw;
 			}
@@ -101,6 +100,7 @@ namespace LGES_SVA.Recipe.Services
 			}
 		}
 
+
 		public void SaveRecipe()
 		{
 			JsonParser.Save(Recipes, _path, _filePath);
@@ -108,11 +108,16 @@ namespace LGES_SVA.Recipe.Services
 		}
 
 
+		public void LoadNowRecipe()
+		{
+			NowRecipe.ToolBlock = _visionProService.Load(NowRecipe.ToolPath) as CogToolBlock;
+		}
+
 		#region Init
 		public bool IsInit => true;
 		public void Initialize()
-		{ 
-
+		{
+			LoadNowRecipe();
 		}
 		#endregion
 	}

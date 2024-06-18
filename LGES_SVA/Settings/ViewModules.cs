@@ -1,11 +1,20 @@
 ﻿using LGES_SVA.ControlBar.Views;
 using LGES_SVA.Core.Datas;
-using LGES_SVA.Dialogs.Live.ViewModels;
-using LGES_SVA.Dialogs.Live.Views;
+using LGES_SVA.Dialog;
+using LGES_SVA.Dialogs.Cam.ViewModels;
+using LGES_SVA.Dialogs.Cam.Views;
+using LGES_SVA.Dialogs.DB.ViewModels;
+using LGES_SVA.Dialogs.DB.Views;
+using LGES_SVA.Dialogs.IO.ViewModels;
+using LGES_SVA.Dialogs.IO.Views;
+using LGES_SVA.Dialogs.Light.ViewModels;
+using LGES_SVA.Dialogs.Light.Views;
 using LGES_SVA.Dialogs.LogDialog.ViewModels;
 using LGES_SVA.Dialogs.LogDialog.Views;
 using LGES_SVA.Dialogs.Login.ViewModels;
 using LGES_SVA.Dialogs.Login.Views;
+using LGES_SVA.Dialogs.PLC.ViewModels;
+using LGES_SVA.Dialogs.PLC.Views;
 using LGES_SVA.Dialogs.Recipe.ViewModels;
 using LGES_SVA.Dialogs.Recipe.Views;
 using LGES_SVA.Dialogs.Search.ViewModels;
@@ -14,21 +23,10 @@ using LGES_SVA.Dialogs.Setting.ViewModels;
 using LGES_SVA.Dialogs.Setting.Views;
 using LGES_SVA.Dialogs.Simulation.ViewModels;
 using LGES_SVA.Dialogs.Simulation.Views;
-using LGES_SVA.Dialog;
 using LGES_SVA.Inspection.Views;
 using LGES_SVA.Regions.TabView.Views;
 using Prism.Ioc;
 using Prism.Modularity;
-using LGES_SVA.Dialogs.IO.Views;
-using LGES_SVA.Dialogs.IO.ViewModels;
-using LGES_SVA.Dialogs.PLC.Views;
-using LGES_SVA.Dialogs.PLC.ViewModels;
-using LGES_SVA.Dialogs.DB.Views;
-using LGES_SVA.Dialogs.DB.ViewModels;
-using LGES_SVA.Dialogs.Cam.Views;
-using LGES_SVA.Dialogs.Light.Views;
-using LGES_SVA.Dialogs.Light.ViewModels;
-using LGES_SVA.Dialogs.Cam.ViewModels;
 
 namespace LGES_SVA.Settings
 {
@@ -59,7 +57,7 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterDialog<RecipeDialog, RecipeDialogViewModel>();
 
             containerRegistry.RegisterDialog<SearchDialog, SearchViewModel>();
-            containerRegistry.RegisterDialog<LiveDialog, LiveViewModel>();
+            containerRegistry.RegisterDialog<LiveDialog, LiveDialogViewModel>(DialogNames.CamLiveDialog);
             containerRegistry.RegisterDialog<SettingDialog, SettingViewModel>();
             
             containerRegistry.RegisterDialog<PLCDialog, PLCViewModel>();

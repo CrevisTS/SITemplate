@@ -7,6 +7,7 @@ using Prism.Commands;
 using Prism.Regions;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -21,6 +22,7 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		public CogToolBlockEditV2 ToolBlockWindow { get; set; } = new CogToolBlockEditV2();
 
 		public CogToolBlock ToolBlock { get; set; }
+		public CogToolBlock ToolBlock2 { get; set; }
 		public ICommand SelectToolPathCommand => new DelegateCommand(OnSelectedTool);
 		public ICommand SelectImagePathCommand => new DelegateCommand<string>(OnSelectedImage);
 
@@ -33,9 +35,16 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 			Recipe = _recipeService.SelectedRecipe;
 
-			ToolLoad(Recipe.ToolPath);
-			ImageLoad();
-			ToolRun();
+			try
+			{
+				ToolLoad(Recipe.ToolPath);
+				ImageLoad();
+				ToolRun();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 		}
 		private void ToolRun()
 		{
@@ -44,6 +53,8 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 				return;
 			}
 
+			// 처음 Run 하면 속도가 느림
+			ToolBlockWindow.Subject.Run();
 			ToolBlockWindow.Subject.Run();
 		}
 
@@ -53,8 +64,15 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 			try
 			{
-				ToolBlock = _visionProService.Load(path) as CogToolBlock;
-				ToolBlockWindow.Subject = ToolBlock;
+				if (File.Exists(path))
+				{
+					ToolBlock = _visionProService.Load(path) as CogToolBlock;
+					ToolBlockWindow.Subject = ToolBlock;
+				}
+				else
+				{
+					Recipe.ToolPath = "";
+				}
 			}
 			catch (Exception)
 			{
@@ -69,21 +87,33 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 
 			try
 			{
-				Bitmap leftImage = new Bitmap(Recipe.LeftImagePath);
-				Bitmap rightImage = new Bitmap(Recipe.RightImagePath);
+				if (File.Exists(Recipe.LeftImagePath))
+				{
+					Bitmap leftImage = new Bitmap(Recipe.LeftImagePath);
+					ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(leftImage);
+					leftImage.Dispose();
+				}
+				else
+				{
+					Recipe.LeftImagePath = "";
+				}
 
-				ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(leftImage);
-				ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(rightImage);
-
-				leftImage.Dispose();
-				rightImage.Dispose();
+				if (File.Exists(Recipe.RightImagePath))
+				{
+					Bitmap rightImage = new Bitmap(Recipe.RightImagePath);
+					ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(rightImage);
+					rightImage.Dispose();
+				}
+				else
+				{
+					Recipe.RightImagePath = "";
+				}
 			}
 			catch (Exception)
 			{
 
 				throw;
 			}
-			
 
 		}
 

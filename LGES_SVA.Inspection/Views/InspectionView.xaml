@@ -3,9 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+			 xmlns:viewModel="clr-namespace:LGES_SVA.Inspection.ViewModels"
              xmlns:cvsWindow="clr-namespace:CvsService.UI.Windows.UI.Units;assembly=CvsService.UI.Windows"
              mc:Ignorable="d" 
              Height="705" d:DesignWidth="1470" Background="CadetBlue">
+
+	<b:Interaction.Triggers>
+		<b:EventTrigger EventName="Loaded">
+			<b:InvokeCommandAction Command="{Binding InitCommand}"/>
+		</b:EventTrigger>
+	</b:Interaction.Triggers>
+	
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition/>
@@ -17,19 +26,35 @@
 		</Grid.ColumnDefinitions>
 		
 		<Border Grid.Row="0" Grid.Column="0" BorderBrush="DimGray" BorderThickness="1">
-			
+			<WindowsFormsHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
+				<b:Interaction.Behaviors>
+					<viewModel:WindowsFormsHostBehavior Child="{Binding Display1}"/>
+				</b:Interaction.Behaviors>
+			</WindowsFormsHost>
 		</Border>
-
+		
 		<Border Grid.Row="0" Grid.Column="1" BorderBrush="DimGray" BorderThickness="1">
-
+			<WindowsFormsHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
+				<b:Interaction.Behaviors>
+					<viewModel:WindowsFormsHostBehavior Child="{Binding Display2}"/>
+				</b:Interaction.Behaviors>
+			</WindowsFormsHost>
 		</Border>
 
 		<Border Grid.Row="1" Grid.Column="0" BorderBrush="DimGray" BorderThickness="1">
-
+			<WindowsFormsHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
+				<b:Interaction.Behaviors>
+					<viewModel:WindowsFormsHostBehavior Child="{Binding Display3}"/>
+				</b:Interaction.Behaviors>
+			</WindowsFormsHost>
 		</Border>
 
 		<Border Grid.Row="1" Grid.Column="1" BorderBrush="DimGray" BorderThickness="1">
-
+			<WindowsFormsHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
+				<b:Interaction.Behaviors>
+					<viewModel:WindowsFormsHostBehavior Child="{Binding Display4}"/>
+				</b:Interaction.Behaviors>
+			</WindowsFormsHost>
 		</Border>
 	</Grid>
 </UserControl>

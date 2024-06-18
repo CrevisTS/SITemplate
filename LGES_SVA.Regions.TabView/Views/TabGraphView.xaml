@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LGES_SVA.Regions.TabView.Views"
              mc:Ignorable="d" 
-             Height="Auto" Width="Auto" Background="Blue">
+             Height="Auto" Width="Auto" Background="#292E42">
     <Grid>
             
     </Grid>

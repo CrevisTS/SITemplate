@@ -23,6 +23,7 @@
 	<Window.Resources>
 		<ResourceDictionary>
 			<coreConverter:BoolToVisibility_Converter x:Key="BoolToVisibility_Converter"/>
+			<coreConverter:InspectToFill_Converter x:Key="InspectToFill_Converter"/>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/CloseButtonTemplate.xaml"/>
 				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/MaximizeButtonTemplate.xaml"/>
@@ -185,7 +186,7 @@
 			<!-- Program State -->
 			<Border Grid.Row="3">
 				<Grid>
-					<Label Background="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize=" 40" Content="STOPPED"/>
+					<Button Background="{Binding InspectionManager.InspectionState, Converter={StaticResource InspectToFill_Converter}}" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize=" 40" Content="{Binding InspectionManager.InspectionState}" Command="{Binding RunAndStopCommand}"/>
 
 					<Grid Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Center">
 						<StackPanel Orientation="Horizontal">

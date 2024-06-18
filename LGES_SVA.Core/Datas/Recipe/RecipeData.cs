@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Cognex.VisionPro.ToolBlock;
+using Newtonsoft.Json;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,12 @@ namespace LGES_SVA.Core.Datas.Recipe
 		/// <summary>
 		/// 제품 모델명
 		/// </summary>
-		public string Model{ get => _model; set => SetProperty(ref _model, value); }
+		public string Model { get => _model; set => SetProperty(ref _model, value); }
 
 		public bool IsNowRecipe { get => _isNowRecipe; set => SetProperty(ref _isNowRecipe, value); }
+
+		[JsonIgnore]
+		public CogToolBlock ToolBlock { get; set; }
 
 		public double AlignResultY_ { get; set; }
 		public double PouchAngle_Correction { get; set; }
@@ -51,5 +55,6 @@ namespace LGES_SVA.Core.Datas.Recipe
 			string leftPart = parts[0];
 			return leftPart;
 		}
+
 	}
 }

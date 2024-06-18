@@ -11,6 +11,7 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
 using System.Windows.Input;
+using LGES_SVA.Camera.Services;
 
 namespace LGES_SVA.ControlBar.ViewModels
 {
@@ -28,6 +29,9 @@ namespace LGES_SVA.ControlBar.ViewModels
 
         private LoginService _loginService;
 
+        private CameraManager _cameraManager;
+        public CameraManager CameraManager { get => _cameraManager; set => SetProperty(ref _cameraManager, value); }
+        public bool CameraConnect { get; private set; }
         public IInspectionStateProvider InsepctionStateProvider => _inspectionManager;
         public ISettingRepository SettingRepository { get => _settingRepository; set => SetProperty(ref _settingRepository, value); }
         public ICommunicateRepository ComunicateRepository { get => _communicateRepository; set => SetProperty(ref _communicateRepository, value); }
@@ -51,7 +55,7 @@ namespace LGES_SVA.ControlBar.ViewModels
 
 		
 
-		public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService, ICommunicateRepository communicateRepository)
+		public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService, ICommunicateRepository communicateRepository, CameraManager cm)
         {
             _regionManager = regionManager;
             _inspectionManager = inspectionManager;
@@ -59,7 +63,11 @@ namespace LGES_SVA.ControlBar.ViewModels
             _settingRepository = settingRepository;
             _loginService = loginService;
             _communicateRepository = communicateRepository;
+
+            CameraManager = cm;
+
         }
+
 
 		#region Main Menu 
 		public void LoginToggleClick()

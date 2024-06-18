@@ -125,6 +125,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LGES_SVA.Camera\LGES_SVA.Camera.csproj">
+      <Project>{E481310C-89F7-4DAE-869A-4A2DA2EFA6E5}</Project>
+      <Name>LGES_SVA.Camera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Core\LGES_SVA.Core.csproj">
       <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
       <Name>LGES_SVA.Core</Name>

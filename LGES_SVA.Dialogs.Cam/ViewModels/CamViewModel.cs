@@ -1,24 +1,41 @@
-﻿using CvsService.Camera.CvsGigE.Services;
+﻿using LGES_SVA.Camera.Services;
+using LGES_SVA.Core.Datas;
 using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace LGES_SVA.Dialogs.Cam.ViewModels
 {
-	public class CamViewModel : IDialogAware
+	public class CamViewModel : BindableBase, IDialogAware
 	{
-		private CvsGigEManager _cvsGigEManager;
-		public CvsGigEManager CVSGigEManager { get; set; }
+		private IDialogService _dialogService;
+
+		private CameraManager _cameraManager;
+
+		public CameraManager CameraManager { get => _cameraManager; set => SetProperty(ref _cameraManager, value); }
 		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
-		public CamViewModel(CvsGigEManager cvsGigEManager)
+		public ICommand ReConnectCommand => new DelegateCommand(OnReConnect);
+		public ICommand LiveCommand => new DelegateCommand(OnLive);
+
+		
+		public CamViewModel(CameraManager cameraManager , IDialogService ds)
 		{
-			_cvsGigEManager = cvsGigEManager;
+			_cameraManager = cameraManager;
+			_dialogService = ds;
+		}
+
+
+		private void OnLive()
+		{
+			_dialogService.ShowDialog(DialogNames.CamLiveDialog);
+		}
+
+		private void OnReConnect()
+		{
+			_cameraManager.AllReConnect();
 		}
 
 		private void OnDialogClose()
@@ -36,9 +53,7 @@ namespace LGES_SVA.Dialogs.Cam.ViewModels
 
 		public bool CanCloseDialog() => true;
 
-		public void OnDialogClosed()
-		{
-		}
+		public void OnDialogClosed() { }
 
 		public void OnDialogOpened(IDialogParameters parameters) { }
 

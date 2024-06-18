@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace LGES_SVA.ControlBar.Converters
 {
@@ -26,6 +27,23 @@ namespace LGES_SVA.ControlBar.Converters
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public class BoolsToColorFillConverter : IMultiValueConverter
+	{
+		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+		{
+			if (values.OfType<bool>().All(b => b))
+			{
+				return Brushes.Green;
+			}
+			return Brushes.Red;
+		}
+
+		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
 		{
 			throw new NotImplementedException();
 		}

@@ -44,10 +44,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		/// 현재 레시피로 선택 할 때
 		/// </summary>
 		public ICommand NowRecipeCommand => new DelegateCommand<RecipeData>(OnSelectNowRecipe);
-		/// <summary>
-		/// 설정을 위해 단순 레시피 선택 할 때
-		/// </summary>
-		public ICommand SelectedCommand => new DelegateCommand<RecipeData>(OnSelected);
 		public ICommand CloseCommand => new DelegateCommand(OnDialogClose);
 
 		public ICommand BasicSettingCommand => new DelegateCommand(OnBasicSettingCommand).ObservesCanExecute(() => IsBasicSettingEnabled);
@@ -62,11 +58,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			_eventAggregator = ea;
 			_dialogService = ds;
 			_regionManager = rm;
-
-			ToolBlockWindowInit();
-			
-			// 툴블럭 파일명 변경 시 새로 Load하기 위해
-			ToolBlockWindow.FilenameChanged += ToolBlockWindow_FilenameChanged;
 
 			_eventAggregator.GetEvent<LogoutEvent>().Subscribe(() => LogoutDialogClosed());
 			_eventAggregator.GetEvent<DialogClosingEvent>().Subscribe(OnDialogClosing, ThreadOption.PublisherThread, false, (filter) => filter.Item1.Equals("RecipeDialog"));
@@ -132,41 +123,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			});
 		}
 
-		public void ToolBlockWindowInit()
-		{
-			var toolBlockPath = _settingRepository.VisionProSetting.InspectionRecipe.ToolPath;
-
-			// 현재 레시피가 없다면
-			if (toolBlockPath == null)
-			{
-				return;
-			}
-			// 현재 레시피가 있다면
-			else
-			{
-				CogToolBlock Toolblock = _visionProService.Load(_settingRepository.VisionProSetting.InspectionRecipe.ToolPath) as CogToolBlock;
-			}
-		}
-
-		private void ToolBlockWindow_FilenameChanged(object sender, EventArgs e)
-		{
-			_recipeService.NowRecipe.ToolPath = ToolBlockWindow.Filename;
-		}
-
-		private void OnAddRightImage()
-		{
-			// Dialog를 띄워서 이미지를 가져옴
-
-			// 이미지를 Cailbration1에 넣음
-		}
-
-			private void OnAddLeftImage()
-		{
-			// Dialog를 띄워서 이미지를 가져옴
-
-			// 이미지를 Cailbration1에 넣음
-		}
-
 		private void OnAddRecipe()
 		{
 			DialogParameters parameter = new DialogParameters();
@@ -202,29 +158,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 			}
 		}
 
-		private void OnSaveRecipe()
-		{
-		}
-
-		private void OnSelected(RecipeData recipeData)
-		{
-			if(recipeData == null)
-			{
-				return;
-			}
-			else
-			{
-				_recipeService.SelectedRecipe = recipeData;
-				_regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeBasicSettingView);
-			}
-
-			// 현재 선택한 레시피를 삭제하면 return
-			if (_recipeService.NowRecipe == null)
-			{
-				return;
-			}
-		}
-
 		#region DialogAware
 		public string Title => "Recipe";
 
@@ -238,8 +171,6 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 		#endregion
 		public void Dispose()
 		{
-			ToolBlockWindow.FilenameChanged -= ToolBlockWindow_FilenameChanged;
-
 			_eventAggregator.GetEvent<DialogClosingEvent>().Unsubscribe(OnDialogClosing);
 			_eventAggregator.GetEvent<LogoutEvent>().Unsubscribe(LogoutDialogClosed);
 		}

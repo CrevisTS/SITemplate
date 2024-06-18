@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:viewModel="clr-namespace:LGES_SVA.Dialogs.Cam.ViewModels"
+			 xmlns:localConverter="clr-namespace:LGES_SVA.Core.Converters;assembly=LGES_SVA.Core"
 			 d:DataContext="{d:DesignInstance Type=viewModel:CamViewModel, IsDesignTimeCreatable=False}"
              xmlns:local="clr-namespace:LGES_SVA.Dialogs.Cam.Views"
 			 xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
-             Height="759" Width="800" Background="#292E42">
+             Height="630" Width="800" Background="#292E42">
 	
 	<prism:Dialog.WindowStyle>
 		<Style TargetType="Window">
@@ -28,15 +29,19 @@
 				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/ComboBoxTemplate.xaml"/>
 				<ResourceDictionary Source="pack://application:,,,/LGES_SVA.Styles;component/Components/CloseButtonTemplate.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
+			
+			<localConverter:BoolToColorFillConverter x:Key="BoolToColorFillConverter"/>
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<Grid>
+	<Grid Margin="10">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50"/>
 			<RowDefinition Height="40"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="50"/>
+			<RowDefinition Height="130"/>
+			<RowDefinition Height="130"/>
+			<RowDefinition Height="130"/>
+			<RowDefinition Height="130"/>
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
@@ -57,12 +62,278 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 
-			<Button Grid.Column="0" Content="Inspection1"/>
-			<Button Grid.Column="1" Content="Inspection2"/>
-		</Grid>
+			<Button Grid.Column="0" Content="Calibration" Command="{Binding CalibrationCommand}"/>
+			<Button Grid.Column="1" Content="Live" Command="{Binding LiveCommand}"/>
+			<Button Grid.Column="2" Content="ReConnect" Command="{Binding ReConnectCommand}"/>
 
+		</Grid>
+		
+		<!-- Cam1 -->
 		<Grid Grid.Row="2">
-			<ContentControl/>
+			<GroupBox Header="Cam1" Foreground="White">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="200"/>
+					</Grid.ColumnDefinitions>
+
+					<!-- Label -->
+					<Grid Grid.Column="0">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" Text="Model Name : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="1" Text="Vendor : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="2" Text="FPS : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="3" Text="Resolution : " HorizontalAlignment="Right"/>
+					</Grid>
+
+					<Grid Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" Text="{Binding CameraManager.Cameras[Cam1].ModelName}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="1" Text="{Binding CameraManager.Cameras[Cam1].Vendor}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="2" Text="{Binding CameraManager.Cameras[Cam1].AcquisitionFrameRate}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="3" HorizontalAlignment="Left">
+							<TextBlock.Text>
+								<MultiBinding StringFormat="{}{0} x {1}">
+									<Binding Path="CameraManager.Cameras[Cam1].Width"/>
+									<Binding Path="CameraManager.Cameras[Cam1].Height"/>
+								</MultiBinding>
+							</TextBlock.Text>
+						</TextBlock>
+					</Grid>
+					
+					<!-- Connected -->
+					<Grid Grid.Column="3">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition/>
+							</Grid.RowDefinitions>
+
+							<Grid Grid.Row="0">
+								<TextBlock Text="Connection"/>
+							</Grid>
+							<Grid Grid.Row="1">
+								<Ellipse Width="30" Height="30" Fill="{Binding  CameraManager.Cameras[Cam1].Cam.IsConnected , Converter={StaticResource BoolToColorFillConverter}}"/>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
+			</GroupBox>	
+		</Grid>
+		
+		<!-- Cam2 -->
+		<Grid Grid.Row="3">
+			<GroupBox Header="Cam2" Foreground="White">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<!-- Label -->
+					<Grid Grid.Column="0">
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" Text="Model Name : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="1" Text="Vendor : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="2" Text="FPS : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="3" Text="Resolution : " HorizontalAlignment="Right"/>
+					</Grid>
+
+					<Grid Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" Text="{Binding CameraManager.Cameras[Cam2].ModelName}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="1" Text="{Binding CameraManager.Cameras[Cam2].Vendor}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="2" Text="{Binding CameraManager.Cameras[Cam2].AcquisitionFrameRate}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="3" HorizontalAlignment="Left">
+							<TextBlock.Text>
+								<MultiBinding StringFormat="{}{0} x {1}">
+									<Binding Path="CameraManager.Cameras[Cam2].Width"/>
+									<Binding Path="CameraManager.Cameras[Cam2].Height"/>
+								</MultiBinding>
+							</TextBlock.Text>
+						</TextBlock>
+					</Grid>
+
+					<!-- Connected -->
+					<Grid Grid.Column="3">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition/>
+							</Grid.RowDefinitions>
+
+							<Grid Grid.Row="0">
+								<TextBlock Text="Connection"/>
+							</Grid>
+							<Grid Grid.Row="1">
+								<Ellipse Width="30" Height="30" Fill="{Binding CameraManager.Cameras[Cam2].Cam.IsConnected , Converter={StaticResource BoolToColorFillConverter}}"/>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
+			</GroupBox>
+		</Grid>
+		
+		<!-- Cam3 -->
+		<Grid Grid.Row="4">
+			<GroupBox Header="Cam3" Foreground="White">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<!-- Label -->
+					<Grid Grid.Column="0">
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" Text="Model Name : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="1" Text="Vendor : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="2" Text="FPS : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="3" Text="Resolution : " HorizontalAlignment="Right"/>
+					</Grid>
+
+					<Grid Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" Text="{Binding CameraManager.Cameras[Cam3].ModelName}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="1" Text="{Binding CameraManager.Cameras[Cam3].Vendor}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="2" Text="{Binding CameraManager.Cameras[Cam3].AcquisitionFrameRate}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="3" HorizontalAlignment="Left">
+							<TextBlock.Text>
+								<MultiBinding StringFormat="{}{0} x {1}">
+									<Binding Path="CameraManager.Cameras[Cam3].Width"/>
+									<Binding Path="CameraManager.Cameras[Cam3].Height"/>
+								</MultiBinding>
+							</TextBlock.Text>
+						</TextBlock>
+					</Grid>
+
+					<!-- Connected -->
+					<Grid Grid.Column="3">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition/>
+							</Grid.RowDefinitions>
+
+							<Grid Grid.Row="0">
+								<TextBlock Text="Connection"/>
+							</Grid>
+							<Grid Grid.Row="1">
+								<Ellipse Width="30" Height="30" Fill="{Binding CameraManager.Cameras[Cam3].Cam.IsConnected , Converter={StaticResource BoolToColorFillConverter}}"/>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
+			</GroupBox>
+		</Grid>
+		
+		<!-- Cam4 -->
+		<Grid Grid.Row="5">
+			<GroupBox Header="Cam4" Foreground="White">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<!-- Label -->
+					<Grid Grid.Column="0">
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" Text="Model Name : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="1" Text="Vendor : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="2" Text="FPS : " HorizontalAlignment="Right"/>
+						<TextBlock Grid.Row="3" Text="Resolution : " HorizontalAlignment="Right"/>
+					</Grid>
+
+					<Grid Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0" Text="{Binding CameraManager.Cameras[Cam4].ModelName}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="1" Text="{Binding CameraManager.Cameras[Cam4].Vendor}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="2" Text="{Binding CameraManager.Cameras[Cam4].AcquisitionFrameRate}" HorizontalAlignment="Left"/>
+						<TextBlock Grid.Row="3" HorizontalAlignment="Left">
+							<TextBlock.Text>
+								<MultiBinding StringFormat="{}{0} x {1}">
+									<Binding Path="CameraManager.Cameras[Cam4].Width"/>
+									<Binding Path="CameraManager.Cameras[Cam4].Height"/>
+								</MultiBinding>
+							</TextBlock.Text>
+						</TextBlock>
+					</Grid>
+
+					<!-- Connected -->
+					<Grid Grid.Column="3">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition/>
+							</Grid.RowDefinitions>
+
+							<Grid Grid.Row="0">
+								<TextBlock Text="Connection"/>
+							</Grid>
+							<Grid Grid.Row="1">
+								<Ellipse Width="30" Height="30" Fill="{Binding CameraManager.Cameras[Cam4].Cam.IsConnected , Converter={StaticResource BoolToColorFillConverter}}"/>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Grid>
+			</GroupBox>
 		</Grid>
 	</Grid>
 </UserControl>

@@ -28,5 +28,8 @@ namespace LGES_SVA.Core.Datas
 		// 레시피 설정
 		public static string NewRecipeDialog = nameof(EDialogType.NewRecipeDialog);
 
+		// 카메라 설정
+		public static string CamLiveDialog => nameof(EDialogType.CamLiveDialog);
+
 	}
 }

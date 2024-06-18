@@ -46,6 +46,14 @@
     <Reference Include="Cognex.VisionPro.CorePlus, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="Cognex.VisionPro.ToolGroup, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="Cognex.VisionPro.ToolGroup.Controls, Version=77.1.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
+    <Reference Include="CvsService.Camera.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CvsService\CvsService.Camera.CvsGigE\bin\x64\Release\CvsService.Camera.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CvsService.Camera.CvsGigE, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CvsService\CvsService.Camera.CvsGigE\bin\x64\Release\CvsService.Camera.CvsGigE.dll</HintPath>
+    </Reference>
     <Reference Include="CvsService.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CvsServiceDlls\CvsService.Core.dll</HintPath>
@@ -164,6 +172,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LGES_SVA.Camera\LGES_SVA.Camera.csproj">
+      <Project>{E481310C-89F7-4DAE-869A-4A2DA2EFA6E5}</Project>
+      <Name>LGES_SVA.Camera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.ControlBar\LGES_SVA.ControlBar.csproj">
       <Project>{D00A8075-5A35-450F-B809-8BC2F7B8F71A}</Project>
       <Name>LGES_SVA.ControlBar</Name>
@@ -187,10 +199,6 @@
     <ProjectReference Include="..\LGES_SVA.Dialogs.Light\LGES_SVA.Dialogs.Light.csproj">
       <Project>{C3EEAA99-F09D-4253-B0C9-2B9766A52943}</Project>
       <Name>LGES_SVA.Dialogs.Light</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LGES_SVA.Dialogs.Live\LGES_SVA.Dialogs.Live.csproj">
-      <Project>{30C1AD99-ECCB-44A3-AE42-A6E4F86C9D83}</Project>
-      <Name>LGES_SVA.Dialogs.Live</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Dialogs.LogDialog\LGES_SVA.Dialogs.LogDialog.csproj">
       <Project>{A6F4A12E-C6D8-4A80-92A4-C647C68E8FB6}</Project>

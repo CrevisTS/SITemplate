@@ -6,11 +6,13 @@ using LGES_SVA.Core.Datas.Settings;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Inspection.Services;
 using LGES_SVA.Recipe.Services;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -27,25 +29,22 @@ namespace LGES_SVA.Main.ViewModels
         private readonly ILogWriteManager _logWirteManager = LogWriteManager.Instance;
         private ISettingRepository _settingRepo;
 		private RecipeService _recipeService;
+        private InspectionManager _inspectionManager;
 		#endregion
-
-
-		//private readonly ILogDisplayManager _logDisplayManager;
 
 		public AppSetting AppSetting { get => _appSetting; set => SetProperty(ref _appSetting, value); }
         public RecipeService RecipeService { get => _recipeService; }
+        public InspectionManager InspectionManager { get => _inspectionManager;  }
         public ISettingRepository SettingRepository { get => _settingRepo; set => SetProperty(ref _settingRepo, value); }
         public ICommand LoadedCommand => new DelegateCommand(OnLoaded);
         public ICommand ClosingCommand => new DelegateCommand<CancelEventArgs>(OnClosing);
         public ICommand ClosedCommand => new DelegateCommand(OnClosed);
         public ICommand MouseMoveCommand => new DelegateCommand(OnMouseMove);
+        public ICommand RunAndStopCommand => new DelegateCommand(OnRunAndStop);
 
-		private void OnMouseMove()
-		{
-            _eventAggregator.GetEvent<MouseMoveEvent>().Publish();
-        }
+		
 
-        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, ISettingRepository settingRepository, IDisposeManager disposeManager, RecipeService rs)
+        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, ISettingRepository settingRepository, IDisposeManager disposeManager, RecipeService rs, InspectionManager im)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
@@ -53,8 +52,26 @@ namespace LGES_SVA.Main.ViewModels
             SettingRepository = settingRepository;
             _disposeManager = disposeManager;
             _recipeService = rs;
+            _inspectionManager = im;
 
             _logWirteManager.Info(new InfoLogData("프로그램 시작",$"{AppSetting.ProgramVersion}"));
+        }
+
+        private void OnRunAndStop()
+        {
+            if(InspectionManager.InspectionState == Core.Enums.EInspectionState.Stop)
+			{
+                InspectionManager.InspectionStartAsync();
+			}
+			else
+			{
+                InspectionManager.InspectionStopAsync();
+            }
+        }
+
+        private void OnMouseMove()
+        {
+            _eventAggregator.GetEvent<MouseMoveEvent>().Publish();
         }
 
         private void OnLoaded()

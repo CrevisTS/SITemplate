@@ -35,6 +35,7 @@
 			<localConverter:LiveIconConverter x:Key="LiveIconConverter"/>
 			<localConverter:SettingIconConverter x:Key="SettingIconConverter"/>
 			<localConverter:BoolToColorFillConverter x:Key="BoolToColorFillConverter"/>
+			<localConverter:BoolsToColorFillConverter x:Key="BoolsToColorFillConverter"/>
 			
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -141,18 +142,7 @@
 					</Grid>
 				</Button>
 
-				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource LiveIconConverter}, Mode=OneWay}" Grid.Column="5" Background="Transparent" BorderThickness="0" Command="{Binding LiveBtnClickCommand}">
-					<Grid Height="80" Width="80">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="50"/>
-							<RowDefinition Height="*"/>
-						</Grid.RowDefinitions>
-						<Image Grid.Row="0" Height="40" Width="40" Source="pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/live.png" RenderOptions.BitmapScalingMode="HighQuality"/>
-						<TextBlock Grid.Row="1" VerticalAlignment="Top" Text="LIVE" HorizontalAlignment="Center" FontSize="10" Foreground="White"/>
-					</Grid>
-				</Button>
-
-				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource SettingIconConverter}, Mode=OneWay}" Grid.Column="6" Background="Transparent" BorderThickness="0" Command="{Binding SettingBtnClickCommand}">
+				<Button Style="{DynamicResource MainMenuButton}" IsEnabled="{Binding SettingRepository.NowUser.Level, Converter={StaticResource SettingIconConverter}, Mode=OneWay}" Grid.Column="5" Background="Transparent" BorderThickness="0" Command="{Binding SettingBtnClickCommand}">
 					<Grid Height="80" Width="80">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="5*"/>
@@ -195,7 +185,16 @@
 						<Button x:Name="Cam_Button"  Padding="-1" Template="{StaticResource MinimizeButton}" Style="{StaticResource NaviBarButton}" Width="70" Command="{Binding CamBtnClickCommand}">
 							<StackPanel Style="{StaticResource LightIndicator}">
 								<TextBlock Text="CAM" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>
-								<Ellipse Width="30" Height="30" Fill="{Binding ComunicateRepository.Cam.IsConnected, Converter={StaticResource BoolToColorFillConverter}}"/>
+								<Ellipse Width="30" Height="30">
+									<Ellipse.Fill>
+										<MultiBinding Converter="{StaticResource BoolsToColorFillConverter}">
+											<Binding Path="CameraManager.Cameras[Cam1].Cam.IsConnected" />
+											<Binding Path="CameraManager.Cameras[Cam2].Cam.IsConnected" />
+											<Binding Path="CameraManager.Cameras[Cam3].Cam.IsConnected" />
+											<Binding Path="CameraManager.Cameras[Cam4].Cam.IsConnected" />
+										</MultiBinding>
+									</Ellipse.Fill>
+								</Ellipse>
 							</StackPanel>
 						</Button>
 					</StackPanel>
