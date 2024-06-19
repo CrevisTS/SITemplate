@@ -11,6 +11,7 @@
         TabGraphView,
         RecipeBasicSettingView,
         RecipeLeftSettingView,
-        RecipeRightSettingView
+        RecipeRightSettingView,
+        YieldView
     }
 }

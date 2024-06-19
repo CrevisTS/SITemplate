@@ -6,17 +6,22 @@ using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Core.Utils;
 using Prism.Events;
 using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Timers;
 
 namespace LGES_SVA.Login.Services
 {
 	public class LoginService : BindableBase
 	{
+		private readonly string _path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Assembly.GetEntryAssembly().GetName().Name, "SettingFile");
+		private readonly string USER_PATH;
+
 		private readonly ISettingRepository _settingRepository;
 		private readonly IEventAggregator _eventAggregator;
 		private readonly CSVParser _csvParser;
-		private readonly string USER_PATH = $@"D:\DAT\User.csv";
 
 		// 300000 = 5분
 		private const int MINUTE5 = 300000;
@@ -36,6 +41,9 @@ namespace LGES_SVA.Login.Services
 			_eventAggregator = eventAggregator;
 
 			_csvParser = csvParser;
+
+			// TODO : IPC에 D:가 없음
+			USER_PATH = $@"{_path}\User.csv";
 			_users = _csvParser.ReadCSV<User>(USER_PATH);
 
 			// Mouse Move Event 구독

@@ -95,6 +95,8 @@ namespace LGES_SVA.Recipe.Services
 				if (recipe.IsNowRecipe)
 				{
 					NowRecipe = recipe;
+
+					LoadNowRecipe();
 					break;
 				}
 			}
@@ -110,6 +112,8 @@ namespace LGES_SVA.Recipe.Services
 
 		public void LoadNowRecipe()
 		{
+			if (!File.Exists(NowRecipe.ToolPath)) return;
+			
 			NowRecipe.ToolBlock = _visionProService.Load(NowRecipe.ToolPath) as CogToolBlock;
 		}
 

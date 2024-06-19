@@ -1,23 +1,25 @@
-﻿using Prism.Mvvm;
+﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Implementation;
+using LGES_SVA.Camera.Services;
+using LGES_SVA.Core.Datas.Inspection;
 using LGES_SVA.Core.Enums;
+using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
+using LGES_SVA.Recipe.Services;
+using LGES_SVA.VisionPro.Services;
+using Prism.Events;
+using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
-using LGES_SVA.Recipe.Services;
-using LGES_SVA.Camera.Services;
-using LGES_SVA.VisionPro.Services;
-using System.Drawing;
-using LGES_SVA.Core.Utils;
 using System.Windows;
-using Prism.Events;
-using LGES_SVA.Core.Events;
-using LGES_SVA.Core.Datas.Inspection;
-using System;
-using Cognex.VisionPro;
 
 namespace LGES_SVA.Inspection.Services
 {
-    public class InspectionManager : BindableBase, IInspectionManager
+	public class InspectionManager : BindableBase, IInspectionManager
     {
         private readonly IEventAggregator _eventAggregator;
         private EInspectionState _inspectionState;
@@ -28,9 +30,10 @@ namespace LGES_SVA.Inspection.Services
         private CameraManager _cameraManager;
         private RecipeService _recipeService;
 		private VisionProService _visionProService;
-        
-        // Result
 
+
+        // Result
+        public ObservableCollection<InspectionResult> InspectionResults { get; set; } = new ObservableCollection<InspectionResult>();
         // 검사 끝나면 검사 결과를 Event로 쏴줘야겠네
 
 		public InspectionManager(IEventAggregator ea, CameraManager cm, RecipeService rs, VisionProService vps)
@@ -39,7 +42,6 @@ namespace LGES_SVA.Inspection.Services
             _cameraManager = cm;
             _recipeService = rs;
             _visionProService = vps;
-
         }
 
         private void MainLogic()
@@ -59,35 +61,43 @@ namespace LGES_SVA.Inspection.Services
 
                     if(_cameraManager.Cameras["Cam1"].Bitmaps.TryDequeue(out bmp1) && _cameraManager.Cameras["Cam2"].Bitmaps.TryDequeue(out bmp2))
 					{
+
                         Application.Current.Dispatcher.Invoke(() => 
-                        { 
-                            _recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(bmp1);
-                            _recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(bmp2);
-                        });
+                        {
+							//_recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(new Bitmap(@"D:\7. 프로젝트\IPC_SmartVision\240516_프로그램 제작 중\Exp5000\left_cell.bmp"));
+							//_recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(new Bitmap(@"D:\7. 프로젝트\IPC_SmartVision\240516_프로그램 제작 중\Exp5000\right_cell.bmp"));
+							_recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(bmp1);
+							_recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(bmp2);
+						});
                         
                         _recipeService.NowRecipe.ToolBlock.Run();
                         if (_recipeService.NowRecipe.ToolBlock.RunStatus.Result == Cognex.VisionPro.CogToolResultConstants.Error)
 						{
                             var inspectResult = new InspectionResult(
-                                leftImage : _recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value as ICogImage,
-                                rightImage : _recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value as ICogImage,
+                                leftRecord : _recipeService.NowRecipe.ToolBlock.CreateLastRunRecord().SubRecords,
+                                rightRecord : _recipeService.NowRecipe.ToolBlock.CreateLastRunRecord().SubRecords,
+                                leftImage : _recipeService.NowRecipe.ToolBlock.Outputs["LeftImage"].Value as ICogImage,
+                                rightImage : _recipeService.NowRecipe.ToolBlock.Outputs["RightImage"].Value as ICogImage,
                                 leftTerraceAngle: null,
                                 rightTerraceAngle: null,
                                 leftTerraceToLeadDistance: null,
                                 rightTerraceToLeadDistance: null,
                                 leftLeadAngle: null,
                                 rightLeadAngle: null,
-                                cellDistance: null
-                            );
+                                cellDistance: 0
+                            );;
 
+                            //InspectionResults.Add(inspectResult);
                             _eventAggregator.GetEvent<InspectComplateEvent>().Publish(inspectResult);
 
                         }
                         else
 						{
                             var inspectResult = new InspectionResult(
-                                leftImage: _recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value as ICogImage,
-                                rightImage: _recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value as ICogImage,
+                                leftRecord: _recipeService.NowRecipe.ToolBlock.CreateLastRunRecord().SubRecords,
+                                rightRecord: _recipeService.NowRecipe.ToolBlock.CreateLastRunRecord().SubRecords,
+                                leftImage: _recipeService.NowRecipe.ToolBlock.Outputs["LeftImage"].Value as ICogImage,
+                                rightImage: _recipeService.NowRecipe.ToolBlock.Outputs["RightImage"].Value as ICogImage,
                                 leftTerraceAngle: (double)_recipeService.NowRecipe.ToolBlock.Outputs["Left_TerraceAngle"].Value,
                                 rightTerraceAngle: (double)_recipeService.NowRecipe.ToolBlock.Outputs["Right_TerraceAngle"].Value,
                                 leftTerraceToLeadDistance: (double)_recipeService.NowRecipe.ToolBlock.Outputs["Left_TerraceToLeadDistance"].Value,
@@ -97,9 +107,11 @@ namespace LGES_SVA.Inspection.Services
                                 cellDistance: (double)_recipeService.NowRecipe.ToolBlock.Outputs["Cell_Distance"].Value
                             );
 
+                            //InspectionResults.Add(inspectResult);
                             _eventAggregator.GetEvent<InspectComplateEvent>().Publish(inspectResult);
 
                         }
+
                     }
                 }
             }

@@ -9,6 +9,7 @@ namespace LGES_SVA.Core.Datas
         public static string InspectionView => nameof(EViewType.InspectionView);
         public static string SettingView => nameof(EViewType.SettingView);
         public static string TabView => nameof(EViewType.TabView);
+        public static string YieldView => nameof(EViewType.YieldView);
 
         // Tab Inner Region
         public static string TabImageView => nameof(EViewType.TabImageView);

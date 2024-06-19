@@ -53,9 +53,28 @@ namespace LGES_SVA.Inspection.ViewModels
 
 		private void OnInspectComplate(InspectionResult obj)
 		{
+             _record1.SubRecords.Clear();
+             _record2.SubRecords.Clear();
+
+            if(obj.CellDistance != 0)
+			{
+                foreach (var rec in obj.LeftRecord)
+                {
+                    _record1.SubRecords.Add(rec);
+                }
+                foreach (var rec in obj.RightRecord)
+                {
+                    _record2.SubRecords.Add(rec);
+                }
+            }
+           
+            _record1.Content = obj.LeftImage;
+            _record2.Content = obj.RightImage;
+
+            Display1.Record = _record1;
+            Display2.Record = _record2;
+
             // 검사 결과 Display
-            Display1.Image = obj.LeftImage;
-            Display2.Image = obj.RightImage;
         }
 
 		private void OnInitCogRecordDisplay()
@@ -71,8 +90,13 @@ namespace LGES_SVA.Inspection.ViewModels
                 Display4.HorizontalScrollBar = false;
                 Display4.VerticalScrollBar = false;
 
+                Display1.AutoFit = true;
+                Display2.AutoFit = true;
+                Display3.AutoFit = true;
+                Display4.AutoFit = true;
+
                 _record1.Content = Display1.Image;
-                _record2.Content = Display1.Image;
+                _record2.Content = Display2.Image;
                 Display1.Record = _record1;
                 Display2.Record = _record2;
             }

@@ -69,8 +69,6 @@ namespace LGES_SVA.VisionPro.Services
 
 		public void Initialize()
 		{
-			CalibrationTool1 = Load(_settingRepository.VisionProSetting.Calibration1Path) as CogCalibNPointToNPointTool;
-			CalibrationTool2 = Load(_settingRepository.VisionProSetting.Calibration2Path) as CogCalibNPointToNPointTool;
 		}
 
 		public CogImage8Grey ConvertImage(Bitmap image)

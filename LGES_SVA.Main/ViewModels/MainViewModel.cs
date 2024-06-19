@@ -89,6 +89,7 @@ namespace LGES_SVA.Main.ViewModels
             _regionManager.RequestNavigate(RegionNames.MainViewRegion, ViewNames.InspectionView);
             _regionManager.RequestNavigate(RegionNames.ControlRegion, ViewNames.ControlBarView);
             _regionManager.RequestNavigate(RegionNames.TabViewRegion, ViewNames.TabView);
+            _regionManager.RequestNavigate(RegionNames.YieldRegion, ViewNames.YieldView);
 
             //
             _regionManager.RequestNavigate(RegionNames.TabInnerRegion, ViewNames.TabImageView);

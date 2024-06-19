@@ -25,6 +25,7 @@ using LGES_SVA.Dialogs.Simulation.ViewModels;
 using LGES_SVA.Dialogs.Simulation.Views;
 using LGES_SVA.Inspection.Views;
 using LGES_SVA.Regions.TabView.Views;
+using LGES_SVA.Regions.Yield.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 
@@ -47,6 +48,7 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterForNavigation<TabGraphView>(ViewNames.TabGraphView);
             containerRegistry.RegisterForNavigation<RecipeBasicSettingView>(ViewNames.RecipeBasicSettingView);
             containerRegistry.RegisterForNavigation<RecipeLeftSettingView>(ViewNames.RecipeLeftSettingView);
+            containerRegistry.RegisterForNavigation<YieldView>(ViewNames.YieldView);
 
             containerRegistry.RegisterDialogWindow<DialogWindow>();
 

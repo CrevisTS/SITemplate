@@ -23,10 +23,6 @@ namespace LGES_SVA.Core.Datas.Settings.VisionPro
 		{
 			Directory.CreateDirectory(_path);
 			
-			Calibration1Path = $@"{_path}\LeftCalibration.vpp";
-			Calibration2Path = $@"{_path}\RightCalibration.vpp";
-			DummyPath = $@"{_path}\Dummy.vpp";
-
 			InspectionRecipe = new RecipeData("DefaultRecipe");
 
 		}

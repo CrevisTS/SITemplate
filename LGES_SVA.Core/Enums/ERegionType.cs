@@ -7,6 +7,7 @@
         TabViewRegion,
         RecipeSettingRegion,
         TabInnerRegion,
-        RecipeSettingInnerRegion
+        RecipeSettingInnerRegion,
+        YieldRegion
     }
 }

@@ -5,6 +5,7 @@ using LGES_SVA.Core.Utils;
 using Prism.Mvvm;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Media;
@@ -121,7 +122,6 @@ namespace LGES_SVA.Camera.Datas
 		{
 			try
 			{
-				Cam.GrabController.ImageCaptured -= GrabController_ImageCaptured;
 				Cam.GrabController.GrabStop();
 			}
 			catch (Exception)

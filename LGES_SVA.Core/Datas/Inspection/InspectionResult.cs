@@ -13,6 +13,9 @@ namespace LGES_SVA.Core.Datas.Inspection
 	{
 		private ICogImage _leftImage;
 		private ICogImage _rightImage;
+
+		private ICogRecords _leftRecord;
+		private ICogRecords _rightRecord;
 		// 1. 검사 안함
 		
 		// 2. Master Jig Center부터 Cell Center Position
@@ -37,18 +40,24 @@ namespace LGES_SVA.Core.Datas.Inspection
 		// 7. Left Terrace 중앙에서 부터 Right Terrace 중앙까지의 길이
 		private double? _cellDistance;
 
+		public double? CellDistance { get => _cellDistance; set => SetProperty(ref _cellDistance, value); }
+
 		// 8. 검사 안함
 
 		// 9. Center Gap
 
 		public ICogImage LeftImage { get => _leftImage; set => SetProperty(ref _leftImage, value); }
 		public ICogImage RightImage { get => _rightImage; set => SetProperty(ref _rightImage, value); }
+		public ICogRecords LeftRecord { get => _leftRecord; set => SetProperty(ref _leftRecord, value); }
+		public ICogRecords RightRecord { get => _rightRecord; set => SetProperty(ref _rightRecord, value); }
 		public InspectionResult() { }
 
-		public InspectionResult(ICogImage leftImage , ICogImage rightImage, double? leftTerraceAngle, double? rightTerraceAngle, double? leftTerraceToLeadDistance, double? rightTerraceToLeadDistance, double? leftLeadAngle, double? rightLeadAngle, double? cellDistance)
+		public InspectionResult(ICogImage leftImage , ICogImage rightImage, ICogRecords leftRecord,ICogRecords rightRecord, double? leftTerraceAngle, double? rightTerraceAngle, double? leftTerraceToLeadDistance, double? rightTerraceToLeadDistance, double? leftLeadAngle, double? rightLeadAngle, double? cellDistance)
 		{
 			LeftImage = leftImage;
 			RightImage = rightImage;
+			LeftRecord = leftRecord;
+			RightRecord = rightRecord;
 
 			_leftTerraceAngle = leftTerraceAngle;
 			_rightTerraceAngle = rightTerraceAngle;

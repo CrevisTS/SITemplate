@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Drawing;
 
 namespace LGES_SVA.Dialogs.Cam.ViewModels
 {
@@ -56,6 +57,14 @@ namespace LGES_SVA.Dialogs.Cam.ViewModels
 		public void Dispose()
 		{
 			_cameraManager.AllAcqStop();
+
+			Bitmap bmp = new Bitmap(100,100);
+			foreach(var cam in _cameraManager.Cameras)
+			{
+				while(!cam.Value.Bitmaps.IsEmpty) { cam.Value.Bitmaps.TryDequeue(out bmp); }
+			}
+			bmp.Dispose();
+
 		}
 		#endregion
 	}

@@ -21,7 +21,7 @@ namespace LGES_SVA.Core.Enums
 		LightDialog,
 		CamDialog,
 		NewRecipeDialog,
-		CamLiveDialog
+		CamLiveDialog,
 	}
 
 }

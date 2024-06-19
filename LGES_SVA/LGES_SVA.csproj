@@ -252,6 +252,10 @@
       <Project>{9a88ddf3-ef68-45f0-9786-1b6a4177fdd7}</Project>
       <Name>LGES_SVA.Regions.TabView</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Regions.Yield\LGES_SVA.Regions.Yield.csproj">
+      <Project>{A1DE362A-7097-4C75-AEC3-AF1F142DF6AA}</Project>
+      <Name>LGES_SVA.Regions.Yield</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Repository\LGES_SVA.Repository.csproj">
       <Project>{8493a038-b421-40c8-9646-fc0cc6f04986}</Project>
       <Name>LGES_SVA.Repository</Name>

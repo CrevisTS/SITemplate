@@ -116,11 +116,7 @@
 				<RowDefinition Height="50"/>
 				<!-- LOT ID -->
 				<RowDefinition Height="50"/>
-				<RowDefinition Height="25"/>
-				<RowDefinition Height="25"/>
-				<RowDefinition Height="50"/>
-				<RowDefinition Height="25"/>
-				<RowDefinition Height="50"/>
+				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
 			<!-- Icon Bar -->
@@ -242,6 +238,10 @@
 						<TextBlock Text="{Binding SettingRepository.NowUser.Level}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 					</Border>
 				</Grid>
+			</Border>
+
+			<Border Grid.Row="6">
+				<ContentControl prism:RegionManager.RegionName="{x:Static coreData:RegionNames.YieldRegion}"/>
 			</Border>
 		</Grid>
 
