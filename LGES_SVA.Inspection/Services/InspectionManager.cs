@@ -53,6 +53,12 @@ namespace LGES_SVA.Inspection.Services
 			{
                 while (EInspectionState.Stopping != InspectionState)
                 {
+                    if (_cameraManager.Cameras.Count == 0)
+					{
+                        MessageBox.Show("연결된 카메라가 없습니다.");
+                        break;
+					}
+                    
                     // 아직 Queue에 촬영한 이미지가 없다면
                     if(_cameraManager.Cameras["Cam1"].Bitmaps.Count < 0 || _cameraManager.Cameras["Cam2"].Bitmaps.Count < 0)
 					{
@@ -64,10 +70,10 @@ namespace LGES_SVA.Inspection.Services
 
                         Application.Current.Dispatcher.Invoke(() => 
                         {
-							//_recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(new Bitmap(@"D:\7. 프로젝트\IPC_SmartVision\240516_프로그램 제작 중\Exp5000\left_cell.bmp"));
-							//_recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(new Bitmap(@"D:\7. 프로젝트\IPC_SmartVision\240516_프로그램 제작 중\Exp5000\right_cell.bmp"));
-							_recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(bmp1);
-							_recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(bmp2);
+							_recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(new Bitmap(@"D:\7. 프로젝트\IPC_SmartVision\240516_프로그램 제작 중\Exp5000\left_cell.bmp"));
+							_recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(new Bitmap(@"D:\7. 프로젝트\IPC_SmartVision\240516_프로그램 제작 중\Exp5000\right_cell.bmp"));
+							//_recipeService.NowRecipe.ToolBlock.Inputs["LeftImage"].Value = _visionProService.ConvertImage(bmp1);
+							//_recipeService.NowRecipe.ToolBlock.Inputs["RightImage"].Value = _visionProService.ConvertImage(bmp2);
 						});
                         
                         _recipeService.NowRecipe.ToolBlock.Run();
@@ -117,7 +123,6 @@ namespace LGES_SVA.Inspection.Services
             }
 			catch (Exception)
 			{
-
 				throw;
 			}
             
@@ -130,7 +135,11 @@ namespace LGES_SVA.Inspection.Services
             {
                 // TODO: Inspection Start 준비
                 Thread.Sleep(1000);
-                _cameraManager.AllAcqStart();
+
+                if(_cameraManager.Cameras.Count != 0)
+				{
+                    _cameraManager.AllAcqStart();
+				}
 
                 _inspectionThread = new Thread(new ThreadStart(MainLogic));
                 _inspectionThread.Name = "Inspection Thread";
@@ -148,7 +157,10 @@ namespace LGES_SVA.Inspection.Services
                 Thread.Sleep(1000);
                 _inspectionThread.Join();
 
-                _cameraManager.AllAcqStop();
+                if (_cameraManager.Cameras.Count != 0)
+                {
+                    _cameraManager.AllAcqStop();
+                }
             });
             InspectionState = EInspectionState.Stop;
         }

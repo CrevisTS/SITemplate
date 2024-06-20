@@ -170,12 +170,6 @@
 								<Ellipse Width="30" Height="30" Fill="{Binding ComunicateRepository.IO.IsConnected, Converter={StaticResource BoolToColorFillConverter} }"/>
 							</StackPanel>
 						</Button>
-						<Button x:Name="DB_Button"  Padding="-1" Template="{StaticResource MinimizeButton}" Style="{StaticResource NaviBarButton}" Width="70" Command="{Binding DBBtnClickCommand}">
-							<StackPanel Style="{StaticResource LightIndicator}">
-								<TextBlock Text="DB" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>
-								<Ellipse Width="30" Height="30" Fill="{Binding ComunicateRepository.DB.IsConnected, Converter={StaticResource BoolToColorFillConverter}}"/>
-							</StackPanel>
-						</Button>
 						<Button x:Name="Light_Button"  Padding="-1" Template="{StaticResource MinimizeButton}" Style="{StaticResource NaviBarButton}" Width="70" Command="{Binding LightBtnClickCommand}">
 							<StackPanel Style="{StaticResource LightIndicator}">
 								<TextBlock Text="LIGHT" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,0,20"/>

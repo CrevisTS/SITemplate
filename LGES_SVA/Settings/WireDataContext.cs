@@ -24,7 +24,6 @@ namespace LGES_SVA.Settings
             ViewModelLocationProvider.Register<SplashWindow, SplashViewModel>();
             ViewModelLocationProvider.Register<InspectionView, InspectionViewModel>();
             ViewModelLocationProvider.Register<ControlBarView, ControlBarViewModel>();
-            ViewModelLocationProvider.Register<TabImageView, TabImageViewModel>();
             ViewModelLocationProvider.Register<RecipeDialog, RecipeDialogViewModel>();
             ViewModelLocationProvider.Register<RecipeBasicSettingView, RecipeBasicSettingViewModel>();
             ViewModelLocationProvider.Register<RecipeLeftSettingView, RecipeLeftSettingViewModel>();

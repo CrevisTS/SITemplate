@@ -188,10 +188,6 @@
       <Project>{1A5839E2-A6EE-45FA-BF03-AC14E6013248}</Project>
       <Name>LGES_SVA.Dialogs.Cam</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LGES_SVA.Dialogs.DB\LGES_SVA.Dialogs.DB.csproj">
-      <Project>{F36802E5-AE67-4ABF-96AB-2BFB5A0EC037}</Project>
-      <Name>LGES_SVA.Dialogs.DB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Dialogs.IO\LGES_SVA.Dialogs.IO.csproj">
       <Project>{7DD70C7D-1252-4F16-A917-A8EBC7571E46}</Project>
       <Name>LGES_SVA.Dialogs.IO</Name>

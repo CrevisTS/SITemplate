@@ -95,12 +95,6 @@
     <Compile Include="Views\TabGraphView.xaml.cs">
       <DependentUpon>TabGraphView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TabImageView.xaml.cs">
-      <DependentUpon>TabImageView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabResultView.xaml.cs">
-      <DependentUpon>TabResultView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\TabView.xaml.cs">
       <DependentUpon>TabView.xaml</DependentUpon>
     </Compile>
@@ -116,14 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\TabGraphView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TabImageView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TabResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -92,7 +92,7 @@ namespace LGES_SVA.Main.ViewModels
             _regionManager.RequestNavigate(RegionNames.YieldRegion, ViewNames.YieldView);
 
             //
-            _regionManager.RequestNavigate(RegionNames.TabInnerRegion, ViewNames.TabImageView);
+            _regionManager.RequestNavigate(RegionNames.TabInnerRegion, ViewNames.TabGraphView);
             _regionManager.RequestNavigate(RegionNames.RecipeSettingRegion, ViewNames.RecipeBasicSettingView);
 
         }

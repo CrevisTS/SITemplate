@@ -12,7 +12,7 @@ namespace LGES_SVA.Core.Datas.Settings
 {
 	public class AppSetting : BindableBase
     {
-        private string _programVersion = "v1.0.0";
+        private string _programVersion = "v1.0.1";
         private WindowSetting _windowSetting = new WindowSetting();
 
         // AppSetting 관련

@@ -33,7 +33,7 @@
 			</WindowsFormsHost>
 		</Border>
 		
-		<Border Grid.Row="0" Grid.Column="1" BorderBrush="DimGray" BorderThickness="1">
+		<Border Grid.Row="1" Grid.Column="0" BorderBrush="DimGray" BorderThickness="1">
 			<WindowsFormsHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
 				<b:Interaction.Behaviors>
 					<viewModel:WindowsFormsHostBehavior Child="{Binding Display2}"/>
@@ -41,7 +41,7 @@
 			</WindowsFormsHost>
 		</Border>
 
-		<Border Grid.Row="1" Grid.Column="0" BorderBrush="DimGray" BorderThickness="1">
+		<Border Grid.Row="0" Grid.Column="1" BorderBrush="DimGray" BorderThickness="1">
 			<WindowsFormsHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="DimGray">
 				<b:Interaction.Behaviors>
 					<viewModel:WindowsFormsHostBehavior Child="{Binding Display3}"/>

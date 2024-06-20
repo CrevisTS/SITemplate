@@ -3,8 +3,6 @@ using LGES_SVA.Core.Datas;
 using LGES_SVA.Dialog;
 using LGES_SVA.Dialogs.Cam.ViewModels;
 using LGES_SVA.Dialogs.Cam.Views;
-using LGES_SVA.Dialogs.DB.ViewModels;
-using LGES_SVA.Dialogs.DB.Views;
 using LGES_SVA.Dialogs.IO.ViewModels;
 using LGES_SVA.Dialogs.IO.Views;
 using LGES_SVA.Dialogs.Light.ViewModels;
@@ -43,8 +41,6 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterForNavigation<ControlBarView>(ViewNames.ControlBarView);
             containerRegistry.RegisterForNavigation<InspectionView>(ViewNames.InspectionView);
             containerRegistry.RegisterForNavigation<TabView>(ViewNames.TabView);
-            containerRegistry.RegisterForNavigation<TabImageView>(ViewNames.TabImageView);
-            containerRegistry.RegisterForNavigation<TabResultView>(ViewNames.TabResultView);
             containerRegistry.RegisterForNavigation<TabGraphView>(ViewNames.TabGraphView);
             containerRegistry.RegisterForNavigation<RecipeBasicSettingView>(ViewNames.RecipeBasicSettingView);
             containerRegistry.RegisterForNavigation<RecipeLeftSettingView>(ViewNames.RecipeLeftSettingView);
@@ -64,7 +60,6 @@ namespace LGES_SVA.Settings
             
             containerRegistry.RegisterDialog<PLCDialog, PLCViewModel>();
             containerRegistry.RegisterDialog<IODialog, IOViewModel>();
-            containerRegistry.RegisterDialog<DBDialog, DBViewModel>();
             containerRegistry.RegisterDialog<LightDialog, LightViewModel>();
             containerRegistry.RegisterDialog<CamDialog, CamViewModel>();
 

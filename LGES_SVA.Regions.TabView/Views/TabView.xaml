@@ -20,14 +20,10 @@
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="80"/>
-						<ColumnDefinition Width="80"/>
-						<ColumnDefinition Width="80"/>
 						<ColumnDefinition Width="*"/>
 					</Grid.ColumnDefinitions>
 
-					<Button Grid.Column="0" FontSize="15" Content="Image" Foreground="White" Background="Transparent" Command="{Binding ImageCommand}"/>
-					<Button Grid.Column="1" FontSize="15" Content="Result" Foreground="White" Background="Transparent" Command="{Binding ResultCommand}"/>
-					<Button Grid.Column="2" FontSize="15" Content="Graph" Foreground="White" Background="Transparent" Command="{Binding GraphCommand}"/>
+					<Button Grid.Column="0" FontSize="15" Content="Graph" Foreground="White" Background="Transparent" Command="{Binding GraphCommand}"/>
 			</Grid>
 			</Border>
 
