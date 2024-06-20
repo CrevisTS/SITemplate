@@ -13,6 +13,13 @@ namespace LGES_SVA.Core.Utils
 {
 	public class ImageHelper
 	{
+		/// <summary>
+		/// Byte배열을 Bitmap으로 변환합니다.
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <returns></returns>
 		public static Bitmap ByteToBitmap(byte[] data, int width, int height)
 		{
 			// 여기에서 높이, 너비 및 형식을 알고있는 비트 맵을 만듭니다. 
@@ -25,7 +32,6 @@ namespace LGES_SVA.Core.Utils
 			IntPtr unmanagedPointer = Marshal.AllocHGlobal(data.Length);
 
 			// 바이트 배열의 데이터를 BitmapData로 복사합니다.
-			// 원래는 unsafe를 사용하기도 하나보다
 			Marshal.Copy(data, 0, bmpData.Scan0, data.Length);
 			// 마샬 메모리 해제
 			Marshal.FreeHGlobal(unmanagedPointer);
@@ -35,6 +41,11 @@ namespace LGES_SVA.Core.Utils
 			return bmp;
 		}
 
+		/// <summary>
+		/// Bitmap을 BitmapImage로 변환합니다.
+		/// </summary>
+		/// <param name="bitmap"></param>
+		/// <returns></returns>
 		public static BitmapImage Bitmap2BitmapImage(Bitmap bitmap)
 		{
 			// 새 비트맵 이미지 객체 생성
@@ -56,6 +67,10 @@ namespace LGES_SVA.Core.Utils
 			}
 		}
 
+		/// <summary>
+		/// Gray 이미지를 만들기 위해 사용합니다.
+		/// </summary>
+		/// <param name="bitmap"></param>
 		public static void SetGrayscalePalette(Bitmap bitmap)
 		{
 			ColorPalette GrayscalePalette = bitmap.Palette;
@@ -80,6 +95,11 @@ namespace LGES_SVA.Core.Utils
 			bitmap.Palette = GrayscalePalette;
 		}
 
+		/// <summary>
+		/// Bitmap을 WriteableBitmap으로 변환합니다.
+		/// </summary>
+		/// <param name="writeBmp"></param>
+		/// <returns></returns>
 		public static Bitmap BitmapFromWriteableBitmap(WriteableBitmap writeBmp)
 		{
 			System.Drawing.Bitmap bmp;

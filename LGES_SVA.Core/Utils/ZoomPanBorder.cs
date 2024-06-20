@@ -10,6 +10,9 @@ using System.Windows.Media;
 
 namespace LGES_SVA.Core.Utils
 {
+	/// <summary>
+	/// 이미지를 출력하는 Canvas같은 Border를 생성합니다.
+	/// </summary>
 	public class ZoomPanBorder : Border
 	{
 		private UIElement child = null;

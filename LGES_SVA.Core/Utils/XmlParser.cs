@@ -8,7 +8,7 @@ namespace LGES_SVA.Core.Utils
     {
 
         /// <summary>
-        /// Xml 저장. 폴더가 없다면 알아서 만들어줌
+        /// Xml 저장. 폴더가 없다면 알아서 만들어줍니다.
         /// </summary>
         /// <typeparam name="T">저장할 클래스 타입</typeparam>
         /// <param name="data">저장할 클래스</param>
@@ -26,7 +26,7 @@ namespace LGES_SVA.Core.Utils
         }
 
         /// <summary>
-        /// Xml 불러오기. 만약 파일이 존재하지 않는다면 
+        /// Xml 불러오기. 만약 파일이 존재하지 않는다면 클래스를 새로 만들어 반환합니다.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="fileFullPath"></param>

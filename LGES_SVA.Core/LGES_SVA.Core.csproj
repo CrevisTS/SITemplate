@@ -81,7 +81,6 @@
     <Compile Include="Datas\Login\User.cs" />
     <Compile Include="Datas\Recipe\Box.cs" />
     <Compile Include="Datas\RegionNames.cs" />
-    <Compile Include="Datas\Settings\AlarmConfigurationData.cs" />
     <Compile Include="Datas\Settings\AppSetting.cs" />
     <Compile Include="Datas\Settings\ByPassMode.cs" />
     <Compile Include="Datas\Settings\Enums\AutoDeleteImageData.cs" />

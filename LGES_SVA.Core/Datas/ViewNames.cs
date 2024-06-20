@@ -12,8 +12,6 @@ namespace LGES_SVA.Core.Datas
         public static string YieldView => nameof(EViewType.YieldView);
 
         // Tab Inner Region
-        public static string TabImageView => nameof(EViewType.TabImageView);
-        public static string TabResultView => nameof(EViewType.TabResultView);
         public static string TabGraphView => nameof(EViewType.TabGraphView);
 
         public static string RecipeBasicSettingView => nameof(EViewType.RecipeBasicSettingView);

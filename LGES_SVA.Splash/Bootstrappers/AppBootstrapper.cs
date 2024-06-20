@@ -30,7 +30,6 @@ namespace LGES_SVA.Splash.Bootstrappers
 
         private readonly Lazy<IDisposeManager> _lazyDisposeManager;
         private readonly Lazy<ISettingRepository> _lazySettingRepo;
-        private readonly Lazy<ICommunicateRepository> _lazyCommunicateRepo;
         private readonly Lazy<VisionProService> _visionProService;
         private readonly Lazy<CvsGigEManager> _cvsGigEManager;
         private readonly Lazy<CameraManager> _cameraManager;
@@ -41,12 +40,11 @@ namespace LGES_SVA.Splash.Bootstrappers
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;
         public event EventHandler WindowLoadedCompleted;
 
-        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<VisionProService> visionProService, Lazy<ICommunicateRepository> lazyCommunicateRepo, Lazy<CvsGigEManager> cvsGigEManager, Lazy<RecipeService> recipeService, Lazy<CameraManager> cm)
+        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<VisionProService> visionProService, Lazy<CvsGigEManager> cvsGigEManager, Lazy<RecipeService> recipeService, Lazy<CameraManager> cm)
         {
             _lazyDisposeManager = lazyDisposeManager;
             _lazySettingRepo = lazySettingRepo;
             _visionProService = visionProService;
-            _lazyCommunicateRepo = lazyCommunicateRepo;
             _cvsGigEManager = cvsGigEManager;
             _recipeService = recipeService;
             _cameraManager = cm;
@@ -66,7 +64,6 @@ namespace LGES_SVA.Splash.Bootstrappers
                 // TODO : Prism Singleton 초기화 하는 부분.
                 _ = LazyInstanceInit(_lazySettingRepo, "Setting", 20);
 
-                _ = LazyInstanceInit(_lazyCommunicateRepo, "Comunicate", 40);
                 //Thread.Sleep(1000); // UI 보기위함
 
                 // VisionPro

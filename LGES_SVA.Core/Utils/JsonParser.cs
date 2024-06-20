@@ -10,6 +10,13 @@ namespace LGES_SVA.Core.Utils
 {
 	public class JsonParser
 	{
+		/// <summary>
+		/// 클래스를 Json으로 저장합니다.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="data"></param>
+		/// <param name="folderPath"></param>
+		/// <param name="fileFullPath"></param>
 		public static void Save<T>(T data, string folderPath, string fileFullPath) where T : class
 		{
 			if(!Directory.Exists(folderPath)) { Directory.CreateDirectory(folderPath); }
@@ -23,6 +30,12 @@ namespace LGES_SVA.Core.Utils
 
 		}
 
+		/// <summary>
+		/// Json을 클래스로 불러옵니다.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="fileFullPath"></param>
+		/// <returns></returns>
 		public static T Load<T>(string fileFullPath) where T : class, new()
 		{
 			if (File.Exists(fileFullPath)) 

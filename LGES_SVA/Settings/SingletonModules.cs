@@ -35,7 +35,6 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterSingleton<IInspectionManager, InspectionManager>();
             containerRegistry.RegisterSingleton<IDisposeManager, DisposeManager>();
             containerRegistry.RegisterSingleton<ISettingRepository, SettingRepository>();
-            containerRegistry.RegisterSingleton<ICommunicateRepository, CommunicateRepository>();
 
             containerRegistry.RegisterSingleton<VisionProService>();
             containerRegistry.RegisterSingleton<LoginService>();
