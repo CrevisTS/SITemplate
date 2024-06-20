@@ -1,31 +1,22 @@
-﻿using CvsService.Core.Interfaces;
+﻿using LGES_SVA.Camera.Services;
 using LGES_SVA.Core.Datas;
-using LGES_SVA.Core.Enums;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Settings;
-using LGES_SVA.Core.Interfaces.Communicate;
 using LGES_SVA.Login.Services;
 using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
 using System.Windows.Input;
-using LGES_SVA.Camera.Services;
 
-namespace LGES_SVA.ControlBar.ViewModels
+namespace LGES_SVA.Regions.ControlBar.ViewModels
 {
-    public class ControlBarViewModel : BindableBase
-    {
-        #region Fields for property
-        private EViewType _mainRegionContent = EViewType.InspectionView;
-        #endregion
+	public class ControlBarViewModel : BindableBase
+	{
 
-        private readonly IRegionManager _regionManager;
         private readonly IInspectionManager _inspectionManager;
         private readonly IDialogService _dialogService;
         private ISettingRepository _settingRepository;
-        private ICommunicateRepository _communicateRepository;
 
         private LoginService _loginService;
 
@@ -34,8 +25,6 @@ namespace LGES_SVA.ControlBar.ViewModels
         public bool CameraConnect { get; private set; }
         public IInspectionStateProvider InsepctionStateProvider => _inspectionManager;
         public ISettingRepository SettingRepository { get => _settingRepository; set => SetProperty(ref _settingRepository, value); }
-        public ICommunicateRepository ComunicateRepository { get => _communicateRepository; set => SetProperty(ref _communicateRepository, value); }
-        public EViewType MainRegionContent { get => _mainRegionContent; set => SetProperty(ref _mainRegionContent, value); }
 
         // Main Menu 
         public ICommand LoginBtnClickCommand => new DelegateCommand(LoginToggleClick);
@@ -53,33 +42,31 @@ namespace LGES_SVA.ControlBar.ViewModels
         public ICommand LightBtnClickCommand => new DelegateCommand(OnLightDialogShow);
         public ICommand CamBtnClickCommand => new DelegateCommand(OnCamDialogShow);
 
-		
 
-		public ControlBarViewModel(IRegionManager regionManager, IInspectionManager inspectionManager, IDialogService dialogService, ISettingRepository settingRepository, LoginService loginService, ICommunicateRepository communicateRepository, CameraManager cm)
+
+        public ControlBarViewModel(IInspectionManager im, IDialogService ds, ISettingRepository sr, LoginService ls, CameraManager cm)
         {
-            _regionManager = regionManager;
-            _inspectionManager = inspectionManager;
-            _dialogService = dialogService;
-            _settingRepository = settingRepository;
-            _loginService = loginService;
-            _communicateRepository = communicateRepository;
+            _inspectionManager = im;
+            _dialogService = ds;
+            _settingRepository = sr;
+            _loginService = ls;
 
             CameraManager = cm;
 
         }
 
 
-		#region Main Menu 
-		public void LoginToggleClick()
+        #region Main Menu 
+        public void LoginToggleClick()
         {
             // 로그아웃 상태 -> 로그인 창 띄움
-            if(!_loginService.IsLogin)
-			{
+            if (!_loginService.IsLogin)
+            {
                 _dialogService.ShowDialog(DialogNames.LoginDialog);
             }
-			// 로그인 상태 -> 로그아웃 시킴
+            // 로그인 상태 -> 로그아웃 시킴
             else
-			{
+            {
                 _loginService.Logout();
             }
         }
@@ -112,8 +99,8 @@ namespace LGES_SVA.ControlBar.ViewModels
 
         public void RecipeClick()
         {
-			try
-			{
+            try
+            {
                 // 로그아웃 상태 -> 로그인 창 띄움
                 if (!_loginService.IsLogin)
                 {
@@ -124,12 +111,12 @@ namespace LGES_SVA.ControlBar.ViewModels
                     _dialogService.ShowDialog(DialogNames.RecipeDialog);
                 }
             }
-			catch (Exception)
-			{
+            catch (Exception)
+            {
 
-				throw;
-			}
-            
+                throw;
+            }
+
         }
 
         public void SearchClick()
@@ -168,10 +155,10 @@ namespace LGES_SVA.ControlBar.ViewModels
                 _dialogService.ShowDialog(DialogNames.SettingDialog);
             }
         }
-		#endregion
+        #endregion
 
-		#region Communicate Menu
-		private void IOClick()
+        #region Communicate Menu
+        private void IOClick()
         {
             _dialogService.ShowDialog(DialogNames.IODialog);
         }
@@ -197,38 +184,5 @@ namespace LGES_SVA.ControlBar.ViewModels
 
         #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-        private void OnMainRegionChangeClick(object parameter)
-        {
-            EViewType newContent = (EViewType)Enum.Parse(typeof(EViewType), parameter.ToString());
-            if (MainRegionContent == newContent) return;
-
-            MainRegionContent = newContent;
-            _regionManager.RequestNavigate(RegionNames.MainViewRegion, newContent.ToString());
-        }
-
-        private void OnBtnStartStopClick()
-        {
-            switch (_inspectionManager.InspectionState)
-            {
-                case EInspectionState.Stop:
-                    _inspectionManager.InspectionStartAsync();
-                    break;
-                case EInspectionState.Start:
-                    _inspectionManager.InspectionStopAsync();
-                    break;
-            }
-        }
-	}
+    }
 }

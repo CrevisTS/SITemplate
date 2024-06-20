@@ -1,4 +1,4 @@
-﻿using LGES_SVA.ControlBar.Views;
+﻿using LGES_SVA.Regions.ControlBar.Views;
 using LGES_SVA.Core.Datas;
 using LGES_SVA.Dialog;
 using LGES_SVA.Dialogs.Cam.ViewModels;

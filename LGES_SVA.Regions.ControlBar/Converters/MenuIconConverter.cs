@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace LGES_SVA.ControlBar.Converters
+namespace LGES_SVA.Regions.ControlBar.Converters
 {
 	public class SimulationIconConverter : IValueConverter
 	{

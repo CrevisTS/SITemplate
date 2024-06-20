@@ -2,26 +2,26 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media;
 
-namespace LGES_SVA.ControlBar.Converters
+namespace LGES_SVA.Regions.ControlBar.Converters
 {
-    public class InspectionStatusToBtnBackgroundConverter : IValueConverter
+    class InspectionStatusToBtnTextConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is EInspectionState state))
+            if (!(value is EInspectionState status))
                 return null;
 
-            switch (state)
+            switch (status)
             {
                 case EInspectionState.Start:
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF6347"));
+                    return "Stop";
                 case EInspectionState.Stop:
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#32CD32"));
-                case EInspectionState.Stopping:
+                    return "Start";
                 case EInspectionState.Starting:
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"));
+                    return "Starting";
+                case EInspectionState.Stopping:
+                    return "Stopping";
                 default:
                     return null;
             }

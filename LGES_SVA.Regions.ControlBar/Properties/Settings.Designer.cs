@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LGES_SVA.Yield.Properties
+namespace LGES_SVA.Regions.ControlBar.Properties
 {
     
     

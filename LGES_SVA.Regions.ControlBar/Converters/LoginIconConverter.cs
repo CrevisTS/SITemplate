@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace LGES_SVA.ControlBar.Converters
+namespace LGES_SVA.Regions.ControlBar.Converters
 {
 	public class LoginIconConverter : IValueConverter
 	{
@@ -15,14 +15,14 @@ namespace LGES_SVA.ControlBar.Converters
 			switch (userLevel)
 			{
 				case ELevel.None:
-					source = $@"pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/Login.png";
+					source = $@"pack://application:,,,/LGES_SVA.Regions.ControlBar;component/Resources/Icons/Login.png";
 
 					break;
 
 				case ELevel.Operator:
 				case ELevel.Engineer:
 				case ELevel.God:
-					source = $@"pack://application:,,,/LGES_SVA.ControlBar;component/Resources/Icons/Login.png";
+					source = $@"pack://application:,,,/LGES_SVA.Regions.ControlBar;component/Resources/Icons/Login.png";
 
 					break;
 			}

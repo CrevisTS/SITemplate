@@ -176,10 +176,6 @@
       <Project>{E481310C-89F7-4DAE-869A-4A2DA2EFA6E5}</Project>
       <Name>LGES_SVA.Camera</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LGES_SVA.ControlBar\LGES_SVA.ControlBar.csproj">
-      <Project>{D00A8075-5A35-450F-B809-8BC2F7B8F71A}</Project>
-      <Name>LGES_SVA.ControlBar</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Core\LGES_SVA.Core.csproj">
       <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
       <Name>LGES_SVA.Core</Name>
@@ -243,6 +239,10 @@
     <ProjectReference Include="..\LGES_SVA.Recipe\LGES_SVA.Recipe.csproj">
       <Project>{E545F16D-1125-46C5-9951-8E4B81B75866}</Project>
       <Name>LGES_SVA.Recipe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Regions.ControlBar\LGES_SVA.Regions.ControlBar.csproj">
+      <Project>{8c1e298d-f4eb-4b7c-8678-db48c1707c21}</Project>
+      <Name>LGES_SVA.Regions.ControlBar</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Regions.TabView\LGES_SVA.Regions.TabView.csproj">
       <Project>{9a88ddf3-ef68-45f0-9786-1b6a4177fdd7}</Project>

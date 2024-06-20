@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace LGES_SVA.ControlBar.Converters
+namespace LGES_SVA.Regions.ControlBar.Converters
 {
 	/// <summary>
 	/// Connect 연결에 따른 Fill 색상 변경

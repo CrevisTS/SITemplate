@@ -1,14 +1,12 @@
 ﻿using CvsService.Prism.Interfaces;
-using LGES_SVA.ControlBar.ViewModels;
-using LGES_SVA.ControlBar.Views;
+using LGES_SVA.Regions.ControlBar.ViewModels;
+using LGES_SVA.Regions.ControlBar.Views;
 using LGES_SVA.Dialogs.Recipe.ViewModels;
 using LGES_SVA.Dialogs.Recipe.Views;
 using LGES_SVA.Inspection.ViewModels;
 using LGES_SVA.Inspection.Views;
 using LGES_SVA.Main.ViewModels;
 using LGES_SVA.Main.Views;
-using LGES_SVA.Regions.TabView.ViewModels;
-using LGES_SVA.Regions.TabView.Views;
 using LGES_SVA.Splash.ViewModels;
 using LGES_SVA.Splash.Views;
 using Prism.Mvvm;
