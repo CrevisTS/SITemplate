@@ -58,12 +58,12 @@ namespace LGES_SVA.Core.Utils
 				group.Children.Add(tt);
 				child.RenderTransform = group;
 				child.RenderTransformOrigin = new Point(0.0, 0.0);
-				this.MouseWheel += child_MouseWheel;
-				this.MouseLeftButtonDown += child_MouseLeftButtonDown;
-				this.MouseLeftButtonUp += child_MouseLeftButtonUp;
-				this.MouseMove += child_MouseMove;
+				this.MouseWheel += Child_MouseWheel;
+				this.MouseLeftButtonDown += Child_MouseLeftButtonDown;
+				this.MouseLeftButtonUp += Child_MouseLeftButtonUp;
+				this.MouseMove += Child_MouseMove;
 				this.PreviewMouseRightButtonDown += new MouseButtonEventHandler(
-				  child_PreviewMouseRightButtonDown);
+				  Child_PreviewMouseRightButtonDown);
 			}
 		}
 
@@ -85,7 +85,7 @@ namespace LGES_SVA.Core.Utils
 
 		#region Child Events
 
-		private void child_MouseWheel(object sender, MouseWheelEventArgs e)
+		private void Child_MouseWheel(object sender, MouseWheelEventArgs e)
 		{
 			if (child != null)
 			{
@@ -111,7 +111,7 @@ namespace LGES_SVA.Core.Utils
 			}
 		}
 
-		private void child_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		private void Child_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			if (child != null)
 			{
@@ -123,7 +123,7 @@ namespace LGES_SVA.Core.Utils
 			}
 		}
 
-		private void child_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+		private void Child_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
 		{
 			if (child != null)
 			{
@@ -132,12 +132,12 @@ namespace LGES_SVA.Core.Utils
 			}
 		}
 
-		void child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+		void Child_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			this.Reset();
 		}
 
-		private void child_MouseMove(object sender, MouseEventArgs e)
+		private void Child_MouseMove(object sender, MouseEventArgs e)
 		{
 			if (child != null)
 			{

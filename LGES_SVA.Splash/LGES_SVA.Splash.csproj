@@ -112,6 +112,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,6 +133,10 @@
     <ProjectReference Include="..\LGES_SVA.Core\LGES_SVA.Core.csproj">
       <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
       <Name>LGES_SVA.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Inspection\LGES_SVA.Inspection.csproj">
+      <Project>{7A2E23B9-3633-414B-9005-9C5FCF4CA8EA}</Project>
+      <Name>LGES_SVA.Inspection</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Recipe\LGES_SVA.Recipe.csproj">
       <Project>{E545F16D-1125-46C5-9951-8E4B81B75866}</Project>

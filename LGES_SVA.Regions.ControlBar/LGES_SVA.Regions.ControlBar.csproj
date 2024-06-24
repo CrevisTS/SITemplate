@@ -108,6 +108,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -116,7 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LGES_SVA.Camera\LGES_SVA.Camera.csproj">
-      <Project>{E481310C-89F7-4DAE-869A-4A2DA2EFA6E5}</Project>
+      <Project>{e481310c-89f7-4dae-869a-4a2da2efa6e5}</Project>
       <Name>LGES_SVA.Camera</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Core\LGES_SVA.Core.csproj">
@@ -126,6 +127,10 @@
     <ProjectReference Include="..\LGES_SVA.Login\LGES_SVA.Login.csproj">
       <Project>{8FCDBA57-5E0A-4062-B8CF-572155141C08}</Project>
       <Name>LGES_SVA.Login</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGES_SVA.Styles\LGES_SVA.Styles.csproj">
+      <Project>{99f0c2ae-6bd7-417a-b6b1-dabc5f5413b9}</Project>
+      <Name>LGES_SVA.Styles</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

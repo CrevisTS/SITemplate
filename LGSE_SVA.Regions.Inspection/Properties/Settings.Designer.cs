@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LGES_SVA.Inspect.Properties
+namespace LGSE_SVA.Regions.Inspection.Properties
 {
     
     

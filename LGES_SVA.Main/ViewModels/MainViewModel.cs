@@ -6,7 +6,6 @@ using LGES_SVA.Core.Datas.Settings;
 using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Settings;
-using LGES_SVA.Inspection.Services;
 using LGES_SVA.Recipe.Services;
 using Prism.Commands;
 using Prism.Events;
@@ -29,12 +28,12 @@ namespace LGES_SVA.Main.ViewModels
         private readonly ILogWriteManager _logWirteManager = LogWriteManager.Instance;
         private ISettingRepository _settingRepo;
 		private RecipeService _recipeService;
-        private InspectionManager _inspectionManager;
+        private IInspectionManager _inspectionManager;
 		#endregion
 
 		public AppSetting AppSetting { get => _appSetting; set => SetProperty(ref _appSetting, value); }
         public RecipeService RecipeService { get => _recipeService; }
-        public InspectionManager InspectionManager { get => _inspectionManager;  }
+        public IInspectionManager InspectionManager { get => _inspectionManager;  }
         public ISettingRepository SettingRepository { get => _settingRepo; set => SetProperty(ref _settingRepo, value); }
         public ICommand LoadedCommand => new DelegateCommand(OnLoaded);
         public ICommand ClosingCommand => new DelegateCommand<CancelEventArgs>(OnClosing);
@@ -44,13 +43,13 @@ namespace LGES_SVA.Main.ViewModels
 
 		
 
-        public MainViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, ISettingRepository settingRepository, IDisposeManager disposeManager, RecipeService rs, InspectionManager im)
+        public MainViewModel(IRegionManager rm, IEventAggregator ea, ISettingRepository sr, IDisposeManager dm, RecipeService rs, IInspectionManager im)
         {
-            _regionManager = regionManager;
-            _eventAggregator = eventAggregator;
-            AppSetting = settingRepository.AppSetting;
-            SettingRepository = settingRepository;
-            _disposeManager = disposeManager;
+            _regionManager = rm;
+            _eventAggregator = ea;
+            AppSetting = sr.AppSetting;
+            SettingRepository = sr;
+            _disposeManager = dm;
             _recipeService = rs;
             _inspectionManager = im;
 

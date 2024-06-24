@@ -40,11 +40,13 @@ namespace LGES_SVA.Core.Datas.Inspection
 		// 7. Left Terrace 중앙에서 부터 Right Terrace 중앙까지의 길이
 		private double? _cellDistance;
 
-		public double? CellDistance { get => _cellDistance; set => SetProperty(ref _cellDistance, value); }
 
 		// 8. 검사 안함
 
 		// 9. Center Gap
+
+
+		private EInspectResult _inspectResult;
 
 		public ICogImage LeftImage { get => _leftImage; set => SetProperty(ref _leftImage, value); }
 		public ICogImage RightImage { get => _rightImage; set => SetProperty(ref _rightImage, value); }
@@ -52,13 +54,16 @@ namespace LGES_SVA.Core.Datas.Inspection
 		public ICogRecords RightRecord { get => _rightRecord; set => SetProperty(ref _rightRecord, value); }
 		public InspectionResult() { }
 
-		public InspectionResult(ICogImage leftImage , ICogImage rightImage, ICogRecords leftRecord,ICogRecords rightRecord, double? leftTerraceAngle, double? rightTerraceAngle, double? leftTerraceToLeadDistance, double? rightTerraceToLeadDistance, double? leftLeadAngle, double? rightLeadAngle, double? cellDistance)
+		public InspectionResult(ICogImage leftImage, ICogImage rightImage, ICogRecords leftRecord, ICogRecords rightRecord)
 		{
 			LeftImage = leftImage;
 			RightImage = rightImage;
 			LeftRecord = leftRecord;
 			RightRecord = rightRecord;
+		}
 
+		public InspectionResult( double? leftTerraceAngle, double? rightTerraceAngle, double? leftTerraceToLeadDistance, double? rightTerraceToLeadDistance, double? leftLeadAngle, double? rightLeadAngle, double? cellDistance, EInspectResult result)
+		{
 			_leftTerraceAngle = leftTerraceAngle;
 			_rightTerraceAngle = rightTerraceAngle;
 			_leftTerraceToLeadDistance = leftTerraceToLeadDistance;
@@ -66,6 +71,15 @@ namespace LGES_SVA.Core.Datas.Inspection
 			_leftLeadAngle = leftLeadAngle;
 			_rightLeadAngle = rightLeadAngle;
 			_cellDistance = cellDistance;
+
+			_inspectResult = result;
 		}
+	}
+
+	public enum EInspectResult
+	{
+		OK,
+		NG,
+		Pass
 	}
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LGES_SVA.Inspect.Properties {
+namespace LGSE_SVA.Regions.Inspection.Properties {
     
     
     /// <summary>
@@ -38,7 +38,7 @@ namespace LGES_SVA.Inspect.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if ((resourceMan == null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LGES_SVA.Inspect.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LGSE_SVA.Regions.Inspection.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

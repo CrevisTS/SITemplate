@@ -1,14 +1,9 @@
 ﻿using Microsoft.Xaml.Behaviors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 
-namespace LGES_SVA.Inspection.ViewModels
+namespace LGES_SVA.Regions.Inspection.Utils
 {
 	class WindowsFormsHostBehavior : Behavior<WindowsFormsHost>
 	{

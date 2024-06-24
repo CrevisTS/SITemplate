@@ -19,11 +19,11 @@ namespace LGES_SVA.Dialogs.Recipe.ViewModels
 {
 	public class RecipeDialogViewModel : BindableBase, IDialogAware, IDisposable
 	{
-		private ISettingRepository _settingRepository;
-		private VisionProService _visionProService;
-		private IEventAggregator _eventAggregator;
-		private IDialogService _dialogService;
-		private IRegionManager _regionManager;
+		private readonly ISettingRepository _settingRepository;
+		private readonly VisionProService _visionProService;
+		private readonly IEventAggregator _eventAggregator;
+		private readonly IDialogService _dialogService;
+		private readonly IRegionManager _regionManager;
 
 		private RecipeService _recipeService;
 		private RecipeData _selectedRecipe;

@@ -1,5 +1,4 @@
 ﻿using Cognex.VisionPro;
-using Cognex.VisionPro.Display;
 using Cognex.VisionPro.Implementation;
 using LGES_SVA.Camera.Services;
 using LGES_SVA.Core.Datas.Inspection;
@@ -8,17 +7,18 @@ using LGES_SVA.Core.Interfaces;
 using LGES_SVA.VisionPro.Services;
 using Prism.Commands;
 using Prism.Events;
-using Prism.Mvvm;
-using Prism.Regions;
 using System;
-using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace LGES_SVA.Inspection.ViewModels
+namespace LGSE_SVA.Regions.Inspection.ViewModels
 {
-	public class InspectionViewModel : BindableBase
-    {
+	public class InspectionViewModel
+	{
         private readonly IInspectionStateProvider _inspectionStateProvider;
         private readonly IEventAggregator _eventAggregator;
 
@@ -26,8 +26,8 @@ namespace LGES_SVA.Inspection.ViewModels
         private CameraManager _cameraManager;
 
         public ICommand InitCommand => new DelegateCommand(OnInitCogRecordDisplay);
-		
-		public IInspectionStateProvider InspectionStateProvider => _inspectionStateProvider;
+
+        public IInspectionStateProvider InspectionStateProvider => _inspectionStateProvider;
 
         public CogRecordDisplay Display1 { get; set; }
         public CogRecordDisplay Display2 { get; set; }
@@ -43,7 +43,7 @@ namespace LGES_SVA.Inspection.ViewModels
             _visionProService = vps;
             _cameraManager = cm;
 
-            _eventAggregator.GetEvent<InspectComplateEvent>().Subscribe(OnInspectComplate);
+            _eventAggregator.GetEvent<InspectComplateImageEvent>().Subscribe(OnInspectComplate);
 
             Display1 = new CogRecordDisplay();
             Display2 = new CogRecordDisplay();
@@ -51,13 +51,11 @@ namespace LGES_SVA.Inspection.ViewModels
             Display4 = new CogRecordDisplay();
         }
 
-		private void OnInspectComplate(InspectionResult obj)
-		{
-             _record1.SubRecords.Clear();
-             _record2.SubRecords.Clear();
+        private void OnInspectComplate(InspectionResult obj)
+        {
+            _record1.SubRecords.Clear();
+            _record2.SubRecords.Clear();
 
-            if(obj.CellDistance != 0)
-			{
                 foreach (var rec in obj.LeftRecord)
                 {
                     _record1.SubRecords.Add(rec);
@@ -66,8 +64,7 @@ namespace LGES_SVA.Inspection.ViewModels
                 {
                     _record2.SubRecords.Add(rec);
                 }
-            }
-           
+
             _record1.Content = obj.LeftImage;
             _record2.Content = obj.RightImage;
 
@@ -77,7 +74,7 @@ namespace LGES_SVA.Inspection.ViewModels
             // 검사 결과 Display
         }
 
-		private void OnInitCogRecordDisplay()
+        private void OnInitCogRecordDisplay()
         {
             try
             {
@@ -99,6 +96,8 @@ namespace LGES_SVA.Inspection.ViewModels
                 _record2.Content = Display2.Image;
                 Display1.Record = _record1;
                 Display2.Record = _record2;
+
+
             }
             catch (Exception e)
             {

@@ -91,6 +91,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -104,9 +105,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LGES_SVA.Inspection\LGES_SVA.Inspection.csproj">
-      <Project>{8370B3F6-38ED-4124-A22C-D5A4E0488B55}</Project>
-      <Name>LGES_SVA.Inspection</Name>
+    <ProjectReference Include="..\LGES_SVA.Core\LGES_SVA.Core.csproj">
+      <Project>{61BA9EC6-77D6-47FB-ABBB-6E91D96267F4}</Project>
+      <Name>LGES_SVA.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

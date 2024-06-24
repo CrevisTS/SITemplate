@@ -1,7 +1,6 @@
 ﻿using CvsService.Camera.CvsGigE.Services;
 using LGES_SVA.Camera.Services;
 using LGES_SVA.Core.Interfaces;
-using LGES_SVA.Core.Interfaces.Communicate;
 using LGES_SVA.Core.Interfaces.Settings;
 using LGES_SVA.Inspection.Services;
 using LGES_SVA.Login.Services;
@@ -41,6 +40,7 @@ namespace LGES_SVA.Settings
             containerRegistry.RegisterSingleton<RecipeService>();
             containerRegistry.RegisterSingleton<CvsGigEManager>();
             containerRegistry.RegisterSingleton<CameraManager>();
+            containerRegistry.RegisterSingleton<ResultSaveService>();
 
 
         }

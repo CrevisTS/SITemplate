@@ -11,6 +11,7 @@ using LGES_SVA.Core.Events;
 using LGES_SVA.Core.Interfaces;
 using LGES_SVA.Core.Interfaces.Communicate;
 using LGES_SVA.Core.Interfaces.Settings;
+using LGES_SVA.Inspection.Services;
 using LGES_SVA.Recipe.Services;
 using LGES_SVA.Splash.Error;
 using LGES_SVA.VisionPro.Services;
@@ -34,13 +35,21 @@ namespace LGES_SVA.Splash.Bootstrappers
         private readonly Lazy<CvsGigEManager> _cvsGigEManager;
         private readonly Lazy<CameraManager> _cameraManager;
         private readonly Lazy<RecipeService> _recipeService;
+        private readonly Lazy<ResultSaveService> _resultSaveService;
 
         public bool IsFail { get; private set; } = false;
 
         public event EventHandler<ProgressMessageEventArgs> WindowLoadedControl;
         public event EventHandler WindowLoadedCompleted;
 
-        public AppBootstrapper(Lazy<IDisposeManager> lazyDisposeManager, Lazy<ISettingRepository> lazySettingRepo, Lazy<VisionProService> visionProService, Lazy<CvsGigEManager> cvsGigEManager, Lazy<RecipeService> recipeService, Lazy<CameraManager> cm)
+        public AppBootstrapper(
+            Lazy<IDisposeManager> lazyDisposeManager,
+            Lazy<ISettingRepository> lazySettingRepo,
+            Lazy<VisionProService> visionProService,
+            Lazy<CvsGigEManager> cvsGigEManager,
+            Lazy<RecipeService> recipeService,
+            Lazy<CameraManager> cm,
+            Lazy<ResultSaveService> rss)
         {
             _lazyDisposeManager = lazyDisposeManager;
             _lazySettingRepo = lazySettingRepo;
@@ -48,6 +57,8 @@ namespace LGES_SVA.Splash.Bootstrappers
             _cvsGigEManager = cvsGigEManager;
             _recipeService = recipeService;
             _cameraManager = cm;
+
+            _resultSaveService = rss;
 
         }
 
@@ -59,23 +70,22 @@ namespace LGES_SVA.Splash.Bootstrappers
 
                 // CvsService Log Initialize
                 LogInit(20);
-                //Thread.Sleep(1000); // UI 보기위함
 
                 // TODO : Prism Singleton 초기화 하는 부분.
-                _ = LazyInstanceInit(_lazySettingRepo, "Setting", 20);
-
-                //Thread.Sleep(1000); // UI 보기위함
+                LazyInstanceInit(_lazySettingRepo, "Setting", 20);
 
                 // VisionPro
-                _ = LazyInstanceInit(_visionProService, "VisionPro", 60);
+                LazyInstanceInit(_visionProService, "VisionPro", 60);
 
                 // Recipe
-                _ = LazyInstanceInit(_recipeService, "Recipe", 70);
+                LazyInstanceInit(_recipeService, "Recipe", 70);
 
                 // Camera
                 CvsGigEManager camManager = LazyInstanceInit(_cvsGigEManager, "Camera", 80);
                 camManager.OpenCameras();
 
+                // Inspection
+                LazyInstanceInit(_resultSaveService, "Inspection", 90);
 
                 // AppBoot에서 초기화하는 클래스 중 Dispose()가 필요하면 여기에서 추가.
                 // 만약 다른곳에서 추가해야한다면 생성자에서 의존성 주입으로 IDisposeManager 받아서 추가하면 됨

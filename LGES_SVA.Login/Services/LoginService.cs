@@ -82,9 +82,11 @@ namespace LGES_SVA.Login.Services
 		/// </summary>
 		private void AutoLogoutStart()
 		{
-			_autoLogoutTimer = new Timer();
-			_autoLogoutTimer.AutoReset = false;
-			_autoLogoutTimer.Elapsed += _autoLogoutTimer_Elapsed;
+			_autoLogoutTimer = new Timer
+			{
+				AutoReset = false
+			};
+			_autoLogoutTimer.Elapsed += AutoLogoutTimer_Elapsed;
 			_autoLogoutTimer.Interval = MINUTE5;
 			_autoLogoutTimer.Start();
 		}
@@ -100,7 +102,7 @@ namespace LGES_SVA.Login.Services
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void _autoLogoutTimer_Elapsed(object sender, ElapsedEventArgs e)
+		private void AutoLogoutTimer_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			AutoLogoutStop();
 

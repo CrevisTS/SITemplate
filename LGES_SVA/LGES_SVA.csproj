@@ -225,7 +225,7 @@
       <Name>LGES_SVA.Dialog</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Inspection\LGES_SVA.Inspection.csproj">
-      <Project>{8370B3F6-38ED-4124-A22C-D5A4E0488B55}</Project>
+      <Project>{7A2E23B9-3633-414B-9005-9C5FCF4CA8EA}</Project>
       <Name>LGES_SVA.Inspection</Name>
     </ProjectReference>
     <ProjectReference Include="..\LGES_SVA.Login\LGES_SVA.Login.csproj">
@@ -267,6 +267,10 @@
     <ProjectReference Include="..\LGES_SVA.VisionPro\LGES_SVA.VisionPro.csproj">
       <Project>{221013A5-C63A-4FF5-8432-C1BD73D60F6D}</Project>
       <Name>LGES_SVA.VisionPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LGSE_SVA.Regions.Inspection\LGSE_SVA.Regions.Inspection.csproj">
+      <Project>{c7a4b22b-a4a8-4c97-9a2d-c4ee1cda5246}</Project>
+      <Name>LGSE_SVA.Regions.Inspection</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

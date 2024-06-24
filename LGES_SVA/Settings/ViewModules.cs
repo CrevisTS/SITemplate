@@ -21,9 +21,9 @@ using LGES_SVA.Dialogs.Setting.ViewModels;
 using LGES_SVA.Dialogs.Setting.Views;
 using LGES_SVA.Dialogs.Simulation.ViewModels;
 using LGES_SVA.Dialogs.Simulation.Views;
-using LGES_SVA.Inspection.Views;
 using LGES_SVA.Regions.TabView.Views;
 using LGES_SVA.Regions.Yield.Views;
+using LGSE_SVA.Regions.Inspection.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 
