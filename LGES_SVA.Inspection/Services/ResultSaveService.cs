@@ -21,6 +21,8 @@ namespace LGES_SVA.Inspection.Services
 
 		private void OnInspectComplate(InspectionResult obj)
 		{
+			// CSV 저장만 할꺼야
+
 		}
 	}
 }

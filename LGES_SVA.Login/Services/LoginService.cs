@@ -44,7 +44,7 @@ namespace LGES_SVA.Login.Services
 
 			// TODO : IPC에 D:가 없음
 			USER_PATH = $@"{_path}\User.csv";
-			_users = _csvParser.ReadCSV<User>(USER_PATH);
+			_users = _csvParser.LoadFromCSV<User>(USER_PATH);
 
 			// Mouse Move Event 구독
 			_eventAggregator.GetEvent<MouseMoveEvent>().Subscribe(() => MouseMove());

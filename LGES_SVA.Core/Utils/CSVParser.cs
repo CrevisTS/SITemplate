@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,26 +12,35 @@ namespace LGES_SVA.Core.Utils
 {
 	public class CSVParser
 	{
-		public void WriteCSV<T>(List<T> data, string path)
+		private static readonly object _lock = new object();
+
+		public void SaveToCSV<T>(List<T> items, string filePath)
 		{
 			try
 			{
-				if (!File.Exists(path)) { new FileNotFoundException(); }
+				var type = typeof(T);
+				var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-				using (var writer = new StreamWriter(path))
+				lock (_lock)
 				{
-					var headerData = typeof(T).GetProperties();
-
-					string[] header = new string[headerData.Length];
-
-					for (int i = 0; i< headerData.Length; i++)
+					using (StreamWriter writer = new StreamWriter(filePath, append: true))
 					{
-						header[0] = headerData[i].PropertyType.Name;
-					}
+						// 파일이 비어 있으면 헤더를 작성
+						if (writer.BaseStream.Length == 0)
+						{
+							writer.WriteLine(string.Join(",", properties.Select(p => p.Name)));
+						}
 
-					writer.WriteLine(string.Join(",", header));
-					writer.Flush();
-				};
+						// 데이터 작성
+						foreach (var item in items)
+						{
+							var values = properties.Select(p => p.GetValue(item)?.ToString() ?? string.Empty);
+							writer.WriteLine(string.Join(",", values));
+						}
+
+						writer.Flush();
+					}
+				}
 			}
 			catch (Exception)
 			{
@@ -38,16 +48,16 @@ namespace LGES_SVA.Core.Utils
 			}
 		}
 
-		public List<T> ReadCSV<T>(string path) where T : new()
+		public List<T> LoadFromCSV<T>(string filePath) where T : new()
 		{
 	
 			List<T> list = new List<T>();
 
 			try
 			{
-				if (!File.Exists(path)) { new FileNotFoundException(); }
+				if (!File.Exists(filePath)) { new FileNotFoundException(); }
 
-				using (var reader = new StreamReader(path))
+				using (var reader = new StreamReader(filePath))
 				{
 					reader.ReadLine();
 
